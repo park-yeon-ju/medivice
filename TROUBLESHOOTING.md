@@ -710,3 +710,87 @@ curl -s -G .../api/ingredients/pair-check --data-urlencode "ingredientA=케토�
 - `.env.local` (이 컴퓨터에만 존재, 공유되지 않음)
 - DA팀 `.env`, `.venv` (팀 공용이라고 커밋되어 있었으나 이 컴퓨터 환경과 불일치)
 - `src/main/resources/application.properties` (환경변수 기본값)
+
+---
+
+## 22. (미해결·기록만) 기획 문서의 "AI-Ready Web Service" 설계 원칙 대비 갭
+
+### 문제
+
+기획 문서(AI-Ready Web Service 슬라이드)가 요구하는 4대 핵심 고려사항 — Interface First / Structured Data / Asynchronous Pipeline / Security & Config Isolation — 을 실제 구현과 하나씩 대조해보니, 2개는 충족하지만 2개는 부족하다.
+
+### 대조 결과
+
+| 항목 | 상태 | 근거 |
+| --- | --- | --- |
+| Interface First | 충족 | `AiClient` 인터페이스 뒤에 `MockAiClient`/`OpenAiClient`가 있고 `medivice.ai.provider` 값만 바꾸면 교체됨. 프론트가 보는 DTO 모양은 provider와 무관하게 동일 |
+| Structured Data | 대체로 충족 | OCR 응답이 Java record 기반 JSON Schema로 강제되는 OpenAI structured output. 다만 DB는 JSON 블롭이 아니라 관계형으로 정규화돼 있어, 문서가 말하는 "바로 JSON으로 저장"과는 결이 다름(변환 부담 최소화 취지 자체는 충족) |
+| **Asynchronous Pipeline** | **미충족** | `POST /api/medications/ocr`가 완전히 동기 처리 — 상태 코드가 그냥 200이고 PENDING/PROCESSING 상태 자체가 없다. 실측으로 **응답에 100초 넘게 걸리는 것을 이미 확인**했다(§10 참고, 트리비얼한 테스트 이미지로도 104초). `POST /api/reports`는 상태 코드는 202를 쓰지만 `ReportService.create()` 주석에 "실제 비동기 워커는 범위 밖이라 요청 스레드 안에서 즉시 COMPLETED까지 만든다"고 명시돼 있어 — 겉모양만 비동기고 실제로는 동기다(다만 이건 Sprint 2 DoD에 이미 문서화된 의도적 축소) |
+| **Security & Config Isolation** | **절반만 충족** | `OPENAI_API_KEY`는 환경변수로 완전히 분리돼 있다. 하지만 모델명(`ChatModel.GPT_5_2`)과 reasoning effort(`ReasoningEffort.XHIGH`) 같은 Model Parameter가 `OpenAiClient.java`에 Java 상수로 하드코딩돼 있어, 모델·파라미터를 바꾸려면 코드 수정 + 재컴파일이 필요하다. "코드 변경 없이 즉시 교체" 요구사항에는 안 맞는다 |
+
+### 원인
+
+Sprint 1~2는 "성분 판정 규칙 엔진이 정확히 동작하는가"에 집중했고, AI 연동(OCR·보고서 요약)은 Sprint 3 확장 지점으로 최소한만(Provider 교체 가능성 정도) 만들어 뒀다. 기획 문서의 Async/Config Isolation 요구사항까지 처음부터 다 반영하지는 않았다.
+
+### 해결 (보류 — 사용자 요청으로 이번엔 기록만)
+
+- [ ] `OpenAiClient`의 `MODEL`/`ReasoningEffort`를 `application.properties`(`medivice.ai.model`, `medivice.ai.reasoning-effort` 등)로 빼서 코드 수정 없이 교체 가능하게 한다 — 작은 수정
+- [ ] `POST /api/medications/ocr`을 202 Accepted + PENDING/PROCESSING/COMPLETED 폴링 구조로 바꾼다 — 별도 워커·상태 저장소가 필요한 큰 작업. OCR이 100초 넘게 걸리는 현재 상태로는 실사용자 브라우저·프록시 타임아웃 위험이 있다
+- [ ] `POST /api/reports`도 실제 비동기 워커가 붙을 때 `jobStatus` 필드 모양은 그대로 재사용 가능(이미 그렇게 설계돼 있음, `ReportService` 주석 참고) — 워커만 붙이면 됨
+
+### 확인
+
+각 항목의 근거는 실제 코드(`grep`)와 이전 세션에서 실측한 OCR 응답 시간(§10)으로 확인했다. 코드 변경은 하지 않았다.
+
+### 관련 파일
+
+- `src/main/java/com/project/medivice/ai/OpenAiClient.java` (`MODEL`, `ReasoningEffort` 하드코딩)
+- `src/main/java/com/project/medivice/controller/MedicationController.java` (`ocr()` — 상태 코드·동기 처리)
+- `src/main/java/com/project/medivice/service/ReportService.java` (동기 처리 주석)
+- `src/main/resources/application.properties` (현재 `medivice.ai.provider`만 외부화됨)
+
+---
+
+## 23. 표시 언어(한국어/English) 토글이 실제로는 아무것도 번역하지 않음
+
+### 문제
+
+1. 진료용 보고서(`POST /api/reports`)를 `language=en`으로 만들어도, AI 요약 문장(`narrative`)만 영어고 사용자가 직접 적은 **증상명·메모(`symptoms`)는 항상 한국어 원문 그대로** 실렸다.
+2. 프론트의 "표시 언어" 토글(`AppShell.vue`·`MyView.vue`의 한국어/English 버튼)은 `store.language` 값만 바꿀 뿐, 이 값을 읽어서 실제로 화면 텍스트를 바꾸는 코드가 어디에도 없었다 — EN을 눌러도 마이페이지 증상 기록, 보고서 미리보기의 "등록 사유" 등 사용자 입력 한글이 그대로 보였다(`grep`으로 `store.language` 사용처를 확인해보니 자기 자신을 하이라이트하는 것 외엔 소비하는 곳이 없었음).
+
+### 원인
+
+성분명(`nameKo`/`nameEn`)처럼 DUR 마스터에 영문명이 이미 있는 데이터는 언어 전환이 필요 없지만, 증상명·메모·등록 사유·성분 메모(`ingredientNote`)처럼 **사용자가 그때그때 자유롭게 입력한 한글 텍스트**는 애초에 영문 버전이 존재하지 않는다 — 이건 값을 골라 보여주는 문제가 아니라 실제 번역이 필요한 문제인데, 번역 기능 자체가 구현돼 있지 않았다.
+
+### 해결
+
+DeepL API(무료 티어 키, `xxxx:fx` 형식)를 연동했다. 새 의존성을 추가하지 않기 위해 Java 표준 `HttpClient`로 DeepL REST API(`https://api-free.deepl.com/v2/translate`)를 직접 호출한다.
+
+- `TranslationService` 신규: `translateAll(texts, targetLang)` — 여러 문장을 한 번의 HTTP 호출로 번역. 키가 없거나(`medivice.translate.api-key` 비어 있음) 호출이 실패하면 **원문을 그대로 돌려준다** — 번역 실패가 보고서 생성·화면 렌더링을 막으면 안 되기 때문(`AiClient`의 mock 폴백과 같은 원칙).
+- `ReportService.create()`: `language=en`일 때만 증상 기록들의 증상명·메모를 모아 DeepL 1회 호출로 번역 후 재배치.
+- `POST /api/translate` 신규(범용): `{texts, targetLang}` → `{enabled, translations}`. 보고서뿐 아니라 화면 어디서든 재사용할 수 있도록 별도 엔드포인트로 뺐다.
+- 프론트: `stores/medivice.js`에 `translationCache`(원문→번역문 캐시)와 `translate(text)` 헬퍼, `translateVisibleText()`(현재 로드된 medications의 `reason`/`ingredientNote`, symptoms의 `symptoms[]`/`note`를 모아 한 번에 번역) 추가. `setLanguage('EN')` 호출 시, 그리고 EN 상태에서 새 데이터가 로드/추가될 때(`loadDashboard`/`createMedication`/`addSymptom`) 자동으로 캐시를 채운다. `MyView.vue`(증상 기록), `ReportView.vue`(등록 사유 열), `MedicationRow.vue`(`ingredientNote`)가 `store.translate(...)`를 통해 표시하도록 교체.
+
+### 확인
+
+```sh
+# 백엔드 단독 확인
+curl -X POST localhost:8080/api/translate -d '{"texts":["두통","고혈압"],"targetLang":"EN"}'
+# {"enabled":true,"translations":["Headache","High Blood Pressure"]}
+
+# 보고서(EN) — 증상까지 번역되는지
+curl -X POST localhost:8080/api/reports -d '{"from":"2026-08-01","to":"2026-09-03","language":"en"}'
+# symptoms[].symptoms: ["Headache","Dizziness"], note: "I felt nauseous after taking the medicine."
+# 같은 데이터로 language=ko 호출 시 한글 원문 그대로 유지되는 것도 확인(불필요한 API 호출 없음)
+```
+
+`npx vite build`·`npx vite`(dev 서버 기동) 둘 다 정상 통과.
+
+### 관련 파일
+
+- `src/main/java/com/project/medivice/service/TranslationService.java` (신규)
+- `src/main/java/com/project/medivice/controller/TranslateController.java` (신규)
+- `src/main/java/com/project/medivice/dto/TranslateRequest.java`, `TranslateResponse.java` (신규)
+- `src/main/java/com/project/medivice/service/ReportService.java` (`translateSymptoms`)
+- `.env.local`의 `DEEPL_API_KEY` (커밋 안 됨), `application.properties`의 `medivice.translate.api-key`
+- (프론트) `front/src/stores/medivice.js`, `front/src/api/client.js`, `front/src/views/MyView.vue`, `front/src/views/ReportView.vue`, `front/src/components/MedicationRow.vue`
