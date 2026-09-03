@@ -3,6 +3,7 @@ package com.project.medivice.ai;
 import com.openai.client.OpenAIClient;
 import com.openai.client.okhttp.OpenAIOkHttpClient;
 import com.openai.models.ChatModel;
+import com.openai.models.ReasoningEffort;
 import com.openai.models.chat.completions.ChatCompletionContentPart;
 import com.openai.models.chat.completions.ChatCompletionContentPartImage;
 import com.openai.models.chat.completions.ChatCompletionContentPartText;
@@ -47,6 +48,22 @@ public class OpenAiClient implements AiClient {
             - 성분명·함량도 마찬가지입니다. 정확히 안 보이면 null로 두고 confidence를 낮게 매기세요.
             각 항목의 confidence는 0.0(전혀 확신 없음)~1.0(매우 확실) 사이로 매기세요.
 
+            【성분·함량표(예: "성분명 ········· 40mg" 처럼 점선·콜론으로 값이 붙는 표)를 읽을 때】
+            이 표가 가장 실수가 많이 나는 부분입니다. 반드시 아래 순서로 확인하세요:
+            1. 먼저 표에 실제로 몇 줄(성분 몇 개)이 있는지 세어보세요.
+            2. 한 줄씩, 그 줄의 성분명과 그 줄의 점선·콜론 바로 뒤에 붙은 함량을 같은 줄에서만
+               짝지으세요. 절대 다른 줄의 성분명과 함량을 섞지 마세요(예: 3번째 줄 이름에
+               5번째 줄 함량을 붙이는 식의 착오가 실제로 자주 발생합니다).
+            3. 최종 ingredients 배열의 항목 수는 1번에서 센 줄 수와 반드시 같아야 합니다.
+               줄 하나를 통째로 건너뛰지 마세요 — 다 못 읽겠으면 그 줄만 name을 null로 두고
+               자리는 남겨서, 최소한 "몇 개 성분이 있었는지"는 보존하세요.
+            4. 사진이 90도 돌아가 있거나(세로 글자가 가로로 누움) 흔들렸어도, 그 상태 그대로
+               글자를 읽으려고 시도하세요 — 회전 때문에 항목을 빠뜨리면 안 됩니다.
+            5. 이름을 확신할 수 없는 성분은 실존하는 다른 성분명으로 대체하지 말고, 사진에 보이는
+               글자를 최대한 그대로 옮기거나(예: 일부 글자가 흐리면 "○○제"처럼 보이는 부분만),
+               정 안 되면 null로 두세요. 없는 성분명을 만들어내는 것이 이 서비스에서 가장 위험한
+               실수입니다.
+
             hospitalName/department: 처방전일 때만 채웁니다(병원명, 진료과 대분류). 약국 이름은
             hospitalName에 넣지 마세요(조제 약국일 뿐 처방한 병원이 아닙니다) — 알 수 없으면 null.
             productName: 그 약의 제품명 전체(용량 포함, 예: "아모잘탄정 5/50mg").
@@ -82,6 +99,9 @@ public class OpenAiClient implements AiClient {
 
         StructuredChatCompletionCreateParams<OcrExtractionBatch> params = ChatCompletionCreateParams.builder()
                 .model(MODEL)
+                // 성분·함량표처럼 촘촘한 표를 줄 단위로 정확히 짝지어야 해서, 기본값보다 신중하게
+                // 추론하도록 올려둔다(HIGH) — 실제 사진에서 성분 누락·줄 뒤섞임이 관찰되어 추가함.
+                .reasoningEffort(ReasoningEffort.XHIGH)
                 .responseFormat(OcrExtractionBatch.class)
                 .addUserMessageOfArrayOfContentParts(List.of(
                         ChatCompletionContentPart.ofText(text),

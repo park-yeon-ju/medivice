@@ -1,6 +1,7 @@
 package com.project.medivice.repository;
 
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -37,6 +38,27 @@ public class UserRepository {
                 .addValue("gender", gender)
                 .addValue("birthDate", birthDate);
         return jdbc.queryForObject(sql, params, Long.class);
+    }
+
+    public record UserSummaryRow(Long id, String loginId, String gender, LocalDate birthDate, OffsetDateTime createdAt) {
+    }
+
+    /**
+     * GET /api/auth/users용 — 회원가입이 실제로 DB에 저장됐는지 확인하는 용도라 conditions·
+     * allergies 같은 연관 조회 없이 users 테이블만 훑는다(가입자 수만큼 N+1을 만들지 않기 위해).
+     */
+    public List<UserSummaryRow> findAll() {
+        String sql = """
+                SELECT user_id, login_id, gender, birth_date, created_at
+                  FROM medivice.users
+                 ORDER BY user_id
+                """;
+        return jdbc.query(sql, (rs, n) -> new UserSummaryRow(
+                rs.getLong("user_id"),
+                rs.getString("login_id"),
+                rs.getString("gender"),
+                rs.getObject("birth_date", LocalDate.class),
+                rs.getObject("created_at", OffsetDateTime.class)));
     }
 
     public Optional<Long> findIdByLoginId(String loginId) {

@@ -1,6 +1,7 @@
 package com.project.medivice.service;
 
 import com.project.medivice.dto.UserDto;
+import com.project.medivice.dto.UserSummaryDto;
 import com.project.medivice.exception.NotFoundException;
 import com.project.medivice.repository.UserRepository;
 import com.project.medivice.repository.UserRepository.UserRow;
@@ -35,5 +36,21 @@ public class UserService {
         return new UserDto(row.id(), row.loginId(), row.loginId(), sex,
                 row.birthDate() != null ? row.birthDate().toString() : null, age,
                 conditions, allergies, row.heightCm(), row.weightKg(), null);
+    }
+
+    /** GET /api/auth/users — 회원가입이 DB에 실제로 저장됐는지 Swagger에서 눈으로 확인하는 용도. */
+    public List<UserSummaryDto> listSummaries() {
+        return userRepository.findAll().stream()
+                .map(row -> {
+                    String sex = switch (row.gender() == null ? "" : row.gender()) {
+                        case "M" -> "남성";
+                        case "F" -> "여성";
+                        default -> null;
+                    };
+                    return new UserSummaryDto(row.id(), row.loginId(), sex,
+                            row.birthDate() != null ? row.birthDate().toString() : null,
+                            row.createdAt() != null ? row.createdAt().toString() : null);
+                })
+                .toList();
     }
 }

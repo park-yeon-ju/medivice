@@ -3,9 +3,11 @@ package com.project.medivice.service;
 import com.project.medivice.dto.LoginRequest;
 import com.project.medivice.dto.SignupRequest;
 import com.project.medivice.dto.UserDto;
+import com.project.medivice.dto.UserSummaryDto;
 import com.project.medivice.exception.NotFoundException;
 import com.project.medivice.repository.UserRepository;
 import java.time.LocalDate;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 /**
@@ -41,6 +43,11 @@ public class AuthService {
         Long userId = userRepository.findIdByLoginId(loginId)
                 .orElseThrow(() -> new NotFoundException("존재하지 않는 아이디입니다: " + loginId));
         return userService.buildUser(userId);
+    }
+
+    /** 회원가입이 실제로 DB에 저장됐는지 Swagger에서 바로 확인할 수 있게 하는 목록 조회. */
+    public List<UserSummaryDto> listUsers() {
+        return userService.listSummaries();
     }
 
     private static String mapGender(String sex) {
