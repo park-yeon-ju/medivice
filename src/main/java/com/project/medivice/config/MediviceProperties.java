@@ -14,7 +14,7 @@ public record MediviceProperties(
         Ai ai,
         Cors cors) {
 
-    public record Ai(String provider) {
+    public record Ai(String provider, String model, String reasoningEffort) {
     }
 
     public record Cors(List<String> allowedOrigins) {

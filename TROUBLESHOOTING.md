@@ -1,6 +1,6 @@
 # 메디바이스 백엔드 트러블슈팅
 
-- 작성일: 2026-09-03 (최종 갱신: 2026-09-03 — Java 21 업그레이드, OCR 속도 개선 이후)
+- 작성일: 2026-09-03 (최종 갱신: 2026-09-03 — Java 21 업그레이드, OCR 속도 개선, AI 설정 외부화·비동기 전환 이후)
 - 대상: `src/main/java/com/project/medivice/**` (Spring Boot) + 로컬 DB/AI 연동
 - 기록 형식: 문제 → 재현 방법 → 원인 → 해결 → 확인 → 관련 파일
 
@@ -713,7 +713,7 @@ curl -s -G .../api/ingredients/pair-check --data-urlencode "ingredientA=케토�
 
 ---
 
-## 22. (미해결·기록만) 기획 문서의 "AI-Ready Web Service" 설계 원칙 대비 갭
+## 22. 기획 문서의 "AI-Ready Web Service" 설계 원칙 대비 갭 (→ §25에서 나머지 2개 해소)
 
 ### 문제
 
@@ -732,11 +732,11 @@ curl -s -G .../api/ingredients/pair-check --data-urlencode "ingredientA=케토�
 
 Sprint 1~2는 "성분 판정 규칙 엔진이 정확히 동작하는가"에 집중했고, AI 연동(OCR·보고서 요약)은 Sprint 3 확장 지점으로 최소한만(Provider 교체 가능성 정도) 만들어 뒀다. 기획 문서의 Async/Config Isolation 요구사항까지 처음부터 다 반영하지는 않았다.
 
-### 해결 (보류 — 사용자 요청으로 이번엔 기록만)
+### 해결
 
-- [ ] `OpenAiClient`의 `MODEL`/`ReasoningEffort`를 `application.properties`(`medivice.ai.model`, `medivice.ai.reasoning-effort` 등)로 빼서 코드 수정 없이 교체 가능하게 한다 — 작은 수정
-- [ ] `POST /api/medications/ocr`을 202 Accepted + PENDING/PROCESSING/COMPLETED 폴링 구조로 바꾼다 — 별도 워커·상태 저장소가 필요한 큰 작업. OCR이 100초 넘게 걸리는 현재 상태로는 실사용자 브라우저·프록시 타임아웃 위험이 있다
-- [ ] `POST /api/reports`도 실제 비동기 워커가 붙을 때 `jobStatus` 필드 모양은 그대로 재사용 가능(이미 그렇게 설계돼 있음, `ReportService` 주석 참고) — 워커만 붙이면 됨
+- [x] `OpenAiClient`의 `MODEL`/`ReasoningEffort`를 `application.properties`(`medivice.ai.model`, `medivice.ai.reasoning-effort`)로 뺐다 — §24
+- [x] `POST /api/medications/ocr`을 202 Accepted + PENDING/PROCESSING/COMPLETED/FAILED 폴링 구조로 바꿨다 — §25
+- [ ] `POST /api/reports`도 실제 비동기 워커가 붙을 때 `jobStatus` 필드 모양은 그대로 재사용 가능(이미 그렇게 설계돼 있음, `ReportService` 주석 참고) — 워커만 붙이면 됨. 아직 미착수
 
 ### 확인
 
@@ -836,4 +836,60 @@ curl -X POST localhost:8080/api/reports -d '{"from":"2026-08-01","to":"2026-09-0
 
 - `src/main/java/com/project/medivice/service/OcrService.java` (`resizeForOcr`, `encodeJpeg` 신규)
 - `src/main/java/com/project/medivice/ai/OpenAiClient.java` (`reasoningEffort`: `HIGH` → `LOW`)
-- §12 (OCR 환각 — 애초에 `XHIGH`를 도입한 배경), §22 (이 문제를 처음 "미해결·기록만"으로 남긴 곳 — `reasoningEffort`/모델명을 `application.properties`로 빼는 것과 `POST /api/medications/ocr`을 202+폴링 비동기로 바꾸는 TODO는 이번에도 손대지 않아 그대로 남아 있다: `LOW`로도 17초는 걸리므로 프론트·프록시 타임아웃 여유가 없다면 여전히 필요하다)
+- §12 (OCR 환각 — 애초에 `XHIGH`를 도입한 배경), §22 (이 문제를 처음 "미해결·기록만"으로 남긴 곳 — 설정 외부화는 §24 이후 별도로, 202+폴링 비동기 전환은 §25에서 마저 처리했다)
+
+---
+
+## 25. `POST /api/medications/ocr`을 동기 → 비동기(202 + 폴링)로 전환
+
+### 문제
+
+§22가 지적한 대로 `POST /api/medications/ocr`은 완전히 동기 처리였다 — `LOW`로 낮춘 뒤에도(§24) 여전히 17~26초가 걸리는데(사진 크기·네트워크 상태에 따라 변동), 요청 스레드가 그동안 그냥 멈춰 있었다. 기획 문서(AI-Ready Web Service, 강의 자료 4쪽) 원칙 ③이 요구하는 "비동기 처리 + 상태 관리(Pending/Completed)를 수용할 수 있는 Endpoint 구조"를 충족하지 못한 상태였다.
+
+### 원인
+
+Sprint 3에서 AI 연동을 최소 범위로만 붙이면서, `OcrService.extract()`가 컨트롤러 스레드 안에서 AI 호출까지 전부 동기로 끝내도록 짜여 있었다. 별도 워커·작업 상태 저장소가 없었다.
+
+### 해결
+
+리뷰 문서(`AI연동_검토결과.html`)가 제안한 "큐 서버 없이, `@Async` + 메모리 상태 저장소" 수준으로 최소하게 구현했다. 실무 규모의 큐(RabbitMQ/SQS)나 SSE는 이 과제 범위에 맞지 않는다고 판단해 넣지 않았다.
+
+- **`OcrService`**: `extract(MultipartFile)` 하나였던 걸 세 조각으로 나눴다.
+  - `readAndValidate(MultipartFile) -> RawInput(bytes, mimeType)` — 검증 + 바이트 추출만, 컨트롤러 스레드에서 동기로 끝나야 하는 부분(`MultipartFile`은 응답이 나간 뒤엔 더 이상 못 읽는다).
+  - `runOcr(byte[], String) -> List<OcrResultDto>` — 리사이즈 + AI 호출 + 로그(§24에서 만든 그대로) + DTO 변환. 순수 로직이라 어디서 호출해도 동일하게 동작한다.
+  - `@Async processAsync(byte[], String) -> CompletableFuture<List<OcrResultDto>>` — `runOcr`을 감싸기만 한다. **주의**: 이 메서드를 `OcrService` 자기 자신의 다른 메서드가 호출하면 스프링 프록시를 안 거쳐서 `@Async`가 조용히 무시되고 동기로 실행되는 흔한 함정이 있다 — 그래서 호출은 항상 다른 빈(`OcrJobService`)에서 하도록 구조를 나눴다.
+- **`OcrJobService`(신규)**: 작업 상태를 `ConcurrentHashMap<String, OcrJob>`(메모리)으로 들고 있다. `submit(file)`이 jobId를 만들고 `PENDING`으로 등록한 뒤 `ocrService.processAsync(...)`를 호출·즉시 반환, `future.whenComplete(...)`로 완료·실패 시 맵을 갱신한다(`COMPLETED`+결과 또는 `FAILED`+에러 메시지).
+- **`MedicationController`**: `POST /ocr`은 이제 `202 Accepted` + `{jobId, status:"PENDING"}`만 즉시 돌려준다. 새 `GET /ocr/{jobId}`가 상태를 폴링용으로 돌려준다(모르는 jobId는 기존 `NotFoundException` 경로를 그대로 타 404).
+- **`MediviceApplication`**에 `@EnableAsync` 추가.
+
+**프론트는 건드리지 않았다** — 사용자 확인 하에 백엔드 API 구조만 바꿨다. 지금 `front/src/stores/medivice.js`의 `runOcr()`은 여전히 동기 배열 응답을 기대하므로, 실제 화면에서 사진 업로드를 누르면 `{jobId, status}` 객체를 결과 배열인 것처럼 다루다 깨진다 — 프론트에서 폴링 로직을 붙이기 전까지는 API 명세·구조만 원칙에 맞춰둔 상태라고 보면 된다.
+
+### 확인
+
+`curl`로 전체 흐름 실측(`s1.jpg`, 실제 OpenAI 호출):
+
+```text
+POST /api/medications/ocr        → 202 {"jobId":"8ce3...","status":"PENDING", ...}
+GET  /api/medications/ocr/{id}   (즉시)   → 200 {"status":"PROCESSING", ...}
+GET  /api/medications/ocr/{id}   (25초 후) → 200 {"status":"COMPLETED","result":[...7건...]}
+GET  /api/medications/ocr/모르는id        → 404 {"message":"OCR 작업을 찾을 수 없습니다: ..."}
+```
+
+완료 로그의 스레드명이 `task-1`로 요청 스레드(`nio-8080-exec-*`)와 다른 것도 확인해 `@Async`가 실제로 별도 스레드에서 도는 것(자기-호출 함정에 안 걸렸다는 것)을 검증했다:
+
+```text
+OCR 호출 완료: 23201ms, ... [task-1] c.project.medivice.service.OcrService
+```
+
+`/v3/api-docs`에도 `POST /api/medications/ocr`, `GET /api/medications/ocr/{jobId}` 둘 다 정상 노출됨을 확인했다.
+
+### 관련 파일
+
+- `src/main/java/com/project/medivice/service/OcrService.java` (`extract` 제거 → `readAndValidate`/`runOcr`/`processAsync`로 분리)
+- `src/main/java/com/project/medivice/service/OcrJobService.java` (신규)
+- `src/main/java/com/project/medivice/service/OcrJob.java`, `OcrJobStatus.java` (신규)
+- `src/main/java/com/project/medivice/dto/OcrJobDto.java` (신규)
+- `src/main/java/com/project/medivice/controller/MedicationController.java` (`POST /ocr` 응답을 202로, `GET /ocr/{jobId}` 신규)
+- `src/main/java/com/project/medivice/MediviceApplication.java` (`@EnableAsync`)
+- §22(이 갭을 처음 기록한 곳), §24(reasoning effort·이미지 리사이즈 — 이 작업 이후에도 17~26초는 걸려서 비동기 전환의 필요성이 여전했음)
+- (미착수, §22에 남겨둠) `front/src/stores/medivice.js`의 `runOcr()` 폴링 대응, `POST /api/reports`의 동일한 비동기 전환

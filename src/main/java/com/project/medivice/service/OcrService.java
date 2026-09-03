@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.imageio.IIOImage;
@@ -24,6 +25,7 @@ import javax.imageio.ImageWriter;
 import javax.imageio.stream.ImageOutputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -54,8 +56,12 @@ public class OcrService {
         this.aiClient = aiClient;
     }
 
-    /** 사진 한 장에서 서로 다른 약 여러 개가 나올 수 있다(약봉투) — 결과는 항목마다 하나씩 목록으로 온다. */
-    public List<OcrResultDto> extract(MultipartFile file) {
+    /** MultipartFile은 응답이 나간 뒤(비동기 처리 중)엔 더 이상 유효하지 않으므로, 요청 스레드에서 미리 바이트로 꺼내 둔다. */
+    public record RawInput(byte[] bytes, String mimeType) {
+    }
+
+    /** 검증 + 바이트 추출만 한다 — 컨트롤러 스레드에서 동기로 끝나야 하는 부분. */
+    public RawInput readAndValidate(MultipartFile file) {
         if (file == null || file.isEmpty()) {
             throw new IllegalArgumentException("이미지 파일이 비어 있습니다.");
         }
@@ -68,9 +74,33 @@ public class OcrService {
         } catch (IOException e) {
             throw new IllegalStateException("이미지를 읽지 못했습니다.", e);
         }
-        PreparedImage prepared = resizeForOcr(bytes, file.getContentType());
+        return new RawInput(bytes, file.getContentType());
+    }
+
+    /**
+     * 실제 AI 호출은 여기서 한다. OcrJobService가 이 메서드를 호출해야 {@code @Async}가 실제로
+     * 별도 스레드에서 돈다 — 같은 빈 안에서 자기 자신의 {@code @Async} 메서드를 호출하면
+     * 스프링 프록시를 거치지 않아 조용히 동기 실행되는 흔한 함정이라, 호출은 항상 다른 빈
+     * (OcrJobService)에서 하도록 구조를 나눴다.
+     */
+    @Async
+    public CompletableFuture<List<OcrResultDto>> processAsync(byte[] bytes, String mimeType) {
+        return CompletableFuture.completedFuture(runOcr(bytes, mimeType));
+    }
+
+    /** 사진 한 장에서 서로 다른 약 여러 개가 나올 수 있다(약봉투) — 결과는 항목마다 하나씩 목록으로 온다. */
+    private List<OcrResultDto> runOcr(byte[] bytes, String mimeType) {
+        PreparedImage prepared = resizeForOcr(bytes, mimeType);
+
+        // AI 호출 1건이 몇 초 걸리는지 남긴다 — reasoning effort·이미지 크기 같은 설정을
+        // 바꿔가며 실제 응답시간을 눈으로 확인하기 위함(TROUBLESHOOTING.md #24 참고).
+        long start = System.currentTimeMillis();
         List<AiClient.OcrExtractionResult> results =
                 aiClient.extractMedicationInfo(prepared.bytes(), prepared.mimeType());
+        long elapsedMs = System.currentTimeMillis() - start;
+        log.info("OCR 호출 완료: {}ms, 원본 {} bytes -> 전송 {} bytes, 인식된 약 {}건",
+                elapsedMs, bytes.length, prepared.bytes().length, results.size());
+
         if (results.isEmpty()) {
             throw new IllegalStateException("사진에서 약 정보를 읽지 못했습니다. 더 선명한 사진으로 다시 시도해주세요.");
         }

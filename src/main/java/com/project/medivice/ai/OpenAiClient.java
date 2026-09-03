@@ -2,8 +2,8 @@ package com.project.medivice.ai;
 
 import com.openai.client.OpenAIClient;
 import com.openai.client.okhttp.OpenAIOkHttpClient;
-import com.openai.models.ChatModel;
 import com.openai.models.ReasoningEffort;
+import com.project.medivice.config.MediviceProperties;
 import com.openai.models.chat.completions.ChatCompletionContentPart;
 import com.openai.models.chat.completions.ChatCompletionContentPartImage;
 import com.openai.models.chat.completions.ChatCompletionContentPartText;
@@ -24,8 +24,6 @@ import org.springframework.stereotype.Component;
 @Component
 @ConditionalOnProperty(prefix = "medivice.ai", name = "provider", havingValue = "openai")
 public class OpenAiClient implements AiClient {
-
-    private static final ChatModel MODEL = ChatModel.GPT_5_2;
 
     /** 구조화 출력의 루트 타입은 하나여야 해서, 약 여러 개를 배열로 감싼다. */
     public record OcrExtractionBatch(List<OcrExtractionResult> medications) {
@@ -77,9 +75,16 @@ public class OpenAiClient implements AiClient {
             """;
 
     private final OpenAIClient client;
+    private final String model;
+    private final ReasoningEffort reasoningEffort;
 
-    public OpenAiClient() {
+    // medivice.ai.model·reasoning-effort는 application.properties로 뺐다 — 모델·튜닝값을
+    // 바꾸려고 재컴파일할 필요가 없게 하기 위해서다(AI-Ready 4대 원칙의 "Model Parameter를
+    // 코드와 분리" 요구사항, TROUBLESHOOTING.md #24 이어지는 지적).
+    public OpenAiClient(MediviceProperties properties) {
         this.client = OpenAIOkHttpClient.fromEnv();
+        this.model = properties.ai().model();
+        this.reasoningEffort = ReasoningEffort.of(properties.ai().reasoningEffort());
     }
 
     @Override
@@ -98,17 +103,18 @@ public class OpenAiClient implements AiClient {
                 .build();
 
         StructuredChatCompletionCreateParams<OcrExtractionBatch> params = ChatCompletionCreateParams.builder()
-                .model(MODEL)
+                .model(model)
+                // reasoning effort는 기본값 low(설정으로 뺌, medivice.ai.reasoning-effort).
                 // 성분·함량표처럼 촘촘한 표를 줄 단위로 정확히 짝지어야 해서 원래는 XHIGH까지
                 // 올렸었다(성분 누락·줄 뒤섞임이 관찰되어 추가함). 그런데 실사진(복약안내지, 7개 약)
                 // 벤치마크로 none/low/medium/high/xhigh를 다 재보니 응답시간은
                 // low 17.4s < medium 30.9s < high 54.5s < xhigh 468.7s 로 폭발적으로 늘어나는데,
                 // 약 이름 7개 정확도는 low·medium·xhigh가 전부 7/7으로 동일했고 오히려
                 // high·none에서만 글자 하나가 틀렸다(비졸본정→비출본정) — reasoning 강도와
-                // 정확도가 비례하지 않았다. 그래서 가장 빠른 확인 가능한 단계인 LOW로 낮췄다.
-                // TROUBLESHOOTING.md #24 참고. 성분·함량표가 촘촘한 사진에서 다시 누락·뒤섞임이
-                // 보이면 medium/high로 되돌린다(정확도가 같았던 medium을 우선 시도).
-                .reasoningEffort(ReasoningEffort.LOW)
+                // 정확도가 비례하지 않았다. TROUBLESHOOTING.md #24 참고. 성분·함량표가 촘촘한
+                // 사진에서 다시 누락·뒤섞임이 보이면 재컴파일 없이 설정값만 medium/high로 올린다
+                // (정확도가 같았던 medium을 우선 시도).
+                .reasoningEffort(reasoningEffort)
                 .responseFormat(OcrExtractionBatch.class)
                 .addUserMessageOfArrayOfContentParts(List.of(
                         ChatCompletionContentPart.ofText(text),
@@ -133,7 +139,7 @@ public class OpenAiClient implements AiClient {
                 .formatted(c.medicationCount(), c.warnCount(), c.critCount(), c.symptomCount());
 
         ChatCompletionCreateParams params = ChatCompletionCreateParams.builder()
-                .model(MODEL)
+                .model(model)
                 .addUserMessage(prompt)
                 .build();
 
