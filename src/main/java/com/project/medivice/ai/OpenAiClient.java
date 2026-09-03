@@ -150,6 +150,69 @@ public class OpenAiClient implements AiClient {
                 .orElse(english ? "No summary was returned." : "요약을 받지 못했습니다.");
     }
 
+    @Override
+    public String explainMedication(MedicationExplainContext c) {
+        String ingredients = String.join(", ", c.ingredientNames());
+        boolean hasSideEffect = c.sideEffect() != null && !c.sideEffect().isBlank();
+
+        // 부작용 원문이 있을 때만 "졸릴 수 있다" 같은 체감 변화를 물어본다 — 없으면 아예
+        // 언급하지 말라고 못박아서, 모델이 성분 지식만으로 부작용을 지어내는 걸 막는다.
+        String sideEffectInstruction = hasSideEffect
+                ? """
+
+                다음은 이 약의 식약처 공식 부작용 안내 원문입니다:
+                "%s"
+                이 원문 안에서 환자가 복용 중 실제로 느낄 수 있는(예: 졸림, 어지러움, 속쓰림처럼
+                체감되는) 대표 증상이 있으면 딱 하나만 골라 자연스럽게 문장에 포함하세요. 이 원문에
+                없는 부작용은 추가하지 마세요. 원문에 체감 증상이 없거나 애매하면 부작용은 언급하지
+                말고 넘어가세요.
+                """.formatted(c.sideEffect())
+                : "\n부작용 정보가 주어지지 않았으니, 부작용을 추측해서 언급하지 마세요.";
+
+        String formatInstruction = """
+                - 진단이 아니라 설명입니다. 마지막에 "이상 증상이 지속되면 의료진에게 알리세요" 같은
+                  안내를 짧게 덧붙이세요.
+                - 화면에 그대로 표시되는 순수 텍스트입니다. 마크다운(**굵게**, 목록, 제목 등)을
+                  쓰지 말고 평문으로만 쓰세요.
+                - 전체 1~3문장으로 짧게 쓰세요.
+                """;
+
+        String prompt;
+        if (c.efficacy() != null && !c.efficacy().isBlank()) {
+            // efficacy는 식약처 e약은요 원문 — 지어내지 말고 이 문장을 그대로 쉬운 말로 다듬기만 하라고 못박는다.
+            prompt = """
+                    다음은 의약품 "%s"의 식약처 공식 효능·효과 설명입니다:
+                    "%s"
+
+                    이 내용만 근거로, 환자가 이해하기 쉬운 한국어로 바꿔 쓰세요.
+                    - 이 문장 밖의 사실을 지어내지 마세요(용법·용량 등을 새로 추가하지 마세요).
+                    %s
+                    %s
+                    """.formatted(c.productName(), c.efficacy(), sideEffectInstruction, formatInstruction);
+        } else {
+            prompt = """
+                    의약품 "%s"에 실제로 든 성분은 %s입니다.
+                    이 성분들이 일반적으로 어떤 목적으로 쓰이는지, 환자가 이해하기 쉬운 한국어로
+                    설명하세요.
+                    - 이 약이 처방된 이유를 추측하거나 용법·용량을 새로 만들어내지 마세요 — 성분의
+                      일반적인 약리 분류(예: "혈압 관리에 쓰이는 성분")만 언급하세요.
+                    %s
+                    %s
+                    """.formatted(c.productName(), ingredients, sideEffectInstruction, formatInstruction);
+        }
+
+        ChatCompletionCreateParams params = ChatCompletionCreateParams.builder()
+                .model(model)
+                .addUserMessage(prompt)
+                .build();
+
+        var response = client.chat().completions().create(params);
+        return response.choices().stream()
+                .findFirst()
+                .flatMap(choice -> choice.message().content())
+                .orElse(null);
+    }
+
     private static <T> T firstStructuredResult(StructuredChatCompletion<T> response) {
         StructuredChatCompletionMessage<T> message = response.choices().stream()
                 .findFirst()

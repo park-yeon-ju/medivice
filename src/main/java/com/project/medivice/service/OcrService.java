@@ -4,6 +4,7 @@ import com.project.medivice.ai.AiClient;
 import com.project.medivice.dto.IngredientDto;
 import com.project.medivice.dto.OcrResultDto;
 import com.project.medivice.dto.OcrRowDto;
+import com.project.medivice.repository.IngredientRepository.ProductIngredientRow;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
@@ -51,9 +52,11 @@ public class OcrService {
     private static final float JPEG_QUALITY = 0.85f;
 
     private final AiClient aiClient;
+    private final ProductLookupService productLookupService;
 
-    public OcrService(AiClient aiClient) {
+    public OcrService(AiClient aiClient, ProductLookupService productLookupService) {
         this.aiClient = aiClient;
+        this.productLookupService = productLookupService;
     }
 
     /** MultipartFile은 응답이 나간 뒤(비동기 처리 중)엔 더 이상 유효하지 않으므로, 요청 스레드에서 미리 바이트로 꺼내 둔다. */
@@ -164,9 +167,22 @@ public class OcrService {
     }
 
     private OcrResultDto toDto(AiClient.OcrExtractionResult r) {
-        List<IngredientDto> ingredients = r.ingredients() == null ? List.of() : r.ingredients().stream()
+        List<IngredientDto> aiIngredients = r.ingredients() == null ? List.of() : r.ingredients().stream()
                 .map(i -> new IngredientDto(i.name(), i.englishName(), i.amount(), i.unit()))
                 .toList();
+
+        // AI가 사진 속 성분·함량표를 눈으로 읽는 대신, 읽어낸 제품명으로 우리 DB(식약처 허가
+        // 원본 데이터)를 먼저 찾아본다(1차 전체 이름, 실패하면 2차 브랜드명 폴백 — §26·§27,
+        // ProductLookupService에 정리됨). 찾으면 그 값이 더 정확하므로 AI가 읽은 성분을
+        // 대체하고, 못 찾으면(수집 범위 밖 제품) 기존처럼 AI가 읽은 값을 그대로 쓴다.
+        List<ProductIngredientRow> dbRows = productLookupService.findIngredients(r.productName());
+        boolean ingredientsFromDb = !dbRows.isEmpty();
+        List<IngredientDto> ingredients = ingredientsFromDb
+                ? dbRows.stream().map(row -> new IngredientDto(row.nameKo(), row.nameEn(), row.amount(), row.unit())).toList()
+                : aiIngredients;
+        if (ingredientsFromDb) {
+            log.debug("OCR 성분을 DB에서 확인함: 제품명={}, 성분 {}개", r.productName(), ingredients.size());
+        }
 
         List<OcrRowDto> rows = new ArrayList<>();
         if (r.hospitalName() != null || r.department() != null) {
@@ -182,7 +198,9 @@ public class OcrService {
             String value = ingredients.stream()
                     .map(i -> i.name() + " " + formatAmount(i.amount()) + i.unit())
                     .collect(Collectors.joining(" · "));
-            rows.add(new OcrRowDto("성분", value, r.ingredientsConfidence()));
+            // DB에서 확인된 성분은 식약처 허가 원본이라 신뢰도를 최대로 표시한다.
+            Double confidence = ingredientsFromDb ? 1.0 : r.ingredientsConfidence();
+            rows.add(new OcrRowDto("성분" + (ingredientsFromDb ? " (DB 확인)" : ""), value, confidence));
         }
         if (r.dosePerIntake() != null) {
             String value = formatAmount(r.dosePerIntake()) + (r.doseUnit() != null ? r.doseUnit() : "");

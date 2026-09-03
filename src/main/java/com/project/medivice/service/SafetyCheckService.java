@@ -37,19 +37,24 @@ public class SafetyCheckService {
 
         Integer capacityTypeId = safetyCheckRepository.findDurTypeIdByCode("CPCTY_ATENT");
         for (OverdoseRow od : viewRepository.findOverdose(userId)) {
+            // MedilightService.buildTotals()와 같은 어휘 — RED면 상한 초과, medCount>=2면 중복,
+            // 그 외(YELLOW인데 아직 상한 근접)는 상한 근접으로 본다.
+            String reasonCode = "RED".equals(od.level())
+                    ? "OVER_LIMIT"
+                    : (od.medCount() != null && od.medCount() >= 2 ? "DUPLICATE" : "NEAR_LIMIT");
             safetyCheckRepository.insertItem(checkId, capacityTypeId, od.ingredientId(),
-                    null, null, od.totalDaily(), od.maxQty(), od.level());
+                    null, null, od.totalDaily(), od.maxQty(), od.level(), reasonCode);
         }
 
         for (SingleConflictRow sc : viewRepository.findSingleConflicts(userId)) {
             safetyCheckRepository.insertItem(checkId, sc.durTypeId(), sc.ingredientId(),
-                    sc.medicationId(), null, null, null, sc.level());
+                    sc.medicationId(), null, null, null, sc.level(), "SINGLE_RULE");
         }
 
         Integer noDurDataTypeId = safetyCheckRepository.findNoDurDataTypeId();
         for (UncoveredRow uc : viewRepository.findUncoveredIngredients(userId)) {
             safetyCheckRepository.insertItem(checkId, noDurDataTypeId, uc.ingredientId(),
-                    null, null, null, null, "INFO");
+                    null, null, null, null, "INFO", "NO_DUR_DATA");
         }
     }
 }

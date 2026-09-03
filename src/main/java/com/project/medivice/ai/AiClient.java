@@ -54,4 +54,20 @@ public interface AiClient {
         public record ExtractedIngredient(String name, String englishName, BigDecimal amount, String unit) {
         }
     }
+
+    /**
+     * UC13/8~12 등록 직후, "이 약이 뭘 위한 약인지" + "복용 중 흔히 느낄 수 있는 것" 1~2문장으로
+     * 설명한다. 진단이 아니라 기계적 설명이라는 원칙은 summarizeReport와 같다 — 제품명·성분명,
+     * 그리고 있으면 식약처 e약은요 효능·효과(efficacy)·부작용(sideEffect) 원문만 근거로 쓰고,
+     * 그 밖의 사실을 지어내지 않는다. 둘 다 없으면(제품이 DB에 없거나 수기 등록) 성분명만으로
+     * 일반적인 설명을 만들고, 부작용은 언급하지 않는다(모르는 부작용을 지어내는 게 가장 위험하다).
+     */
+    String explainMedication(MedicationExplainContext context);
+
+    record MedicationExplainContext(
+            String productName,
+            List<String> ingredientNames,
+            String efficacy,
+            String sideEffect) {
+    }
 }

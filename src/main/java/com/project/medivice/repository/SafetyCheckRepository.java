@@ -32,15 +32,20 @@ public class SafetyCheckRepository {
         return jdbc.queryForObject(sql, params, Long.class);
     }
 
-    /** dur_type_id 가 없는(NO_DUR_DATA/효능군중복 등 단일 원인이 아닌) 항목은 null로 둔다. */
+    /**
+     * dur_type_id 가 없는(NO_DUR_DATA/효능군중복 등 단일 원인이 아닌) 항목은 null로 둔다.
+     * reasonCode는 06_schema_alignment.sql이 NOT NULL로 추가한 컬럼 — MedilightService의
+     * IngredientAnalysisDto.reasonCode와 같은 어휘(OVER_LIMIT/DUPLICATE/NEAR_LIMIT 등)를 쓴다.
+     */
     public void insertItem(Long checkId, Integer durTypeId, Long ingredientId,
-            Long medicationAId, Long medicationBId, BigDecimal totalAmount, BigDecimal threshold, String level) {
+            Long medicationAId, Long medicationBId, BigDecimal totalAmount, BigDecimal threshold, String level,
+            String reasonCode) {
         String sql = """
                 INSERT INTO medivice.safety_check_items
                     (check_id, dur_type_id, ingredient_id, medication_a_id, medication_b_id,
-                     total_amount, threshold, level)
+                     total_amount, threshold, level, reason_code)
                 VALUES (:checkId, :durTypeId, :ingredientId, :medicationAId, :medicationBId,
-                        :totalAmount, :threshold, :level)
+                        :totalAmount, :threshold, :level, :reasonCode)
                 """;
         MapSqlParameterSource params = new MapSqlParameterSource()
                 .addValue("checkId", checkId)
@@ -50,7 +55,8 @@ public class SafetyCheckRepository {
                 .addValue("medicationBId", medicationBId)
                 .addValue("totalAmount", totalAmount)
                 .addValue("threshold", threshold)
-                .addValue("level", level);
+                .addValue("level", level)
+                .addValue("reasonCode", reasonCode);
         jdbc.update(sql, params);
     }
 

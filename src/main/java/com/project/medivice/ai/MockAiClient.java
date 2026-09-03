@@ -60,4 +60,27 @@ public class MockAiClient implements AiClient {
                         + "증상 기록은 %d건 남겨졌습니다. 이 요약은 기록된 데이터를 기계적으로 정리한 것이며 진단이 아닙니다.",
                 c.medicationCount(), c.warnCount(), c.critCount(), c.symptomCount());
     }
+
+    @Override
+    public String explainMedication(MedicationExplainContext context) {
+        // 실제 모델을 부르지 않고, 있는 사실(efficacy·sideEffect 원문 또는 성분명)만 문장 틀에 끼워 넣는다.
+        String ingredients = String.join(" · ", context.ingredientNames());
+        String base;
+        if (context.efficacy() != null && !context.efficacy().isBlank()) {
+            base = truncate(context.efficacy(), 60);
+        } else {
+            base = ingredients + "이(가) 포함된 약입니다. 복용법은 처방 내용을 우선해 확인하세요.";
+        }
+        // sideEffect 원문이 있으면 짧게 붙인다 — "졸릴 수 있다" 같은 체감 변화는 이 원문 안에
+        // 있는 것만 옮기고, 없는 부작용을 지어내지 않는다.
+        if (context.sideEffect() != null && !context.sideEffect().isBlank()) {
+            return base + " " + truncate(context.sideEffect(), 60);
+        }
+        return base + " 이상 증상이 지속되면 의료진에게 알리세요.";
+    }
+
+    private static String truncate(String text, int maxLength) {
+        String trimmed = text.strip();
+        return trimmed.length() > maxLength ? trimmed.substring(0, maxLength) + "…" : trimmed;
+    }
 }

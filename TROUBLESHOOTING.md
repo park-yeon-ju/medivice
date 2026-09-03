@@ -1,6 +1,6 @@
 # 메디바이스 백엔드 트러블슈팅
 
-- 작성일: 2026-09-03 (최종 갱신: 2026-09-03 — Java 21 업그레이드, OCR 속도 개선, AI 설정 외부화·비동기 전환 이후)
+- 작성일: 2026-09-03 (최종 갱신: 2026-09-03 — Java 21 업그레이드, OCR 속도 개선, AI 설정 외부화·비동기 전환, 성분 DB 우선 조회·이름 폴백, DB 전체 재적재(43,019개 제품), 복용 항목 AI 설명(효능+부작용) 이후)
 - 대상: `src/main/java/com/project/medivice/**` (Spring Boot) + 로컬 DB/AI 연동
 - 기록 형식: 문제 → 재현 방법 → 원인 → 해결 → 확인 → 관련 파일
 
@@ -893,3 +893,355 @@ OCR 호출 완료: 23201ms, ... [task-1] c.project.medivice.service.OcrService
 - `src/main/java/com/project/medivice/MediviceApplication.java` (`@EnableAsync`)
 - §22(이 갭을 처음 기록한 곳), §24(reasoning effort·이미지 리사이즈 — 이 작업 이후에도 17~26초는 걸려서 비동기 전환의 필요성이 여전했음)
 - (미착수, §22에 남겨둠) `front/src/stores/medivice.js`의 `runOcr()` 폴링 대응, `POST /api/reports`의 동일한 비동기 전환
+
+---
+
+## 26. OCR 성분 인식을 AI 단독 판독에서 "제품명 → DB 조회, 실패 시 AI 폴백"으로 전환
+
+> **정정(§28)**: 아래에서 "무코스타서방정"·"모티리톤정"이 "수집 범위 밖이라 DB에 없다"고
+> 진단한 건 틀렸다. 실제로는 로컬에 데이터가 다 있었는데 마이그레이션(06·08·09) 미적용으로
+> DB 적재가 절반만 돼 있었을 뿐이다 — §28에서 재적재 후 둘 다 정상 매칭된다. 이 절 자체의
+> 하이브리드 매칭 로직(1차 DB 조회, 실패 시 AI 폴백) 설계는 여전히 유효하다.
+
+### 문제
+
+§12(OCR 환각)에서 프롬프트로 어느 정도 억제했지만, 근본적으로 AI가 사진 속 "성분·함량표"를
+글자 그대로 눈으로 읽는 방식은 애초에 실수가 나기 쉬운 작업이다(§24 벤치마크에서도 이 표가
+"가장 실수가 많이 나는 부분"이라고 프롬프트에 명시해뒀을 정도). 사용자가 실제 사진(`7198.jpg`,
+처방전 3개 약)으로 확인해보니, 약 이름(예: "벨록스캡정40밀리그램")은 비교적 뚜렷하게 잘
+읽히는 반면 함량표는 사진마다 화질·각도가 달라 신뢰하기 어려웠다.
+
+### 원인
+
+OCR 파이프라인이 제품명·성분·함량을 전부 AI 한 번의 시각 판독에만 의존했다. 그런데
+DA_데이터파이프라인이 이미 공공데이터포털(식약처)에서 제품 22,271종의 **허가 원본 성분·함량**을
+`medivice.products`/`medivice.product_ingredients`에 적재해 뒀다 — 이 데이터가 있는 제품이라면
+AI가 사진에서 성분표를 "읽어서 추측"할 필요가 아예 없다.
+
+### 해결
+
+`OcrService.toDto()`에서 AI가 읽은 제품명으로 먼저 DB를 찾아보고, 있으면 그 성분으로 **대체**,
+없으면 기존처럼 AI가 읽은 성분을 그대로 쓰는 하이브리드 방식으로 바꿨다.
+
+- `IngredientRepository.findIngredientsByProductName(String)`(신규): `medivice.products.name_ko`가
+  `"이름(주성분)"` 형태라(예: `벨록스캡정40밀리그램(펙수프라잔염산염)`), 사진에서 읽은 이름
+  (괄호 없음)과는 **정확히 일치하거나, 그 이름 뒤에 "("이 바로 오는 접두어**까지만 매칭한다.
+  동명이 여러 건 걸리면 `product_id`가 가장 작은 것 하나만 쓴다(여러 제품의 성분을 섞는 것보다
+  안전).
+- `OcrService.toDto()`: DB 매칭이 있으면 그 성분으로 `ingredients`를 교체하고, 응답의 "성분" 행
+  라벨을 `"성분 (DB 확인)"`으로 바꾸고 confidence를 `1.0`으로 표시한다(식약처 허가 원본이라
+  AI의 시각 판독보다 신뢰도가 높다는 것을 화면에서도 구분할 수 있게). 없으면 기존 동작 그대로
+  AI가 읽은 값(없으면 빈 배열)을 쓴다 — **AI에게 이미 지시해 둔 "모르면 지어내지 말고 비워라"
+  원칙(§12)은 그대로 유지**, DB가 그 위에 한 단계 검증을 얹은 것뿐이다.
+- 공공데이터포털 API를 요청 경로에서 실시간으로 추가 호출하는 방안(커버리지는 더 넓어지지만
+  외부 API 왕복이 OCR 응답 시간에 또 얹힌다)은 이번엔 넣지 않기로 했다 — 사용자와 상의 후,
+  DB에 없으면 AI 판독값을 그대로 쓰는 쪽을 택함.
+
+### 확인
+
+`7198.jpg`(처방전, 약 3개)로 `POST /api/medications/ocr` → 폴링 → 실측:
+
+```text
+벨록스캡정40밀리그램        → DB 매칭 성공: 펙수프라잔염산염 40mg, confidence 1.0 ("성분 (DB 확인)")
+무코스타서방정150밀…       → DB 매칭 안 됨(수집 범위 밖) → AI 판독 그대로: ingredients []
+                              (AI 스스로 "성분/함량 표기는 보이지 않아 비워둠"이라고 정직하게 표시)
+모티리톤정                  → DB 매칭 안 됨 → 위와 동일하게 빈 배열 유지
+```
+
+`medivice.products` 22,271건 중 이 사진의 3개 제품을 직접 조회해, 접두어 매칭 로직이 실제
+DB 스키마(제품명에 성분이 괄호로 붙는 규칙)와 맞는지 `psql`로 먼저 검증한 뒤 코드를 짰다.
+
+### 관련 파일
+
+- `src/main/java/com/project/medivice/repository/IngredientRepository.java`
+  (`ProductIngredientRow`, `findIngredientsByProductName` 신규)
+- `src/main/java/com/project/medivice/service/OcrService.java` (`toDto`가 DB 조회를 우선하도록 수정)
+- §12(OCR 환각 — "모르면 비워라" 원칙의 출처), §24(reasoning effort — 이번 변경과 별개로 그대로 유지)
+- DA_데이터파이프라인 `sql/01_schema_ddl.sql`(`products`/`product_ingredients` 정의), `src/load_postgres.py`(적재 스크립트)
+
+---
+
+## 27. §26 DB 매칭이 이름 뒷부분(용량·제형) 오독에는 약함 — "정" 앞부분 폴백 추가
+
+### 문제
+
+§26의 `findIngredientsByProductName`은 AI가 읽은 이름이 DB의 `"이름(주성분)"` 형태와 **정확히**
+같거나 그 접두어여야만 매칭된다. 그런데 사진 화질이 나쁘면 브랜드명은 뚜렷해도 뒤에 붙는
+용량·제형(`정40밀리그램` 같은) 쪽이 흐려서 AI가 그 부분만 잘못 읽거나 비워두는 경우가 있다 —
+이러면 브랜드명은 맞았는데도 DB에 있는 제품을 그냥 놓친다.
+
+### 원인
+
+1차 매칭이 "전체 이름 일치"만 보기 때문에, 이름 뒷부분 한 글자만 어긋나도 매칭이 실패한다.
+
+### 해결
+
+`IngredientRepository.findIngredientsByCoreName(String)`(신규)을 1차 실패 시에만 도는 2차
+폴백으로 추가했다. 제품명에서 **"정" 앞부분(브랜드명)만** 잘라 그 접두어로 다시 찾는다
+(예: `"벨록스캡정40밀리그램"` → `"벨록스캡"`).
+
+이 완화된 검색은 그 자체로 위험하다 — 같은 브랜드에 용량이 다른 버전이 여러 개 있으면
+(예: 벨록스캡정 10·20·40mg 세 가지가 전부 `"벨록스캡"`으로 걸림) 아무거나 하나를 고르면
+틀린 용량의 성분을 잘못 붙이게 된다. 그래서 **결과가 제품 정확히 1개로 좁혀질 때만** 채택하고,
+0개(못 찾음)든 여러 개(모호함)든 둘 다 포기하고 빈 리스트를 돌려준다 — §12·§26과 같은 원칙
+("모르면 지어내지 말고 비워라")을 매칭 단계에도 그대로 적용한 것이다.
+
+`OcrService.toDto()`는 1차(`findIngredientsByProductName`)가 빈 리스트를 돌려줄 때만 2차를
+시도하도록 연결했다.
+
+### 확인
+
+- 실제 사진(`7198.jpg`)으로 재검증: `벨록스캡정40밀리그램`은 1차 그대로 매칭되어 영향 없음.
+  `무코스타서방정`·`모티리톤정`은 부분 일치로 넓혀도 DB에 아예 없어(§26에서 이미 확인) 2차도
+  빈 리스트 — 잘못된 값을 만들지 않고 정직하게 실패함을 재확인.
+- 2차 로직이 "1개로 좁혀지면 채택" 조건에서 실제로 맞는 성분을 찾는지 `psql`로 별도 검증:
+  DB에서 `"정"` 기준으로 잘랐을 때 후보가 정확히 1개인 실제 제품(`가드렛정100mg(아나글립틴)`)을
+  찾아, 브랜드명만("가드렛") 남겨도 `아나글립틴 100mg`으로 정확히 좁혀지는 것을 확인했다.
+- "모호하면 3개가 걸린다"는 위험 사례도 재확인: `"벨록스캡"`만으로 검색하면 10·20·40mg 세
+  버전이 모두 걸려(`product_id` 3개) 2차 로직이 의도대로 빈 리스트를 돌려준다.
+
+### 관련 파일
+
+- `src/main/java/com/project/medivice/repository/IngredientRepository.java`
+  (`findIngredientsByCoreName` 신규)
+- `src/main/java/com/project/medivice/service/OcrService.java` (`toDto`에서 1차 실패 시 2차 호출)
+- §26(1차 매칭·이 기능의 배경), §12(모르면 비워라 원칙의 출처)
+
+---
+
+## 28. DB에 제품 절반이 비어 있던 진짜 원인 — 마이그레이션(06·08·09) 미적용
+
+### 문제
+
+§26·§27에서 "무코스타서방정"·"모티리톤정"이 DB에 없다고 기록했는데, 사용자가 "왜 없냐"고
+다시 물어서 원인을 끝까지 파봤다. 결론부터 말하면 **§26의 진단이 틀렸다** — 공공데이터포털
+수집 범위 밖이 아니라, **이미 로컬에 다 있는 데이터가 DB에 절반만 적재된 상태**였다.
+
+### 원인
+
+`DA_데이터파이프라인/data/normalized/products.csv`를 직접 열어보니 43,283행 전체(모티리톤·
+무코스타 포함)가 이미 정규화까지 끝나 있었다. 그런데 DB의 `product_ingredients`는 21,093건뿐 —
+README에 적힌 "기존 서비스 범위 21,093건"이라는 **예전 수치와 정확히 일치**했다. 즉 지금 DB는
+초기(01~05 스크립트 + 수동 적재) 상태 그대로였고, 그 뒤에 나온 마이그레이션 3개가 한 번도
+적용되지 않았다:
+
+- `06_schema_alignment.sql` — 안전 고지·규칙 출처 컬럼 추가
+- `08_widen_name_columns.sql` — **핵심 원인**. `products.name_ko`가 `VARCHAR(200)`인데 실제
+  제품명 중 최대 391자짜리가 있어(`ingredients.name_ko`는 최대 287자), 전체 재적재를 시도하면
+  `StringDataRightTruncation: value too long for type character varying(200)`으로 죽는다.
+  §26에서 이 에러를 직접 만났다.
+- `09_fix_single_rule_uniqueness.sql` — `dur_single_rules` 재적재 시 행이 중복되는 유니크 제약
+  버그 수정(`NULL != NULL`이라 임부·연령 금기 규칙이 막히지 않던 문제)
+
+README 맨 위에 **"기존 DB는 06 → 08 → 09 실행 후 03(뷰)을 다시 실행"**이라고 이미 적혀 있었는데
+(§1에서 신규 DB만 만들고 이 안내를 놓쳤다), §26을 쓸 당시엔 이걸 못 보고 "API가 42,984건 중
+22,271건만 수집됐다"고 잘못 결론 내렸다.
+
+### 해결
+
+DA_데이터파이프라인 `README.md`가 지시한 순서 그대로 실행했다 — 새 API 호출은 전혀 없이,
+이미 로컬에 있는 CSV를 다시 적재하기만 했다.
+
+```sh
+psql -h localhost -p 5544 -U $(whoami) -d medivice_db -f sql/06_schema_alignment.sql
+psql -h localhost -p 5544 -U $(whoami) -d medivice_db -f sql/08_widen_name_columns.sql   # 뷰 10개를 자동으로 DROP
+psql -h localhost -p 5544 -U $(whoami) -d medivice_db -f sql/09_fix_single_rule_uniqueness.sql
+psql -h localhost -p 5544 -U $(whoami) -d medivice_db -f sql/03_medilight_views.sql      # 뷰 10개 재생성
+
+python3 -m venv loadenv && loadenv/bin/pip install psycopg2-binary python-dotenv
+PGHOST=localhost PGPORT=5544 PGDATABASE=medivice_db PGUSER=$(whoami) PGPASSWORD= \
+  loadenv/bin/python3 src/load_postgres.py
+```
+
+`load_postgres.py`는 `ON CONFLICT ... DO UPDATE/DO NOTHING`(upsert)이라 기존 행을 지우지 않고
+빠진 것만 채운다 — `product_id`(identity 대체키)도 그대로 보존되므로, 이미 등록된 사용자
+복용 목록(`medications.product_id` 참조)이 깨질 위험이 없다.
+
+### 확인
+
+```text
+[적재 전]  products 22,271 / product_ingredients 21,093
+[적재 후]  products 43,019 / product_ingredients 92,355  (전부 통과: 참조 무결성·중복·자기 자신 금기 0건)
+```
+
+`GET /api/products/ingredients`로 재확인:
+
+```text
+name=모티리톤정                → 현호색·견우자(5:1) 50% 에탄올 연조엑스(9.5~11.5→1) 30mg  (이제 매칭됨)
+name=무코스타서방정150밀리그램 → 레바미피드 mg  (이제 매칭됨, 함량은 원천 데이터에 없어 NULL)
+```
+
+`7198.jpg`(처방전 3개 약)로 OCR도 재실행 — 이제 **3개 전부** `"성분 (DB 확인)"`, confidence 1.0으로
+채워진다(§26·§27 때는 1개만 성공했었다). `GET /api/dashboard`도 200 정상 — 뷰 재생성 후 기존
+사용자 데이터 조회에 영향 없음을 확인했다.
+
+### 관련 파일
+
+- DA_데이터파이프라인 `sql/06_schema_alignment.sql`, `08_widen_name_columns.sql`,
+  `09_fix_single_rule_uniqueness.sql`, `03_medilight_views.sql`(재실행), `src/load_postgres.py`
+- §1(최초 DB 구축 — 이때 마이그레이션 안내를 놓친 지점), §26·§27(잘못된 원인 진단이 남아있던 곳)
+
+---
+
+## 29. 등록된 약마다 "AI 설명"을 붙임 — 이미 설계는 돼 있었다
+
+### 문제
+
+사용자가 준 목업 화면(약 이름·성분 아래에 초록 "AI 설명" 칩과 1~2문장 설명이 붙는 카드)대로
+만들어 달라는 요청. 코드를 보니 `MedicationDto.aiExplanation`과 `front/src/components/
+MedicationRow.vue`의 렌더링 로직(`v-if="medication.aiExplanation"`)이 **이미 정확히 그 목업
+모양대로 구현돼 있었다** — 백엔드가 항상 `null`만 채워 넣고 있었을 뿐이다. `medivice.ai_outputs`
+테이블도 `target_type='MEDICATION'` 값까지 미리 준비된 채 아무 데서도 안 쓰이고 있었다.
+
+### 원인
+
+Sprint 3 확장 지점으로 자리만 파 두고 실제 생성 로직을 붙이지 않은 상태였다(§22가 지적한
+"미리 세워 둔 구조" 패턴과 같은 종류).
+
+### 해결
+
+- `AiClient`에 `explainMedication(MedicationExplainContext)` 추가 — `summarizeReport`와 같은
+  "AI는 주어진 사실만 풀어쓴다" 원칙. 근거 텍스트는 두 단계로 고른다:
+  1. 제품명으로 `product_infos.efficacy`(식약처 e약은요 공식 효능·효과 원문, §28로 채워진
+     4,767건)를 찾으면 그 문장을 쉬운 말로 다듬기만 하게 시킨다(지어내지 말라고 명시).
+  2. 못 찾으면(수기 등록 등) 성분명만으로 "일반적으로 어떤 목적의 약인지" 설명하게 한다.
+  - `MockAiClient`는 API를 부르지 않고 같은 우선순위(efficacy 있으면 그 앞부분, 없으면
+    "OO이(가) 포함된 약입니다" 템플릿)로 기계적으로 채운다.
+- `IngredientRepository`의 §26·§27 매칭 로직(전체 이름 → 브랜드명 폴백)을 재사용하도록
+  리팩터링해서 `findEfficacyByProductName`을 추가했다 — 두 군데서 매칭 규칙이 어긋나지 않게
+  `resolveProductIdExact`/`resolveProductIdByCoreName` private 메서드로 뽑아 공유한다.
+- `AiOutputRepository`(신규) — 이미 있던 `ai_outputs` 테이블에 `target_type='MEDICATION'`으로
+  저장·조회한다. **등록 시점에 딱 한 번만 생성해서 캐시**하고, 목록/대시보드 조회 때마다 AI를
+  다시 부르지 않는다(OCR과 달리 짧은 텍스트 생성이라 등록 요청 스레드 안에서 동기로 끝낸다 —
+  `ReportService.summarizeReport`와 같은 판단). AI 호출이 실패해도(키 미설정·네트워크 등)
+  등록 자체는 실패하지 않도록 감싸고, 실패 기록만 `status='failed'`로 남긴다.
+- `MedicationService.create()`가 생성해 반환하고, `list()`(대시보드가 호출)는 캐시된 값만 읽는다.
+  **이 기능 이전에 등록된 항목은 설명 없이 그대로 보인다** — 프론트가 이미 `v-if`로 처리하므로
+  깨지지 않는다.
+- 프롬프트에 "마크다운(굵게·목록 등) 쓰지 말고 평문으로" 명시 — 첫 실측에서 `**LDL**`처럼
+  마크다운이 섞여 나왔는데, 프론트는 이 문자열을 그냥 텍스트로 찍으므로 별표가 그대로 보였다.
+
+### 확인
+
+목업과 같은 두 약으로 실제 등록·조회:
+
+```text
+POST /api/medications (아모잘탄정 5/50mg, 암로디핀5mg+로사르탄칼륨50mg)
+→ aiExplanation: "암로디핀과 로사르탄칼륨은 모두 혈관을 이완시켜 혈압을 낮추는 데 도움을
+   주는 성분으로, 주로 고혈압 같은 혈압 관리에 사용됩니다. 복용 중 어지럼, 심한 부종 등
+   이상 증상이 지속되면 의료진에게 알리세요."
+
+POST /api/medications (크레스토정 5mg, 로수바스타틴5mg)
+→ aiExplanation: "로수바스타틴은 혈액 속 LDL(나쁜) 콜레스테롤과 중성지방을 낮추고 HDL(좋은)
+   콜레스테롤을 높이는 데 도움을 주어, 고지혈증(이상지질혈증) 관리에 흔히 쓰이는 성분입니다.
+   복용 중 근육통·근력저하 같은 이상 증상이 지속되면 의료진에게 알리세요."
+
+GET /api/dashboard → 재호출 시 AI를 다시 안 부르고(응답 즉시) 캐시된 문장 그대로 반환.
+```
+
+### 관련 파일
+
+- `src/main/java/com/project/medivice/ai/AiClient.java`, `MockAiClient.java`, `OpenAiClient.java`
+  (`explainMedication`, `MedicationExplainContext` 신규)
+- `src/main/java/com/project/medivice/repository/AiOutputRepository.java` (신규)
+- `src/main/java/com/project/medivice/repository/IngredientRepository.java`
+  (`resolveProductIdExact`/`resolveProductIdByCoreName` 공유 추출, `findEfficacyByProductName` 신규)
+- `src/main/java/com/project/medivice/service/ProductLookupService.java` (`findEfficacy` 신규)
+- `src/main/java/com/project/medivice/service/MedicationService.java`
+  (`create`가 생성·캐시, `list`가 캐시만 읽음)
+- (건드리지 않음) `front/src/components/MedicationRow.vue` — 이미 완성돼 있었음
+
+---
+
+## 30. §29 작업 중 발견 — §28 마이그레이션이 등록 자체를 깨고 있었음
+
+### 문제
+
+§29 기능 확인을 위해 `POST /api/medications`를 호출하니 500 에러:
+`null value in column "reason_code" of relation "safety_check_items" violates not-null constraint`.
+새 기능과 무관하게 **등록 자체가 이미 막혀 있던** 상태였다.
+
+### 원인
+
+오늘(§28) 적용한 `06_schema_alignment.sql`이 `safety_check_items.reason_code`를 `NOT NULL`로
+바꿔 놓았는데, 그 컬럼을 채우는 `SafetyCheckRepository.insertItem()`은 스키마가 바뀌기 전
+버전 그대로였다 — INSERT 문에 `reason_code`가 아예 없어 항상 NULL이 들어가려다 막혔다.
+§28에서 "마이그레이션은 데이터·뷰에 안전하다"만 확인했지, 그 마이그레이션이 전제하는 Java
+코드 변경까지 같이 왔는지는 확인하지 않았던 게 원인이다.
+
+### 해결
+
+`insertItem()`에 `reason_code` 파라미터를 추가하고, 호출부(`SafetyCheckService.recordCheck`)
+세 곳에 각각 맞는 코드를 채웠다 — `MedilightService.buildTotals()`가 이미 쓰던 어휘와 맞췄다:
+
+- 용량주의(overdose): `RED`면 `OVER_LIMIT`, 같은 성분 복용 항목이 2개 이상이면 `DUPLICATE`,
+  그 외엔 `NEAR_LIMIT`
+- 단일금기(임부·연령·노인): `SINGLE_RULE`(성분 쌍이 아니라 이 스냅샷 표 모양상 뭉뚱그림)
+- 판정 근거 없음: `NO_DUR_DATA`
+
+### 확인
+
+같은 등록 요청을 재시도해 201로 정상 처리됨을 확인했고, §29의 두 약 등록·조회로 회귀가
+더 없는지 같이 검증했다(위 §29 확인 항목 참고).
+
+### 관련 파일
+
+- `src/main/java/com/project/medivice/repository/SafetyCheckRepository.java` (`insertItem`)
+- `src/main/java/com/project/medivice/service/SafetyCheckService.java` (`recordCheck`)
+- §28(원인이 된 마이그레이션), §6(DA 팀 06_schema_alignment.sql 원본)
+
+---
+
+## 31. AI 설명에 "복용 중 체감 변화"(예: 졸림) 추가 — 부작용 원문도 근거로 씀
+
+> **추가 확인**: 이 기능을 적용한 뒤 OCR로 등록한 실제 3개 약(벨록스캡정40밀리그램·
+> 무코스타서방정150밀리그램·모티리톤정)에는 부작용 설명이 안 붙었다. §28처럼 로딩이 덜 된
+> 건지 다시 파봤는데 **이번엔 로딩 버그가 아니었다** — `product_infos.csv`를 제대로 된
+> CSV 파서(줄바꿈 포함 필드 때문에 `wc -l`로 세면 48,918로 착시가 생긴다)로 다시 세보니
+> 정확히 4,767행이고, **이 4,767개가 전부 이미 DB에 들어가 있었다**. 즉 이 세 약은 로컬
+> 파일 어디에도 애초에 부작용 데이터가 없다 — "e약은요"(의약품개요정보) 데이터셋 자체가
+> 전체 43,019개 제품 중 4,767개(약 11%)만 커버하는 원천 데이터셋 한계다(§26의 제품
+> 허가정보·성분 데이터셋과는 커버리지가 다른 별개 데이터셋). 공공데이터포털 API를 실시간
+> 호출해 이 11%를 넓히는 방법도 있지만, 사용자와 상의해 "지금처럼 유지(있으면 언급, 없으면
+> 성분명 기반 일반 설명만)"로 결정했다 — 코드 변경 없음.
+
+### 문제
+
+사용자가 §29의 "AI 설명"에 사용자가 실제로 느낄 수 있는 변화(졸림 등)도 같이 안내할 수 있는지
+물었다. `product_infos.side_effect`(식약처 공식 부작용 원문, 4,767건 중 4,535건에 이미 있음)를
+안 쓰고 있었다.
+
+### 해결
+
+`AiClient.MedicationExplainContext`에 `sideEffect` 필드를 추가했다. `IngredientRepository`의
+`findEfficacyByProductName`을 `findProductInfoByProductName`으로 넓혀 `efficacy`·`side_effect`를
+한 번에 가져온다(매칭 로직은 §26·§27 그대로 재사용).
+
+프롬프트 원칙은 §29와 같다 — **부작용 원문이 있을 때만** "복용 중 실제로 느낄 수 있는 대표
+증상 하나만" 골라 언급하게 시키고, 원문이 없으면 부작용을 절대 추측하지 말라고 명시했다.
+성분 지식만으로 "이 계열 약은 보통 졸린다더라" 식으로 지어내는 걸 막기 위해서다.
+
+### 확인
+
+부작용 원문에 실제로 "졸음"이 적힌 실제 약(`탐부틴정200밀리그램(트리메부틴말레산염)`)으로
+등록해 확인했다:
+
+```text
+POST /api/medications (탐부틴정200밀리그램, 트리메부틴말레산염 200mg)
+→ aiExplanation: "이 약은 식도역류나 열공헤르니아, 위·십이지장염/궤양 등에서 생기는 복통,
+   소화불량, 메스꺼움·구토 같은 소화기 증상과 과민성대장증후군·경련성 결장, 그리고 소아의
+   습관성 구토, 변비, 설사 등 감염이 아닌 장 통과 장애에 사용합니다. 복용 중 졸릴 수 있으니
+   불편하면 의료진과 상의하고, 이상 증상이 지속되면 의료진에게 알리세요."
+```
+
+식약처 원문("...피로감, 졸음, 현기...")에 있던 "졸음"이 실제 응답에 자연스럽게 반영됨을
+확인했다. 확인용으로 등록한 항목이라 검증 후 삭제했다(§29의 목업 재현용 두 건만 남김).
+
+### 관련 파일
+
+- `src/main/java/com/project/medivice/ai/AiClient.java`, `MockAiClient.java`, `OpenAiClient.java`
+  (`MedicationExplainContext.sideEffect`)
+- `src/main/java/com/project/medivice/repository/IngredientRepository.java`
+  (`findEfficacyByProductName` → `findProductInfoByProductName`)
+- `src/main/java/com/project/medivice/service/ProductLookupService.java` (`findProductInfo`)
+- §29(이 기능의 원본 구현)

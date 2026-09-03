@@ -1,11 +1,13 @@
 package com.project.medivice.service;
 
+import com.project.medivice.ai.AiClient;
 import com.project.medivice.dto.IngredientDto;
 import com.project.medivice.dto.MedicationCreateRequest;
 import com.project.medivice.dto.MedicationCreateResponse;
 import com.project.medivice.dto.MedicationDto;
 import com.project.medivice.dto.MedilightDto;
 import com.project.medivice.exception.NotFoundException;
+import com.project.medivice.repository.AiOutputRepository;
 import com.project.medivice.repository.DepartmentRepository;
 import com.project.medivice.repository.IngredientRepository;
 import com.project.medivice.repository.MedicationRepository;
@@ -16,6 +18,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,22 +30,31 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class MedicationService {
 
+    private static final Logger log = LoggerFactory.getLogger(MedicationService.class);
+
     private final MedicationRepository medicationRepository;
     private final IngredientRepository ingredientRepository;
     private final DepartmentRepository departmentRepository;
     private final DemoUserResolver demoUserResolver;
     private final MedilightService medilightService;
     private final SafetyCheckService safetyCheckService;
+    private final AiClient aiClient;
+    private final ProductLookupService productLookupService;
+    private final AiOutputRepository aiOutputRepository;
 
     public MedicationService(MedicationRepository medicationRepository, IngredientRepository ingredientRepository,
             DepartmentRepository departmentRepository, DemoUserResolver demoUserResolver,
-            MedilightService medilightService, SafetyCheckService safetyCheckService) {
+            MedilightService medilightService, SafetyCheckService safetyCheckService,
+            AiClient aiClient, ProductLookupService productLookupService, AiOutputRepository aiOutputRepository) {
         this.medicationRepository = medicationRepository;
         this.ingredientRepository = ingredientRepository;
         this.departmentRepository = departmentRepository;
         this.demoUserResolver = demoUserResolver;
         this.medilightService = medilightService;
         this.safetyCheckService = safetyCheckService;
+        this.aiClient = aiClient;
+        this.productLookupService = productLookupService;
+        this.aiOutputRepository = aiOutputRepository;
     }
 
     /** DoD: "목록이 처방약(병원·진료과별) → 영양제·상비약 순으로 정렬된다" — 정렬은 리포지토리 쿼리가 보장한다. */
@@ -51,9 +64,14 @@ public class MedicationService {
         for (IngredientRow row : medicationRepository.findIngredientRowsByUser(userId)) {
             byMedication.computeIfAbsent(row.medicationId(), k -> new ArrayList<>()).add(row);
         }
+        // §29: 등록 시점에 이미 생성해 ai_outputs에 캐시해 둔 설명을 읽기만 한다 — 목록 조회
+        // 때마다 AI를 다시 부르지 않는다. 이 기능 이전에 등록된 항목은 그냥 설명 없이 보인다.
+        List<Long> medicationIds = headers.stream().map(MedicationHeaderRow::medicationId).toList();
+        Map<Long, String> explanations = aiOutputRepository.findExplanations(medicationIds);
         List<MedicationDto> result = new ArrayList<>();
         for (MedicationHeaderRow header : headers) {
-            result.add(toDto(header, byMedication.getOrDefault(header.medicationId(), List.of())));
+            result.add(toDto(header, byMedication.getOrDefault(header.medicationId(), List.of()),
+                    explanations.get(header.medicationId())));
         }
         return result;
     }
@@ -92,6 +110,11 @@ public class MedicationService {
                 .map(i -> new IngredientDto(i.name(), null, i.amount(), i.unit()))
                 .toList();
 
+        List<String> ingredientNames = request.ingredients().stream()
+                .map(MedicationCreateRequest.IngredientInput::name)
+                .toList();
+        String aiExplanation = generateExplanation(medicationId, request.name(), ingredientNames);
+
         MedicationDto dto = new MedicationDto(
                 String.valueOf(medicationId),
                 request.type(),
@@ -108,10 +131,37 @@ public class MedicationService {
                 LocalDate.now().toString(),
                 isPrescription ? request.duration() : null,
                 !isPrescription,
-                null);
+                aiExplanation);
 
         MedilightDto medilight = medilightService.build(userId);
         return new MedicationCreateResponse(dto, medilight);
+    }
+
+    /**
+     * §29·§31: 등록 직후 "이 약이 뭘 위한 약인지" + "복용 중 흔히 느낄 수 있는 것"을 만들어
+     * ai_outputs에 캐시해 둔다. 등록 자체는 이 기능 없이도 되던 핵심 경로라, AI 호출이
+     * 실패해도(키 미설정·네트워크 등) 등록 트랜잭션을 굴리지 않는다 — 실패 기록만 남기고
+     * aiExplanation은 null로 돌아간다.
+     */
+    private String generateExplanation(Long medicationId, String productName, List<String> ingredientNames) {
+        String prompt = "explainMedication: " + productName;
+        try {
+            var productInfo = productLookupService.findProductInfo(productName).orElse(null);
+            String efficacy = productInfo != null ? productInfo.efficacy() : null;
+            String sideEffect = productInfo != null ? productInfo.sideEffect() : null;
+            String explanation = aiClient.explainMedication(
+                    new AiClient.MedicationExplainContext(productName, ingredientNames, efficacy, sideEffect));
+            if (explanation == null || explanation.isBlank()) {
+                aiOutputRepository.saveMedicationExplanationFailure(medicationId, prompt, "빈 응답");
+                return null;
+            }
+            aiOutputRepository.saveMedicationExplanation(medicationId, prompt, explanation);
+            return explanation;
+        } catch (Exception e) {
+            log.warn("약 설명 생성 실패(등록은 계속 진행): medicationId={}, error={}", medicationId, e.getMessage());
+            aiOutputRepository.saveMedicationExplanationFailure(medicationId, prompt, e.getMessage());
+            return null;
+        }
     }
 
     /** UC14: 소프트 삭제 후 전체 재계산(safety_checks 스냅샷)까지 이 트랜잭션 안에서 끝낸다. */
@@ -125,7 +175,7 @@ public class MedicationService {
         safetyCheckService.recordCheck(userId, "DELETE");
     }
 
-    private MedicationDto toDto(MedicationHeaderRow header, List<IngredientRow> ingredientRows) {
+    private MedicationDto toDto(MedicationHeaderRow header, List<IngredientRow> ingredientRows, String aiExplanation) {
         String type = resolveType(header);
         String name = header.productName() != null ? header.productName() : header.customName();
         List<IngredientDto> ingredients = ingredientRows.stream()
@@ -149,7 +199,7 @@ public class MedicationService {
                 header.startedAt() != null ? header.startedAt().toString() : null,
                 header.durationNote(),
                 !"PRESCRIPTION".equals(type),
-                null);
+                aiExplanation);
     }
 
     /** UC13 수기 등록은 custom_type을 그대로 쓰고, 마스터 매칭분은 products.product_type을 옮긴다. */
