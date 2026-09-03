@@ -1,0 +1,953 @@
+﻿ingr_code,name_ko,name_en
+D000762,이트라코나졸,Itraconazole
+D000027,심바스타틴,Simvastatin
+D000455,아토르바스타틴칼슘,Atorvastatin Calcium
+D000769,케토코나졸,Ketoconazole
+D000716,메토트렉세이트,Methotrexate
+D000363,이부프로펜,Ibuprofen
+D000373,클래리트로마이신,Clarithromycin
+D000060,테녹시캄,Tenoxicam
+D000086,덱시부프로펜 디.씨.,Dexibuprofen D.C.
+D000274,케토롤락트로메타민염,Ketorolac Tromethamine
+D000081,나부메톤,Nabumetone
+D000672,케토프로펜,Ketoprofen
+D000142,시프로플록사신염산염수화물,Ciprofloxacin Hydrochloride Hydrate
+D000712,리토나비르,Ritonavir
+D000017,부프레노르핀,Buprenorphine
+D000006,모르핀황산염수화물,Morphine Sulfate Hydrate
+D000760,이오비트리돌,Iobitridol
+D000718,메트포르민염산염 콜로이드성이산화규소,Metformin Hydrochloride with Colloidal Anhydrous Silica
+D000669,이오헥솔,Iohexol
+D000364,이오메프롤,Iomeprol
+D000675,클로닉신리시네이트,Clonixin Lysinate
+D000452,아스피린,Aspirin
+D000477,클렌부테롤염산염,Clenbuterol Hydrochloride
+D000560,에피네프린타르타르산염,Epinephrine Tartrate
+D000334,사이클로스포린,Cyclosporine
+D000279,타크로리무스 수화물,Tacrolimus Hydrate
+D000309,피록시캄,Piroxicam
+D000544,살살레이트,Salsalate
+D000644,설린닥,Sulindac
+D000679,구연산타목시펜,Tamoxifen Citrate
+D000144,아나스트로졸,Anastrozole
+D000238,브롬페리돌,Bromperidol
+D000541,브로모크립틴메실산염,Bromocriptine Mesylate
+D000267,이오파미돌,Iopamidol
+D000525,록소프로펜나트륨수화물,Loxoprofen Sodium Hydrate
+D000246,실데나필시트르산염,Sildenafil Citrate
+D000181,타다라필,Tadalafil
+D000427,멜록시캄,Meloxicam
+D000028,아데포비어디피복실,Adefovir Dipivoxil
+D000665,엠트리시타빈,Emtricitabine
+D000350,에제티미브,Ezetimibe
+D000395,다루나비르에탄올레이트,Darunavir Ethanolate
+D000698,라사길린메실산염,Rasagiline Mesylate
+D000773,트라마돌염산염,Tramadol Hydrochloride
+D000342,실로도신,Silodosin
+D000571,이바브라딘염산염,Ivabradine Hydrochloride
+D000443,보리코나졸,Voriconazole
+D000527,리바록사반(미분화),Rivaroxaban Micronized
+D000700,페티딘염산염,Pethidine Hydrochloride
+D000487,톨밥탄분무건조분말,Tolvaptan Spray Dry Powder
+D000297,돔페리돈,Domperidone
+D000143,아나그렐리드염산염,Anagrelide Hydrochloride
+D000385,티카그렐러,Ticagrelor
+D000035,에스시탈로프람옥살산염,Escitalopram Oxalate
+D000348,에바스틴,Ebastine
+D000517,플루코나졸,Fluconazole
+D000793,레보플록사신,Levofloxacin
+D000425,메토클로프라미드염산염수화물,Metoclopramide Hydrochloride Hydrate
+D000430,목시플록사신염산염,Moxifloxacin Hydrochloride
+D000719,미졸라스틴,Mizolastine
+D000608,닐로티닙염산염일수화물,Nilotinib Hydrochrloride Monohydrate
+D000226,메퀴타진,Mequitazine
+D000213,피모짓,Pimozide
+D000809,아미트리프틸린염산염,Amitriptyline Hydrochloride
+D000835,플루페남산,Flufenamic Acid
+D000122,메로페넴수화물,Meropenem Hydrate
+D000535,발프로산나트륨,Sodium Valproate
+D000583,쿠에티아핀푸마르산염,Quetiapine Fumarate
+D000422,리스페리돈,Risperidone
+D000329,베라파밀염산염,Verapamil Hydrochloride
+D000818,딜티아젬아시딕폴리머콤플렉스,Diltiazem Acidic Polymer Complex
+D001071,소포스부비르,Sofosbuvir
+D000595,페니토인,Phenytoin
+D000632,모다피닐,Modafinil
+D000405,포사코나졸(미분화),Posaconazole Micronized
+D000476,카르바마제핀,Carbamazepine
+D000103,프리미돈,Primidone
+D000282,페노바르비탈,Phenobarbital
+D000739,아세클로페낙,Aceclofenac
+D000138,세레콕시브,Celecoxib
+D000696,덱스케토프로펜트로메타몰,Dexketoprofen Trometamol
+D000506,디클로페낙나트륨,Diclofenac Sodium
+D000463,미분화에토돌락,Etodolac Micronized
+D000575,인도메타신,Indometacin
+D000230,메페남산,Mefenamic Acid
+D000321,모니플루메이트,Morniflumate
+D000083,니메술리드,Nimesulide
+D000206,펠루비프로펜,Pelubiprofen
+D000211,프로글루메타신말레산염,Proglumetacin Dimaleate
+D000816,피라지노부타존,Pyrazinobutazone
+D000280,탈니플루메이트,Talniflumate
+D000766,잘토프로펜,Zaltoprofen
+D000147,아세트아미노펜,Acetaminophen
+D000101,프로파세타몰염산염,Propacetamol Hydrochloride
+D000745,알모트립탄말산염,Almotriptan Malate
+D000407,프로바트립탄숙신산염일수화물,Frovatriptan Succinate Monohydrate
+D000287,나라트립탄염산염,Naratriptan Hydrochloride
+D000650,수마트립탄숙신산염,Sumatriptan Succinate
+D000171,졸미트립탄,Zolmitriptan
+D000331,부토르파놀타르타르산염,Butorphanol Tartrate
+D000784,날부핀염산염,Nalbuphine Hydrochloride
+D000794,펜타조신,Pentazocine
+D000543,비소프롤롤푸마르산염,Bisoprolol Fumarate
+D000681,테라조신염산염수화물,Terazosin Hydrochloride Hydrate
+D000601,나도롤,Nadolol
+D000717,메토프롤롤타르타르산염,Metoprolol Tartrate
+D000551,아젤라스틴염산염,Azelastine Hydrochloride
+D000156,에피나스틴염산염,Epinastine Hydrochloride
+D000160,올로파타딘염산염,Olopatadine Hydrochloride
+D000511,페미로라스트칼륨,Pemirolast Potassium
+D000785,네비보롤염산염,Nebivolol Hydrochloride
+D000370,카르베딜롤,Carvedilol
+D000625,히드랄라진염산염,Hydralazine Hydrochloride
+D000433,미녹시딜,Minoxidil
+D000152,암로디핀말레산염,Amlodipine Maleate
+D000404,펠로디핀,Felodipine
+D000497,니카르디핀염산염,Nicardipine Hydrochloride
+D000399,라시디핀,Lacidipine
+D000315,마니디핀염산염,Manidipine Hydrochloride
+D000616,레르카니디핀염산염,Lercanidipine Hydrochloride
+D000245,실니디핀,Cilnidipine
+D000435,베니디핀염산염,Benidipine Hydrochloride
+D000414,히드로클로로티아지드,Hydrochlorothiazide
+D000377,클로르탈리돈,Chlorthalidone
+D000088,독사조신메실산염,Doxazosin Mesylate
+D000454,아테놀롤,Atenolol
+D000436,베탁솔롤염산염,Betaxolol Hydrochloride
+D000176,캅토프릴,Captopril
+D000554,에날라프릴말레산염,Enalapril Maleate
+D000528,리시노프릴,Lisinopril
+D000192,페린도프릴아르기닌,Perindopril Arginine
+D000398,라미프릴,Ramipril
+D000652,실라자프릴수화물,Cilazapril Hydrate
+D000456,알라세프릴,Alacepril
+D000220,로사르탄칼륨,Losartan Potassium
+D000046,이르베사르탄,Irbesartan
+D000273,칸데사르탄실렉세틸,Candesartan Cilexetil
+D000485,텔미사르탄,Telmisartan
+D000624,피마사르탄칼륨삼수화물,Fimasartan Potassium Trihydrate
+D000618,펜토바르비탈나트륨,Pentobarbital Sodium
+D000106,플루라제팜염산염,Flurazepam Hydrochloride
+D000411,플루니트라제팜,Flunitrazepam
+D000592,트리아졸람,Triazolam
+D000007,미다졸람,Midazolam
+D000271,졸피뎀타르타르산염,Zolpidem Tartrate
+D000468,오르페나드린염산염,Orphenadrine Hydrochloride
+D000097,펜타닐시트르산염,Fentanyl Citrate
+D000356,옥시코돈염산염,Oxycodone Hydrochloride
+D000197,니페디핀,Nifedipine
+D000496,니모디핀,Nimodipine
+D000752,에포니디핀염산염,Efonidipine Hydrochloride
+D000584,클로르프로마진염산염,Chlorpromazine Hydrochloride
+D000792,레보메프로마진말레산염,Levomepromazine Maleate
+D000781,페르페나진,Perphenazine
+D000113,할로페리돌,Haloperidol
+D000276,클로르프로칙센,Chlorprothixene
+D000357,올란자핀,Olanzapine
+D000728,설피리드,Sulpiride
+D000491,팔리페리돈팔미테이트,Paliperidone Palmitate
+D000090,디아제팜,Diazepam
+D000056,클로르디아제폭시드염산염,Chlordiazepoxide Hydrochloride
+D000133,브로마제팜,Bromazepam
+D000378,클로바잠,Clobazam
+D000660,알프라졸람,Alprazolam
+D000352,에티졸람,Etizolam
+D000540,부스피론염산염,Buspirone Hydrochloride
+D000362,이미프라민염산염,Imipramine Hydrochloride
+D000277,클로미프라민염산염,Clomipramine Hydrochloride
+D000501,독세핀염산염,Doxepin Hydrochloride
+D000516,플루옥세틴염산염,Fluoxetine Hydrochloride
+D000438,벤조나테이트,Benzonatate
+D000186,트라닐라스트,Tranilast
+D000731,스피로노락톤,Spironolactone
+D000799,프로프라놀롤염산염,Propranolol Hydrochloride
+D000419,로바스타틴,Lovastatin
+D000305,프라바스타틴나트륨,Pravastatin Sodium
+D000306,플루바스타틴나트륨,Fluvastatin Sodium
+D000219,로수바스타틴칼슘,Rosuvastatin Calcium
+D000518,피타바스타틴칼슘,Pitavastatin Calcium
+D000070,페노테롤브롬화수소산염,Fenoterol Hydrobromide
+D000514,프로카테롤염산염수화물,Procaterol Hydrochloride Hydrate
+D000137,살부타몰황산염,Salbutamol Sulfate
+D000185,툴로부테롤,Tulobuterol
+D000155,에페드린염산염,Ephedrine Hydrochloride
+D000448,슈도에페드린염산염,Pseudoephedrine Hydrochloride
+D000708,로라타딘,Loratadine
+D000236,베포타스틴칼슘이수화물,Bepotastine Calcium Dihydrate
+D000647,세티리진염산염,Cetirizine Hydrochloride
+D000026,시프로헵타딘염산염수화물,Cyproheptadine Hydrochloride Hydrate
+D000374,클레마스틴푸마르산염,Clemastine Fumarate
+D000355,옥시라세탐,Oxiracetam
+D000307,피라세탐,Piracetam
+D000552,아토목세틴염산염,Atomoxetine Hydrochloride
+D000229,메틸페니데이트염산염,Methylphenidate Hydrochloride
+D000326,밀나시프란염산염,Milnacipran Hydrochloride
+D000638,벤라팍신염산염,Venlafaxine Hydrochloride
+D000336,설트랄린염산염,Sertraline Hydrochloride
+D000353,파록세틴염산염수화물,Paroxetine Hydrochloride Hydrate
+D000620,프라미펙솔염산염일수화물,Pramipexole Dihydrochloride Monohydrate
+D000627,로피니롤염산염,Ropinirole Hydrochloride
+D000302,레보도파,Levodopa
+D000440,벤즈트로핀메실산염,Benztropine Mesylate
+D000740,아시피목스,Acipimox
+D000012,베자피브레이트,Bezafibrate
+D000076,겜피브로질,Gemfibrozil
+D000686,페노피브레이트,Fenofibrate
+D000851,톨페남산,Tolfenamic Acid
+D000747,에르고타민타르타르산염,Ergotamine Tartrate
+D000855,지파미드,Xipamide
+D000856,인다파미드,Indapamide
+D000858,메틸도파,Methyldopa
+D000866,S-아테놀롤,S-Atenolol
+D000867,라베탈롤염산염,Labetalol Hydrochloride
+D000935,레보클로페라스틴펜디조산염,Levocloperastine Fendizoate
+D000875,알펜타닐염산염,Alfentanil Hydrochloride
+D000876,레미펜타닐염산염,Remifentanil Hydrochloride
+D000877,수펜타닐시트르산염,Sufentanil Citrate
+D000879,히드로모르폰염산염,Hydromorphone Hydrochloride
+D000881,트리헥시페니딜염산염,Trihexyphenidyl Hydrochloride
+D000882,비페리덴염산염,Biperiden Hydrochloride
+D000218,로라제팜,Lorazepam
+D000888,에틸로플라제페이트,Ethyl Loflazepate
+D000890,둘록세틴염산염,Duloxetine Hydrochloride
+D000930,레보드로프로피진,Levodropropizine
+D000891,도네페질염산염,Donepezil Hydrochloride
+D000892,리바스티그민타르타르산염,Rivastigmine Tartarate
+D000893,클로르페니라민말레산염,Chlorpheniramine Maleate
+D000895,디펜히드라민염산염,Diphenhydramine Hydrochloride
+D000897,피프린히드리네이트,Piprinhydrinate
+D000901,펙소페나딘염산염,Fexofenadine Hydrochloride
+D000902,케토티펜푸마르산염,Ketotifen Fumarate
+D000903,레보세티리진염산염,Levocetirizine Hydrochloride
+D000904,미졸라스틴,Mizolastine
+D000905,몬테루카스트나트륨,Montelukast Sodium
+D000906,아세브로필린,Acebrophylline
+D000909,독소필린,Doxofylline
+D000912,테오필린폴리메릭쉘드콤플렉스,Theophylline Polymeric Shelled Complex
+D000913,디에틸아미노에틸테오필린염산염,Diethylaminoethyltheophylline Hydrochloride
+D000914,밤부테롤염산염,Bambuterol Hydrochloride
+D000915,아세틸시스테인,Acetylcysteine
+D000916,암브록솔염산염,Ambroxol Hydrochloride
+D000917,브롬헥신염산염,Bromhexine Hydrochloride
+D000918,에르도스테인,Erdosteine
+D000922,넬테넥신일수화물,Neltenexine Monohydrate
+D000923,소브레롤,Sobrerol
+D000925,벤프로페린인산염,Benproperine Phosphate
+D000926,부타미레이트시트르산염,Butamirate Citrate
+D000968,"메틸-N,S-디아세틸시스테인","Methyl-N,S-Diacetylcysteine"
+D000972,올메사르탄메독소밀,Olmesartan Medoxomil
+D000450,아로티놀롤염산염,Arotinolol Hydrochloride
+D000011,발사르탄,Valsartan
+D000982,나프록센,Naproxen
+D000983,피록시캄,Piroxicam
+D001004,폴마콕시브,Polmacoxib
+D001012,에토리콕시브,Etoricoxib
+D001016,타펜타돌염산염,Tapentadol Hydrochloride
+D001010,데스벤라팍신숙신산염일수화물,Desvenlafaxine Succinate Monohydrate
+D000690,글리벤클라미드,Glibenclamide
+D000600,글리클라지드,Gliclazide
+D000392,글리메피리드,Glimepiride
+D000079,글리피지드,Glipizide
+D000130,미티글리니드칼슘수화물,Mitiglinide Calcium Hydrate
+D000418,레파글리니드,Repaglinide
+D000149,아카보즈,Acarbose
+D001333,미그리톨,Miglitol
+D000442,보글리보스,Voglibose
+D000109,피오글리타존염산염,Pioglitazone Hydrochloride
+D000692,다파글리플로진프로판디올수화물,Dapagliflozin Propanediol Hydrate
+D000157,엠파글리플로진,Empagliflozin
+D000744,알로글립틴벤조산염,Alogliptin Benzoate
+D001066,아나글립틴,Anagliptin
+D001008,에보글립틴타르타르산염,Evogliptin Tartrate
+D000670,제미글립틴타르타르산염1.5수화물,Gemigliptin Tartrate Sesquihydrate
+D000117,리나글립틴,Linagliptin
+D000335,삭사글립틴수화물,Saxagliptin Hydrate
+D000244,시타글립틴인산염수화물,Sitagliptin Phosphate Hydrate
+D000680,테네리글립틴브롬화수소산염수화물,Teneligliptin Hydrobromide Hydrate
+D000445,빌다글립틴,Vildagliptin
+D001007,둘라글루타이드,Dulaglutide
+D001351,인슐린아스파트,Insulin Aspart
+D001330,인슐린데글루덱,Insulin Degludec
+D001349,인슐린글라진,Insulin Glargine
+D001544,에스조피클론,Eszopiclone
+D000140,시메티딘,Cimetidine
+D001615,파모티딘,Famotidine
+D001488,라푸티딘,Lafutidine
+D001489,니자티딘,Nizatidine
+D001616,라니티딘염산염,Ranitidine Hydrochloride
+D001490,록사티딘아세테이트염산염,Roxatidine Acetate Hydrochloride
+D000168,일라프라졸,Ilaprazole
+D000699,란소프라졸,Lansoprazole
+D000695,덱스란소프라졸,Dexlansoprazole
+D000469,오메프라졸,Omeprazole
+D000153,에스오메프라졸마그네슘삼수화물,Esomeprazole Magnesium Trihydrate
+D000386,판토프라졸나트륨세스키히드레이트,Pantoprazole Sodium Sesquihydrate
+D000204,라베프라졸나트륨,Rabeprazole Sodium
+D000301,레바프라잔염산염,Revaprazan Hydrochloride
+D001367,테고프라잔,Tegoprazan
+D001410,보노프라잔푸마르산염,Vonoprazan Fumarate
+D001648,펙수프라잔염산염,Fexuprazan Hydrochloride
+D001743,피네레논,Finerenone
+D001745,이나보글리플로진,Enavogliflozin
+D001746,라스미디탄헤미숙신산염,Lasmiditan Hemisuccinate
+D001765,터제파타이드,Tirzepatide
+D001824,자스타프라잔시트르산염,Zastaprazan Citrate
+D000145,아미노필린,Aminophylline
+D000159,아미로라이드,Amiloride
+D000550,아미카신,Amikacin
+D000254,알벤다졸,Albendazole
+D000345,알프로스타딜,Alprostadil
+D000249,아세타졸아미드,Acetazolamide
+D000658,알렌드론산,Alendronate
+D000033,아캄프로세이트,Acamprosate
+D000741,아자시티딘,Azacitidine
+D000597,3'-데옥시-3'-플루오로티미딘(18F),3'-Deoxy-3'-Fluorothymidine(18F)
+D000736,아니둘라펀진,Anidulafungin
+D000019,아시트레틴,Acitretin
+D000458,암브리센탄,Ambrisentan
+D000738,아바타셉트,Abatacept
+D000654,아바카비르,Abacavir
+D000643,삼산화비소,Arsenic trioxide
+D000687,5-아미노레불린산,5-Aminolevulinic acid
+D000258,엑시티닙,Axitinib
+D000346,애플리버셉트,Aflibercept
+D000253,알렘투주맙,Alemtuzumab
+D000146,아비라테론,Abiraterone
+D000100,프로게스테론,Progesterone
+D000132,베타메타손,Betamethasone
+D000340,시스플라틴,Cisplatin
+D000053,카모스타트,Camostat
+D000148,아조세미드,Azosemide
+D000371,카르보플라틴,Carboplatin
+D000563,벤세라지드,Benserazide
+D000581,칼시트리올,Calcitriol
+D000054,클라드리빈,Cladribine
+D000542,블레오마이신,Bleomycin
+D000174,카르비마졸,Carbimazole
+D000441,벨로테칸,Belotecan
+D000533,바실릭시맙,Basiliximab
+D000330,보르테조밉,Bortezomib
+D000030,아미설프리드,Amisulpride
+D000537,베바시주맙,Bevacizumab
+D000337,세트로렐릭스,Cetrorelix
+D000637,베클로메타손,Beclomethasone
+D000372,카바지탁셀,Cabazitaxel
+D000009,바제독시펜,Bazedoxifene
+D000539,벨리무맙,Belimumab
+D000640,브롬페낙,Bromfenac
+D000339,시나칼세트,Cinacalcet
+D000437,벤다무스틴,Bendamustine
+D000538,벤지다민,Benzydamine
+D000052,카르테올롤,Carteolol
+D000234,베넥세이트,Benexate
+D000722,부시라민,Bucillamine
+D000250,아자티오프린,Azathioprine
+D000534,발로플록사신,Balofloxacin
+D000235,베라프로스트,Beraprost
+D000439,벤즈브로마론,Benzbromarone
+D000768,카페시타빈,Capecitabine
+D000013,베타네콜,Bethanechol
+D000724,비칼루타미드,Bicalutamide
+D000451,아리피프라졸,Aripiprazole
+D000237,부설판,Busulfan
+D000015,보센탄,Bosentan
+D000020,블로난세린,Blonanserin
+D000247,실로스타졸,Cilostazol
+D000376,클로람부실,Chlorambucil
+D000199,덱사메타손,Dexamethasone
+D000732,시클로포스파미드,Cyclophosphamide
+D000394,다나졸,Danazol
+D000582,콜키신,Colchicine
+D000449,시타라빈,Cytarabine
+D000788,데프라자코르트,Deflazacort
+D000293,닥티노마이신,Dactinomycin
+D000243,시클로페닐,Cyclofenil
+D000478,클로미펜,Clomifene
+D000691,다카르바진,Dacarbazine
+D000198,다우노루비신,Daunorubicin
+D000292,다사티닙,Dasatinib
+D000664,에스트로겐,Estrogens
+D000733,시프로테론,Cyproterone
+D000609,데시타빈,Decitabine
+D000396,다비가트란에텍실레이트,Dabigatran etexilate
+D000057,클로파라빈,Clofarabine
+D000674,크리조티닙,Crizotinib
+D000055,클로니딘,Clonidine
+D000693,데가렐릭스,Degarelix
+D000375,클로나제팜,Clonazepam
+D000085,덱스메데토미딘,Dexmedetomidine
+D000503,독시사이클린,Doxycycline
+D000502,독소루비신,Doxorubicin
+D000154,에토포시드,Etoposide
+D000349,에스몰롤,Esmolol
+D000504,독시플루리딘,Doxifluridine
+D000555,에스트로피페이트,Estropipate
+D000748,에스트라디올,Estradiol
+D000464,에피루비신,Epirubicin
+D000462,에스트라머스틴,Estramustine
+D000559,에프로사르탄,Eprosartan
+D000610,두타스테리드,Dutasteride
+D000465,엘로티닙,Erlotinib
+D000461,에베로리무스,Everolimus
+D000611,디드로게스테론,Dydrogesterone
+D000295,도세탁셀,Docetaxel
+D000257,에토숙시미드,Ethosuximide
+D000034,에리불린,Eribulin
+D000201,드로네다론,Dronedarone
+D000107,피나스테리드,Finasteride
+D000750,에스트리올,Estriol
+D000038,엑스메스탄,Exemestane
+D000512,페소테로딘,Fesoterodine
+D000402,페북소스타트,Febuxostat
+D000212,플레카이니드아세테이트,Flecainide Acetate
+D000519,핀골리모드,Fingolimod
+D000798,푸로세미드,Furosemide
+D000075,겐타마이신,Gentamicin
+D000623,플루오로우라실,Fluorouracil
+D000284,가벡세이트,Gabexate
+D000417,히드록시클로로퀸,Hydroxychloroquine
+D000410,플루나리진,Flunarizine
+D000129,플루드로코르티손,Fludrocortisone
+D000522,히드로코르티손,Hydrocortisone
+D000170,제미플록사신,Gemifloxacin
+D000073,간시클로버,Ganciclovir
+D000048,난포자극호르몬,Follicle stimulating hormone
+D000366,젬시타빈,Gemcitabine
+D000074,게피티니브,Gefitinib
+D000099,풀베스트란트,Fulvestrant
+D000387,가도부트롤,Gadobutrol
+D000725,산화가돌리늄,Gadolinium Oxide
+D000105,플루다라빈,Fludarabine
+D000412,플루오로프로필씨아이티(18F),Fluoropropyl-CIT(18F)
+D000209,포스페니토인,Fosphenytoin
+D000705,플루르비프로펜,Flurbiprofen
+D000077,골리무맙,Golimumab
+D000286,글라티라머,Glatiramer
+D000688,가니렐릭스,Ganirelix
+D000114,히드록시진,Hydroxyzine
+D000416,히드록시우레아,Hydroxyurea
+D000577,인슐린,Insulin
+D000344,아이다루비신,Idarubicin
+D000668,이반드론산,Ibandronic acid
+D000162,이매티닙,Imatinib
+D000578,일로프로스트,Iloprost
+D000574,이포스파마이드,Ifosfamide
+D000047,이미다페나신,Imidafenacin
+D000166,인다카테롤,Indacaterol
+D000572,이소소르비드,Isosorbide
+D000116,류프로렐린,Leuprorelin
+D000758,이소트레티노인,Isotretinoin
+D000161,이리노테칸,Irinotecan
+D000096,레트로졸,Letrozole
+D000300,라모트리진,Lamotrigine
+D000510,레비티라세탐,Levetiracetam
+D000400,란레오티드,Lanreotide
+D000562,엘아스파라기나제,Asparaginase
+D000743,알데스류킨,"Interleukin-2, Aldesleukin"
+D000791,라파티닙,Lapatinib
+D000217,레플루노미드,Leflunomide
+D000163,이소플루란,Isoflurane
+D000167,인터페론베타-1a,Interferon Beta-1a
+D000509,레날리도마이드,Lenalidomide
+D000205,라코사미드,Lacosamide
+D000050,카나마이신,Kanamycin
+D000059,탄산리튬,Lithium Carbonate
+D000312,리마프로스트,Limaprost
+D000523,로메플록사신,Lomefloxacin
+D000617,레보노르게스트렐,Levonorgestrel
+D000420,로베글리타존,Lobeglitazone
+D000135,빈크리스틴,Vincristine
+D000473,조니사미드,Zonisamide
+D000642,빈블라스틴,Vinblastine
+D000369,죠테핀,Zotepine
+D000723,비가바트린,Vigabatrin
+D000567,와파린,Warfarin
+D000173,지프라시돈,Ziprasidone
+D000221,로테프레드놀 에타보네이트,Loteprednol Etabonate
+D000663,약독 황열 생바이러스 17D(AB237주),"Live, attenuated, Yellow Fever virus 17D"
+D000368,졸레드론산,Zoledronic acid
+D000683,트리암시놀론,Triamcinolone
+D000486,토브라마이신,Tobramycin
+D000488,트레티노인,Tretinoin
+D000061,테를리프레신,Terlipressin
+D000593,트립토렐린,Triptorelin
+D000063,테스토스테론,Testosterone
+D000772,토포테칸,Topotecan
+D000382,트라보프로스트,Travoprost
+D000489,티오콜키코시드,Thiocolchicoside
+D000065,토피라메이트,Topiramate
+D000588,토르세미드,Torsemide
+D000068,티볼론,Tibolone
+D000131,발간시클로비르,Valganciclovir
+D000589,토수플록사신,Tosufloxacine
+D000591,트라스투주맙,Trastuzumab
+D000381,테모졸로미드,Temozolomide
+D000482,탈리도마이드,Thalidomide
+D000682,트라벡테딘,Trabectedin
+D000775,트라페르민,Trafermin
+D000587,템시롤리무스,Temsirolimus
+D000776,트레프로스티닐,Treprostinil
+D000361,울리프리스탈,Ulipristal
+D000771,토실리주맙,Tocilizumab
+D000182,타이제사이클린,Tigecycline
+D000241,스트렙토마이신,Streptomycin
+D000483,테가푸르,Tegafur
+D000022,소타롤,Sotalol
+D000023,수니티닙말산염,Sunitinib Malate
+D000547,소라페닙,Sorafenib
+D000481,타플루프로스트,Tafluprost
+D000139,셀레길린염산염,Selegiline Hydrochloride
+D000223,리바비린,Ribavirin
+D000224,리세드론산,Risedronic Acid
+D000313,리툭시맙,Rituximab
+D000710,리루졸,Riluzole
+D000401,레고라페닙,Regorafenib
+D000408,프로필티오우라실,Propylthiouracil
+D000406,프레드니솔론,Prednisolone
+D000621,프란루카스트,Pranlukast
+D000508,라록시펜,Raloxifene
+D000093,라니비주맙,Ranibizumab
+D000094,랄테그라빌,Raltegravir
+D000104,플레릭사포르,Plerixafor
+D000471,요오드화칼륨,Potassium Iodide
+D000299,라도티닙,Radotinib
+D000102,프루칼로프라이드,Prucalopride
+D000797,폴라프레징크,Polaprezinc
+D000515,프로파페논,Propafenone
+D000667,옥시토신,Oxytocin
+D000566,옥시메톨론,Oxymetholone
+D000121,메드록시프로게스테론,Medroxyprogesterone
+D000685,파미드론산,Pamidronate
+D000189,파클리탁셀,Paclitaxel
+D000263,옥스카르바제핀,Oxcarbazepine
+D000403,펜토라민,Phentolamine
+D000043,옥살리플라틴,Oxaliplatin
+D000715,메게스트롤,Megestrol
+D000490,파조파닙,Pazopanib
+D000596,페라미비르,Peramivir
+D000285,과플루오르부탄,Perfluoro-n-butane
+D000303,페메트렉시드,Pemetrexed
+D000190,퍼투주맙,Pertuzumab
+D000466,노르트립틸린,Nortriptyline
+D000126,메티마졸,Methimazole
+D000605,노르플록사신,Norfloxacin
+D000666,오플록사신,Ofloxacin
+D000005,메틸프레드니솔론,Methylprednisolone
+D000123,메르캅토푸린,Mercaptopurine
+D000317,메노트로핀,Menotropins
+D000082,노르에피네프린,Norepinephrine
+D000320,멜팔란,Melphalan
+D000787,니트로푸루시드,Nitroprusside
+D000228,메틸에르고메트린,Methylergometrine
+D000786,노르에티스테론,Norethisterone
+D000127,미노사이클린,Minocycline
+D000531,미토마이신씨,Mitomycin C
+D000532,미톡산트론,Mitoxantrone
+D000634,미조리빈,Mizoribine
+D000233,미소프로스톨,Misoprostol
+D000499,니코틴,Nicotine
+D000325,미코페놀레이트,Mycophenolate
+D000602,나파모스타트,Nafamostat
+D000603,네오마이신,Neomycin
+D000289,네포팜염산염,Nefopam Hydrochloride
+D000432,미글루스타트,Miglustat
+D000008,미라베그론,Mirabegron
+D000119,마시텐탄,Macitentan
+D000290,니코틴산,Nicotinic acid
+D000783,날리딕스산,Nalidixic Acid
+D000343,아만타딘,Amantadine
+D000953,미토테인,Mitotane
+D000959,프레가발린,Pregabalin
+D000259,아미오다론,Amiodarone
+D000613,디에노게스트,Dienogest
+D000064,테트라사이클린,Tetracycline
+D000240,사르포그렐레이트,Sarpogrelate
+D000180,클로자핀,Clozapine
+D000568,요오드화나트륨(131I),Sodium Iodide(131I)
+D000524,로플루밀라스트,Roflumilast
+D000845,암리논,Amrinone
+D000985,인터페론베타-1b,Interferon beta-1b
+D000659,알테수네이트,Artesunate
+D000051,카르비도파,Carbidopa
+D000134,브롬페니라민,Brompheniramine
+D000749,에티닐에스트라디올,Ethinyl estradiol
+D000428,모엑시프릴,Moexipril
+D000770,클로람페니콜,Chloramphenicol
+D000018,부프로피온염산염,Bupropion Hydrochloride
+D000569,유데나필,Udenafil
+D000128,미로데나필,Mirodenafil
+D001017,아파티닙,Afatinib
+D001003,토파시티닙,Tofacitinib
+D001015,유메클리디늄,Umeclidinium
+D001019,데노수맙,Denosumab
+D001013,플로르베타벤(18F),Florbetaben(18F)
+D001060,에독사반,Edoxaban
+D000177,코데인,Codeine
+D000480,클린다마이신,Clindamycin
+D000631,메살라진,Mesalazine
+D000633,모메타손,Mometasone
+D000447,세인트존스워트,St. Johns Wort
+D001059,자보플록사신,Zabofloxacin
+D001062,페람파넬,Perampanel
+D001009,플루트메타몰(18F),Flutemetamol (18F)
+D001005,올로다테롤,Olodaterol
+D001064,세쿠키누맙,Secukinumab
+D001061,렌바티닙,Lenvatinib
+D001072,레디파스비르,Ledipasvir
+D001067,라무시루맙,Ramucirumab
+D001068,프로포폴,Propofol
+D000092,디히드로코데인,Dihydrocodeine
+D000878,히드로코돈,Hydrocodone
+D000573,이소프로필안티피린,Isopropylantipyrine
+D001318,데스플루란,Desflurane
+D000388,가바펜틴,Gabapentin
+D001279,루피나미드,Rufinamide
+D001316,레미펜타닐,Remifentanil
+D001317,수펜타닐,Sufentanil
+D000557,에토미데이트,Etomidate
+D001319,케타민,Ketamine
+D001320,티오펜탈,Thiopental
+D000207,포수클로랄,Chloral Hydrate
+D000265,이소니아지드,Isoniazid
+D000549,시클로세린,Cycloserine
+D001324,에탐부톨,Ethambutol
+D000546,설파메톡사졸,Sulfamethoxazole
+D000802,피라진아미드,Pyrazinamide
+D000314,리팜피신,Rifampicin
+D000615,라미부딘,Lamivudine
+D001321,카스포펀진,Caspofungin
+D000318,메만틴,Memantine
+D001325,엔테카비르,Entecavir
+D001322,미카펑긴,Micafungin
+D000689,갈란타민,Galantamine
+D001273,팜프리딘,Fampridine
+D001323,델라마니드,Delamanid
+D000553,알로푸리놀,Allopurinol
+D001342,도파민,Dopamine
+D000702,펜톡시필린,Pentoxifylline
+D000393,날록손,Naloxone
+D000838,포르모테롤,Formoterol
+D001345,스트렙토키나제/스트렙토도르나제,Streptokinase/Streptodornase
+D001332,도베실산칼슘,Calcium dobesilate
+D001383,디아세레인,Diacerein
+D001338,프로티렐린,Protirelin
+D001331,미도드린,Midodrine
+D001261,알테플라제,Alteplase
+D001344,스트렙토키나제,Streptokinase
+D001339,이부딜라스트,Ibudilast
+D001379,데페록사민,Deferoxamine
+D001326,아토바쿠온,Atovaquone
+D001006,티오트로피움,Tiotropium
+D001334,라스부리카제,Rasburicase
+D001341,밀리논,Milrinone
+D000868,에스암로디핀,S-Amlodipine
+D001380,덱스라족산,Dexrazoxane
+D001343,아가트로반,Argatroban
+D001381,아미노벤조산칼륨,Aminobenzoate Potassium
+D001283,아세트산아연,Zinc acetate
+D001336,세벨라머,Sevelamer
+D001348,피르페니돈,Pirfenidone
+D001335,알글루코시다제 알파,Alglucosidase α
+D001284,카베르골린,Cabergoline
+D001378,데페라시록스,Deferasirox
+D000673,코비시스타트,Cobicistat
+D001347,테넥테플라제,Tenecteplase
+D000565,염화칼륨,Potassium Chloride
+D001393,티클로피딘,Ticlopidine
+D000151,알파칼시돌,Alfacalcidol
+D001388,레노그라스팀,Lenograstim
+D000032,아이오다이즈드오일,Iodised Oil
+D001402,아다팔렌,Adapalene
+D000188,파리칼시톨,Paricalcitol
+D000165,이오베르솔,Ioversol
+D001369,디옥타헤드랄스멕타이트,Dioctahedral smectite
+D001385,황산바륨,Barium sulfate
+D001395,염화망간,Manganese Chloride
+D001282,엘트롬보팍,Eltrombopag
+D001387,로미플로스팀,Romiplostim
+D001389,페그필그라스팀,Pegfilgrastim
+D001295,브렌툭시맙 베도틴,Brentuximab vedotin
+D001392,트리페그필그라스팀,Tripegfilgrastim
+D001391,페그테오그라스팀,Pegteograstim
+D001386,에프모록토코그알파,Efmoroctocog alfa
+D001396,뉴시너센,Nusinersen
+D001401,플로라프로놀(18F),Florapronol(18F)
+D001400,수크로제이철옥시수산화물,Sucroferric oxyhydroxide
+D001397,구셀쿠맙,Guselkumab
+D001399,더발루맙,Durvalumab
+D001364,레테르모비르,Letermovir
+D001409,벤라리주맙,Benralizumab
+D001404,갈카네주맙,Galcanezumab
+D001405,오피카폰,Opicapone
+D001408,리산키주맙,Risankizumab
+D001407,오미데네팍이소프로필,Omidenepag isopropyl
+D001403,브리바라세탐,Brivaracetam
+D000175,칼시페디올,Calcifediol
+D001439,황산마그네슘,Magnesium Sulfate
+D000656,아트로핀,Atropine
+D001262,디멘히드리네이트,Dimenhydrinate
+D001300,비사코딜,Bisacodyl
+D001448,이노시플렉스,Inosiplex
+D000479,클로베타솔 프로피오네이트,Clobetasol Propionate
+D000227,메토카르바몰,Methocarbamol
+D001309,데속시메타손,Desoximetasone
+D001445,답손,Dapsone
+D001422,바소프레신,Vasopressin
+D001434,바클로펜,Baclofen
+D001429,메피바카인,Mepivacaine
+D000044,옥시부티닌,Oxybutynin
+D001444,클로파지민,Clofazimine
+D001452,플루벤다졸,Flubendazole
+D001310,프레드니카르베이트,Prednicarbate
+D001437,톨페리손,Tolperisone
+D001354,트로스피움,Trospium
+D001443,프로티온아미드,Prothionamide
+D000380,테르비나핀,Terbinafine
+D001355,프로피베린,Propiverine
+D001438,토피소팜,Tofisopam
+D000242,시클로벤자프린,Cyclobenzaprine
+D000172,지도부딘,Zidovudine
+D001430,로피바카인,Ropivacaine
+D000470,온단세트론,Ondansetron
+D001308,데소니드,Desonide
+D001450,자나미비어,Zanamivir
+D001432,아트라쿠륨,Atracurium
+D000078,그라니세트론,Granisetron
+D001293,클로베타손 부티레이트,Clobetasone butyrate
+D001081,리파부틴,Rifabutin
+D001449,발라시클로비르,Valaciclovir
+D001431,프로카인,Procaine
+D001366,팔로노세트론,Palonosetron
+D000187,티자니딘,Tizanidine
+D001451,나탈리주맙,Natalizumab
+D001455,클로스트리디움보톨리눔독소A형,Clostridium Botulinum Toxin Type A
+D000711,리오티로닌나트륨,Liothyronine Sodium
+D001413,이노투주맙오조가마이신,Inotuzumab ozogamicin
+D001414,아베마시클립,Abemaciclib
+D001412,로모소주맙,Romosozumab
+D001416,티피라실,Tipiracil
+D001415,올라파립,Olaparib
+D001418,리보시클립,Ribociclib
+D001421,발록사비르 마르복실,Baloxavir marboxil
+D001420,테노포비르알라페나미드,Tenofovir alafenamide
+D000709,리도카인,Lidocaine
+D000995,플루오로메톨론,Fluorometholone
+D001457,필로카르핀,Pilocarpine
+D001458,호마트로핀,Homatropine
+D000657,아프라클로니딘,Apraclonidine
+D000684,티몰롤,Timolol
+D001465,도르졸라미드,Dorzolamide
+D000191,페닐레프린,Phenylephrine
+D000727,설파살라진,Sulfasalazine
+D001467,단트롤렌,Dantrolene
+D001471,아보카도·대두불검화물,"Avocado and Soyabean oil, unsaponifiables"
+D001275,라타노프로스트,Latanoprost
+D001456,펜타미딘,Pentamidine
+D001460,브린졸라미드,Brinzolamide
+D001047,월견초종자유(달맞이꽃종자유),Evening Primrose Oil
+D001082,시롤리무스,Sirolimus
+D001462,베르테포르핀,Verteporfin
+D001469,에데트산칼슘나트륨,Edetate Calcium Disodium(Calcium EDTA)
+D001476,솔리페나신,Solifenacin
+D001466,시클레소니드,Ciclesonide
+D001274,비마토프로스트,Bimatoprost
+D001472,가도테리돌,Gadoteridol
+D001475,리페그필그라스팀,Lipegfilgrastim
+D001463,오말리주맙,Omalizumab
+D001464,페그인터페론베타-1a,Peginterferon beta-1a
+D001468,트리엔틴,Trientine
+D001503,글리세린,Glycerin
+D001480,플루오시노니드,Fluocinonide
+D001483,크로타미톤,Crotamiton
+D001477,설파디아진은,Silver Sulfadiazine
+D001496,로페라미드,Loperamide
+D001058,니푸록사지드,Nifuroxazide
+D001505,피나베륨,Pinaverium
+D001482,디플로라손디아세테이트,Diflorasone diacetate
+D001486,디플루프레드네이트,Difluprednate
+D001506,메베베린,Mebeverine
+D001733,포비돈요오드,Povidone-iodine
+D001494,라모세트론,Ramosetron
+D001479,디플루코르톨론발레레이트,Diflucortolone valerate
+D001731,요오드,Iodine
+D001507,발살라지드,Balsalazide
+D001500,피코설페이트나트륨,Sodium Picosulfate
+D001509,클레부딘,Clevudine
+D001492,아프레피탄트,Aprepitant
+D001487,이르소글라딘,Irsogladine
+D001727,아미도트리조산,amidotrizoate
+D001617,D-소르비톨,D-Sorbitol
+D001294,리라글루티드,Liraglutide
+D001493,포스아프레피탄트,Fosaprepitant
+D001694,레이저티닙,Lazertinib
+D001649,라타노프로스틴부노드,Latanoprostene bunod
+D001737,트리파로텐,Trifarotene
+D001704,알펠리십,Alpelisib
+D001741,프레마네주맙,Fremanezumab
+D001740,플루시클로빈(18F)액,Fluciclovine(18F)
+D001699,네라티닙,Neratinib
+D001644,아브로시티닙,Abrocitinib
+D001724,발베나진,Valbenazine
+D001736,베리시구앗,Vericiguat
+D000694,데소게스트렐,Desogestrel
+D001748,카보테그라비르,Cabotegravir
+D001755,필고티닙,Filgotinib
+D001700,페드라티닙,Fedratinib
+D001757,루스파터셉트,Luspatercept
+D001759,세마글루티드,Semaglutide
+D001758,사람단백질씨,Human Protein C
+D001713,트라스투주맙 데룩스테칸,Trastuzumab deruxtecan
+D001756,비베그론,Vibegron
+D001744,에나로두스타트,Enarodustat
+D001716,도스탈리맙,Dostarlimab
+D001701,아칼라브루티닙,Acalabrutinib
+D001508,페닐부틸산나트륨,Sodium phenylbutyrate
+D001734,레미마졸람,Remimazolam
+D001735,라나델루맙,Lanadelumab
+D001742,에플라페그라스팀,Eflapegrastim
+D000493,구아이페네신,Guaifenesin
+D001315,염화암모늄,Ammonium chloride
+D001098,노스카핀,Noscapine
+D001703,자누브루티닙,Zanubrutinib
+D001693,보수티닙,Bosutinib
+D001795,파리시맙,Faricimab
+D001787,네타르수딜,Netarsudil
+D001783,오자니모드,Ozanimod
+D001764,바다두스타트,Vadadustat
+D001794,트레멜리무맙,Tremelimumab
+D001796,수팀리맙,Sutimlimab
+D001650,니르마트렐비르,Nirmatrelvir
+D001788,듀크라바시티닙,Deucravacitinib
+D001789,스페솔리맙,Spesolimab
+D001790,트랄로키누맙,Tralokinumab
+D001792,에보칼세트,Evocalcet
+D001786,아토제판트,Atogepant
+D001793,티슬렐리주맙,Tislelizumab
+D001763,루라시돈,Lurasidone
+D001791,테제펠루맙,Tezepelumab
+D001766,클라조센탄,Clazosentan
+D001784,투카티닙,Tucatinib
+D001815,프레드니솔론발레로아세테이트,Prednisolone valeroacetate
+D001847,진드기추출물,Allergen extract
+D000764,인산일수소나트륨,Sodium Phosphate Dibasic Dihydrate
+D001108,피릴라민,Pyrilamine
+D001845,비시세이트염산염,Bicisate hydrochloride
+D001843,아네톨,Anethole
+D001770,요오드화나트륨(123I),Sodium iodide(123I)
+D001848,염화인듐(111ln) + 펜테트레오티드,Indium Chloride (111In) + Pentetreotide
+D001844,히드록시에틸전분,Hydroxyethyl starch
+D001800,디프로필린,Diprophylline
+D001813,이부프로펜피코놀,Ibuprofen Piconol
+D001839,셀리넥서,Selinexor
+D001828,마리바비르,Maribavir
+D001814,데옥시콜산,Deoxycholic acid
+D001833,미리키주맙,Mirikizumab
+D001827,카피바설팁,Capivasertib
+D001834,페그세타코플란,Pegcetacoplan
+D001830,레케네맙,Lecanemab
+D001838,엘라나타맙,Elranatamab
+D001835,인클리시란,Inclisiran
+D001840,탈쿠에타맙,Talquetamab
+D001831,비메키주맙,Bimekizumab
+D001841,졸베툭시맙,Zolbetuximab
+D001836,리틀레시티닙,Ritlecitinib
+D001837,아바트롬보팍,Avatrombopag
+D001822,오피란제린,Opiranserin
+D001842,"재조합호흡기세포융합바이러스융합-전단백질F, 면역증가제","Recombinant respiratory syncytial virus pre-fusion F protein, Adjuvanted"
+D001832,래브리키주맙,Lebrikizumab
+D000025,시클로펜톨레이트염산염,Cyclopentolate Hydrochloride
+D000641,브리모니딘타르타르산염,Brimonidine Tartrate
+D000648,세페타메트피복실염산염,Cefetamet Pivoxil Hydrochloride
+D000089,디시클로민염산염,Dicyclomine Hydrochloride
+D000296,독시라민석시네이트,Doxylamine Succinate
+D000576,인산이수소나트륨,Monobasic Sodium Phosphate
+D000598,6β-요오드메칠-19-노르-코레스트-5(10)-엔3β-올(131 I),6Beta-Iodomethyl-19-Norcholest-5 (10)-EN-3Beta-ol (131I)
+D000505,디에틸프로피온염산염,Diethylpropion Hydrochloride
+D000222,로페라미드염산염,Loperamide Hydrochloride
+D000210,폴리스티렌설폰산칼슘,Calcium Polystyrene Sulfonate
+D000424,메탄설폰산페플록사신,Pefloxacin Methanesulfonate
+D000108,피메크로리무스,Pimecrolimus
+D000701,펜디메트라진타르타르산염,Phendimetrazine Tartrate
+D000795,펜터민염산염,Phentermine Hydrochloride
+D000446,설파디아진은,Silver Sulfadiazine
+D000586,타우로리딘,Taurolidine
+D000384,티아넵틴나트륨,Tianeptine Sodium
+D000193,글루콘산제이철나트륨착염,Sodium Ferric Gluconate Complex
+D000484,"테리파라타이드(유전자재조합)(숙주:E.coli K12RQ228, 벡터:pHMM193)","Teriparatide (rDNA, Host:E.coli K12RQ228, Vector:pHMM193)"
+D000183,테트라데실황산나트륨콘센트레이트,Sodium Tetradecyl Sulfate Concentrate
+D000184,텔비부딘,Telbivudine
+D001154,폴리믹신B황산염,Polymyxin B Sulfate
+D000323,제피미르타자핀,Mirtazapine Coated
+D001011,보티옥세틴브롬화수소산염,Vortioxetine Hydrobromide
+D001152,클로르헥시딘글루콘산염 액,Chlorhexidine Gluconate Solution
+D001518,밀크시슬열매 건조엑스,Milk-Thistle Fruit Dried Extract
+D001521,판토텐산칼슘,Calcium Pantothenate
+D000358,올메사르탄메독소밀,Olmesartan Medoxomil
+D000536,발프로산나트륨,Sodium Valproate
+D000774,트라조돈염산염,Trazodone Hydrochloride
+D000782,글리코피롤레이트,Glycopyrrolate
+D000010,반코마이신염산염,Vancomycin Hydrochloride
+D000203,라모세트론염산염,Ramosetron Hydrochloride
+D000730,솔리페나신숙신산염,Solifenacin Succinate
+D000288,네오스티그민메틸황산염,Neostigmine Methylsulfate
+D000426,메트로니다졸,Metronidazole
+D000195,나프록센,Naproxen
+D000729,세프트리악손나트륨수화물,Ceftriaxone Sodium Hydrate
+D000383,트리엔틴염산염,Trientine Hydrochloride
+D000671,침강탄산칼슘,Precipitated Calcium Carbonate
+D000975,나프록센나트륨,Naproxen Sodium
+D000977,피록시캄-베타사이클로덱스트린,Piroxicam Beta-Cyclodextrin
+D000852,카페인무수물,Anhydrous Caffeine
+D000978,시트르산칼륨수화물,Potassium Citrate Hydrate
+D000976,피록시캄칼륨,Piroxicam Potassium
+D000645,설박탐나트륨,Sulbactam Sodium
+D000707,플루티카손푸로에이트(미분화),Fluticasone Furoate Micronized
+D001087,단트롤렌나트륨수화물,Dantrolene Sodium Hydrate
+D001085,닌테다닙에실산염,Nintedanib Esilate
+D001269,메클리진염산염수화물,Meclizine Hydrochloride Hydrate
+D001276,칼시포트리올,Calcipotriol
+D001184,디노프로스톤,Dinoprostone
+D001088,페타시테스히브리두스엽이산화탄소엑스,Butterbur Leaves Carbon Dioxide Extract
+D001278,미분화시클레소니드,Ciclesonide Micronized
+D000084,다폭세틴염산염,Dapoxetine Hydrochloride
+D001031,나프토피딜,Naftopidil
+D001090,룩소리티닙인산염,Ruxolitinib Phosphate
+D001248,설프로스톤,Sulprostone
+D001286,리도카인염산염수화물,Lidocaine Hydrochloride Hydrate
+D001285,세프타지딤수화물,Ceftazidime Hydrate
+D001270,달테파린나트륨,Dalteparin Sodium
+D001292,토수플록사신토실산염수화물,Tosufloxacine Tosilate Hydrate
+D001079,엔잘루타마이드,Enzalutamide
+D001291,브리모니딘타르타르산염,Brimonidine Tartrate
+D001073,리오시구앗(미분화),Riociguat Micronized
+D001550,이카티반트아세테이트,Icatibant Acetate
+D001078,다브라페닙메실산염(미분화),Dabrafenib Mesylate Micronized
+D001076,세리티닙,Ceritinib
+D001178,셀렉시팍(미분화),Selexipag Micronized
+D001546,아모다피닐,Armodafinil
+D001547,카나키누맙,Canakinumab
+D001551,미로가발린베실산염,Mirogabalin Besilate
+D001553,다로루타마이드,Darolutamide
+D001168,아질사르탄메독소밀칼륨,Potassium Azilsartan Medoxomil
+D001545,에스케타민염산염,Esketamine Hydrochloride
+D001549,폴리트로핀델타,Follitropin delta
+D001552,부로수맙,Burosumab
+D001825,글리시리진산암모늄,Ammonium Glycyrrhizinate
+D000999,스코폴라민,Scopolamine
+D000883,프로사이클리딘,Procyclidine
+D001357,시메트로퓸,Cimetropium
+D001234,톨터로딘,Tolterodine
+D001356,플라복세이트,Flavoxate
+D001289,케토롤락,Ketorolac

@@ -1,0 +1,37 @@
+{
+  "dur_usjnt_taboo": {
+    "url": "https://apis.data.go.kr/1471000/DURPrdlstInfoService03/getUsjntTabooInfoList03",
+    "total": 797186,
+    "page_size": 500
+  },
+  "dur_efcy_dplct": {
+    "url": "https://apis.data.go.kr/1471000/DURPrdlstInfoService03/getEfcyDplctInfoList03",
+    "total": 7065,
+    "page_size": 500
+  },
+  "dur_pwnm_taboo": {
+    "url": "https://apis.data.go.kr/1471000/DURPrdlstInfoService03/getPwnmTabooInfoList03",
+    "total": 16086,
+    "page_size": 500
+  },
+  "dur_age_taboo": {
+    "url": "https://apis.data.go.kr/1471000/DURPrdlstInfoService03/getSpcifyAgrdeTabooInfoList03",
+    "total": 2682,
+    "page_size": 500
+  },
+  "dur_cpcty_atent": {
+    "url": "https://apis.data.go.kr/1471000/DURPrdlstInfoService03/getCpctyAtentInfoList03",
+    "total": 6621,
+    "page_size": 500
+  },
+  "dur_odsn_atent": {
+    "url": "https://apis.data.go.kr/1471000/DURPrdlstInfoService03/getOdsnAtentInfoList03",
+    "total": 1983,
+    "page_size": 500
+  },
+  "drug_easy_info": {
+    "url": "https://apis.data.go.kr/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList",
+    "total": 4784,
+    "page_size": 500
+  }
+}
