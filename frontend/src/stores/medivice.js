@@ -4,6 +4,7 @@ import { computed, ref } from 'vue'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import {
   createMedication as apiCreateMedication,
+  updateMedication as apiUpdateMedication,
   createSymptom as apiCreateSymptom,
   deleteMedication as apiDeleteMedication,
   extractMedicationOcr,
@@ -150,6 +151,25 @@ export const useMediviceStore = defineStore('medivice', () => {
     }
   }
 
+  /** UC14 보완 — 현재 Mock 목록의 기존 항목을 교체하고 다시 계산된 메디라이트를 함께 반영한다. */
+  async function updateMedication(id, payload) {
+    loading.value = true
+    error.value = ''
+    try {
+      const response = await apiUpdateMedication(id, payload)
+      const index = medications.value.findIndex((item) => String(item.id) === String(id))
+      if (index < 0) throw new Error('수정할 복용 항목을 찾지 못했습니다.')
+      medications.value.splice(index, 1, response.data.medication)
+      medilight.value = response.data.medilight
+      return response.data.medication
+    } catch (caughtError) {
+      error.value = caughtError instanceof Error ? caughtError.message : '수정에 실패했습니다.'
+      throw caughtError
+    } finally {
+      loading.value = false
+    }
+  }
+
   /** UC14 삭제 — 실제 DELETE /api/medications/:id. 삭제는 응답 본문이 없어 medilight는 별도로 다시 조회한다. */
   async function removeMedication(id) {
     loading.value = true
@@ -196,6 +216,16 @@ export const useMediviceStore = defineStore('medivice', () => {
     user.value = { ...user.value, ...profile }
   }
 
+  /** 계정정보 저장 API가 없는 회의용 화면에서는 개인정보 변경값을 현재 프론트 세션에만 반영한다. */
+  function updateAccount(account) {
+    const birthYear = account.birthDate ? Number(account.birthDate.slice(0, 4)) : null
+    user.value = {
+      ...user.value,
+      ...account,
+      age: birthYear ? new Date().getFullYear() - birthYear : user.value?.age,
+    }
+  }
+
   function setLanguage(nextLanguage) {
     language.value = nextLanguage
   }
@@ -238,10 +268,12 @@ export const useMediviceStore = defineStore('medivice', () => {
     ocrError,
     runOcr,
     createMedication,
+    updateMedication,
     removeMedication,
     addSymptom,
     skipOnboarding,
     updateProfile,
+    updateAccount,
     setLanguage,
     createReport,
   }

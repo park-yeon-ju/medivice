@@ -1,11 +1,19 @@
+<!--
+  RegistrationView.vue
+  사진 인식·수기 입력·기존 복용 정보 수정 과정을 하나의 등록 화면 흐름으로 제공한다.
+
+  OCR 결과는 사용자가 확인하기 전 저장하지 않으며, 수정 모드에서는 기존 항목을 불러와 Mock 상태만 갱신한다.
+  관련 UC: UC8~UC14 / 화면: SCR-REG-001, SCR-REG-002, SCR-REG-003
+-->
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import AppShell from '@/layouts/AppShell.vue'
 import { useMediviceStore } from '@/stores/medivice'
 
-const { mode } = defineProps({
+const { mode, medicationId } = defineProps({
   mode: { type: String, default: 'upload' },
+  medicationId: { type: String, default: '' },
 })
 
 const router = useRouter()
@@ -34,6 +42,15 @@ const previewTotal = computed(
 )
 const manualError = ref('')
 const manualSaving = ref(false)
+const editingMedication = ref(null)
+
+const pageTitle = computed(() => {
+  if (mode === 'edit') return '복용 정보 수정'
+  if (mode === 'manual') return '직접 약 입력'
+  if (mode === 'confirm') return '인식 결과 확인'
+  return '사진으로 약 등록'
+})
+const cancelDestination = computed(() => (mode === 'edit' ? '/medications' : '/main'))
 
 // SCR-REG-002 확인 화면에서 사용자가 고칠 수 있는 초안들. 사진 한 장(특히 약봉투)에서 서로 다른
 // 약이 여러 개 나올 수 있어 배열로 다룬다 — store.ocrDrafts(백엔드 응답, 항목마다 하나)를 각각
@@ -54,7 +71,8 @@ function makeDraft(d) {
       ? d.ingredients.map((i) => ({ name: i.name, amount: i.amount, unit: i.unit }))
       : [{ name: '', amount: null, unit: 'mg' }],
     dose: d?.dose ?? 1,
-    doseUnit: '정',
+    // OCR이 확인한 제형 단위를 보존해야 캡슐·mL 등이 모두 '정'으로 바뀌지 않는다.
+    doseUnit: d?.doseUnit ?? '정',
     timesPerDay: d?.timesPerDay ?? 1,
     hospital: d?.hospital ?? '',
     department: d?.department ?? '내과',
@@ -89,6 +107,8 @@ function selectFile(event) {
 
 /** UC8~10(EXT-1) — 실제 POST /api/medications/ocr(비전 AI, medivice.ai.provider 설정에 따름)을 호출한다. */
 async function startOcr() {
+  // 처리 중 재호출은 같은 사진을 중복 접수할 수 있으므로 화면과 함수 양쪽에서 차단한다.
+  if (starting.value) return
   uploadError.value = ''
   if (!ocrFile.value) {
     uploadError.value = '사진을 먼저 선택해주세요.'
@@ -168,7 +188,7 @@ async function saveManual() {
   manualSaving.value = true
   const isPrescription = manual.value.type === 'PRESCRIPTION'
   try {
-    await store.createMedication({
+    const payload = {
       type: manual.value.type,
       name: manual.value.name,
       ingredients: [
@@ -177,6 +197,8 @@ async function saveManual() {
           amount: Number(manual.value.amount),
           unit: manual.value.unit,
         },
+        // 현재 입력 화면은 대표 성분 한 줄만 편집하므로 나머지 복합제 성분은 수정 시 그대로 보존한다.
+        ...(editingMedication.value?.ingredients?.slice(1) ?? []),
       ],
       dose: Number(manual.value.dose),
       doseUnit: manual.value.doseUnit,
@@ -185,8 +207,17 @@ async function saveManual() {
       // 수기 입력 폼에는 병원·기간 필드가 없다. 처방약을 골라도 진료과 정도만 보내고
       // 나머지는 비워 보낸다(백엔드에서 선택 항목이라 등록 자체는 막히지 않는다).
       department: isPrescription ? department.value : undefined,
-    })
-    router.push('/main')
+      hospital: isPrescription ? editingMedication.value?.hospital : undefined,
+      duration: isPrescription ? editingMedication.value?.duration : undefined,
+      timing: editingMedication.value?.timing,
+    }
+    if (mode === 'edit') {
+      await store.updateMedication(medicationId, payload)
+      router.push('/medications')
+    } else {
+      await store.createMedication(payload)
+      router.push('/main')
+    }
   } catch (caughtError) {
     manualError.value =
       caughtError instanceof Error
@@ -197,21 +228,50 @@ async function saveManual() {
   }
 }
 
+onMounted(async () => {
+  if (mode !== 'edit') return
+  await store.loadDashboard()
+  const medication = store.medications.find((item) => String(item.id) === String(medicationId))
+  if (!medication) {
+    manualError.value = '수정할 복용 항목을 찾지 못했습니다.'
+    return
+  }
+  editingMedication.value = medication
+  const firstIngredient = medication.ingredients?.[0]
+  manual.value = {
+    name: medication.name ?? '',
+    ingredient: firstIngredient?.name ?? '',
+    amount: firstIngredient?.amount ?? 0,
+    unit: firstIngredient?.unit ?? 'mg',
+    dose: medication.dose ?? 1,
+    doseUnit: medication.doseUnit ?? '정',
+    timesPerDay: medication.timesPerDay ?? 1,
+    type: medication.type ?? 'SUPPLEMENT',
+    reason: medication.reason ?? '',
+  }
+  department.value = medication.department ?? '내과'
+})
+
 if (mode === 'confirm' && confirmDrafts.value.length === 0) {
   seedConfirmDrafts()
 }
 </script>
 
 <template>
-  <AppShell title="약 등록" crumb="메인 /">
+  <AppShell :title="pageTitle">
     <section class="modal-page">
       <div v-if="mode === 'upload'" class="dialog-card">
         <header class="dialog-header">
           <div>
-            <p class="eyebrow">SCR-REG-001 · UC8·11·13</p>
-            <h2>약 등록</h2>
+            <h2>사진으로 약 등록</h2>
           </div>
-          <button class="icon-button" type="button" aria-label="닫기" @click="router.push('/main')">
+          <button
+            class="icon-button"
+            type="button"
+            aria-label="닫기"
+            :disabled="starting"
+            @click="router.push('/main')"
+          >
             ×
           </button>
         </header>
@@ -220,38 +280,63 @@ if (mode === 'confirm' && confirmDrafts.value.length === 0) {
             <button
               type="button"
               :class="{ active: registrationType === 'SUPPLEMENT' }"
+              :disabled="starting"
               @click="registrationType = 'SUPPLEMENT'"
             >
-              <b>영양제 · 상비약</b><span>제품 라벨 사진</span>
+              <b>영양제 · 상비약</b><span>성분표 사진</span>
             </button>
             <button
               type="button"
               :class="{ active: registrationType === 'PRESCRIPTION' }"
+              :disabled="starting"
               @click="registrationType = 'PRESCRIPTION'"
             >
               <b>처방약</b><span>처방전 · 약봉투 사진</span>
             </button>
           </div>
-          <label class="drop-zone" :class="{ populated: fileName }">
-            <input type="file" accept="image/jpeg,image/png,image/webp" @change="selectFile" />
+          <label class="drop-zone" :class="{ populated: fileName, busy: starting }">
+            <input
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              :disabled="starting"
+              @change="selectFile"
+            />
             <span class="upload-icon" aria-hidden="true">↑</span>
             <b>{{ fileName || '사진을 끌어다 놓거나 파일을 선택하세요' }}</b>
             <small>JPG · PNG · WEBP · 최대 10MB · 글자가 선명하게 보이도록 촬영해주세요.</small>
             <span class="button secondary">파일 선택</span>
           </label>
           <div class="info-note">
-            <b>비전 AI가 사진에서 병원·제품명·성분·용법을 읽어냅니다.</b
-            ><span>다음 화면에서 값을 확인·수정한 뒤에만 실제로 저장됩니다.</span>
+            <b>비전 AI가 사진에서 병원·제품명·성분·용법을 읽어냅니다.</b>
           </div>
           <p v-if="uploadError" class="field-error">{{ uploadError }}</p>
-          <RouterLink class="manual-link" to="/main/register-manual"
+          <RouterLink
+            class="manual-link"
+            :class="{ disabled: starting }"
+            to="/main/register-manual"
+            :aria-disabled="starting"
+            :tabindex="starting ? -1 : undefined"
+            @click="starting && $event.preventDefault()"
             >사진 없이 직접 입력 →</RouterLink
           >
         </div>
         <footer class="dialog-footer">
-          <button class="button ghost" type="button" @click="router.push('/main')">취소</button
-          ><button class="button primary" type="button" :disabled="starting" @click="startOcr">
-            {{ starting ? '인식 중…' : '인식 시작' }}
+          <button
+            class="button ghost"
+            type="button"
+            :disabled="starting"
+            @click="router.push('/main')"
+          >
+            취소</button
+          ><button
+            class="button primary"
+            type="button"
+            :disabled="starting"
+            :aria-busy="starting"
+            @click="startOcr"
+          >
+            <span v-if="starting" class="spinner small button-spinner" aria-hidden="true"></span>
+            <span>{{ starting ? '인식 중…' : '인식 시작' }}</span>
           </button>
         </footer>
       </div>
@@ -259,7 +344,6 @@ if (mode === 'confirm' && confirmDrafts.value.length === 0) {
       <div v-else-if="mode === 'confirm' && confirmDrafts.length" class="dialog-card wide-dialog">
         <header class="dialog-header">
           <div>
-            <p class="eyebrow">SCR-REG-002 · UC9·10·12</p>
             <h2>인식된 약 {{ confirmDrafts.length }}건을 확인해주세요</h2>
           </div>
           <span class="chip ai">AI · OCR</span>
@@ -285,6 +369,33 @@ if (mode === 'confirm' && confirmDrafts.value.length === 0) {
             </header>
 
             <template v-if="confirmIncluded[di]">
+              <!-- 진료 맥락과 등록 목적을 제품 세부정보보다 먼저 확인하되 기존 draft 연결은 그대로 사용한다. -->
+              <div class="ocr-primary-fields">
+                <div v-if="draft.type === 'PRESCRIPTION'" class="field-grid two">
+                  <label class="form-field"
+                    ><span>병원명</span><input v-model="draft.hospital"
+                  /></label>
+                  <label class="form-field"
+                    ><span>진료과 대분류</span
+                    ><select v-model="draft.department">
+                      <option>내과</option>
+                      <option>이비인후과</option>
+                      <option>정형외과</option>
+                      <option>피부과</option>
+                      <option>안과</option>
+                      <option>가정의학과</option>
+                      <option>기타</option>
+                    </select></label
+                  >
+                </div>
+                <label class="form-field"
+                  ><span>등록 사유 <b>*</b></span
+                  ><input v-model="draft.reason" placeholder="예: 고혈압, 뼈 건강" required /><small
+                    >질병 소분류나 제품을 먹는 이유는 사용자가 직접 입력합니다.</small
+                  ></label
+                >
+              </div>
+
               <section v-if="draft.rows.length" class="ocr-card">
                 <div v-for="row in draft.rows" :key="row.key" class="ocr-row">
                   <span>{{ row.key }}</span
@@ -378,32 +489,9 @@ if (mode === 'confirm' && confirmDrafts.value.length === 0) {
                 /></label>
               </div>
 
-              <div v-if="draft.type === 'PRESCRIPTION'" class="field-grid two">
-                <label class="form-field"
-                  ><span>병원명</span><input v-model="draft.hospital"
-                /></label>
-                <label class="form-field"
-                  ><span>진료과 대분류</span
-                  ><select v-model="draft.department">
-                    <option>내과</option>
-                    <option>이비인후과</option>
-                    <option>정형외과</option>
-                    <option>피부과</option>
-                    <option>안과</option>
-                    <option>가정의학과</option>
-                    <option>기타</option>
-                  </select></label
-                >
-              </div>
               <div v-if="draft.type === 'PRESCRIPTION'" class="form-field">
                 <span>복용 기간</span><input v-model="draft.duration" placeholder="예: 30일분" />
               </div>
-              <label class="form-field"
-                ><span>등록 사유 <b>*</b></span
-                ><input v-model="draft.reason" placeholder="예: 고혈압, 뼈 건강" required /><small
-                  >질병 소분류나 제품을 먹는 이유는 사용자가 직접 입력합니다.</small
-                ></label
-              >
             </template>
           </section>
 
@@ -429,18 +517,18 @@ if (mode === 'confirm' && confirmDrafts.value.length === 0) {
       <form v-else class="dialog-card wide-dialog" @submit.prevent="saveManual">
         <header class="dialog-header">
           <div>
-            <p class="eyebrow">SCR-REG-003 · UC13</p>
-            <h2>직접 입력</h2>
+            <h2>{{ pageTitle }}</h2>
           </div>
-          <button class="icon-button" type="button" aria-label="닫기" @click="router.push('/main')">
+          <button
+            class="icon-button"
+            type="button"
+            aria-label="닫기"
+            @click="router.push(cancelDestination)"
+          >
             ×
           </button>
         </header>
         <div class="dialog-body">
-          <div class="info-note">
-            <b>지금은 직접 입력만 실제로 저장됩니다.</b
-            ><span>사진으로 등록(OCR)은 준비 중인 기능이라 아래 값을 입력해 등록해주세요.</span>
-          </div>
           <div class="field-grid two">
             <label class="form-field"
               ><span>제품명 <b>*</b></span
@@ -502,10 +590,12 @@ if (mode === 'confirm' && confirmDrafts.value.length === 0) {
           <p v-if="manualError" class="field-error">{{ manualError }}</p>
         </div>
         <footer class="dialog-footer">
-          <RouterLink class="button ghost" to="/main/register">사진으로 등록 (준비 중)</RouterLink
-          ><button class="button text" type="button" @click="router.push('/main')">취소</button
+          <RouterLink v-if="mode !== 'edit'" class="button ghost" to="/main/register"
+            >사진으로 약 등록</RouterLink
+          ><button class="button text" type="button" @click="router.push(cancelDestination)">
+            취소</button
           ><button class="button primary" type="submit" :disabled="manualSaving">
-            {{ manualSaving ? '등록 중…' : '등록' }}
+            {{ manualSaving ? '저장 중…' : mode === 'edit' ? '복용 정보 수정' : '직접 약 입력' }}
           </button>
         </footer>
       </form>
@@ -534,11 +624,21 @@ if (mode === 'confirm' && confirmDrafts.value.length === 0) {
   justify-content: space-between;
 }
 
+.ocr-primary-fields {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 12px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 14px;
+}
+
+/* 선택 여부와 약 이름을 한 줄에서 충분히 읽을 수 있도록 공통 본문 크기에 맞춘다. */
 .checkbox-line {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 14px;
+  font-size: 16.8px;
 }
 
 .checkbox-line input[type='checkbox'] {

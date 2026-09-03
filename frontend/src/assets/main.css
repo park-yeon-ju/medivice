@@ -1,3 +1,8 @@
+/*
+ * main.css
+ * Medivice 전 화면의 레이아웃·타이포그래피·반응형 동작을 정의하는 공통 스타일.
+ * 회의에서 정한 가독성 기준과 기존 디자인 토큰을 모든 화면에 일관되게 적용한다.
+ */
 @import './tokens.css';
 
 *,
@@ -20,7 +25,7 @@ body {
   color: var(--ink);
   background: var(--ground);
   font-family: var(--sans);
-  font-size: 14px;
+  font-size: 16.8px;
   line-height: 1.6;
   word-break: keep-all;
   -webkit-font-smoothing: antialiased;
@@ -71,7 +76,9 @@ textarea {
   outline: 0;
   background: var(--surface);
   padding: 10px 12px;
-  transition: border-color 160ms ease, box-shadow 160ms ease;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
 }
 
 input:focus,
@@ -111,7 +118,10 @@ textarea {
   font-weight: 750;
   letter-spacing: -0.01em;
   line-height: 1.2;
-  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease;
 }
 
 .button:hover:not(:disabled) {
@@ -151,18 +161,16 @@ textarea {
 .compact-button {
   min-height: 34px;
   padding: 7px 11px;
-  font-size: 12px;
+  font-size: 14.4px;
 }
 
 .eyebrow,
 .section-kicker,
-.rule-version,
 .reference-date,
-.status-pipeline,
-.breadcrumb {
+.status-pipeline {
   color: var(--muted);
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 13.2px;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.06em;
 }
@@ -185,7 +193,7 @@ textarea {
   border: 1px solid transparent;
   border-radius: 999px;
   padding: 2px 8px;
-  font-size: 11px;
+  font-size: 13.2px;
   font-weight: 750;
   line-height: 1.45;
   white-space: nowrap;
@@ -225,7 +233,7 @@ textarea {
   color: var(--emerald-2);
   background: var(--tint-2);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.06em;
 }
 
@@ -271,14 +279,14 @@ textarea {
 }
 
 .brand-copy b {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 850;
   letter-spacing: -0.04em;
 }
 
 .brand-copy small {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 13.2px;
 }
 
 .brand-lockup.compact {
@@ -292,7 +300,7 @@ textarea {
 }
 
 .brand-lockup.compact .brand-copy b {
-  font-size: 16px;
+  font-size: 19.2px;
 }
 
 .app-shell {
@@ -336,8 +344,13 @@ textarea {
   border-radius: 8px;
   padding: 9px 10px;
   color: var(--rail-ink-2);
-  font-size: 12.5px;
+  font-size: 15px;
   font-weight: 650;
+}
+
+.side-rail nav a span {
+  /* 메뉴명은 짧은 단위로 확정했으므로 데스크톱·모바일 모두 한 줄로 유지한다. */
+  white-space: nowrap;
 }
 
 .side-rail nav a:hover,
@@ -357,21 +370,21 @@ textarea {
   display: flex;
   flex-direction: column;
   margin-top: auto;
-  border: 1px solid rgb(255 255 255 / 7%);
+  border: 1px solid color-mix(in srgb, var(--rail-ink) 7%, transparent);
   border-radius: 10px;
   padding: 11px;
-  background: rgb(255 255 255 / 5%);
+  background: color-mix(in srgb, var(--rail-ink) 5%, transparent);
 }
 
 .rail-profile b {
   color: var(--rail-ink);
-  font-size: 12.5px;
+  font-size: 15px;
 }
 
 .rail-profile span,
 .rail-profile small {
   color: var(--rail-ink-2);
-  font-size: 10.5px;
+  font-size: 12.6px;
 }
 
 .app-pane {
@@ -395,20 +408,25 @@ textarea {
 }
 
 .topbar h1 {
-  font-size: 19px;
+  /* 로그인 이후 화면 제목만 약 1.25배 키우되 작은 화면에서는 상단 동작을 밀지 않게 제한한다. */
+  font-size: clamp(24px, 2.3vw, 28.5px);
   font-weight: 800;
   letter-spacing: -0.03em;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
-.breadcrumb {
-  display: block;
-  margin-bottom: 1px;
+.topbar > div:first-child {
+  min-width: 0;
 }
 
 .topbar-actions {
   display: flex;
+  flex: none;
   align-items: center;
   gap: 12px;
+  /* 날짜 정보가 빠진 뒤에도 언어 전환을 화면 우측 끝에 고정한다. */
+  margin-left: auto;
 }
 
 .language-switch {
@@ -425,7 +443,7 @@ textarea {
   color: var(--muted);
   background: transparent;
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 12.6px;
   font-weight: 700;
 }
 
@@ -437,7 +455,7 @@ textarea {
 .language-switch.large button {
   padding: 8px 14px;
   font-family: var(--sans);
-  font-size: 12px;
+  font-size: 14.4px;
 }
 
 .page-canvas {
@@ -475,6 +493,17 @@ textarea {
   color: var(--muted);
 }
 
+.hero-date {
+  display: block;
+  margin-top: 7px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 17.3px;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+}
+
 .hero-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -485,7 +514,7 @@ textarea {
   display: grid;
   min-height: 96px;
   grid-template-columns: auto 1fr;
-  grid-template-rows: auto auto;
+  grid-template-rows: 1fr;
   align-items: center;
   column-gap: 12px;
   border: 1px solid var(--line);
@@ -493,7 +522,9 @@ textarea {
   padding: 18px;
   background: var(--surface);
   box-shadow: var(--shadow);
-  transition: transform 160ms ease, border-color 160ms ease;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease;
 }
 
 .action-card:hover {
@@ -505,10 +536,10 @@ textarea {
   display: grid;
   width: 38px;
   height: 38px;
-  grid-row: 1 / 3;
+  grid-row: 1;
   place-items: center;
   border-radius: 11px;
-  font-size: 22px;
+  font-size: 26.4px;
   font-weight: 350;
 }
 
@@ -523,14 +554,14 @@ textarea {
 }
 
 .action-card b {
-  align-self: end;
-  font-size: 14px;
+  align-self: center;
+  font-size: 16.8px;
 }
 
 .action-card small {
   align-self: start;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 13.2px;
 }
 
 .signal {
@@ -557,17 +588,23 @@ textarea {
 
 .signal.s-ok i:first-child {
   background: var(--ok-light);
-  box-shadow: 0 0 0 3px var(--ok-bg), 0 0 12px color-mix(in srgb, var(--ok-light) 62%, transparent);
+  box-shadow:
+    0 0 0 3px var(--ok-bg),
+    0 0 12px color-mix(in srgb, var(--ok-light) 62%, transparent);
 }
 
 .signal.s-warn i:nth-child(2) {
   background: var(--warn-light);
-  box-shadow: 0 0 0 3px var(--warn-bg), 0 0 12px color-mix(in srgb, var(--warn-light) 62%, transparent);
+  box-shadow:
+    0 0 0 3px var(--warn-bg),
+    0 0 12px color-mix(in srgb, var(--warn-light) 62%, transparent);
 }
 
 .signal.s-crit i:last-child {
   background: var(--crit-light);
-  box-shadow: 0 0 0 3px var(--crit-bg), 0 0 12px color-mix(in srgb, var(--crit-light) 62%, transparent);
+  box-shadow:
+    0 0 0 3px var(--crit-bg),
+    0 0 12px color-mix(in srgb, var(--crit-light) 62%, transparent);
 }
 
 .medilight-banner {
@@ -602,7 +639,7 @@ textarea {
 .medilight-copy b {
   display: block;
   margin-bottom: 2px;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 850;
 }
 
@@ -620,7 +657,7 @@ textarea {
 
 .medilight-copy p {
   color: var(--ink-2);
-  font-size: 12.5px;
+  font-size: 15px;
 }
 
 .content-section,
@@ -628,6 +665,40 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 14px;
+}
+
+.medilight-overview {
+  /* 바깥 카드 장식을 걷어 내고 제목과 상태 배너가 한 단계씩 읽히도록 정보 위계만 남긴다. */
+  gap: 12px;
+  padding-top: 4px;
+}
+
+.medilight-overview .section-title {
+  align-items: center;
+  border-left: 4px solid var(--lime-hover);
+  padding-left: 13px;
+}
+
+.medilight-overview .section-title h2 {
+  /* 상태 의미가 아니라 섹션 자체의 위계만 높여 기존 신호등·색·라벨 해석을 유지한다. */
+  color: var(--ink);
+  font-size: clamp(24px, 2.5vw, 28px);
+  font-weight: 850;
+  letter-spacing: -0.035em;
+}
+
+.medilight-overview .medilight-banner {
+  min-height: 112px;
+  padding: 22px 24px;
+  box-shadow: var(--shadow);
+}
+
+.medilight-overview .medilight-copy b {
+  font-size: 19.2px;
+}
+
+.medilight-overview .medilight-copy p {
+  font-size: 15.6px;
 }
 
 .section-title {
@@ -639,14 +710,14 @@ textarea {
 
 .section-title h2 {
   margin-top: 2px;
-  font-size: 18px;
+  font-size: 21.6px;
   font-weight: 800;
   letter-spacing: -0.025em;
 }
 
 .section-title > a {
   color: var(--emerald-2);
-  font-size: 12px;
+  font-size: 14.4px;
   font-weight: 750;
 }
 
@@ -655,7 +726,7 @@ textarea {
   border: 1px solid var(--line);
   border-radius: 12px;
   background: var(--surface);
-  box-shadow: 0 1px 1px rgb(17 17 17 / 5%);
+  box-shadow: 0 1px 1px color-mix(in srgb, var(--ink) 5%, transparent);
 }
 
 .medication-group > header {
@@ -681,14 +752,14 @@ textarea {
 }
 
 .medication-group > header b {
-  font-size: 12.5px;
+  font-size: 15px;
   font-weight: 750;
 }
 
 .medication-group > header small {
   color: var(--muted);
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 12.6px;
 }
 
 .group-dot {
@@ -709,7 +780,8 @@ textarea {
 }
 
 .medication-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: 3px minmax(0, 1fr) minmax(240px, auto) auto;
   align-items: center;
   gap: 13px;
   border-bottom: 1px solid var(--line);
@@ -753,7 +825,7 @@ textarea {
 }
 
 .medication-title b {
-  font-size: 13.5px;
+  font-size: 16.2px;
   font-weight: 750;
   letter-spacing: -0.015em;
 }
@@ -761,7 +833,7 @@ textarea {
 .medication-main > p {
   margin-top: 2px;
   color: var(--muted);
-  font-size: 11.5px;
+  font-size: 13.8px;
 }
 
 .ai-summary {
@@ -770,30 +842,43 @@ textarea {
   gap: 7px;
   margin-top: 8px;
   color: var(--ink-2);
-  font-size: 11.5px;
+  font-size: 13.8px;
 }
 
 .medication-dose {
-  display: flex;
-  flex: none;
-  flex-direction: column;
-  align-items: flex-end;
+  display: grid;
+  min-width: 0;
+  grid-template-columns: repeat(2, minmax(104px, auto));
+  gap: 14px;
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 12.6px;
   font-variant-numeric: tabular-nums;
 }
 
-.medication-dose b {
-  font-weight: 650;
+.medication-dose > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
 }
 
-.medication-dose span {
+.medication-dose b,
+.medication-dose time {
+  color: var(--ink-2);
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+
+.medication-dose > div > span {
   color: var(--muted);
+  font-family: var(--sans);
+  font-size: 11.4px;
+  font-weight: 700;
 }
 
 .row-actions {
   display: flex;
   flex: none;
+  align-items: center;
   gap: 4px;
 }
 
@@ -802,8 +887,21 @@ textarea {
   border: 0;
   color: var(--muted);
   background: transparent;
-  font-size: 11.5px;
+  font-size: 13.8px;
   font-weight: 700;
+}
+
+.medication-row .text-button {
+  /* 링크와 실제 버튼의 기본 박스 차이를 없애 두 동작의 높이·기준선·클릭 영역을 맞춘다. */
+  display: inline-flex;
+  width: 48px;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  padding: 6px 9px;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .text-button:hover {
@@ -849,7 +947,7 @@ textarea {
   border-radius: 50%;
   color: var(--emerald-2);
   background: var(--tint-2);
-  font-size: 28px;
+  font-size: 33.6px;
 }
 
 .spinner {
@@ -868,7 +966,9 @@ textarea {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .content-card {
@@ -890,20 +990,38 @@ textarea {
 .status-page-heading {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 16px;
   margin-bottom: 4px;
 }
 
 .status-title {
   display: flex;
+  min-width: 0;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
+}
+
+.status-title > .signal {
+  align-self: center;
+}
+
+.status-title > div {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
 }
 
 .status-title > div > span {
   color: var(--muted);
-  font-size: 11.5px;
+  font-size: 13.8px;
+}
+
+.status-title h2 {
+  margin-top: 0;
+  white-space: nowrap;
 }
 
 .finding-card {
@@ -935,14 +1053,14 @@ textarea {
 }
 
 .finding-card h2 {
-  font-size: 22px;
+  font-size: 26.4px;
   font-weight: 850;
 }
 
 .finding-card > header > b {
   color: var(--warn);
   font-family: var(--mono);
-  font-size: 14px;
+  font-size: 16.8px;
   font-variant-numeric: tabular-nums;
 }
 
@@ -956,7 +1074,7 @@ textarea {
   color: var(--rail-ink);
   background: var(--rail-bg);
   font-family: var(--mono);
-  font-size: 11.5px;
+  font-size: 13.8px;
   text-align: center;
 }
 
@@ -972,7 +1090,7 @@ textarea {
   gap: 18px;
   padding: 6px 0;
   color: var(--ink-2);
-  font-size: 12px;
+  font-size: 14.4px;
 }
 
 .evidence-list code {
@@ -1025,7 +1143,7 @@ textarea {
   margin-top: 6px;
   color: var(--muted);
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 12.6px;
 }
 
 .ai-box {
@@ -1038,7 +1156,7 @@ textarea {
 .ai-box p {
   margin: 9px 0;
   color: var(--ink-2);
-  font-size: 12.5px;
+  font-size: 15px;
 }
 
 .ai-box small {
@@ -1047,7 +1165,7 @@ textarea {
   padding-top: 9px;
   color: var(--muted);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .compact-empty {
@@ -1063,7 +1181,7 @@ textarea {
   width: 100%;
   margin-top: 16px;
   border-collapse: collapse;
-  font-size: 12px;
+  font-size: 14.4px;
 }
 
 .data-table th {
@@ -1072,7 +1190,7 @@ textarea {
   color: var(--muted);
   background: var(--surface-3);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 650;
   letter-spacing: 0.04em;
   text-align: left;
@@ -1100,7 +1218,7 @@ textarea {
   margin-top: 10px;
   padding-top: 12px;
   color: var(--muted);
-  font-size: 11.5px;
+  font-size: 13.8px;
 }
 
 .auth-stage,
@@ -1110,8 +1228,16 @@ textarea {
   place-items: center;
   padding: 36px 20px;
   background:
-    radial-gradient(circle at 16% 8%, color-mix(in srgb, var(--mint) 18%, transparent), transparent 28%),
-    radial-gradient(circle at 88% 92%, color-mix(in srgb, var(--emerald) 13%, transparent), transparent 30%),
+    radial-gradient(
+      circle at 16% 8%,
+      color-mix(in srgb, var(--mint) 18%, transparent),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 88% 92%,
+      color-mix(in srgb, var(--emerald) 13%, transparent),
+      transparent 30%
+    ),
     var(--ground);
 }
 
@@ -1129,7 +1255,14 @@ textarea {
   width: min(620px, 100%);
 }
 
-.auth-card > .brand-lockup {
+.auth-brand-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth-brand-heading > .brand-lockup {
+  /* 로고 묶음과 화면 제목이 같은 중앙선을 공유하도록 부모에서 정렬한다. */
   justify-content: center;
   margin-bottom: 26px;
 }
@@ -1143,7 +1276,7 @@ textarea {
 .choice-card h1,
 .not-found-card h1 {
   margin: 5px 0;
-  font-size: 24px;
+  font-size: 28.8px;
   font-weight: 850;
   letter-spacing: -0.04em;
 }
@@ -1152,7 +1285,7 @@ textarea {
 .choice-card .lead-copy,
 .not-found-card > p:not(.eyebrow) {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 15.6px;
 }
 
 .form-stack,
@@ -1173,7 +1306,7 @@ textarea {
 .form-field > span,
 .form-field legend {
   color: var(--ink-2);
-  font-size: 12px;
+  font-size: 14.4px;
   font-weight: 750;
 }
 
@@ -1186,12 +1319,12 @@ textarea {
 .form-field legend small {
   margin-left: 4px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .form-field > small {
   color: var(--muted);
-  font-size: 10.5px;
+  font-size: 12.6px;
 }
 
 fieldset.form-field {
@@ -1221,7 +1354,7 @@ fieldset.form-field {
 
 .field-error {
   color: var(--crit);
-  font-size: 11px;
+  font-size: 13.2px;
 }
 
 .privacy-note,
@@ -1232,7 +1365,7 @@ fieldset.form-field {
   padding: 11px 13px;
   color: var(--ink-2);
   background: var(--tint-2);
-  font-size: 11.5px;
+  font-size: 13.8px;
 }
 
 .info-note,
@@ -1253,7 +1386,7 @@ fieldset.form-field {
 .auth-switch {
   margin-top: 17px;
   color: var(--muted);
-  font-size: 11.5px;
+  font-size: 13.8px;
   text-align: center;
 }
 
@@ -1265,6 +1398,7 @@ fieldset.form-field {
 
 .onboarding-stage {
   align-content: center;
+  gap: 18px;
 }
 
 .onboarding-header {
@@ -1272,24 +1406,41 @@ fieldset.form-field {
   width: min(780px, 100%);
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 14px;
+  /* 로고를 카드와 같은 너비 축에 놓아 문진 흐름의 시선이 자연스럽게 이어지게 한다. */
+  margin-bottom: 0;
+  padding: 0 8px;
+}
+
+.onboarding-header.choice-header {
+  width: min(720px, 100%);
+  justify-content: center;
 }
 
 .onboarding-header > span,
 .progress-label {
   color: var(--muted);
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 12.6px;
 }
 
 .onboarding-card {
   width: min(780px, 100%);
+  padding: clamp(30px, 4vw, 42px);
 }
 
 .choice-card {
-  width: min(680px, 100%);
-  padding: 42px;
+  width: min(720px, 100%);
   text-align: center;
+}
+
+.onboarding-step-copy {
+  margin-top: 7px;
+  color: var(--emerald-2);
+  font-weight: 750;
+}
+
+.onboarding-step-copy + .lead-copy {
+  margin-top: 7px;
 }
 
 .question-icon {
@@ -1301,7 +1452,7 @@ fieldset.form-field {
   border-radius: 50%;
   color: var(--emerald-2);
   background: var(--tint-2);
-  font-size: 25px;
+  font-size: 30px;
   font-weight: 800;
 }
 
@@ -1338,13 +1489,13 @@ fieldset.form-field {
 
 .choice-option b,
 .selection-grid button b {
-  font-size: 13px;
+  font-size: 15.6px;
 }
 
 .choice-option span,
 .selection-grid button span {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 13.2px;
 }
 
 .section-heading {
@@ -1377,7 +1528,7 @@ fieldset.form-field {
   padding: 7px 10px;
   color: var(--ink-2);
   background: var(--surface);
-  font-size: 11.5px;
+  font-size: 13.8px;
 }
 
 .check-options button.selected,
@@ -1386,6 +1537,13 @@ fieldset.form-field {
   color: var(--emerald-2);
   background: var(--tint-2);
   font-weight: 750;
+}
+
+.condition-direct-field {
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 9px;
+  background: var(--surface-3);
 }
 
 .symptom-options button span {
@@ -1412,7 +1570,7 @@ fieldset.form-field {
   right: 12px;
   color: var(--muted);
   font-style: normal;
-  font-size: 11px;
+  font-size: 13.2px;
 }
 
 .optional-block {
@@ -1429,12 +1587,12 @@ fieldset.form-field {
 }
 
 .optional-block > div:first-child b {
-  font-size: 12.5px;
+  font-size: 15px;
 }
 
 .optional-block > div:first-child span {
   color: var(--muted);
-  font-size: 10.5px;
+  font-size: 12.6px;
 }
 
 .form-actions {
@@ -1450,6 +1608,12 @@ fieldset.form-field {
 
 .quick-actions.three {
   grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 16px;
+}
+
+.quick-actions.two {
+  /* 버튼과 도착 화면 제목이 같은 두 등록 방식만 남겨 빈 열이 생기지 않게 한다. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   margin-bottom: 16px;
 }
 
@@ -1494,12 +1658,12 @@ fieldset.form-field {
 }
 
 .dialog-header h2 {
-  font-size: 16px;
+  font-size: 19.2px;
   font-weight: 800;
 }
 
 .icon-button {
-  font-size: 22px;
+  font-size: 26.4px;
 }
 
 .dialog-body {
@@ -1544,7 +1708,7 @@ fieldset.form-field {
 
 .segmented-select span {
   color: var(--muted);
-  font-size: 10.5px;
+  font-size: 12.6px;
 }
 
 .drop-zone {
@@ -1565,6 +1729,11 @@ fieldset.form-field {
   background: var(--tint-2);
 }
 
+.drop-zone.busy {
+  cursor: wait;
+  opacity: 0.72;
+}
+
 .drop-zone input {
   position: absolute;
   width: 1px;
@@ -1575,7 +1744,7 @@ fieldset.form-field {
 
 .drop-zone small {
   color: var(--muted);
-  font-size: 10.5px;
+  font-size: 12.6px;
 }
 
 .upload-icon {
@@ -1586,12 +1755,24 @@ fieldset.form-field {
   border-radius: 50%;
   color: var(--emerald-2);
   background: var(--tint-2);
-  font-size: 19px;
+  font-size: 22.8px;
 }
 
 .manual-link {
   align-self: flex-end;
-  font-size: 11.5px;
+  font-size: 13.8px;
+}
+
+.manual-link.disabled {
+  color: var(--muted);
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.button.primary .button-spinner {
+  /* 강조 버튼 위에서도 진행 상태가 보이도록 기존 전경 토큰으로 대비를 만든다. */
+  border-color: color-mix(in srgb, var(--lime-ink) 25%, transparent);
+  border-top-color: var(--lime-ink);
 }
 
 .ocr-card {
@@ -1607,7 +1788,7 @@ fieldset.form-field {
   padding: 10px 12px;
   color: var(--emerald-2);
   background: var(--tint);
-  font-size: 11.5px;
+  font-size: 13.8px;
 }
 
 .ocr-row {
@@ -1617,7 +1798,7 @@ fieldset.form-field {
   gap: 10px;
   border-bottom: 1px solid var(--line);
   padding: 9px 12px;
-  font-size: 11.5px;
+  font-size: 13.8px;
 }
 
 .ocr-row:last-child {
@@ -1642,7 +1823,7 @@ fieldset.form-field {
   border-radius: 4px;
   padding: 2px 6px;
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 11.4px;
 }
 
 .ocr-row > small.high {
@@ -1663,7 +1844,7 @@ fieldset.form-field {
   border-radius: 9px;
   padding: 12px 14px;
   background: var(--surface-3);
-  font-size: 11px;
+  font-size: 13.2px;
 }
 
 .calculation-preview code {
@@ -1674,7 +1855,8 @@ fieldset.form-field {
 
 .symptom-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(270px, 0.6fr);
+  /* 입력과 스냅샷을 같은 폭으로 읽도록 화면 크기와 관계없이 세로 흐름을 유지한다. */
+  grid-template-columns: minmax(0, 1fr);
   align-items: start;
   gap: 16px;
 }
@@ -1686,8 +1868,8 @@ fieldset.form-field {
 }
 
 .snapshot-card {
-  position: sticky;
-  top: 92px;
+  position: static;
+  width: 100%;
   border: 1px solid var(--line);
   border-radius: 13px;
   padding: 18px;
@@ -1701,12 +1883,15 @@ fieldset.form-field {
   border-bottom: 1px solid var(--line);
   margin-bottom: 10px;
   padding-bottom: 10px;
-  font-size: 12px;
+  font-size: 17.3px;
+  font-weight: 750;
 }
 
 .snapshot-card > p {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 15.8px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .snapshot-card ul {
@@ -1716,13 +1901,24 @@ fieldset.form-field {
   margin: 14px 0 0;
   padding: 0;
   list-style: none;
-  font-size: 11.5px;
+  font-size: 16.6px;
 }
 
 .snapshot-card li {
   display: flex;
-  align-items: center;
+  /* 긴 제품명이 두 줄이 되어도 신호점이 첫 줄과 정렬되고 글자가 카드 밖으로 넘치지 않게 한다. */
+  align-items: flex-start;
   gap: 7px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.snapshot-card .group-dot {
+  margin-top: 0.5em;
+}
+
+.snapshot-card .button {
+  font-size: 17px;
 }
 
 .profile-hero {
@@ -1740,7 +1936,7 @@ fieldset.form-field {
   border-radius: 50%;
   color: var(--lime-ink);
   background: var(--lime);
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 850;
 }
 
@@ -1750,14 +1946,14 @@ fieldset.form-field {
 }
 
 .profile-hero h2 {
-  font-size: 19px;
+  font-size: 22.8px;
   font-weight: 800;
 }
 
 .profile-hero p:not(.eyebrow) {
   margin-bottom: 8px;
   color: var(--muted);
-  font-size: 11.5px;
+  font-size: 13.8px;
 }
 
 .tile-grid {
@@ -1774,7 +1970,9 @@ fieldset.form-field {
   border-radius: 12px;
   padding: 18px;
   background: var(--surface);
-  transition: transform 160ms ease, border-color 160ms ease;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease;
 }
 
 .tile-grid > a:hover {
@@ -1792,23 +1990,23 @@ fieldset.form-field {
   color: var(--emerald-2);
   background: var(--tint-2);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
 }
 
 .tile-grid b {
-  font-size: 13.5px;
+  font-size: 16.2px;
 }
 
 .tile-grid p {
   color: var(--muted);
-  font-size: 11.5px;
+  font-size: 13.8px;
 }
 
 .tile-grid small {
   margin-top: 7px;
   color: var(--emerald-2);
-  font-size: 10.5px;
+  font-size: 12.6px;
   font-weight: 700;
 }
 
@@ -1825,7 +2023,7 @@ fieldset.form-field {
 .dangerless-card p,
 .family-card p {
   color: var(--muted);
-  font-size: 11.5px;
+  font-size: 13.8px;
 }
 
 .profile-table {
@@ -1834,12 +2032,12 @@ fieldset.form-field {
 
 .profile-row {
   display: grid;
-  grid-template-columns: 150px minmax(180px, 1fr) minmax(140px, 0.8fr) auto;
+  grid-template-columns: 160px minmax(180px, 1fr) minmax(160px, 0.65fr);
   align-items: center;
   gap: 12px;
   border-bottom: 1px solid var(--line);
   padding: 13px 4px;
-  font-size: 12px;
+  font-size: 14.4px;
 }
 
 .profile-row:last-child {
@@ -1859,6 +2057,77 @@ fieldset.form-field {
   margin-top: 18px;
 }
 
+.section-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-edit-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.profile-edit-wide {
+  grid-column: 1 / -1;
+}
+
+.account-fields {
+  margin-top: 18px;
+}
+
+.success-message {
+  border: 1px solid var(--ok-line);
+  border-radius: 8px;
+  margin-top: 14px;
+  padding: 10px 12px;
+  color: var(--ok);
+  background: var(--ok-bg);
+}
+
+.date-filter-card {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(160px, 1fr)) auto;
+  align-items: end;
+  gap: 12px;
+}
+
+.date-filter-card > p {
+  grid-column: 1 / -1;
+}
+
+.date-filter-card input,
+.date-filter-card > .button {
+  min-height: 49px;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: color-mix(in srgb, var(--rail-bg) 62%, transparent);
+}
+
+.confirmation-modal {
+  width: min(420px, 100%);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 26px;
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+}
+
+.confirmation-modal p {
+  margin: 10px 0 20px;
+  color: var(--ink-2);
+}
+
 .muted-row {
   opacity: 0.68;
 }
@@ -1874,7 +2143,7 @@ fieldset.form-field {
 
 .family-card h2 {
   margin-top: 7px;
-  font-size: 17px;
+  font-size: 20.4px;
 }
 
 .family-card .input-action {
@@ -1904,18 +2173,18 @@ fieldset.form-field {
   border-right: 1px solid var(--line);
   color: var(--muted);
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 12.6px;
 }
 
 .symptom-log time b {
   color: var(--ink);
-  font-size: 15px;
+  font-size: 18px;
 }
 
 .symptom-log > div:nth-child(2) p {
   margin: 7px 0;
   color: var(--ink-2);
-  font-size: 12px;
+  font-size: 14.4px;
 }
 
 .symptom-log > div:nth-child(2) small {
@@ -1924,7 +2193,7 @@ fieldset.form-field {
   padding-top: 7px;
   color: var(--muted);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .report-builder {
@@ -1950,17 +2219,18 @@ fieldset.form-field {
 }
 
 .include-list b {
-  font-size: 12px;
+  font-size: 14.4px;
 }
 
 .include-list ul {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* 포함 범위를 빠르게 확인할 수 있도록 세 항목을 항상 한 열로 나열한다. */
+  grid-template-columns: 1fr;
   gap: 7px 18px;
   margin-top: 8px;
   padding: 0;
   color: var(--ink-2);
-  font-size: 11.5px;
+  font-size: 13.8px;
   list-style: none;
 }
 
@@ -1987,7 +2257,7 @@ fieldset.form-field {
   gap: 8px;
   color: var(--muted);
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 13.2px;
 }
 
 .medical-report {
@@ -2013,7 +2283,7 @@ fieldset.form-field {
 }
 
 .report-header > div:first-child > b {
-  font-size: 21px;
+  font-size: 25.2px;
   font-weight: 850;
   letter-spacing: -0.035em;
 }
@@ -2022,7 +2292,7 @@ fieldset.form-field {
 .report-header > div:last-child > b {
   color: var(--muted);
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 12.6px;
 }
 
 .report-header > div:last-child {
@@ -2038,7 +2308,7 @@ fieldset.form-field {
   margin-bottom: 10px;
   color: var(--muted);
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 13.2px;
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -2066,7 +2336,7 @@ fieldset.form-field {
 
 .report-safety span {
   color: var(--ink-2);
-  font-size: 11px;
+  font-size: 13.2px;
 }
 
 .timeline {
@@ -2098,22 +2368,22 @@ fieldset.form-field {
   display: block;
   color: var(--muted);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .timeline-event b {
-  font-size: 12px;
+  font-size: 14.4px;
 }
 
 .timeline-event p {
   color: var(--ink-2);
-  font-size: 11.5px;
+  font-size: 13.8px;
 }
 
 .report-disclaimer {
   padding-top: 16px;
   color: var(--muted);
-  font-size: 10.5px;
+  font-size: 12.6px;
 }
 
 .not-found-card {
@@ -2132,6 +2402,26 @@ fieldset.form-field {
 
   .snapshot-card {
     position: static;
+  }
+
+  .medication-row {
+    grid-template-columns: 3px minmax(0, 1fr) auto;
+  }
+
+  .category-stripe {
+    grid-row: 1 / 3;
+  }
+
+  .medication-dose {
+    grid-column: 2;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .medication-row > .row-actions {
+    grid-column: 3;
+    grid-row: 1 / 3;
+    flex-direction: column;
   }
 
   .profile-row {
@@ -2164,7 +2454,7 @@ fieldset.form-field {
     width: 100%;
     height: 66px;
     padding: 8px;
-    box-shadow: 0 -8px 30px rgb(0 0 0 / 16%);
+    box-shadow: 0 -8px 30px color-mix(in srgb, var(--rail-bg) 16%, transparent);
   }
 
   .rail-brand-link,
@@ -2182,7 +2472,7 @@ fieldset.form-field {
     flex-direction: column;
     gap: 2px;
     padding: 5px 2px;
-    font-size: 9.5px;
+    font-size: 11.4px;
   }
 
   .side-rail nav svg {
@@ -2193,6 +2483,15 @@ fieldset.form-field {
   .topbar {
     min-height: 60px;
     padding: 10px 16px;
+  }
+
+  .topbar h1 {
+    font-size: clamp(22px, 6.8vw, 25px);
+  }
+
+  .hero-date {
+    margin-top: 6px;
+    font-size: 16.2px;
   }
 
   .reference-date {
@@ -2206,7 +2505,10 @@ fieldset.form-field {
   .hero-actions,
   .tile-grid,
   .choice-grid,
+  .quick-actions.two,
   .quick-actions.three,
+  .profile-edit-grid,
+  .date-filter-card,
   .field-grid.two,
   .field-grid.three,
   .ingredient-grid,
@@ -2226,12 +2528,30 @@ fieldset.form-field {
   }
 
   .medilight-banner .button {
-    margin-left: 60px;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .medilight-overview .medilight-banner {
+    min-height: 0;
+    padding: 18px;
+  }
+
+  .status-title {
+    align-items: flex-start;
+  }
+
+  .status-title > div {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .status-title h2 {
+    white-space: normal;
   }
 
   .medication-row {
-    display: grid;
-    grid-template-columns: 3px minmax(0, 1fr) auto;
+    row-gap: 10px;
   }
 
   .category-stripe {
@@ -2239,14 +2559,15 @@ fieldset.form-field {
   }
 
   .medication-dose {
-    grid-column: 2;
     align-items: flex-start;
   }
 
   .medication-row > .row-actions {
-    grid-column: 3;
-    grid-row: 1 / 3;
-    flex-direction: column;
+    gap: 8px;
+  }
+
+  .date-filter-card > .button {
+    width: 100%;
   }
 
   .profile-hero,
@@ -2265,7 +2586,11 @@ fieldset.form-field {
   }
 
   .profile-row {
-    grid-template-columns: 95px minmax(0, 1fr) auto;
+    grid-template-columns: 110px minmax(0, 1fr);
+  }
+
+  .profile-row small {
+    grid-column: 2;
   }
 
   .symptom-log {

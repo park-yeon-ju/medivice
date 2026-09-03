@@ -365,6 +365,36 @@ export async function createMedication(payload) {
   }
 }
 
+/** UC14 보완. 회의 시연에서는 기존 Mock 항목을 바꾸고 메디라이트도 같은 목록으로 다시 계산한다. */
+export async function updateMedication(id, payload) {
+  await wait()
+  const index = medications.findIndex((medication) => String(medication.id) === String(id))
+  if (index < 0) throw new Error(`복용 항목을 찾을 수 없습니다: id=${id}`)
+
+  const previous = medications[index]
+  const medication = {
+    ...previous,
+    ...clone(payload),
+    id: previous.id,
+    ingredients: (payload.ingredients ?? previous.ingredients).map(
+      (ingredient, ingredientIndex) => ({
+        ...ingredient,
+        // 기존 영문명이 있으면 유지하고, 없으면 확인 가능한 성분명을 대신 사용한다.
+        englishName:
+          ingredient.englishName ??
+          previous.ingredients[ingredientIndex]?.englishName ??
+          ingredient.name,
+      }),
+    ),
+    analysisEligible: payload.type !== 'PRESCRIPTION',
+  }
+  medications.splice(index, 1, medication)
+  return {
+    status: 200,
+    data: clone({ medication, medilight: analyzeMedications(medications) }),
+  }
+}
+
 /** UC14. 현재 목록만 삭제하며 증상 기록의 medicationSnapshot은 유지한다. */
 export async function deleteMedication(id) {
   await wait()

@@ -1,8 +1,13 @@
-<!-- UC1·2 로그인·회원가입 화면. Mock 모드에서는 테스트 계정을 명시해 실제 인증 화면과 혼동하지 않게 한다. -->
+<!--
+  AuthView.vue
+  로그인과 회원가입 입력을 검증하고, 성공 시 메인 또는 첫 설문·문진 화면으로 이동한다.
+
+  개발용 인증 정보는 화면에 노출하지 않고 회원가입 뒤 문진 흐름을 반드시 거치게 한다.
+  관련 UC: UC1, UC2 / 화면: SCR-AUTH-001, SCR-AUTH-002
+-->
 <script setup>
 import { computed, ref } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
-import { isMockApi } from '@/api/adapter'
 import BrandLockup from '@/components/BrandLockup.vue'
 import { useMediviceStore } from '@/stores/medivice'
 
@@ -15,7 +20,8 @@ const store = useMediviceStore()
 const username = ref('')
 const password = ref('')
 const passwordConfirm = ref('')
-const sex = ref('여성')
+// 성별은 판정 기준에 쓰이는 필수값이므로 기본 선택 없이 사용자가 직접 고르게 한다.
+const sex = ref('')
 const birthDate = ref('1974-03-08')
 const submitted = ref(false)
 
@@ -29,7 +35,13 @@ const submitting = ref(false)
 async function submit() {
   submitted.value = true
   submitError.value = ''
-  if (!username.value || !password.value || passwordMismatch.value) return
+  if (
+    !username.value ||
+    !password.value ||
+    passwordMismatch.value ||
+    (isSignup.value && !sex.value)
+  )
+    return
   submitting.value = true
   try {
     if (isSignup.value) {
@@ -58,21 +70,18 @@ async function submit() {
 <template>
   <main class="auth-stage">
     <section class="auth-card" :class="{ signup: isSignup }">
-      <BrandLockup />
-      <div class="auth-heading">
-        <p class="eyebrow">{{ isSignup ? 'SCR-AUTH-002 · UC1' : 'SCR-AUTH-001 · UC2' }}</p>
-        <h1>{{ isSignup ? '회원가입' : '다시 만나서 반가워요' }}</h1>
-        <p>
-          {{
-            isSignup
-              ? '가입을 마치면 자동으로 로그인됩니다.'
-              : '복용 목록과 메디라이트를 확인하세요.'
-          }}
-        </p>
-      </div>
-
-      <div v-if="isMockApi && !isSignup" class="privacy-note">
-        <b>개발용 Mock API</b> · 아이디 <code>minseo_k</code> · 비밀번호 <code>12345678</code>
+      <div class="auth-brand-heading">
+        <BrandLockup />
+        <div class="auth-heading">
+          <h1>{{ isSignup ? '회원가입' : '다시 만나서 반가워요' }}</h1>
+          <p>
+            {{
+              isSignup
+                ? '가입을 마치면 자동으로 로그인됩니다.'
+                : '복용 목록과 메디라이트를 확인하세요.'
+            }}
+          </p>
+        </div>
       </div>
 
       <form class="form-stack" @submit.prevent="submit">
@@ -109,11 +118,11 @@ async function submit() {
 
         <div v-if="isSignup" class="field-grid two">
           <label class="form-field">
-            <span>성별 <small>선택</small></span>
-            <select v-model="sex">
+            <span>성별 <b aria-hidden="true">*</b></span>
+            <select v-model="sex" required>
+              <option disabled value="">성별을 선택하세요</option>
               <option>여성</option>
               <option>남성</option>
-              <option>선택 안 함</option>
             </select>
           </label>
           <label class="form-field">
@@ -124,7 +133,7 @@ async function submit() {
         <div v-if="isSignup" class="privacy-note">
           성별과 생년월일은 연령·성별 기준 판정에만 사용합니다. 주민등록번호는 수집하지 않습니다.
         </div>
-        <p v-if="submitted && (!username || !password)" class="field-error">
+        <p v-if="submitted && (!username || !password || (isSignup && !sex))" class="field-error">
           필수 항목을 입력해주세요.
         </p>
         <p v-if="submitError" class="field-error">{{ submitError }}</p>

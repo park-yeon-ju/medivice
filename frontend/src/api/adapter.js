@@ -19,6 +19,11 @@ async function callApi(method, args) {
 export const getDashboard = (...args) => callApi('getDashboard', args)
 export const getMedilight = (...args) => callApi('getMedilight', args)
 export const createMedication = (...args) => callApi('createMedication', args)
+export const updateMedication = (...args) => {
+  // 백엔드 수정 계약이 확정되지 않았으므로 회의용 수정 기능은 Mock 모드에서만 제공한다.
+  if (!isMockApi) throw new Error('복용 정보 수정 API가 아직 연결되지 않았습니다.')
+  return callApi('updateMedication', args)
+}
 export const deleteMedication = (...args) => callApi('deleteMedication', args)
 export const createSymptom = (...args) => callApi('createSymptom', args)
 export const requestReport = (...args) => callApi('requestReport', args)
