@@ -1,0 +1,18 @@
+# 인증키 — 절대 커밋 금지
+.env
+
+# 원본 응답은 용량이 크고 재수집 가능하므로 커밋하지 않는다
+data/raw/
+
+# 가상환경 · 캐시
+.venv/
+__pycache__/
+*.pyc
+
+# 정규화 결과 CSV는 커밋한다.
+#   팀원이 인증키·API 호출 없이 load_postgres.py 만으로 같은 DB를 만들 수 있게 하기 위함.
+#   (아래 !규칙이 없으면 data/ 전체가 무시되는 실수를 하기 쉽다)
+!data/normalized/
+!data/normalized/*.csv
+!data/normalized/_SOURCE.txt
+!data/endpoints.json

@@ -39,6 +39,10 @@ def load_raw(name: str):
             items = items.get("item", [])
         if isinstance(items, dict):
             items = [items]
+        # 성분 단위 DUR은 items=[{"item": {...}}, ...] 형태로 한 번 더 감싼다.
+        if isinstance(items, list):
+            items = [row["item"] if isinstance(row, dict) and isinstance(row.get("item"), dict)
+                     else row for row in items]
         rows.extend(items)
     return rows
 
@@ -73,6 +77,22 @@ def parse_amount(text):
         return None, None
     unit = {"㎎": "mg", "㎍": "mcg", "밀리그램": "mg", "ml": "mL", "iu": "IU"}.get(m.group(2), m.group(2))
     return float(m.group(1).replace(",", "")), unit
+
+
+# QNT는 '1,250.5' 같은 천단위 구분자와 '250,500,1000,1500' 같은 규격 목록이 섞여 있다.
+# 후자는 하나의 함량이 아니므로 쉼표를 지우면 250억 같은 허구의 값이 만들어진다(실제로 그랬다).
+THOUSANDS_RE = re.compile(r"^\d{1,3}(?:,\d{3})*(?:\.\d+)?$")
+PLAIN_NUM_RE = re.compile(r"^\d+(?:\.\d+)?$")
+
+
+def parse_qnt(text):
+    """단일 수치일 때만 float, 규격 목록·범위·'적량' 등 비정형은 None(=미상)."""
+    t = (text or "").strip()
+    if PLAIN_NUM_RE.match(t):
+        return float(t)
+    if THOUSANDS_RE.match(t):
+        return float(t.replace(",", ""))
+    return None
 
 
 def parse_date(text):
@@ -199,14 +219,19 @@ class Normalizer:
             cur.update(amount=amount, unit=unit)
 
     # --- DUR 규칙 -------------------------------------------------------------
-    def add_pair_rule(self, dur_type, a, b, content, ndate):
+    def add_pair_rule(self, dur_type, a, b, content, ndate, dataset):
         """④ 해결 : (A,B)와 (B,A)를 정렬해 한 쌍이 한 행만 갖게 만든다."""
         if not (a and b) or a == b:
             return
         lo, hi = sorted([a, b])
         key = (dur_type, lo, hi)
-        if key not in self.pair_rules:
-            self.pair_rules[key] = {"prohibit_content": content, "notification_date": ndate}
+        source_ref = f"https://www.data.go.kr/data/{dataset}/openapi.do"
+        rule_version = "MFDS-DUR-INGREDIENT" if dataset == "15056780" else "MFDS-DUR-PRODUCT"
+        if key not in self.pair_rules or dataset == "15056780":
+            self.pair_rules[key] = {"prohibit_content": content,
+                                    "notification_date": ndate,
+                                    "rule_version": rule_version,
+                                    "source_ref": source_ref}
 
     def add_single_rule(self, dur_type, ingr, content, cmin, cmax, cunit, ndate):
         if not ingr:
@@ -231,7 +256,8 @@ class Normalizer:
             self.link_product_ingredient(pa, a, amt, unit)
             self.link_product_ingredient(pb, b, *parse_amount(g(r, "MIXTURE_ITEM_NAME")))
             self.add_pair_rule(spec["dur_type"], a, b,
-                               g(r, "PROHBT_CONTENT"), parse_date(g(r, "NOTIFICATION_DATE")))
+                               g(r, "PROHBT_CONTENT"), parse_date(g(r, "NOTIFICATION_DATE")),
+                               spec["dataset"])
         self.stats.append((spec["desc"], len(rows), None))
 
     def parse_single_dataset(self, name, spec):
@@ -311,7 +337,7 @@ class Normalizer:
         따라서 성분명으로 DUR 성분코드를 역인덱스 조회할 수 있다."""
         rows = load_raw(name)
         for r in rows:
-            ptype = ETC_OTC_MAP.get(g(r, "ETC_OTC_CODE") or "", "ETC")
+            ptype = ETC_OTC_MAP.get(g(r, "ETC_OTC_CODE", "SPCLTY_PBLC") or "", "ETC")
             p = self.put_product(g(r, "ITEM_SEQ"), g(r, "ITEM_NAME"), g(r, "ENTP_NAME"),
                                  g(r, "CHART"), ptype=ptype)
             if not p:
@@ -331,6 +357,30 @@ class Normalizer:
                 self.link_product_ingredient(p, code, comp["amount"], comp["unit"])
         self.stats.append((spec["desc"], len(rows), None))
 
+    def parse_permit_ingredients(self, name, spec):
+        """제품 주성분 상세정보 — ITEM_SEQ별 원료코드·분량·단위를 성분 행으로 연결한다."""
+        rows = load_raw(name)
+        for r in rows:
+            item_seq = g(r, "ITEM_SEQ")
+            name_ko = g(r, "MTRAL_NM")
+            if not (item_seq and name_ko):
+                continue
+
+            code = self.name_index.get(normalize_ingr_name(name_ko))
+            if code:
+                self.match_hit += 1
+            else:
+                self.match_miss += 1
+                code = g(r, "MTRAL_CODE") or local_ingr_code(name_ko)
+                self.put_ingredient(code, name_ko)
+
+            product = self.put_product(item_seq, g(r, "PRDUCT"), g(r, "ENTRPS"))
+            amount = parse_qnt(g(r, "QNT"))
+            raw_unit = g(r, "INGD_UNIT_CD") or ""
+            self.link_product_ingredient(product, code, amount,
+                                         UNIT_MAP.get(raw_unit, raw_unit or None))
+        self.stats.append((spec["desc"], len(rows), None))
+
     def run(self):
         for name, spec in config.DATASETS.items():
             if spec["arity"] == "EFFECT":
@@ -341,6 +391,8 @@ class Normalizer:
                 self.parse_single_dataset(name, spec)
             elif spec["arity"] == "PERMIT":
                 self.parse_permit_dataset(name, spec)
+            elif spec["arity"] == "PERMIT_INGREDIENT":
+                self.parse_permit_ingredients(name, spec)
             else:
                 self.parse_easy_drug(name, spec)
 
@@ -380,8 +432,10 @@ class Normalizer:
             [[k[0], k[1], v["prohibit_content"], k[2], k[3], v["condition_unit"], v["notification_date"]]
              for k, v in self.single_rules.items()])
         counts["dur_pair_rules"] = dump("dur_pair_rules.csv",
-            ["dur_code", "ingr_code_a", "ingr_code_b", "prohibit_content", "notification_date"],
-            [[k[0], k[1], k[2], v["prohibit_content"], v["notification_date"]]
+            ["dur_code", "ingr_code_a", "ingr_code_b", "prohibit_content", "notification_date",
+             "rule_version", "source_ref"],
+            [[k[0], k[1], k[2], v["prohibit_content"], v["notification_date"],
+              v["rule_version"], v["source_ref"]]
              for k, v in self.pair_rules.items()])
         counts["effect_groups"] = dump("effect_groups.csv", ["name", "series_name"],
             [[n, v] for n, v in self.effect_groups.items()])
@@ -422,7 +476,7 @@ def main():
     if n.match_hit or n.match_miss:
         total = n.match_hit + n.match_miss
         print(f"\n  성분명 → DUR 성분코드 매칭: {n.match_hit}/{total} "
-              f"({n.match_hit / total:.0%}) — 미매칭분은 LOCAL_ 코드로 등록되며 판정 근거가 없다")
+              f"({n.match_hit / total:.0%}) — 미매칭분은 식약처 원료코드 또는 LOCAL_ 코드로 등록된다")
 
     unnamed = sum(1 for c, v in n.ingredients.items() if v["name_ko"] == c)
     if n.ingredients:

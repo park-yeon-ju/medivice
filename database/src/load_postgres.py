@@ -132,12 +132,19 @@ def load(conn):
         if not (a and b) or a == b or r["dur_code"] not in dur_map:
             continue
         lo, hi = (a, b) if a < b else (b, a)
-        data.append((dur_map[r["dur_code"]], lo, hi, nz(r["prohibit_content"]), nz(r["notification_date"])))
+        data.append((dur_map[r["dur_code"]], lo, hi, nz(r["prohibit_content"]),
+                     nz(r["notification_date"]), r.get("rule_version") or "MFDS-DUR",
+                     r.get("source_ref") or "https://www.data.go.kr/data/15059486/openapi.do"))
     execute_batch(cur,
         """INSERT INTO dur_pair_rules(dur_type_id, ingredient_a_id, ingredient_b_id,
-                                      prohibit_content, notification_date)
-           VALUES (%s,%s,%s,%s,%s)
-           ON CONFLICT (dur_type_id, ingredient_a_id, ingredient_b_id) DO NOTHING""",
+                                      prohibit_content, notification_date, rule_version, source_ref)
+           VALUES (%s,%s,%s,%s,%s,%s,%s)
+           ON CONFLICT (dur_type_id, ingredient_a_id, ingredient_b_id) DO UPDATE
+             SET prohibit_content = COALESCE(EXCLUDED.prohibit_content, dur_pair_rules.prohibit_content),
+                 notification_date = COALESCE(EXCLUDED.notification_date, dur_pair_rules.notification_date),
+                 rule_version = EXCLUDED.rule_version,
+                 source_ref = EXCLUDED.source_ref,
+                 checked_at = now()""",
         data, page_size=1000)
     print(f"  dur_pair_rules         {len(data):>6}건 처리")
 

@@ -1,0 +1,319 @@
+<title>메디바이스 DA 작업 요약</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#FBFCFC; --surface:#FFFFFF; --surface-2:#F1F5F5;
+    --ink:#16232B; --ink-2:#54666F; --ink-3:#84969C; --line:#DCE4E5;
+    --accent:#0E7C86; --accent-soft:#DCEFF0;
+    --green:#12876E; --amber:#B9740F; --red:#C0402F;
+    --green-soft:#DCEFEA; --amber-soft:#F5E9D6; --red-soft:#F6E0DC;
+    --shadow:0 1px 2px rgba(18,40,48,.04), 0 8px 24px -12px rgba(18,40,48,.14);
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --sans:"IBM Plex Sans KR",system-ui,-apple-system,"Malgun Gothic",sans-serif;
+  }
+  :root:not([data-theme="light"]){
+    @media (prefers-color-scheme:dark){
+      --bg:#0E1417; --surface:#151D21; --surface-2:#1B252A;
+      --ink:#E9EFEF; --ink-2:#9DACB2; --ink-3:#6C7C82; --line:#27343A;
+      --accent:#3FB6C0; --accent-soft:#123338;
+      --green:#3CB89A; --amber:#E0A140; --red:#E76C58;
+      --green-soft:#123029; --amber-soft:#332711; --red-soft:#331B16;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 28px -14px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0E1417; --surface:#151D21; --surface-2:#1B252A;
+    --ink:#E9EFEF; --ink-2:#9DACB2; --ink-3:#6C7C82; --line:#27343A;
+    --accent:#3FB6C0; --accent-soft:#123338;
+    --green:#3CB89A; --amber:#E0A140; --red:#E76C58;
+    --green-soft:#123029; --amber-soft:#332711; --red-soft:#331B16;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 28px -14px rgba(0,0,0,.6);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:var(--sans); font-weight:400; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1000px; margin:0 auto; padding:clamp(28px,5vw,64px) clamp(20px,4vw,40px)}
+  .mono{font-family:var(--mono)}
+
+  /* ── 헤더 밴드 ── */
+  header{border-bottom:2px solid var(--ink); padding-bottom:28px; margin-bottom:36px}
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; font-weight:500; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--accent); margin:0 0 14px;
+  }
+  h1{
+    font-size:clamp(30px,5vw,46px); font-weight:700; line-height:1.12;
+    letter-spacing:-.02em; margin:0 0 6px; text-wrap:balance;
+  }
+  .sub{font-size:clamp(15px,2.2vw,18px); color:var(--ink-2); margin:0; max-width:60ch}
+  .meta{
+    display:flex; flex-wrap:wrap; gap:8px 20px; margin-top:20px;
+    font-family:var(--mono); font-size:12.5px; color:var(--ink-2);
+  }
+  .meta b{color:var(--ink); font-weight:600}
+
+  /* ── 지표 행 ── */
+  .metrics{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line); border-radius:12px;
+    overflow:hidden; margin-bottom:40px;
+  }
+  .metric{background:var(--surface); padding:18px 20px}
+  .metric .n{font-family:var(--mono); font-size:clamp(22px,3vw,28px); font-weight:600; letter-spacing:-.02em; line-height:1.1}
+  .metric .l{font-size:12.5px; color:var(--ink-2); margin-top:6px}
+  .metric .n.accent{color:var(--accent)}
+
+  /* ── 파이프라인 스트립 ── */
+  .flow-h{font-size:12px; font-family:var(--mono); letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); margin:0 0 12px}
+  .flow{
+    display:flex; align-items:stretch; gap:0; flex-wrap:wrap;
+    border:1px solid var(--line); border-radius:12px; background:var(--surface);
+    padding:6px; margin-bottom:48px; box-shadow:var(--shadow);
+  }
+  .step{flex:1 1 0; min-width:150px; padding:14px 16px; display:flex; flex-direction:column; gap:3px; position:relative}
+  .step:not(:last-child)::after{
+    content:"→"; position:absolute; right:-9px; top:50%; transform:translateY(-50%);
+    font-family:var(--mono); color:var(--accent); font-weight:600; z-index:1;
+    background:var(--surface); padding:2px 0;
+  }
+  .step .k{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent)}
+  .step .t{font-weight:600; font-size:15px}
+  .step .d{font-size:12.5px; color:var(--ink-2); line-height:1.45}
+
+  /* ── 섹션 ── */
+  .section-h{
+    display:flex; align-items:baseline; gap:12px; margin:0 0 20px;
+    padding-bottom:10px; border-bottom:1px solid var(--line);
+  }
+  .section-h h2{font-size:20px; font-weight:700; letter-spacing:-.01em; margin:0}
+  .section-h .c{font-family:var(--mono); font-size:12.5px; color:var(--ink-3)}
+
+  /* ── 트러블슈팅 카드 ── */
+  .cards{display:flex; flex-direction:column; gap:16px}
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:22px 24px; box-shadow:var(--shadow); border-left:3px solid var(--tag,var(--accent));
+  }
+  .card-top{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:4px}
+  .tag{
+    font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:.08em;
+    text-transform:uppercase; padding:4px 10px; border-radius:999px;
+    color:var(--tag,var(--accent)); background:var(--tag-soft,var(--accent-soft));
+  }
+  .card h3{font-size:17.5px; font-weight:600; letter-spacing:-.01em; margin:0; line-height:1.35}
+  .rows{display:grid; grid-template-columns:auto 1fr; gap:9px 16px; margin-top:16px}
+  .rk{
+    font-family:var(--mono); font-size:11.5px; font-weight:600; letter-spacing:.05em;
+    text-transform:uppercase; color:var(--ink-3); padding-top:2px; white-space:nowrap;
+  }
+  .rv{font-size:14.5px; color:var(--ink); line-height:1.55}
+  .rv.result{color:var(--tag,var(--accent)); font-weight:500}
+  .rv code, .inline-code{
+    font-family:var(--mono); font-size:.86em; background:var(--surface-2);
+    padding:1px 6px; border-radius:5px; color:var(--ink); white-space:nowrap;
+  }
+
+  /* medilight 데모 배지 */
+  .light{display:inline-flex; align-items:center; gap:6px; font-family:var(--mono); font-size:12px; font-weight:600; padding:3px 9px; border-radius:999px}
+  .light::before{content:""; width:9px; height:9px; border-radius:50%; background:currentColor}
+  .light.red{color:var(--red); background:var(--red-soft)}
+
+  /* ── 푸터 ── */
+  footer{margin-top:44px; padding-top:24px; border-top:1px solid var(--line)}
+  .stack{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px}
+  .chip{
+    font-family:var(--mono); font-size:12px; color:var(--ink-2);
+    border:1px solid var(--line); border-radius:7px; padding:5px 11px; background:var(--surface);
+  }
+  .note{
+    font-size:13px; color:var(--ink-2); line-height:1.6; max-width:70ch;
+    background:var(--surface-2); border-radius:10px; padding:14px 18px;
+  }
+  .note b{color:var(--ink)}
+  .foot-meta{margin-top:18px; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px}
+
+  @media (max-width:720px){
+    .metrics{grid-template-columns:repeat(2,1fr)}
+    .rows{grid-template-columns:1fr; gap:3px 0}
+    .rk{padding-top:10px}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .card{transition:transform .15s ease, box-shadow .15s ease}
+    .card:hover{transform:translateY(-1px)}
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Data Analyst · 미니프로젝트 작업 요약</p>
+    <h1>메디바이스 데이터 파이프라인 &amp; DB 설계</h1>
+    <p class="sub">공공 API를 받아와 정규화하고, 판정을 지탱하는 데이터베이스와 ERD까지 — 사소한 수정이 아니라 설계 판단이 필요했던 일곱 국면.</p>
+    <div class="meta">
+      <span>담당 · <b>DA (데이터 정규화 / DB / ERD)</b></span>
+      <span>출처 · <b>식약처 공공 API 4종</b></span>
+      <span>대상 · <b>복약 안전 관리 서비스</b></span>
+      <span>DB · <b>PostgreSQL</b></span>
+    </div>
+  </header>
+
+  <section class="metrics" aria-label="핵심 지표">
+    <div class="metric"><div class="n accent mono">797,186 → 성분쌍</div><div class="l">품목 조합 폭발을 성분 단위로 접음</div></div>
+    <div class="metric"><div class="n mono">230,809 → 148,664행</div><div class="l">원본 → 정규화 <b>10개 참조 테이블</b> · DB 29개</div></div>
+    <div class="metric"><div class="n mono">43,019</div><div class="l">품목 · 성분 5,016 · 병용금기 성분쌍 1,292</div></div>
+    <div class="metric"><div class="n mono">66,748 / 92,355</div><div class="l">함량 확보 <b>72%</b> · 1NF→3NF · FK 37</div></div>
+  </section>
+
+  <p class="flow-h">파이프라인</p>
+  <div class="flow">
+    <div class="step"><span class="k">01 수집</span><span class="t">공공 API</span><span class="d">엔드포인트 자동 확정 · 호출량 계획 · 계통추출</span></div>
+    <div class="step"><span class="k">02 정규화</span><span class="t">1NF→2NF→3NF</span><span class="d">플랫 응답 분해 · 양방향 중복 제거 · 코드 테이블 분리</span></div>
+    <div class="step"><span class="k">03 적재</span><span class="t">PostgreSQL</span><span class="d">자연키→대체키 치환 · 참조 무결성 검증</span></div>
+    <div class="step"><span class="k">04 ERD</span><span class="t">DBML</span><span class="d">레이어별 색상 · 판정 뷰로 설계 실증</span></div>
+  </div>
+
+  <div class="section-h">
+    <h2>주요 트러블슈팅</h2>
+    <span class="c">문제 발견 → 판단 → 결과</span>
+  </div>
+
+  <div class="cards">
+
+    <!-- T1 정규화 -->
+    <article class="card" style="--tag:var(--accent);--tag-soft:var(--accent-soft)">
+      <div class="card-top">
+        <h3>정규화의 목적을 ‘미관’이 아니라 ‘기능 요건’으로 재정의</h3>
+        <span class="tag">정규화</span>
+      </div>
+      <div class="rows">
+        <div class="rk">상황</div>
+        <div class="rv">병용금기 응답이 <b>797,186건</b>. 단순히 “크다”가 아니라, 같은 금기 규칙이 해당 품목 조합 수만큼 반복 폭발한 구조였다. 게다가 복합제 성분이 한 칸에 묶여 와 1NF를 위반하고 있었다.</div>
+        <div class="rk">판단</div>
+        <div class="rv">이 서비스의 핵심 기능인 “같은 성분이 여러 약에 겹치는지”는 <b>성분이 행 단위로 펼쳐져 있어야만</b> <span class="inline-code">SUM()</span>으로 계산된다. 정규화를 보기 좋으라고 하는 게 아니라, <b>판정 기능이 SQL 한 줄로 성립하게 만드는 전제</b>로 규정했다.</div>
+        <div class="rk">결과</div>
+        <div class="rv result">품목 조합을 성분 쌍으로 접고, 성분을 조인 축으로 삼는 스키마 확립. 이후 모든 판정 로직이 이 축 위에서 동작.</div>
+      </div>
+    </article>
+
+    <!-- T2 스키마 -->
+    <article class="card" style="--tag:var(--amber);--tag-soft:var(--amber-soft)">
+      <div class="card-top">
+        <h3>실데이터를 열어 설계 초안의 스키마 결함을 발견·재설계</h3>
+        <span class="tag">스키마</span>
+      </div>
+      <div class="rows">
+        <div class="rk">상황</div>
+        <div class="rv">초안은 ‘효능군중복’을 <b>성분 쌍</b>으로 모델링했다. 그러나 실제 API 응답을 열어보니 <span class="inline-code">MIXTURE_*</span> 필드가 아예 없고, <span class="inline-code">EFFECT_NAME</span>·<span class="inline-code">SERS_NAME</span> — 즉 <b>‘성분→효능군 분류’</b>였다. 쌍으로 파싱하면 규칙이 <b>0건</b>이 된다.</div>
+        <div class="rk">판단</div>
+        <div class="rv">중복 여부는 데이터가 알려주는 게 아니라 <b>판정 시점에 계산해야 하는 것</b>이라고 판단. 문서상 정의가 아니라 원본 실데이터를 근거로 스키마를 다시 잡았다.</div>
+        <div class="rk">결과</div>
+        <div class="rv result"><span class="inline-code">effect_groups</span> + N:M 교차 테이블 신설, 판정 뷰가 “복용 성분들의 효능군이 겹치면 경고”를 계산. 효능군 9종·매핑 256건 확보.</div>
+      </div>
+    </article>
+
+    <!-- T3 데이터 정합성 / 안전 설계 -->
+    <article class="card" style="--tag:var(--green);--tag-soft:var(--green-soft)">
+      <div class="card-top">
+        <h3>데이터 소스와 판정 규칙의 불일치를 간파하고, ‘모르는 것’을 드러내는 설계</h3>
+        <span class="tag">데이터 정합성</span>
+      </div>
+      <div class="rows">
+        <div class="rk">상황</div>
+        <div class="rv">영양제·건기식 성분은 식약처 DUR 고시 대상이 아니라, API를 추가로 받아와도 <b>대조할 판정 규칙 자체가 없다.</b> “데이터를 더 넣으면 된다”는 접근이 통하지 않는 지점이었다.</div>
+        <div class="rk">판단</div>
+        <div class="rv">무작정 소스를 늘리는 대신 성분 중심 스키마로 <b>출처와 무관하게 판정되도록</b> 설계. 더 중요하게는, 판정 근거가 없는 성분을 ‘초록(안전)’으로 <b>숨기면 안 된다</b>고 봤다 — 사용자가 “확인 못 함”을 “이상 없음”으로 읽는 것이 안전 서비스의 가장 위험한 실패다.</div>
+        <div class="rk">결과</div>
+        <div class="rv result">판정 불가 성분을 별도 집계하는 뷰 + 상담 권고 안내(UC31) 도입. 안내 문구는 완화 표현이 섞이지 않도록 <b>AI가 아닌 결정론적 템플릿</b>으로 고정.</div>
+      </div>
+    </article>
+
+    <!-- T4 수집 -->
+    <article class="card" style="--tag:var(--accent);--tag-soft:var(--accent-soft)">
+      <div class="card-top">
+        <h3>일일 호출 한도 vs 79만 건 — 편향 없는 계통추출로 수집 설계</h3>
+        <span class="tag">수집 전략</span>
+      </div>
+      <div class="rows">
+        <div class="rk">상황</div>
+        <div class="rv">개발계정 한도는 <b>일 1,000회</b>. 79만 건을 100건씩 받으면 8천 회로 한참 초과. 게다가 앞에서부터 자르면 응답이 <span class="inline-code">DUR_SEQ</span> 순 정렬이라 <b>규칙 7종만</b> 잡히는 편향이 있었다 — “머리부터 N건”은 표본이 아니었다.</div>
+        <div class="rk">판단</div>
+        <div class="rv">전 구간을 일정 간격으로 건너뛰는 <b>계통추출(systematic sampling)</b>로 전환. 서버 페이지 크기를 실측하고, 실행 전 예상 호출량을 미리 계산해 한도 초과를 사전 차단.</div>
+        <div class="rk">결과</div>
+        <div class="rv result">한도 내에서 전 구간에 고르게 분포한 규칙 수집. 중단 시 이어받기(<span class="inline-code">--resume</span>)로 호출 낭비 방지.</div>
+      </div>
+    </article>
+
+    <!-- T5 인프라 -->
+    <article class="card" style="--tag:var(--red);--tag-soft:var(--red-soft)">
+      <div class="card-top">
+        <h3>“실패해도 200을 주는” 공공 API를 결정론적으로 검증</h3>
+        <span class="tag">수집 견고성</span>
+      </div>
+      <div class="rows">
+        <div class="rk">상황</div>
+        <div class="rv">공공데이터포털은 개편 때마다 엔드포인트 버전 접미사(<span class="inline-code">…03</span>, <span class="inline-code">…06</span>)가 바뀌고, 인증·경로가 틀려도 <b>HTTP 200에 오류코드</b>를 실어 보낸다. 죽은 엔드포인트가 정상처럼 통과하기 쉬웠다.</div>
+        <div class="rk">판단</div>
+        <div class="rv">후보 URL을 나열하고, HTTP 상태·<span class="inline-code">resultCode</span>·<span class="inline-code">totalCount</span>까지 함께 확인해 <b>실제로 살아있는 경로만</b> 자동 확정하도록 진단 단계를 분리. 자연키/대체키를 분리해 코드 체계가 개편돼도 FK가 흔들리지 않게 설계.</div>
+        <div class="rk">결과</div>
+        <div class="rv result">확정 엔드포인트를 <span class="inline-code">endpoints.json</span>에 기록 → 경로를 손으로 고칠 일 없음. 실데이터 검증에서 병용금기가 실제 판정으로 이어짐:
+          <span class="light red" style="margin-left:4px">RED · 심바스타틴 × 이트라코나졸 (횡문근융해증)</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- T6 함량 보강 -->
+    <article class="card" style="--tag:var(--amber);--tag-soft:var(--amber-soft)">
+      <div class="card-top">
+        <h3>“목록 API에 함량이 없다” — 같은 데이터셋의 다른 오퍼레이션을 찾아 72%까지 보강</h3>
+        <span class="tag">함량 커버리지</span>
+      </div>
+      <div class="rows">
+        <div class="rk">상황</div>
+        <div class="rv">일일 상한 합산은 <b>함량이 있어야만</b> 성립하는데, 제품 허가정보 <b>목록</b> 응답(<span class="inline-code">getDrugPrdtPrmsnInq07</span>)에는 <span class="inline-code">MATERIAL_NAME</span>이 없었다. 기존 서비스 범위 21,093건 중 <b>7,999건</b>이 함량 미상이라 그만큼 판정이 스킵됐다.</div>
+        <div class="rk">판단</div>
+        <div class="rv">품목별 상세 조회는 42,984회 호출이 필요해 한도를 넘는다. 공식 Swagger 명세를 열어 같은 데이터셋 안의 <b>주성분 상세 오퍼레이션</b>(<span class="inline-code">getDrugPrdtMcpnDtlInq07</span>, 126,768행)을 찾아냈다. <span class="inline-code">numOfRows=1000</span>은 <span class="inline-code">resultCode 11</span>로 거부돼 500으로 실측 조정, <b>254회</b>로 전량 수집했다.</div>
+        <div class="rk">결과</div>
+        <div class="rv result">기존 누락 7,999건 중 <b>5,310건(66%)</b>을 공식 데이터로 보강. 전체 함량 확보 <b>66,748 / 92,355(72%)</b>.</div>
+      </div>
+    </article>
+
+    <!-- T7 함량 파싱 -->
+    <article class="card" style="--tag:var(--red);--tag-soft:var(--red-soft)">
+      <div class="card-top">
+        <h3><span class="inline-code">QNT='250,500,1000,1500'</span> — 쉼표를 천단위로 읽으면 250억이 된다</h3>
+        <span class="tag">파싱 안전</span>
+      </div>
+      <div class="rows">
+        <div class="rk">상황</div>
+        <div class="rv">적재 중 <span class="inline-code">numeric field overflow</span>. 추적해 보니 혈액응고인자 제제의 <span class="inline-code">QNT</span>가 하나의 값이 아니라 <b>규격 목록</b>(250·500·1000·1500 IU)이었다. 쉼표를 지우던 파서가 이를 <b>25,050,010,001,500</b>이라는 존재하지 않는 함량으로 만들었다.</div>
+        <div class="rk">판단</div>
+        <div class="rv">천단위 구분자(<span class="inline-code">1,250.5</span>)와 규격 목록은 <b>자릿수 패턴으로 구분</b>된다. 목록·범위·<span class="inline-code">적량</span> 같은 비정형 값은 임의로 하나를 고르지 않고 <b>NULL(=모름)</b>로 남기기로 했다 — 안전 판정에서 추정값은 없는 값보다 위험하다.</div>
+        <div class="rk">결과</div>
+        <div class="rv result"><span class="inline-code">parse_qnt()</span> 도입 후 최대 함량이 18,000,000 IU(알데스류킨 주사제)로 정상화. 남은 NULL 25,607건은 원천 <span class="inline-code">QNT</span> 공백·비정형이며 경고 뷰로 정직하게 노출한다.</div>
+      </div>
+    </article>
+
+  </div>
+
+  <footer>
+    <div class="stack" aria-label="기술 스택">
+      <span class="chip">Python</span>
+      <span class="chip">requests</span>
+      <span class="chip">psycopg2</span>
+      <span class="chip">PostgreSQL</span>
+      <span class="chip">DBML / dbdiagram.io</span>
+      <span class="chip">공공데이터포털 OpenAPI</span>
+      <span class="chip">1NF–3NF 정규화</span>
+      <span class="chip">계통추출</span>
+    </div>
+    <p class="note"><b>정직한 한계.</b> DUR 용량주의 API에는 1일 최대용량 수치 필드가 없어, 성분별 임계값은 공공 API만으로 완결되지 않는다(텍스트 추출 + 큐레이션 병행). 임계값이 없는 성분은 판정 뷰가 <b>중복 자체만으로</b> 경고를 띄우도록 설계해 결손을 흡수했다.</p>
+    <div class="foot-meta">
+      <span>정규화 → PostgreSQL → ERD(DBML)</span>
+      <span>산출물 · *-DB.dbml / schema.sql / 정규화 설계문서</span>
+    </div>
+  </footer>
+</div>

@@ -39,7 +39,7 @@ Project medivice_service {
 Table ingredients [headercolor: #2E86C1] {
   ingredient_id bigint       [pk]
   ingr_code     varchar(20)  [not null, unique, note: '식약처 성분코드. LOCAL_ 접두사 = 공공데이터 미수록 → 판정 불가(UC31)']
-  name_ko       varchar(200) [not null]
+  name_ko       varchar(300) [not null]
   name_en       varchar(200) [note: 'KO/EN 전환 시 노출']
   Note: '★ 두 영역이 만나는 축. 사용자의 약도, 공공 규칙도 모두 성분으로 연결된다.'
 }
@@ -47,7 +47,7 @@ Table ingredients [headercolor: #2E86C1] {
 Table products [headercolor: #2E86C1] {
   product_id   bigint       [pk]
   item_seq     varchar(20)  [not null, unique, note: '식약처 품목기준코드']
-  name_ko      varchar(300) [not null]
+  name_ko      varchar(500) [not null]
   product_type varchar(20)  [not null, note: 'ETC 전문 / OTC 일반 / SUPPLEMENT 건기식']
 }
 
@@ -65,6 +65,9 @@ Table ingredient_daily_limits [headercolor: #2E86C1] {
   max_qty       "numeric(12,3)" [not null, note: '1일 상한섭취량']
   unit          varchar(20)     [not null]
   age_group     varchar(20)     [not null, note: 'ADULT / SENIOR …']
+  rule_version  varchar(30)     [not null]
+  source_ref    text            [not null, note: '판정 근거 URL']
+  checked_at    timestamptz     [not null]
   Note: '[FE] 메디라이트 상세의 “상한 4,000 IU (성인·한국)” 막대가 읽는 값. 비어 있으면 중복만으로 노랑.'
 }
 
@@ -73,6 +76,9 @@ Table dur_pair_rules [headercolor: #2E86C1] {
   ingredient_a_id  bigint [ref: > ingredients.ingredient_id]
   ingredient_b_id  bigint [ref: > ingredients.ingredient_id]
   prohibit_content text   [note: '금기 사유']
+  rule_version     varchar(30)
+  source_ref       text   [note: '식약처 DUR 성분정보(15056780)']
+  checked_at       timestamptz
   Note: '병용금기 — 두 성분 조합. (A,B)와 (B,A)는 한 행으로 접는다.'
 }
 
@@ -83,6 +89,9 @@ Table dur_single_rules [headercolor: #2E86C1] {
   prohibit_content text
   condition_min    "numeric(12,3)" [note: '연령 하한 등']
   condition_max    "numeric(12,3)" [note: '연령 상한 / 1일 최대용량 등']
+  rule_version     varchar(30)
+  source_ref       text
+  checked_at       timestamptz
   Note: '성분 하나에 대한 금기·주의. 사용자 조건(임신·나이)과 대조된다.'
 }
 
@@ -148,6 +157,7 @@ Table medications [headercolor: #16A085] {
   custom_name     varchar(300)   [note: '수기 등록 제품명']
   dose_per_intake "numeric(8,2)" [not null, note: '1회 투여량']
   times_per_day   smallint       [not null, note: '1일 횟수']
+  as_needed       boolean        [not null, default: false, note: '필요 시 복용이면 times_per_day는 1일 최대 횟수']
   register_reason varchar(200)   [note: '등록 사유 — 등록 3화면과 보고서 표에 모두 나온다']
   started_at      date           [not null]
   ended_at        date           [note: '복용 종료(삭제) 시 — 하드 삭제하지 않는다']
@@ -170,6 +180,7 @@ Table safety_checks [headercolor: #16A085] {
   level           varchar(10) [not null, note: 'GREEN / YELLOW / RED — 규칙 엔진이 결정']
   trigger_type    varchar(20) [note: 'REGISTER / DELETE / MANUAL']
   uncovered_count smallint    [note: '판정 근거 없는 성분 수 — 초록과 구분해 부기(UC31)']
+  amount_missing_count smallint [note: '함량 누락으로 일일 합산하지 못한 성분 수']
   checked_at      timestamptz
   Note: '[FE] 메인 화면의 메디라이트가 읽는다. 등록·삭제 시점마다 1행.'
 }
@@ -180,9 +191,11 @@ Table safety_check_items [headercolor: #16A085] {
   ingredient_id   bigint          [ref: > ingredients.ingredient_id]
   medication_a_id bigint          [ref: > medications.medication_id]
   medication_b_id bigint          [ref: > medications.medication_id]
-  reason_code     varchar(20)     [note: 'DUPLICATE / NEAR_LIMIT / OVER_LIMIT / PAIR — 화면 칩 문구']
+  reason_code     varchar(40)     [note: 'DUPLICATE / NEAR_LIMIT / OVER_LIMIT / USJNT_TABOO 등']
   total_amount    "numeric(12,3)" [note: '하루 합계 — 상세 표의 “하루 합계” 열, 미터 막대']
   threshold       "numeric(12,3)" [note: '비교한 임계값 — 상세 표의 “기준” 열']
+  unit            varchar(20)
+  source_ref      text            [note: '판정 근거 URL']
   level           varchar(10)     [note: 'YELLOW / RED / INFO']
   Note: '[FE] 메디라이트 상세 — 충돌 항목만 표시. 수치 3종이 있어야 상세 화면이 그려진다.'
 }
@@ -192,7 +205,7 @@ Table ai_outputs [headercolor: #16A085] {
   target_type  varchar(20) [note: 'SAFETY_CHECK / MEDICATION / REPORT']
   target_id    bigint      [note: '대상 행을 가리킴 — FK 없는 다형 참조라 선이 그려지지 않는다']
   result_json  jsonb       [note: 'AI 설명·보고서 본문']
-  status       varchar(10) [note: 'pending / completed / failed — NULL 가능해야 규칙 결과는 그대로 표시된다']
+  status       varchar(10) [note: 'pending / processing / completed / failed']
   Note: '[FE] AI 설명·보고서. 규칙 엔진이 색을 정하고 AI는 설명 문장만 만든다.'
 }
 
@@ -234,7 +247,7 @@ Table reports [headercolor: #16A085] {
   period_start date        [not null]
   period_end   date        [not null]
   language     varchar(5)  [not null, default: 'ko', note: 'ko / en — 보고서 생성 화면의 표시 언어 선택']
-  status       varchar(10) [note: 'pending / completed / failed']
+  status       varchar(10) [note: 'pending / processing / completed / failed']
   result_json  jsonb       [note: '완성된 보고서 본문 — 결과 화면이 읽는다']
   Note: '[FE] 보고서 생성 화면 — 진료실에서 보여줄 복약 리포트.'
 }

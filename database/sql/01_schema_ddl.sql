@@ -157,7 +157,11 @@ CREATE TABLE medivice.dur_single_rules (
     condition_max     NUMERIC(12,3),              -- 연령 상한 / 1일 최대용량
     condition_unit    VARCHAR(20),                -- 세 / 일 / mg
     notification_date DATE,                       -- 식약처 고시일자
-    CONSTRAINT uq_single_rule UNIQUE (dur_type_id, ingredient_id, condition_min, condition_max)
+    rule_version       VARCHAR(30) NOT NULL DEFAULT 'MFDS-DUR',
+    source_ref         TEXT NOT NULL DEFAULT 'https://www.data.go.kr/data/15059486/openapi.do',
+    checked_at         TIMESTAMPTZ NOT NULL DEFAULT now(),
+    -- condition_min/max 는 NULL 이 많아 기본 UNIQUE 로는 중복이 막히지 않는다(재적재 시 행이 2배가 됐다).
+    CONSTRAINT uq_single_rule UNIQUE NULLS NOT DISTINCT (dur_type_id, ingredient_id, condition_min, condition_max)
 );
 
 -- (8) 쌍 DUR 규칙 (dur_pair_rules) — 성분 두 개의 조합에 대한 금기 (병용금기·효능군중복)
@@ -171,6 +175,9 @@ CREATE TABLE medivice.dur_pair_rules (
     ingredient_b_id   BIGINT NOT NULL REFERENCES medivice.ingredients(ingredient_id) ON DELETE CASCADE,
     prohibit_content  TEXT,
     notification_date DATE,
+    rule_version       VARCHAR(30) NOT NULL DEFAULT 'MFDS-DUR',
+    source_ref         TEXT NOT NULL DEFAULT 'https://www.data.go.kr/data/15056780/openapi.do',
+    checked_at         TIMESTAMPTZ NOT NULL DEFAULT now(),
     CONSTRAINT chk_pair_order CHECK (ingredient_a_id < ingredient_b_id),
     CONSTRAINT uq_pair_rule   UNIQUE (dur_type_id, ingredient_a_id, ingredient_b_id)
 );
@@ -183,7 +190,9 @@ CREATE TABLE medivice.dur_pair_rules (
 CREATE TABLE medivice.effect_groups (
     effect_group_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name            VARCHAR(100) UNIQUE NOT NULL,  -- EFFECT_NAME (해열진통소염제 …)
-    series_name     VARCHAR(200)                   -- SERS_NAME  (비스테로이드성 소염제 …)
+    series_name     VARCHAR(200),                  -- SERS_NAME  (비스테로이드성 소염제 …)
+    source_ref      TEXT NOT NULL DEFAULT 'https://www.data.go.kr/data/15059486/openapi.do',
+    checked_at      TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
 -- (10) 성분 ↔ 효능군 (ingredient_effect_groups) : N:M 교차 테이블
@@ -207,6 +216,9 @@ CREATE TABLE medivice.ingredient_daily_limits (
     max_qty       NUMERIC(12,3) NOT NULL,         -- 1일 최대 투여량
     unit          VARCHAR(20)   NOT NULL,
     age_group     VARCHAR(20)   NOT NULL DEFAULT 'ADULT',
+    rule_version  VARCHAR(30)   NOT NULL DEFAULT 'MFDS-DUR',
+    source_ref    TEXT NOT NULL DEFAULT 'https://www.data.go.kr/data/15059486/openapi.do',
+    checked_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
     CONSTRAINT chk_max_qty CHECK (max_qty > 0)
 );
 
@@ -292,6 +304,7 @@ CREATE TABLE medivice.medications (
     custom_name     VARCHAR(300),                 -- UC13 수기 등록 제품명
     dose_per_intake NUMERIC(8,2) NOT NULL,        -- 1회 투여량
     times_per_day   SMALLINT     NOT NULL,        -- 1일 횟수
+    as_needed       BOOLEAN      NOT NULL DEFAULT FALSE, -- 필요 시 복용이면 times_per_day는 1일 최대 횟수
     register_reason VARCHAR(200),                 -- 영양제·상비약의 자유 입력 사유
     started_at      DATE NOT NULL DEFAULT CURRENT_DATE,
     ended_at        DATE,                         -- UC14 삭제 시 종료 처리 (이력 보존)
@@ -323,10 +336,12 @@ CREATE TABLE medivice.safety_checks (
     -- 판정 근거 데이터가 없어 확인하지 못한 성분 수. 색과 별개로 화면에 부기된다(UC31).
     -- 파생 가능한 값이지만, 점검 기록은 그 시점의 스냅샷이어야 하므로 저장한다.
     uncovered_count SMALLINT NOT NULL DEFAULT 0,
+    amount_missing_count SMALLINT NOT NULL DEFAULT 0,
     checked_at   TIMESTAMPTZ NOT NULL DEFAULT now(),
     CONSTRAINT chk_check_level   CHECK (level        IN ('GREEN','YELLOW','RED')),
     CONSTRAINT chk_check_trigger CHECK (trigger_type IN ('REGISTER','DELETE','MANUAL')),
-    CONSTRAINT chk_uncovered     CHECK (uncovered_count >= 0)
+    CONSTRAINT chk_uncovered       CHECK (uncovered_count >= 0),
+    CONSTRAINT chk_amount_missing  CHECK (amount_missing_count >= 0)
 );
 
 -- (19) 점검 상세 (safety_check_items)
@@ -340,6 +355,9 @@ CREATE TABLE medivice.safety_check_items (
     medication_b_id BIGINT REFERENCES medivice.medications(medication_id) ON DELETE SET NULL,
     total_amount    NUMERIC(12,3),               -- 일일 합산량
     threshold       NUMERIC(12,3),               -- 비교한 임계값
+    unit            VARCHAR(20),
+    reason_code     VARCHAR(40) NOT NULL,
+    source_ref      TEXT,
     level           VARCHAR(10) NOT NULL,
     -- INFO = 판정 근거가 없어 확인하지 못한 성분 (UC31). YELLOW/RED와 같은 줄에 두지 않는다.
     CONSTRAINT chk_item_level CHECK (level IN ('YELLOW','RED','INFO'))
@@ -357,7 +375,7 @@ CREATE TABLE medivice.ai_outputs (
     status       VARCHAR(10) NOT NULL DEFAULT 'pending',
     created_at   TIMESTAMPTZ NOT NULL DEFAULT now(),
     CONSTRAINT chk_ai_target CHECK (target_type IN ('SAFETY_CHECK','MEDICATION','REPORT')),
-    CONSTRAINT chk_ai_status CHECK (status      IN ('pending','completed','failed'))
+    CONSTRAINT chk_ai_status CHECK (status      IN ('pending','processing','completed','failed'))
 );
 
 -- (21) 증상 마스터 (symptoms)
@@ -411,7 +429,7 @@ CREATE TABLE medivice.reports (
     created_at   TIMESTAMPTZ NOT NULL DEFAULT now(),
     CONSTRAINT chk_report_period CHECK (period_start <= period_end),
     CONSTRAINT chk_report_lang   CHECK (language IN ('ko','en')),
-    CONSTRAINT chk_report_status CHECK (status   IN ('pending','completed','failed'))
+    CONSTRAINT chk_report_status CHECK (status   IN ('pending','processing','completed','failed'))
 );
 
 -- (26) 가족 계정 연동 (family_links) — UC30 : users의 자기참조 N:M

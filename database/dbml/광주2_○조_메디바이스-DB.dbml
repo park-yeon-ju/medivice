@@ -1,430 +1,346 @@
-Table "medivice"."ingredients" {
-  "ingredient_id" BIGINT [pk, increment]
-  "ingr_code" VARCHAR(20) [unique, not null]
-  "name_ko" VARCHAR(200) [not null]
-  "name_en" VARCHAR(200)
-  "created_at" TIMESTAMPTZ [not null, default: `now()`]
+// 메디바이스 전체 물리 스키마 — sql/01_schema_ddl.sql 및 PostgreSQL medivice 스키마 기준
+// 29개 테이블 · PK/FK/UNIQUE 반영 · 2026-09-03 검증
+Project medivice {
+  database_type: 'PostgreSQL'
+  Note: '공공 API 참조 데이터와 서비스 데이터를 ingredients 중심으로 연결한 전체 물리 스키마'
 }
 
-Table "medivice"."manufacturers" {
-  "manufacturer_id" BIGINT [pk, increment]
-  "name" VARCHAR(200) [unique, not null]
-  "biz_no" VARCHAR(20)
+Table ingredients [headercolor: #2E86C1] {
+  ingredient_id            bigint [pk, increment, not null]
+  ingr_code                varchar(20) [not null, unique]
+  name_ko                  varchar(300) [not null]
+  name_en                  varchar(200)
+  created_at               timestamptz [not null, default: `now()`]
 }
 
-Table "medivice"."products" {
-  "product_id" BIGINT [pk, increment]
-  "item_seq" VARCHAR(20) [unique, not null]
-  "name_ko" VARCHAR(300) [not null]
-  "manufacturer_id" BIGINT
-  "product_type" VARCHAR(20) [not null]
-  "chart" VARCHAR(300)
-  "image_url" TEXT
-  "updated_at" TIMESTAMPTZ [not null, default: `now()`]
+Table manufacturers [headercolor: #2E86C1] {
+  manufacturer_id          bigint [pk, increment, not null]
+  name                     varchar(200) [not null, unique]
+  biz_no                   varchar(20)
+}
 
-  Checks {
-    `product_type IN ('ETC','OTC','SUPPLEMENT')` [name: 'chk_product_type']
+Table products [headercolor: #2E86C1] {
+  product_id               bigint [pk, increment, not null]
+  item_seq                 varchar(20) [not null, unique]
+  name_ko                  varchar(500) [not null]
+  manufacturer_id          bigint
+  product_type             varchar(20) [not null]
+  chart                    varchar(300)
+  image_url                text
+  updated_at               timestamptz [not null, default: `now()`]
+}
+
+Table product_ingredients [headercolor: #E67E22] {
+  product_id               bigint [not null]
+  ingredient_id            bigint [not null]
+  amount                   "numeric(12,3)"
+  unit                     varchar(20)
+
+  indexes {
+    (product_id, ingredient_id) [pk]
   }
 }
 
-Table "medivice"."product_ingredients" {
-  "product_id" BIGINT [not null]
-  "ingredient_id" BIGINT [not null]
-  "amount" NUMERIC(12,3)
-  "unit" VARCHAR(20)
+Table product_infos [headercolor: #2E86C1] {
+  product_id               bigint [pk, not null]
+  efficacy                 text
+  usage_method             text
+  warning                  text
+  caution                  text
+  interaction              text
+  side_effect              text
+  storage                  text
+}
 
-  Indexes {
-    (product_id, ingredient_id) [pk, name: "pk_product_ingredients"]
+Table dur_types [headercolor: #8E44AD] {
+  dur_type_id              integer [pk, increment, not null]
+  code                     varchar(30) [not null, unique]
+  name_ko                  varchar(50) [not null]
+  arity                    varchar(10) [not null]
+  severity                 varchar(10) [not null]
+}
+
+Table dur_single_rules [headercolor: #2E86C1] {
+  rule_id                  bigint [pk, increment, not null]
+  dur_type_id              integer [not null]
+  ingredient_id            bigint [not null]
+  prohibit_content         text
+  condition_min            "numeric(12,3)"
+  condition_max            "numeric(12,3)"
+  condition_unit           varchar(20)
+  notification_date        date
+  rule_version             varchar(30) [not null, default: `'MFDS-DUR'::character varying`]
+  source_ref               text [not null, default: `'https://www.data.go.kr/data/15059486/openapi.do'::text`]
+  checked_at               timestamptz [not null, default: `now()`]
+
+  indexes {
+    (dur_type_id, ingredient_id, condition_min, condition_max) [unique]
   }
 }
 
-Table "medivice"."product_infos" {
-  "product_id" BIGINT [pk]
-  "efficacy" TEXT
-  "usage_method" TEXT
-  "warning" TEXT
-  "caution" TEXT
-  "interaction" TEXT
-  "side_effect" TEXT
-  "storage" TEXT
-}
+Table dur_pair_rules [headercolor: #2E86C1] {
+  pair_id                  bigint [pk, increment, not null]
+  dur_type_id              integer [not null]
+  ingredient_a_id          bigint [not null]
+  ingredient_b_id          bigint [not null]
+  prohibit_content         text
+  notification_date        date
+  rule_version             varchar(30) [not null, default: `'MFDS-DUR'::character varying`]
+  source_ref               text [not null, default: `'https://www.data.go.kr/data/15056780/openapi.do'::text`]
+  checked_at               timestamptz [not null, default: `now()`]
 
-Table "medivice"."dur_types" {
-  "dur_type_id" INT [pk, increment]
-  "code" VARCHAR(30) [unique, not null]
-  "name_ko" VARCHAR(50) [not null]
-  "arity" VARCHAR(10) [not null]
-  "severity" VARCHAR(10) [not null]
-
-  Checks {
-    `arity    IN ('SINGLE','PAIR')` [name: 'chk_dur_arity']
-    `severity IN ('RED','YELLOW','INFO')` [name: 'chk_dur_severity']
+  indexes {
+    (dur_type_id, ingredient_a_id, ingredient_b_id) [unique]
   }
 }
 
-Table "medivice"."dur_single_rules" {
-  "rule_id" BIGINT [pk, increment]
-  "dur_type_id" INT [not null]
-  "ingredient_id" BIGINT [not null]
-  "prohibit_content" TEXT
-  "condition_min" NUMERIC(12,3)
-  "condition_max" NUMERIC(12,3)
-  "condition_unit" VARCHAR(20)
-  "notification_date" DATE
+Table effect_groups [headercolor: #2E86C1] {
+  effect_group_id          integer [pk, increment, not null]
+  name                     varchar(100) [not null, unique]
+  series_name              varchar(200)
+  source_ref               text [not null, default: `'https://www.data.go.kr/data/15059486/openapi.do'::text`]
+  checked_at               timestamptz [not null, default: `now()`]
+}
 
-  Indexes {
-    (dur_type_id, ingredient_id, condition_min, condition_max) [unique, name: "uq_single_rule"]
+Table ingredient_effect_groups [headercolor: #E67E22] {
+  ingredient_id            bigint [not null]
+  effect_group_id          integer [not null]
+
+  indexes {
+    (ingredient_id, effect_group_id) [pk]
   }
 }
 
-Table "medivice"."dur_pair_rules" {
-  "pair_id" BIGINT [pk, increment]
-  "dur_type_id" INT [not null]
-  "ingredient_a_id" BIGINT [not null]
-  "ingredient_b_id" BIGINT [not null]
-  "prohibit_content" TEXT
-  "notification_date" DATE
-
-  Checks {
-    `ingredient_a_id < ingredient_b_id` [name: 'chk_pair_order']
-  }
-
-  Indexes {
-    (dur_type_id, ingredient_a_id, ingredient_b_id) [unique, name: "uq_pair_rule"]
-  }
+Table ingredient_daily_limits [headercolor: #2E86C1] {
+  ingredient_id            bigint [pk, not null]
+  max_qty                  "numeric(12,3)" [not null]
+  unit                     varchar(20) [not null]
+  age_group                varchar(20) [not null, default: `'ADULT'::character varying`]
+  rule_version             varchar(30) [not null, default: `'MFDS-DUR'::character varying`]
+  source_ref               text [not null, default: `'https://www.data.go.kr/data/15059486/openapi.do'::text`]
+  checked_at               timestamptz [not null, default: `now()`]
 }
 
-Table "medivice"."effect_groups" {
-  "effect_group_id" INT [pk, increment]
-  "name" VARCHAR(100) [unique, not null]
-  "series_name" VARCHAR(200)
+Table users [headercolor: #16A085] {
+  user_id                  bigint [pk, increment, not null]
+  login_id                 varchar(50) [not null, unique]
+  password_hash            varchar(255) [not null]
+  gender                   character(1)
+  birth_date               date [not null]
+  lang                     varchar(5) [not null, default: `'ko'::character varying`]
+  created_at               timestamptz [not null, default: `now()`]
 }
 
-Table "medivice"."ingredient_effect_groups" {
-  "ingredient_id" BIGINT [not null]
-  "effect_group_id" INT [not null]
-
-  Indexes {
-    (ingredient_id, effect_group_id) [pk, name: "pk_ingredient_effect_groups"]
-  }
+Table user_profiles [headercolor: #16A085] {
+  user_id                  bigint [pk, not null]
+  height_cm                "numeric(5,1)"
+  weight_kg                "numeric(5,1)"
+  is_pregnant              boolean
+  renal_status             varchar(10)
+  drink_freq               varchar(20)
+  smoking                  boolean
+  updated_at               timestamptz [not null, default: `now()`]
 }
 
-Table "medivice"."ingredient_daily_limits" {
-  "ingredient_id" BIGINT [pk]
-  "max_qty" NUMERIC(12,3) [not null]
-  "unit" VARCHAR(20) [not null]
-  "age_group" VARCHAR(20) [not null, default: 'ADULT']
+Table user_allergies [headercolor: #E67E22] {
+  user_id                  bigint [not null]
+  ingredient_id            bigint [not null]
+  noted_at                 timestamptz [not null, default: `now()`]
 
-  Checks {
-    `max_qty > 0` [name: 'chk_max_qty']
+  indexes {
+    (user_id, ingredient_id) [pk]
   }
 }
 
-Table "medivice"."users" {
-  "user_id" BIGINT [pk, increment]
-  "login_id" VARCHAR(50) [unique, not null]
-  "password_hash" VARCHAR(255) [not null]
-  "gender" CHAR(1)
-  "birth_date" DATE [not null]
-  "lang" VARCHAR(5) [not null, default: 'ko']
-  "created_at" TIMESTAMPTZ [not null, default: `now()`]
+Table user_conditions [headercolor: #16A085] {
+  condition_id             bigint [pk, increment, not null]
+  user_id                  bigint [not null]
+  name                     varchar(100) [not null]
 
-  Checks {
-    `gender IN ('M','F')` [name: 'chk_user_gender']
-    `lang   IN ('ko','en')` [name: 'chk_user_lang']
+  indexes {
+    (user_id, name) [unique]
   }
 }
 
-Table "medivice"."user_profiles" {
-  "user_id" BIGINT [pk]
-  "height_cm" NUMERIC(5,1)
-  "weight_kg" NUMERIC(5,1)
-  "is_pregnant" BOOLEAN
-  "renal_status" VARCHAR(10)
-  "drink_freq" VARCHAR(20)
-  "smoking" BOOLEAN
-  "updated_at" TIMESTAMPTZ [not null, default: `now()`]
+Table departments [headercolor: #8E44AD] {
+  department_id            integer [pk, increment, not null]
+  name                     varchar(50) [not null, unique]
+}
 
-  Checks {
-    `renal_status IN ('YES','NO','UNKNOWN')` [name: 'chk_renal']
+Table prescriptions [headercolor: #16A085] {
+  prescription_id          bigint [pk, increment, not null]
+  user_id                  bigint [not null]
+  hospital_name            varchar(200)
+  department_id            integer
+  reason_detail            varchar(200)
+  issued_date              date
+  source                   varchar(10) [not null, default: `'OCR'::character varying`]
+  created_at               timestamptz [not null, default: `now()`]
+}
+
+Table medications [headercolor: #16A085] {
+  medication_id            bigint [pk, increment, not null]
+  user_id                  bigint [not null]
+  prescription_id          bigint
+  product_id               bigint
+  custom_name              varchar(300)
+  dose_per_intake          "numeric(8,2)" [not null]
+  times_per_day            smallint [not null]
+  register_reason          varchar(200)
+  started_at               date [not null, default: `CURRENT_DATE`]
+  ended_at                 date
+  source                   varchar(10) [not null, default: `'OCR'::character varying`]
+  created_at               timestamptz [not null, default: `now()`]
+  as_needed                boolean [not null, default: `false`]
+}
+
+Table medication_ingredients [headercolor: #E67E22] {
+  medication_id            bigint [not null]
+  ingredient_id            bigint [not null]
+  amount                   "numeric(12,3)"
+  unit                     varchar(20)
+
+  indexes {
+    (medication_id, ingredient_id) [pk]
   }
 }
 
-Table "medivice"."user_allergies" {
-  "user_id" BIGINT [not null]
-  "ingredient_id" BIGINT [not null]
-  "noted_at" TIMESTAMPTZ [not null, default: `now()`]
+Table safety_checks [headercolor: #16A085] {
+  check_id                 bigint [pk, increment, not null]
+  user_id                  bigint [not null]
+  level                    varchar(10) [not null]
+  trigger_type             varchar(20) [not null]
+  uncovered_count          smallint [not null, default: `0`]
+  checked_at               timestamptz [not null, default: `now()`]
+  amount_missing_count     smallint [not null, default: `0`]
+}
 
-  Indexes {
-    (user_id, ingredient_id) [pk, name: "pk_user_allergies"]
+Table safety_check_items [headercolor: #16A085] {
+  item_id                  bigint [pk, increment, not null]
+  check_id                 bigint [not null]
+  dur_type_id              integer [not null]
+  ingredient_id            bigint [not null]
+  medication_a_id          bigint
+  medication_b_id          bigint
+  total_amount             "numeric(12,3)"
+  threshold                "numeric(12,3)"
+  level                    varchar(10) [not null]
+  unit                     varchar(20)
+  reason_code              varchar(40) [not null]
+  source_ref               text
+}
+
+Table ai_outputs [headercolor: #16A085] {
+  ai_output_id             bigint [pk, increment, not null]
+  target_type              varchar(20) [not null]
+  target_id                bigint [not null]
+  prompt                   text [not null]
+  result_json              jsonb
+  status                   varchar(10) [not null, default: `'pending'::character varying`]
+  created_at               timestamptz [not null, default: `now()`]
+}
+
+Table symptoms [headercolor: #8E44AD] {
+  symptom_id               integer [pk, increment, not null]
+  category                 varchar(30) [not null]
+  name                     varchar(100) [not null]
+
+  indexes {
+    (category, name) [unique]
   }
 }
 
-Table "medivice"."user_conditions" {
-  "condition_id" BIGINT [pk, increment]
-  "user_id" BIGINT [not null]
-  "name" VARCHAR(100) [not null]
+Table side_effect_logs [headercolor: #16A085] {
+  log_id                   bigint [pk, increment, not null]
+  user_id                  bigint [not null]
+  occurred_date            date [not null]
+  written_at               timestamptz [not null, default: `now()`]
+  note                     text
+}
 
-  Indexes {
-    (user_id, name) [unique, name: "uq_user_condition"]
+Table side_effect_symptoms [headercolor: #E67E22] {
+  log_id                   bigint [not null]
+  symptom_id               integer [not null]
+
+  indexes {
+    (log_id, symptom_id) [pk]
   }
 }
 
-Table "medivice"."departments" {
-  "department_id" INT [pk, increment]
-  "name" VARCHAR(50) [unique, not null]
+Table side_effect_snapshots [headercolor: #16A085] {
+  snapshot_id              bigint [pk, increment, not null]
+  log_id                   bigint [not null]
+  medication_id            bigint
+  product_name             varchar(300) [not null]
+  ingredient_text          text
 }
 
-Table "medivice"."prescriptions" {
-  "prescription_id" BIGINT [pk, increment]
-  "user_id" BIGINT [not null]
-  "hospital_name" VARCHAR(200)
-  "department_id" INT
-  "reason_detail" VARCHAR(200)
-  "issued_date" DATE
-  "source" VARCHAR(10) [not null, default: 'OCR']
-  "created_at" TIMESTAMPTZ [not null, default: `now()`]
+Table reports [headercolor: #16A085] {
+  report_id                bigint [pk, increment, not null]
+  user_id                  bigint [not null]
+  period_start             date [not null]
+  period_end               date [not null]
+  language                 varchar(5) [not null, default: `'ko'::character varying`]
+  status                   varchar(10) [not null, default: `'pending'::character varying`]
+  result_json              jsonb
+  created_at               timestamptz [not null, default: `now()`]
+}
 
-  Checks {
-    `source IN ('OCR','MANUAL')` [name: 'chk_presc_source']
+Table family_links [headercolor: #16A085] {
+  from_user_id             bigint [not null]
+  to_user_id               bigint [not null]
+  status                   varchar(10) [not null, default: `'INVITED'::character varying`]
+  created_at               timestamptz [not null, default: `now()`]
+
+  indexes {
+    (from_user_id, to_user_id) [pk]
   }
 }
 
-Table "medivice"."medications" {
-  "medication_id" BIGINT [pk, increment]
-  "user_id" BIGINT [not null]
-  "prescription_id" BIGINT
-  "product_id" BIGINT
-  "custom_name" VARCHAR(300)
-  "dose_per_intake" NUMERIC(8,2) [not null]
-  "times_per_day" SMALLINT [not null]
-  "register_reason" VARCHAR(200)
-  "started_at" DATE [not null, default: `CURRENT_DATE`]
-  "ended_at" DATE
-  "source" VARCHAR(10) [not null, default: 'OCR']
-  "created_at" TIMESTAMPTZ [not null, default: `now()`]
+Table notice_templates [headercolor: #8E44AD] {
+  notice_code              varchar(40) [not null]
+  lang                     varchar(5) [not null]
+  message                  text [not null]
 
-  Checks {
-    `source IN ('OCR','MANUAL')` [name: 'chk_med_source']
-    `times_per_day BETWEEN 1 AND 12` [name: 'chk_med_times']
-    `ended_at IS NULL OR ended_at >= started_at` [name: 'chk_med_period']
-    `product_id IS NOT NULL OR custom_name IS NOT NULL` [name: 'chk_med_identity']
+  indexes {
+    (notice_code, lang) [pk]
   }
 }
 
-Table "medivice"."medication_ingredients" {
-  "medication_id" BIGINT [not null]
-  "ingredient_id" BIGINT [not null]
-  "amount" NUMERIC(12,3)
-  "unit" VARCHAR(20)
-
-  Indexes {
-    (medication_id, ingredient_id) [pk, name: "pk_medication_ingredients"]
-  }
-}
-
-Table "medivice"."safety_checks" {
-  "check_id" BIGINT [pk, increment]
-  "user_id" BIGINT [not null]
-  "level" VARCHAR(10) [not null]
-  "trigger_type" VARCHAR(20) [not null]
-  "uncovered_count" SMALLINT [not null, default: 0]
-  "checked_at" TIMESTAMPTZ [not null, default: `now()`]
-
-  Checks {
-    `level        IN ('GREEN','YELLOW','RED')` [name: 'chk_check_level']
-    `trigger_type IN ('REGISTER','DELETE','MANUAL')` [name: 'chk_check_trigger']
-    `uncovered_count >= 0` [name: 'chk_uncovered']
-  }
-}
-
-Table "medivice"."safety_check_items" {
-  "item_id" BIGINT [pk, increment]
-  "check_id" BIGINT [not null]
-  "dur_type_id" INT [not null]
-  "ingredient_id" BIGINT [not null]
-  "medication_a_id" BIGINT
-  "medication_b_id" BIGINT
-  "total_amount" NUMERIC(12,3)
-  "threshold" NUMERIC(12,3)
-  "level" VARCHAR(10) [not null]
-
-  Checks {
-    `level IN ('YELLOW','RED','INFO')` [name: 'chk_item_level']
-  }
-}
-
-Table "medivice"."ai_outputs" {
-  "ai_output_id" BIGINT [pk, increment]
-  "target_type" VARCHAR(20) [not null]
-  "target_id" BIGINT [not null]
-  "prompt" TEXT [not null]
-  "result_json" JSONB
-  "status" VARCHAR(10) [not null, default: 'pending']
-  "created_at" TIMESTAMPTZ [not null, default: `now()`]
-
-  Checks {
-    `target_type IN ('SAFETY_CHECK','MEDICATION','REPORT')` [name: 'chk_ai_target']
-    `status      IN ('pending','completed','failed')` [name: 'chk_ai_status']
-  }
-}
-
-Table "medivice"."symptoms" {
-  "symptom_id" INT [pk, increment]
-  "category" VARCHAR(30) [not null]
-  "name" VARCHAR(100) [not null]
-
-  Indexes {
-    (category, name) [unique, name: "uq_symptom"]
-  }
-}
-
-Table "medivice"."side_effect_logs" {
-  "log_id" BIGINT [pk, increment]
-  "user_id" BIGINT [not null]
-  "occurred_date" DATE [not null]
-  "written_at" TIMESTAMPTZ [not null, default: `now()`]
-  "note" TEXT
-
-  Checks {
-    `occurred_date <= CURRENT_DATE` [name: 'chk_log_not_future']
-  }
-}
-
-Table "medivice"."side_effect_symptoms" {
-  "log_id" BIGINT [not null]
-  "symptom_id" INT [not null]
-
-  Indexes {
-    (log_id, symptom_id) [pk, name: "pk_side_effect_symptoms"]
-  }
-}
-
-Table "medivice"."side_effect_snapshots" {
-  "snapshot_id" BIGINT [pk, increment]
-  "log_id" BIGINT [not null]
-  "medication_id" BIGINT
-  "product_name" VARCHAR(300) [not null]
-  "ingredient_text" TEXT
-}
-
-Table "medivice"."reports" {
-  "report_id" BIGINT [pk, increment]
-  "user_id" BIGINT [not null]
-  "period_start" DATE [not null]
-  "period_end" DATE [not null]
-  "language" VARCHAR(5) [not null, default: 'ko']
-  "status" VARCHAR(10) [not null, default: 'pending']
-  "result_json" JSONB
-  "created_at" TIMESTAMPTZ [not null, default: `now()`]
-
-  Checks {
-    `period_start <= period_end` [name: 'chk_report_period']
-    `language IN ('ko','en')` [name: 'chk_report_lang']
-    `status   IN ('pending','completed','failed')` [name: 'chk_report_status']
-  }
-}
-
-Table "medivice"."family_links" {
-  "from_user_id" BIGINT [not null]
-  "to_user_id" BIGINT [not null]
-  "status" VARCHAR(10) [not null, default: 'INVITED']
-  "created_at" TIMESTAMPTZ [not null, default: `now()`]
-
-  Checks {
-    `from_user_id <> to_user_id` [name: 'chk_family_self']
-    `status IN ('INVITED','ACCEPTED','REJECTED')` [name: 'chk_family_status']
-  }
-
-  Indexes {
-    (from_user_id, to_user_id) [pk, name: "pk_family_links"]
-  }
-}
-
-Table "medivice"."notice_templates" {
-  "notice_code" VARCHAR(40) [not null]
-  "lang" VARCHAR(5) [not null]
-  "message" TEXT [not null]
-
-  Checks {
-    `lang IN ('ko','en')` [name: 'chk_notice_lang']
-  }
-
-  Indexes {
-    (notice_code, lang) [pk, name: "pk_notice_templates"]
-  }
-}
-
-Ref:"medivice"."manufacturers"."manufacturer_id" ?<? "medivice"."products"."manufacturer_id" [delete: set null]
-
-Ref:"medivice"."products"."product_id" <? "medivice"."product_ingredients"."product_id" [delete: cascade]
-
-Ref:"medivice"."ingredients"."ingredient_id" <? "medivice"."product_ingredients"."ingredient_id" [delete: cascade]
-
-Ref:"medivice"."products"."product_id" <? "medivice"."product_infos"."product_id" [delete: cascade]
-
-Ref:"medivice"."dur_types"."dur_type_id" <? "medivice"."dur_single_rules"."dur_type_id"
-
-Ref:"medivice"."ingredients"."ingredient_id" <? "medivice"."dur_single_rules"."ingredient_id" [delete: cascade]
-
-Ref:"medivice"."dur_types"."dur_type_id" <? "medivice"."dur_pair_rules"."dur_type_id"
-
-Ref:"medivice"."ingredients"."ingredient_id" <? "medivice"."dur_pair_rules"."ingredient_a_id" [delete: cascade]
-
-Ref:"medivice"."ingredients"."ingredient_id" <? "medivice"."dur_pair_rules"."ingredient_b_id" [delete: cascade]
-
-Ref:"medivice"."ingredients"."ingredient_id" <? "medivice"."ingredient_effect_groups"."ingredient_id" [delete: cascade]
-
-Ref:"medivice"."effect_groups"."effect_group_id" <? "medivice"."ingredient_effect_groups"."effect_group_id" [delete: cascade]
-
-Ref:"medivice"."ingredients"."ingredient_id" <? "medivice"."ingredient_daily_limits"."ingredient_id" [delete: cascade]
-
-Ref:"medivice"."users"."user_id" <? "medivice"."user_profiles"."user_id" [delete: cascade]
-
-Ref:"medivice"."users"."user_id" <? "medivice"."user_allergies"."user_id" [delete: cascade]
-
-Ref:"medivice"."ingredients"."ingredient_id" <? "medivice"."user_allergies"."ingredient_id" [delete: cascade]
-
-Ref:"medivice"."users"."user_id" <? "medivice"."user_conditions"."user_id" [delete: cascade]
-
-Ref:"medivice"."users"."user_id" <? "medivice"."prescriptions"."user_id" [delete: cascade]
-
-Ref:"medivice"."departments"."department_id" ?<? "medivice"."prescriptions"."department_id" [delete: set null]
-
-Ref:"medivice"."users"."user_id" <? "medivice"."medications"."user_id" [delete: cascade]
-
-Ref:"medivice"."prescriptions"."prescription_id" ?<? "medivice"."medications"."prescription_id" [delete: cascade]
-
-Ref:"medivice"."products"."product_id" ?<? "medivice"."medications"."product_id" [delete: set null]
-
-Ref:"medivice"."medications"."medication_id" <? "medivice"."medication_ingredients"."medication_id" [delete: cascade]
-
-Ref:"medivice"."ingredients"."ingredient_id" <? "medivice"."medication_ingredients"."ingredient_id" [delete: cascade]
-
-Ref:"medivice"."users"."user_id" <? "medivice"."safety_checks"."user_id" [delete: cascade]
-
-Ref:"medivice"."safety_checks"."check_id" <? "medivice"."safety_check_items"."check_id" [delete: cascade]
-
-Ref:"medivice"."dur_types"."dur_type_id" <? "medivice"."safety_check_items"."dur_type_id"
-
-Ref:"medivice"."ingredients"."ingredient_id" <? "medivice"."safety_check_items"."ingredient_id"
-
-Ref:"medivice"."medications"."medication_id" ?<? "medivice"."safety_check_items"."medication_a_id" [delete: set null]
-
-Ref:"medivice"."medications"."medication_id" ?<? "medivice"."safety_check_items"."medication_b_id" [delete: set null]
-
-Ref:"medivice"."users"."user_id" <? "medivice"."side_effect_logs"."user_id" [delete: cascade]
-
-Ref:"medivice"."side_effect_logs"."log_id" <? "medivice"."side_effect_symptoms"."log_id" [delete: cascade]
-
-Ref:"medivice"."symptoms"."symptom_id" <? "medivice"."side_effect_symptoms"."symptom_id"
-
-Ref:"medivice"."side_effect_logs"."log_id" <? "medivice"."side_effect_snapshots"."log_id" [delete: cascade]
-
-Ref:"medivice"."medications"."medication_id" ?<? "medivice"."side_effect_snapshots"."medication_id" [delete: set null]
-
-Ref:"medivice"."users"."user_id" <? "medivice"."reports"."user_id" [delete: cascade]
-
-Ref:"medivice"."users"."user_id" <? "medivice"."family_links"."from_user_id" [delete: cascade]
-
-Ref:"medivice"."users"."user_id" <? "medivice"."family_links"."to_user_id" [delete: cascade]
+Ref: dur_pair_rules.dur_type_id > dur_types.dur_type_id
+Ref: dur_pair_rules.ingredient_a_id > ingredients.ingredient_id
+Ref: dur_pair_rules.ingredient_b_id > ingredients.ingredient_id
+Ref: dur_single_rules.dur_type_id > dur_types.dur_type_id
+Ref: dur_single_rules.ingredient_id > ingredients.ingredient_id
+Ref: family_links.from_user_id > users.user_id
+Ref: family_links.to_user_id > users.user_id
+Ref: ingredient_daily_limits.ingredient_id > ingredients.ingredient_id
+Ref: ingredient_effect_groups.effect_group_id > effect_groups.effect_group_id
+Ref: ingredient_effect_groups.ingredient_id > ingredients.ingredient_id
+Ref: medication_ingredients.ingredient_id > ingredients.ingredient_id
+Ref: medication_ingredients.medication_id > medications.medication_id
+Ref: medications.prescription_id > prescriptions.prescription_id
+Ref: medications.product_id > products.product_id
+Ref: medications.user_id > users.user_id
+Ref: prescriptions.department_id > departments.department_id
+Ref: prescriptions.user_id > users.user_id
+Ref: product_infos.product_id > products.product_id
+Ref: product_ingredients.ingredient_id > ingredients.ingredient_id
+Ref: product_ingredients.product_id > products.product_id
+Ref: products.manufacturer_id > manufacturers.manufacturer_id
+Ref: reports.user_id > users.user_id
+Ref: safety_check_items.check_id > safety_checks.check_id
+Ref: safety_check_items.dur_type_id > dur_types.dur_type_id
+Ref: safety_check_items.ingredient_id > ingredients.ingredient_id
+Ref: safety_check_items.medication_a_id > medications.medication_id
+Ref: safety_check_items.medication_b_id > medications.medication_id
+Ref: safety_checks.user_id > users.user_id
+Ref: side_effect_logs.user_id > users.user_id
+Ref: side_effect_snapshots.log_id > side_effect_logs.log_id
+Ref: side_effect_snapshots.medication_id > medications.medication_id
+Ref: side_effect_symptoms.log_id > side_effect_logs.log_id
+Ref: side_effect_symptoms.symptom_id > symptoms.symptom_id
+Ref: user_allergies.ingredient_id > ingredients.ingredient_id
+Ref: user_allergies.user_id > users.user_id
+Ref: user_conditions.user_id > users.user_id
+Ref: user_profiles.user_id > users.user_id

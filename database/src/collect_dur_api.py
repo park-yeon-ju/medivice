@@ -43,6 +43,10 @@ def extract_items(payload: dict) -> list:
         items = items.get("item", [])
     if isinstance(items, dict):
         items = [items]
+    # 성분 단위 DUR은 items=[{"item": {...}}, ...] 형태로 한 번 더 감싼다.
+    if isinstance(items, list):
+        items = [row["item"] if isinstance(row, dict) and isinstance(row.get("item"), dict)
+                 else row for row in items]
     return items or []
 
 

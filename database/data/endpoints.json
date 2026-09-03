@@ -29,9 +29,24 @@
     "total": 1983,
     "page_size": 500
   },
+  "dur_ingr_usjnt": {
+    "url": "https://apis.data.go.kr/1471000/DURIrdntInfoService03/getUsjntTabooInfoList02",
+    "total": 1836,
+    "page_size": 500
+  },
   "drug_easy_info": {
     "url": "https://apis.data.go.kr/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList",
     "total": 4784,
+    "page_size": 500
+  },
+  "drug_permit_info": {
+    "url": "https://apis.data.go.kr/1471000/DrugPrdtPrmsnInfoService07/getDrugPrdtPrmsnInq07",
+    "total": 42984,
+    "page_size": 500
+  },
+  "drug_permit_ingredients": {
+    "url": "https://apis.data.go.kr/1471000/DrugPrdtPrmsnInfoService07/getDrugPrdtMcpnDtlInq07",
+    "total": 126768,
     "page_size": 500
   }
 }

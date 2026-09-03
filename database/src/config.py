@@ -61,7 +61,8 @@ def _dur_ingr(op):
     """DUR 성분정보(15056780) — 품목이 아니라 성분 단위 규칙.
        품목정보의 병용금기는 797,186건인데, 같은 규칙이 품목 조합 수만큼 반복된 결과다.
        성분 단위로 받으면 규칙 자체를 훨씬 적은 호출로 전부 확보할 수 있다."""
-    return ([f"{_B}/DURIrdntInfoService{v}/get{op}List{v}" for v in ("03", "02", "")]
+    return ([f"{_B}/DURIrdntInfoService03/get{op}List02"]
+            + [f"{_B}/DURIrdntInfoService{v}/get{op}List{v}" for v in ("03", "02", "")]
             + [f"{_B}/DurIrdntInfoService{v}/get{op}List{v}" for v in ("03", "02", "")]
             + [f"{_B}/DURIrdntInfoService{v}/get{op}List" for v in ("03", "02", "")])
 
@@ -119,19 +120,28 @@ DATASETS = {
         "dur_type": None, "arity": None,
         "desc": "의약품개요정보(e약은요)", "dataset": "15075057",
     },
-    # ⑧ 의약품 제품 허가정보 — 성분/함량(MATERIAL_NAME)의 유일한 정식 출처.
+    # ⑧ 의약품 제품 허가정보 — 상세 응답의 MATERIAL_NAME이 성분/함량의 정식 출처다.
     #    이게 없으면 product_ingredients.amount 가 NULL 로 남고, 일일 합산량이 계산되지 않아
-    #    해당 약이 메디라이트 판정에서 조용히 제외된다. 파이프라인의 필수 항목이다.
+    #    해당 약의 용량 판정이 불가능하다. 목록 조회 응답에는 MATERIAL_NAME이 없으므로
+    #    목록만 수집한 경우 제품 기본정보만 보강되고, 함량은 별도 상세 수집이 필요하다.
     "drug_permit_info": {
         # 목록 조회(Inq)를 상세 조회(DtlInq)보다 먼저 시도한다.
         # 상세 조회는 품목 단건 조회용이라 totalCount 를 주지 않고, 목록처럼 페이징하면
         # HTTP 400 이 난다(실제로 그렇게 실패했다).
         # 서비스 버전과 오퍼레이션 버전이 서로 다른 경우가 있어 조합을 넓게 시도한다.
-        "urls": [f"{_B}/DrugPrdtPrmsnInfoService0{sv}/getDrugPrdtPrmsn{op}Inq0{ov}"
+        "urls": [f"{_B}/DrugPrdtPrmsnInfoService07/getDrugPrdtPrmsnInq07"]
+                + [f"{_B}/DrugPrdtPrmsnInfoService0{sv}/getDrugPrdtPrmsn{op}Inq0{ov}"
                  for sv in (6, 5, 4) for ov in (6, 5, 4) for op in ("Dtl", "")]
                 + [f"{_B}/DrugPrdtPrmsnInfoService/getDrugPrdtPrmsnInq"],
         "dur_type": None, "arity": "PERMIT", "optional": True,
-        "desc": "의약품 제품 허가정보(성분·함량)", "dataset": "15095677",
+        "desc": "의약품 제품 허가정보(목록; 함량은 상세 응답 필요)", "dataset": "15095677",
+    },
+    # ⑨ 의약품 제품 주성분 상세정보 — 제품별 주성분 코드·분량·단위를 목록으로 제공한다.
+    #    제품 상세를 품목마다 호출하는 대신 126,768행을 500건씩 페이지 수집할 수 있다.
+    "drug_permit_ingredients": {
+        "urls": [f"{_B}/DrugPrdtPrmsnInfoService07/getDrugPrdtMcpnDtlInq07"],
+        "dur_type": None, "arity": "PERMIT_INGREDIENT", "optional": True,
+        "desc": "의약품 제품 주성분 상세정보(성분·함량)", "dataset": "15095677",
     },
 }
 
@@ -204,7 +214,8 @@ SAMPLE_ACROSS = {"dur_usjnt_taboo"}
 
 MAX_ROWS = {
     "dur_usjnt_taboo":  20000,   # 797,186건 중 일부. 성분 쌍으로 접히므로 이 정도로도 근거가 선다
-    "drug_permit_info": 5000,    # 응답이 커서 페이지 크기가 작다. 무리하게 받지 않는다
+    "drug_permit_info": None,    # 42,984건, 500건/페이지라 전량도 호출 한도 안에 든다
+    "drug_permit_ingredients": None, # 126,768건 전량. 약 254회 호출
     "dur_ingr_usjnt":   None,    # 성분 단위는 전량 받아도 몇 천 건이다
     # 나머지는 전량 (다 합쳐도 4만 건 미만)
 }
