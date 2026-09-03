@@ -99,9 +99,16 @@ public class OpenAiClient implements AiClient {
 
         StructuredChatCompletionCreateParams<OcrExtractionBatch> params = ChatCompletionCreateParams.builder()
                 .model(MODEL)
-                // 성분·함량표처럼 촘촘한 표를 줄 단위로 정확히 짝지어야 해서, 기본값보다 신중하게
-                // 추론하도록 올려둔다(HIGH) — 실제 사진에서 성분 누락·줄 뒤섞임이 관찰되어 추가함.
-                .reasoningEffort(ReasoningEffort.XHIGH)
+                // 성분·함량표처럼 촘촘한 표를 줄 단위로 정확히 짝지어야 해서 원래는 XHIGH까지
+                // 올렸었다(성분 누락·줄 뒤섞임이 관찰되어 추가함). 그런데 실사진(복약안내지, 7개 약)
+                // 벤치마크로 none/low/medium/high/xhigh를 다 재보니 응답시간은
+                // low 17.4s < medium 30.9s < high 54.5s < xhigh 468.7s 로 폭발적으로 늘어나는데,
+                // 약 이름 7개 정확도는 low·medium·xhigh가 전부 7/7으로 동일했고 오히려
+                // high·none에서만 글자 하나가 틀렸다(비졸본정→비출본정) — reasoning 강도와
+                // 정확도가 비례하지 않았다. 그래서 가장 빠른 확인 가능한 단계인 LOW로 낮췄다.
+                // TROUBLESHOOTING.md #24 참고. 성분·함량표가 촘촘한 사진에서 다시 누락·뒤섞임이
+                // 보이면 medium/high로 되돌린다(정확도가 같았던 medium을 우선 시도).
+                .reasoningEffort(ReasoningEffort.LOW)
                 .responseFormat(OcrExtractionBatch.class)
                 .addUserMessageOfArrayOfContentParts(List.of(
                         ChatCompletionContentPart.ofText(text),

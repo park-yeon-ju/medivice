@@ -4,13 +4,26 @@ import com.project.medivice.ai.AiClient;
 import com.project.medivice.dto.IngredientDto;
 import com.project.medivice.dto.OcrResultDto;
 import com.project.medivice.dto.OcrRowDto;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.imageio.IIOImage;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.ImageOutputStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,7 +36,17 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class OcrService {
 
+    private static final Logger log = LoggerFactory.getLogger(OcrService.class);
+
     private static final long MAX_FILE_BYTES = 10L * 1024 * 1024;
+
+    /**
+     * 휴대폰 사진은 보통 4000px+ 라 OpenAI 쪽에서 처리할 이미지 타일 수가 과도하게 많아진다
+     * (detail=HIGH와 맞물려 응답이 특히 느려짐). 글자 판독에는 긴 변 2000px면 충분하므로,
+     * 초과분만 줄여서 응답 시간을 단축한다. reasoningEffort·detail은 정확도 때문에 그대로 둔다.
+     */
+    private static final int MAX_DIMENSION_PX = 2000;
+    private static final float JPEG_QUALITY = 0.85f;
 
     private final AiClient aiClient;
 
@@ -45,11 +68,69 @@ public class OcrService {
         } catch (IOException e) {
             throw new IllegalStateException("이미지를 읽지 못했습니다.", e);
         }
-        List<AiClient.OcrExtractionResult> results = aiClient.extractMedicationInfo(bytes, file.getContentType());
+        PreparedImage prepared = resizeForOcr(bytes, file.getContentType());
+        List<AiClient.OcrExtractionResult> results =
+                aiClient.extractMedicationInfo(prepared.bytes(), prepared.mimeType());
         if (results.isEmpty()) {
             throw new IllegalStateException("사진에서 약 정보를 읽지 못했습니다. 더 선명한 사진으로 다시 시도해주세요.");
         }
         return results.stream().map(this::toDto).toList();
+    }
+
+    private record PreparedImage(byte[] bytes, String mimeType) {
+    }
+
+    /** 디코딩할 수 없는 형식(예: WEBP는 표준 ImageIO 플러그인이 없음)이면 원본을 그대로 돌려준다. */
+    private PreparedImage resizeForOcr(byte[] original, String mimeType) {
+        try {
+            BufferedImage image = ImageIO.read(new ByteArrayInputStream(original));
+            if (image == null) {
+                return new PreparedImage(original, mimeType);
+            }
+            int width = image.getWidth();
+            int height = image.getHeight();
+            int longestSide = Math.max(width, height);
+            if (longestSide <= MAX_DIMENSION_PX) {
+                return new PreparedImage(original, mimeType);
+            }
+
+            double scale = (double) MAX_DIMENSION_PX / longestSide;
+            int newWidth = Math.max(1, (int) Math.round(width * scale));
+            int newHeight = Math.max(1, (int) Math.round(height * scale));
+
+            BufferedImage scaled = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
+            Graphics2D g = scaled.createGraphics();
+            g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            g.drawImage(image, 0, 0, newWidth, newHeight, null);
+            g.dispose();
+
+            byte[] jpeg = encodeJpeg(scaled);
+            log.debug("OCR 이미지 리사이즈: {}x{} -> {}x{} ({} -> {} bytes)",
+                    width, height, newWidth, newHeight, original.length, jpeg.length);
+            return new PreparedImage(jpeg, "image/jpeg");
+        } catch (IOException e) {
+            log.warn("OCR 이미지 리사이즈 실패, 원본을 그대로 사용합니다: {}", e.getMessage());
+            return new PreparedImage(original, mimeType);
+        }
+    }
+
+    private static byte[] encodeJpeg(BufferedImage image) throws IOException {
+        Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName("jpg");
+        ImageWriter writer = writers.next();
+        try {
+            ImageWriteParam param = writer.getDefaultWriteParam();
+            param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+            param.setCompressionQuality(JPEG_QUALITY);
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            try (ImageOutputStream ios = ImageIO.createImageOutputStream(out)) {
+                writer.setOutput(ios);
+                writer.write(null, new IIOImage(image, null, null), param);
+            }
+            return out.toByteArray();
+        } finally {
+            writer.dispose();
+        }
     }
 
     private OcrResultDto toDto(AiClient.OcrExtractionResult r) {

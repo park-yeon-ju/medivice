@@ -1,6 +1,6 @@
 # 메디바이스 백엔드 트러블슈팅
 
-- 작성일: 2026-09-03 (최종 갱신: 2026-09-03 — Swagger 정비, 성분 충돌 확인 API 추가 이후)
+- 작성일: 2026-09-03 (최종 갱신: 2026-09-03 — Java 21 업그레이드, OCR 속도 개선 이후)
 - 대상: `src/main/java/com/project/medivice/**` (Spring Boot) + 로컬 DB/AI 연동
 - 기록 형식: 문제 → 재현 방법 → 원인 → 해결 → 확인 → 관련 파일
 
@@ -794,3 +794,46 @@ curl -X POST localhost:8080/api/reports -d '{"from":"2026-08-01","to":"2026-09-0
 - `src/main/java/com/project/medivice/service/ReportService.java` (`translateSymptoms`)
 - `.env.local`의 `DEEPL_API_KEY` (커밋 안 됨), `application.properties`의 `medivice.translate.api-key`
 - (프론트) `front/src/stores/medivice.js`, `front/src/api/client.js`, `front/src/views/MyView.vue`, `front/src/views/ReportView.vue`, `front/src/components/MedicationRow.vue`
+
+---
+
+## 24. OCR 응답이 느림 — 이미지 리사이즈 + reasoning effort 재조정
+
+### 문제
+
+사용자가 "OCR이 느리다"고 보고. §22에서 이미 "미해결·기록만"으로 남겨둔 항목(트리비얼한 이미지로도 104초, `ReasoningEffort.XHIGH` 하드코딩)을 실제로 손본 작업이다.
+
+### 원인
+
+응답 시간은 두 군데에서 늘어난다.
+
+1. 휴대폰 사진은 보통 3000~4000px대인데, `detail=HIGH`로 고정돼 있어 이미지가 클수록 OpenAI가 처리할 타일 수가 그만큼 늘어난다.
+2. `OpenAiClient`의 OCR 호출에 `ReasoningEffort.XHIGH`가 하드코딩돼 있다. §12(OCR 환각)에서 성분·함량표 줄 뒤섞임을 잡으려고 올려둔 값인데, 이번에 실측해보니 정확도와 비례하지 않았다(아래 확인 참고).
+
+### 해결
+
+**1) 이미지 리사이즈** (`OcrService.resizeForOcr` 신규) — 업로드 이미지의 긴 변이 2000px를 넘으면 JPEG(품질 0.85)로 다시 인코딩해 축소 후 AI 클라이언트로 넘긴다. 2000px 이하면 원본 그대로 통과시키고, `ImageIO`가 못 읽는 포맷(WEBP 등)이면 예외 없이 원본을 그대로 쓴다. `reasoningEffort`·`detail=HIGH`처럼 판독 정확도에 영향을 줄 수 있는 설정은 건드리지 않고, 순수하게 전송 바이트·타일 수만 줄이는 방향으로 잡았다.
+
+**2) reasoning effort 재조정** — 사용자가 준 실제 샘플 사진(`s1.jpg`, 2560×1920, 서로 다른 약 7개가 적힌 복약안내지)으로 `OpenAiClient`와 동일한 모델(`GPT_5_2`)·프롬프트·`detail=HIGH`를 그대로 써서 `none`/`low`/`medium`/`high`/`xhigh` 5단계를 전부 실측했다(`minimal`은 이 모델이 400으로 거부: "reasoning_effort does not support 'minimal'"). 실제 OpenAI API를 호출한 결과:
+
+| reasoningEffort | 응답 시간 | 약 이름 7개 정확도 |
+| --- | --- | --- |
+| none | 10.9s | 6/7 ("비졸본정"→"비출본정" 오독) |
+| **low** | **17.4s** | **7/7** ← 채택 |
+| medium | 30.9s | 7/7 |
+| high | 54.5s | 6/7 (같은 오독 재발) |
+| xhigh (기존값) | 468.7s (7분 48초) | 7/7 |
+
+"reasoning을 올릴수록 정확해진다"는 전제와 달리 이 표본에서는 `low`·`medium`·`xhigh`가 전부 약 이름 7개를 정확히 읽었고, 오히려 `high`·`none`에서만 글자 하나가 틀렸다 — 즉 reasoning effort와 정확도가 단순 비례하지 않았다. `low`가 가장 빠르면서 정확도도 최상위와 동일해 `OpenAiClient.java`의 `reasoningEffort`를 `HIGH`에서 `LOW`로 낮췄다. (단, 이 표본은 §12가 다뤘던 "한 알에 성분이 여러 개인 촘촘한 단일 함량표"가 아니라 "서로 다른 약 여러 개가 나열된 문서"라 — 진짜 다성분 함량표 사진에서 누락·뒤섞임이 다시 보이면 정확도가 동일했던 `medium`부터 먼저 시도하고, 그래도 안 되면 되돌린다.)
+
+### 확인
+
+- `./gradlew compileJava` 통과, 백엔드 재기동 후 `/swagger-ui/index.html` 200 확인.
+- 위 표의 5개 호출은 전부 실제 OpenAI API 호출(과금 발생, 총 소요 약 10분 — 대부분 `xhigh` 한 번에 8분 가까이 걸림).
+- 이미지 리사이즈는 합성 이미지(4032×3024, 휴대폰 사진 전형적 크기)로 별도 검증: 2000×1500으로 축소, 파일 용량 약 75% 감소. `s1.jpg`(2560×1920) 자체도 2000px를 넘어 실제 요청에서는 리사이즈+LOW가 함께 적용된다 — 이번 reasoning-effort 벤치마크는 리사이즈 적용 전 원본 크기로 5단계를 비교한 것이라, 실제 운영 응답시간은 표의 값보다 더 낮을 가능성이 높다.
+
+### 관련 파일
+
+- `src/main/java/com/project/medivice/service/OcrService.java` (`resizeForOcr`, `encodeJpeg` 신규)
+- `src/main/java/com/project/medivice/ai/OpenAiClient.java` (`reasoningEffort`: `HIGH` → `LOW`)
+- §12 (OCR 환각 — 애초에 `XHIGH`를 도입한 배경), §22 (이 문제를 처음 "미해결·기록만"으로 남긴 곳 — `reasoningEffort`/모델명을 `application.properties`로 빼는 것과 `POST /api/medications/ocr`을 202+폴링 비동기로 바꾸는 TODO는 이번에도 손대지 않아 그대로 남아 있다: `LOW`로도 17초는 걸리므로 프론트·프록시 타임아웃 여유가 없다면 여전히 필요하다)
