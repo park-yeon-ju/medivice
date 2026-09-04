@@ -1,0 +1,318 @@
+// =============================================================================
+// 메디바이스 — 서비스 ERD (AI 웹서비스 설계용)  ·  v2
+// 작성자 : 박기준  |  수정일 : 2026-09-03  |  https://dbdiagram.io 에서 시각화
+//
+// 이 ERD는 "프론트엔드가 실제로 읽고 쓰는 관계"만 보여 준다.
+// 남기고 빼는 기준은 '공공 API 유래인가' 가 아니라 '화면이 읽는가' 다.
+//   · 공공 API 유래여도 화면이 수치를 그리면 남긴다  → ingredient_daily_limits (상한 막대)
+//   · 사용자 데이터여도 화면에 없으면 뺀다           → family_links (향후 확장)
+//
+// [수집·정규화 전용이라 뺀 것]
+//   manufacturers · product_infos · effect_groups · ingredient_effect_groups
+//   dur_types (dur_single_rules.dur_type 문자열로 인라인)
+//   notice_templates (UC31 문구는 프론트 상수로 둔다) · family_links (향후)
+// 전체 물리 스키마는 광주2_○조_메디바이스-DB.dbml 참고.
+// =============================================================================
+
+Project medivice_service {
+  database_type: 'PostgreSQL'
+  Note: '''메디바이스 서비스 데이터 모델 (프론트엔드 관점)
+
+  [화면 ↔ 테이블]
+  · SCR-AUTH / SCR-ONB  로그인·온보딩   →  users · user_profiles · user_conditions · user_allergies (쓰기)
+  · SCR-REG-001~003     약 등록          →  prescriptions · medications · medication_ingredients (쓰기)
+                                            products · ingredients 매칭 (읽기)
+  · SCR-MAIN-001/002    메인·메디라이트  →  safety_checks · safety_check_items (읽기) ← 규칙 엔진이 씀
+  · SCR-SE-001          부작용 기록      →  side_effect_logs · side_effect_symptoms · side_effect_snapshots (쓰기)
+  · SCR-RPT-001         보고서           →  reports · ai_outputs (읽기)
+
+  [핵심 접점]  medications → product_ingredients / medication_ingredients → ingredients → DUR 규칙 · 상한
+              이 경로가 메디라이트(초록/노랑/빨강) 판정의 실행 경로다.
+  [읽기 전용]  파랑 그룹은 공공 API에서 적재되며 서비스가 값을 바꾸지 않는다.'''
+}
+
+// ---------------------------------------------------------------------------
+// ① 참조 데이터 — 공공 API 적재 · 읽기 전용 (파랑)
+//    수집·정규화 세부는 감추고, 서비스가 조인하는 테이블만 남겼다.
+// ---------------------------------------------------------------------------
+
+Table ingredients [headercolor: #2E86C1] {
+  ingredient_id bigint       [pk]
+  ingr_code     varchar(20)  [not null, unique, note: '식약처 성분코드. LOCAL_ 접두사 = 공공데이터 미수록 → 판정 불가(UC31)']
+  name_ko       varchar(300) [not null]
+  name_en       varchar(200) [note: 'KO/EN 전환 시 노출']
+  Note: '★ 두 영역이 만나는 축. 사용자의 약도, 공공 규칙도 모두 성분으로 연결된다.'
+}
+
+Table products [headercolor: #2E86C1] {
+  product_id   bigint       [pk]
+  item_seq     varchar(20)  [not null, unique, note: '식약처 품목기준코드']
+  name_ko      varchar(500) [not null]
+  product_type varchar(20)  [not null, note: 'ETC 전문 / OTC 일반 / SUPPLEMENT 건기식']
+}
+
+Table product_ingredients [headercolor: #E67E22] {
+  product_id    bigint          [ref: > products.product_id]
+  ingredient_id bigint          [ref: > ingredients.ingredient_id]
+  amount        "numeric(12,3)" [note: '1정/1캡슐당 함량']
+  unit          varchar(20)
+  indexes { (product_id, ingredient_id) [pk] }
+  Note: '제품 ↔ 성분 N:M. 복합제 성분을 행으로 펼쳐 성분 단위 합산을 가능하게 한다.'
+}
+
+Table ingredient_daily_limits [headercolor: #2E86C1] {
+  ingredient_id bigint          [pk, ref: - ingredients.ingredient_id]
+  max_qty       "numeric(12,3)" [not null, note: '1일 상한섭취량']
+  unit          varchar(20)     [not null]
+  age_group     varchar(20)     [not null, note: 'ADULT / SENIOR …']
+  rule_version  varchar(30)     [not null]
+  source_ref    text            [not null, note: '판정 근거 URL']
+  checked_at    timestamptz     [not null]
+  Note: '[FE] 메디라이트 상세의 “상한 4,000 IU (성인·한국)” 막대가 읽는 값. 비어 있으면 중복만으로 노랑.'
+}
+
+Table dur_pair_rules [headercolor: #2E86C1] {
+  pair_id          bigint [pk]
+  ingredient_a_id  bigint [ref: > ingredients.ingredient_id]
+  ingredient_b_id  bigint [ref: > ingredients.ingredient_id]
+  prohibit_content text   [note: '금기 사유']
+  rule_version     varchar(30)
+  source_ref       text   [note: '식약처 DUR 성분정보(15056780)']
+  checked_at       timestamptz
+  Note: '병용금기 — 두 성분 조합. (A,B)와 (B,A)는 한 행으로 접는다.'
+}
+
+Table dur_single_rules [headercolor: #2E86C1] {
+  rule_id          bigint          [pk]
+  ingredient_id    bigint          [ref: > ingredients.ingredient_id]
+  dur_type         varchar(30)     [note: '임부 / 연령 / 용량 / 노인 · 심각도(RED·YELLOW·INFO)는 애플리케이션 매핑']
+  prohibit_content text
+  condition_min    "numeric(12,3)" [note: '연령 하한 등']
+  condition_max    "numeric(12,3)" [note: '연령 상한 / 1일 최대용량 등']
+  rule_version     varchar(30)
+  source_ref       text
+  checked_at       timestamptz
+  Note: '성분 하나에 대한 금기·주의. 사용자 조건(임신·나이)과 대조된다.'
+}
+
+// ---------------------------------------------------------------------------
+// ② 서비스 데이터 — 사용자가 생성 · 프론트엔드가 CRUD (초록)
+// ---------------------------------------------------------------------------
+
+Table users [headercolor: #16A085] {
+  user_id       bigint       [pk]
+  login_id      varchar(50)  [not null, unique]
+  password_hash varchar(255) [not null]
+  gender        char(1)      [note: 'M / F']
+  birth_date    date         [not null, note: '연령 판정 근거. 주민번호는 받지 않는다']
+  lang          varchar(5)   [not null, default: 'ko', note: 'ko / en']
+  Note: '[FE] 로그인·회원가입 화면이 쓴다.'
+}
+
+Table user_profiles [headercolor: #16A085] {
+  user_id      bigint [pk, ref: - users.user_id]
+  height_cm    "numeric(5,1)"
+  weight_kg    "numeric(5,1)"
+  is_pregnant  boolean     [note: '임부금기 판정에 직결']
+  renal_status varchar(10) [note: 'YES / NO / UNKNOWN']
+  Note: '[FE] 특이사항(온보딩) 화면. 사용자당 1행(1:1).'
+}
+
+Table user_conditions [headercolor: #16A085] {
+  condition_id bigint       [pk]
+  user_id      bigint       [ref: > users.user_id]
+  name         varchar(100) [not null, note: '고혈압 · 당뇨 · 고지혈증 …']
+  Note: '[FE] 온보딩 지병 체크 · 좌측 레일 “고혈압 · 알레르기 2건” · 보고서 헤더가 읽는다.'
+}
+
+Table user_allergies [headercolor: #E67E22] {
+  user_id       bigint [ref: > users.user_id]
+  ingredient_id bigint [ref: > ingredients.ingredient_id]
+  indexes { (user_id, ingredient_id) [pk] }
+  Note: '[FE] 알러지를 성분 코드로 저장 → 등록 시점에 즉시 대조.'
+}
+
+Table departments [headercolor: #8E44AD] {
+  department_id int         [pk]
+  name          varchar(50) [not null, unique, note: '내과 · 이비인후과 …']
+  Note: '[FE] OCR이 읽는 진료과 대분류. “삼성내과의원 · 내과” 표기의 뒷부분.'
+}
+
+Table prescriptions [headercolor: #16A085] {
+  prescription_id bigint       [pk]
+  user_id         bigint       [ref: > users.user_id]
+  hospital_name   varchar(200) [note: 'OCR 판독']
+  department_id   int          [ref: > departments.department_id, note: '대분류 — OCR 자동 입력']
+  reason_detail   varchar(200) [note: '소분류 — 사용자 직접 입력 (예: 고혈압)']
+  issued_date     date
+  source          varchar(10)  [note: 'OCR / MANUAL']
+  Note: '[FE] 약 등록 화면 — 처방전 단위 묶음.'
+}
+
+Table medications [headercolor: #16A085] {
+  medication_id   bigint         [pk]
+  user_id         bigint         [ref: > users.user_id]
+  prescription_id bigint         [ref: > prescriptions.prescription_id, note: '영양제·상비약이면 NULL']
+  product_id      bigint         [ref: > products.product_id, note: '마스터 매칭. 수기 등록이면 NULL']
+  custom_name     varchar(300)   [note: '수기 등록 제품명']
+  dose_per_intake "numeric(8,2)" [not null, note: '1회 투여량']
+  times_per_day   smallint       [not null, note: '1일 횟수']
+  as_needed       boolean        [not null, default: false, note: '필요 시 복용이면 times_per_day는 1일 최대 횟수']
+  register_reason varchar(200)   [note: '등록 사유 — 등록 3화면과 보고서 표에 모두 나온다']
+  started_at      date           [not null]
+  ended_at        date           [note: '복용 종료(삭제) 시 — 하드 삭제하지 않는다']
+  source          varchar(10)    [note: 'OCR / MANUAL']
+  Note: '★ 핵심 접점. 사용자 데이터이면서 products·ingredients(참조)로 이어진다. 판정의 출발점.'
+}
+
+Table medication_ingredients [headercolor: #E67E22] {
+  medication_id bigint          [ref: > medications.medication_id]
+  ingredient_id bigint          [ref: > ingredients.ingredient_id]
+  amount        "numeric(12,3)"
+  unit          varchar(20)
+  indexes { (medication_id, ingredient_id) [pk] }
+  Note: '[FE] 수기 등록 폼(SCR-REG-003)의 성분 입력. product_id 가 NULL인 약도 성분 합산에 참여시키는 유일한 경로.'
+}
+
+Table safety_checks [headercolor: #16A085] {
+  check_id        bigint      [pk]
+  user_id         bigint      [ref: > users.user_id]
+  level           varchar(10) [not null, note: 'GREEN / YELLOW / RED — 규칙 엔진이 결정']
+  trigger_type    varchar(20) [note: 'REGISTER / DELETE / MANUAL']
+  uncovered_count smallint    [note: '판정 근거 없는 성분 수 — 초록과 구분해 부기(UC31)']
+  amount_missing_count smallint [note: '함량 누락으로 일일 합산하지 못한 성분 수']
+  checked_at      timestamptz
+  Note: '[FE] 메인 화면의 메디라이트가 읽는다. 등록·삭제 시점마다 1행.'
+}
+
+Table safety_check_items [headercolor: #16A085] {
+  item_id         bigint          [pk]
+  check_id        bigint          [ref: > safety_checks.check_id]
+  ingredient_id   bigint          [ref: > ingredients.ingredient_id]
+  medication_a_id bigint          [ref: > medications.medication_id]
+  medication_b_id bigint          [ref: > medications.medication_id]
+  reason_code     varchar(40)     [note: 'DUPLICATE / NEAR_LIMIT / OVER_LIMIT / USJNT_TABOO 등']
+  total_amount    "numeric(12,3)" [note: '하루 합계 — 상세 표의 “하루 합계” 열, 미터 막대']
+  threshold       "numeric(12,3)" [note: '비교한 임계값 — 상세 표의 “기준” 열']
+  unit            varchar(20)
+  source_ref      text            [note: '판정 근거 URL']
+  level           varchar(10)     [note: 'YELLOW / RED / INFO']
+  Note: '[FE] 메디라이트 상세 — 충돌 항목만 표시. 수치 3종이 있어야 상세 화면이 그려진다.'
+}
+
+Table ai_outputs [headercolor: #16A085] {
+  ai_output_id bigint      [pk]
+  target_type  varchar(20) [note: 'SAFETY_CHECK / MEDICATION / REPORT']
+  target_id    bigint      [note: '대상 행을 가리킴 — FK 없는 다형 참조라 선이 그려지지 않는다']
+  result_json  jsonb       [note: 'AI 설명·보고서 본문']
+  status       varchar(10) [note: 'pending / processing / completed / failed']
+  Note: '[FE] AI 설명·보고서. 규칙 엔진이 색을 정하고 AI는 설명 문장만 만든다.'
+}
+
+Table side_effect_logs [headercolor: #16A085] {
+  log_id        bigint      [pk]
+  user_id       bigint      [ref: > users.user_id]
+  occurred_date date        [not null, note: '미래 날짜 불가']
+  written_at    timestamptz [note: '작성 시각(투약 시간대는 받지 않음)']
+  note          text        [note: '예외사항 자유 입력']
+  Note: '[FE] 부작용 기록 화면의 헤더 — 날짜·시각·메모.'
+}
+
+Table symptoms [headercolor: #8E44AD] {
+  symptom_id int          [pk]
+  category   varchar(30)  [note: '소화기 / 피부 / 전신·통증 / 신경·감각 / 수면·정신 / 기타']
+  name       varchar(100) [not null, note: '어지러움 · 두통 · 속쓰림 …']
+  Note: '[FE] 증상 기록 화면의 체크박스 9종. 문구가 기록마다 반복되지 않도록 코드로 분리.'
+}
+
+Table side_effect_symptoms [headercolor: #E67E22] {
+  log_id     bigint [ref: > side_effect_logs.log_id]
+  symptom_id int    [ref: > symptoms.symptom_id]
+  indexes { (log_id, symptom_id) [pk] }
+  Note: '[FE] 증상 다중 선택 N:M. 이게 없으면 “증상 미선택 시 저장 불가” 규칙을 걸 대상이 없다.'
+}
+
+Table side_effect_snapshots [headercolor: #16A085] {
+  snapshot_id     bigint       [pk]
+  log_id          bigint       [ref: > side_effect_logs.log_id]
+  medication_id   bigint       [ref: > medications.medication_id, note: '약이 삭제돼도 아래 값은 남는다']
+  product_name    varchar(300) [not null]
+  ingredient_text text
+  Note: '[FE] “이 날짜에 복용 중이던 항목 6건”. 값을 복사해 두므로 인과관계 판정 없이 기록만 보존된다(UC21).'
+}
+
+Table reports [headercolor: #16A085] {
+  report_id    bigint      [pk]
+  user_id      bigint      [ref: > users.user_id]
+  period_start date        [not null]
+  period_end   date        [not null]
+  language     varchar(5)  [not null, default: 'ko', note: 'ko / en — 보고서 생성 화면의 표시 언어 선택']
+  status       varchar(10) [note: 'pending / processing / completed / failed']
+  result_json  jsonb       [note: '완성된 보고서 본문 — 결과 화면이 읽는다']
+  Note: '[FE] 보고서 생성 화면 — 진료실에서 보여줄 복약 리포트.'
+}
+
+TableGroup "① 참조 데이터 · 공공 API 적재 (읽기 전용)" {
+  ingredients
+  products
+  product_ingredients
+  ingredient_daily_limits
+  dur_pair_rules
+  dur_single_rules
+}
+
+TableGroup "② 서비스 데이터 · 사용자 생성 (프론트엔드 CRUD)" {
+  users
+  user_profiles
+  user_conditions
+  user_allergies
+  departments
+  prescriptions
+  medications
+  medication_ingredients
+  safety_checks
+  safety_check_items
+  ai_outputs
+  side_effect_logs
+  symptoms
+  side_effect_symptoms
+  side_effect_snapshots
+  reports
+}
+
+// ---------------------------------------------------------------------------
+// 범례 — 내용을 "타입" 자리에 넣었다. note 는 마우스를 올려야 보여 캔버스에서 안 읽힌다.
+// 제출 시에는 이 블록만 지우면 된다.
+// ---------------------------------------------------------------------------
+Table "◆ 범례 · 색상과 접점" [headercolor: #34495E] {
+  "파랑" "참조 데이터 — 공공 API 적재 · 읽기 전용"
+  "초록" "서비스 데이터 — 사용자 생성 · FE 가 CRUD"
+  "주황" "N:M 교차 테이블 — 복합 PK"
+  "보라" "코드 테이블 — 반복 문자열을 분리"
+  "★"   "medications · ingredients — 두 영역이 만나는 지점"
+  "1 — N" "화살표: 자식(여러 행)이 부모(하나)를 참조"
+}
+
+Table "◆ 범례 · 판정 한 줄" [headercolor: #34495E] {
+  "① 등록" "medications (+ medication_ingredients)"
+  "② 성분 전개" "product_ingredients / medication_ingredients → ingredients"
+  "③ 규칙 대조" "dur_pair_rules · dur_single_rules · ingredient_daily_limits"
+  "④ 색 결정" "safety_check_items → safety_checks.level"
+  "⑤ 설명" "ai_outputs — 색은 정하지 않고 문장만 만든다"
+}
+
+// dbdiagram.io 는 아래 sticky note 를 지원한다.
+// (dbdocs CLI / @dbml/core 로 파싱할 때는 이 블록을 지워야 한다)
+Note 흐름 {
+  '''
+  프론트엔드에서 DB로 흐르는 한 줄
+
+  사용자가 약을 등록(medications)하면
+   → 제품·성분(products / medication_ingredients → ingredients)에 매칭되고
+   → 공공 DUR 규칙(dur_*)·상한(ingredient_daily_limits)과 대조되어
+   → 메디라이트 색(safety_checks)이 정해지고
+   → 화면에 초록/노랑/빨강 + 설명(ai_outputs)으로 표시된다.
+
+  참조 데이터(파랑)와 서비스 데이터(초록)는 오직 ingredients 하나로 만난다.
+  '''
+}

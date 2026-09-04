@@ -1,0 +1,1305 @@
+﻿dur_code,ingr_code_a,ingr_code_b,prohibit_content,notification_date,rule_version,source_ref
+USJNT_TABOO,D000027,D000762,근병증의 위험 증가 가능,2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000455,D000769,"근육병증, 횡문근융해 위험 증가 가능",2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000363,D000716,혈액학적 독성,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000027,D000769,근병증의 위험 증가 가능,2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000027,D000373,횡문근융해증 보고,2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000455,D000762,"근육병증, 횡문근융해 위험 증가 가능",2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000060,D000716,혈액학적 독성,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000086,D000274,중증의 위장관계 이상반응,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000081,D000274,중증의 위장관계 이상반응,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000142,D000672,경련,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000027,D000712,횡문근융해를 포함한 근육병증 위험 가능,2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000006,D000017,"진통효과 감소, 금단증상 위험",2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000718,D000760,기능적 신부전에 의해 유산 산성증 촉진,2020-07-10,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000669,D000718,기능적 신부전에 의해 유산 산성증 촉진,2011-09-29,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000364,D000718,기능적 신부전에 의해 유산 산성증 촉진,2020-07-10,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000274,D000363,중증의 위장관계 이상반응,2008-01-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000274,D000675,중증의 위장관계 이상반응,2008-01-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000274,D000452,중증의 위장관계 이상반응,2008-01-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000477,D000560,부정맥 또는 심정지,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000279,D000334,신독성 증가,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000274,D000309,중증의 위장관계 이상반응,2008-01-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000274,D000544,중증의 위장관계 이상반응,2008-01-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000274,D000644,중증의 위장관계 이상반응,2008-01-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000144,D000679,anastrozole의 혈장농도 감소,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000238,D000541,"지발성 운동장애 촉진, bromocryptine의 작용감약",2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000238,D000560,혈압강하,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000267,D000718,기능적 신부전에 의해 유산 산성증 촉진,2020-07-10,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000274,D000525,"상가적인 위장관 궤양, 출혈의 위험",2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000181,D000246,동일계열 병용투여 금기,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000427,D000716,신세뇨관에서 Methotrexate 배설이 지연되어 Methotrexate의 혈액학적 독성 증가,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000028,D000665,양쪽 약물 모두 혈장농도 상승 가능,2011-09-29,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000350,D000395,근증/횡문근변성의 위험성이 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000027,D000395,횡문근융해를 포함한 근질환의 위험 가능,2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000698,D000773,"고혈압위기, 세로토닌증후군 발생 위험 증가",2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000342,D000373,실로도신의 혈중농도 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000373,D000571,이바브라딘의 혈중농도 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000443,D000527,리바록사반의 혈중농도가 상승하여 출혈위험 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000571,D000712,이바브라딘의 혈중농도 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000698,D000700,"고혈압위기, 세로토닌증후군 발생 위험 증가",2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000373,D000487,톨밥탄의 혈중농도 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000487,D000762,톨밥탄의 혈중농도 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000143,D000297,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000373,D000385,티카그렐러의 혈중농도 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000142,D000297,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000035,D000297,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000348,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000517,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000373,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성
+강력한 CYP억제제가 돔페리돈의 대사를 감소시켜, 돔페리돈의 영향(이상반응 포함) 증대 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000793,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000425,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000430,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000719,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000608,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000226,D000297,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000809,QT연장,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000274,D000835,중증의 위장관계 이상반응,2008-01-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000122,D000535,간질발작 재발,2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000560,D000583,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000422,D000560,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000329,D000571,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000571,D000818,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001071,소포스부비르 혈장 농도를 현저히 떨어트려 소포스부비르의 치료 효과를 감소시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000385,D000762,티카그렐러는 이트라코나졸에 의해 혈장농도가 증가 가능,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000632,D001071,소포스부비르 농도를 감소시켜 소포스부비르의 치료 효과를 감소시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000027,D000405,횡문근융해증 발생 가능,2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001071,소포스부비르 혈장 농도를 현저히 떨어트려 소포스부비르의 치료 효과를 감소시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000103,D001071,소포스부비르 혈장 농도를 현저히 떨어트려 소포스부비르의 치료 효과를 감소시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000282,D001071,소포스부비르 혈장 농도를 현저히 떨어트려 소포스부비르의 치료 효과를 감소시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000334,D000455,"근육병증, 횡문근융해 위험 증가 가능",2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000592,D000762,triazolam 의 약리학적 효과 및 작용(수면유도 및 진정작용 등의 중추신경 억제 효과) 증가,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000353,"세로토닌성 증후군(고혈압, 고열, 간대성 근경련, 정신상태 변화 등)",2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000336,"세로토닌성 증후군 (고열, 간대성근경련, 정신상태 변화등)",2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000660,D000762,"alprazolam의 혈장농도 증가, 수면 및 진정작용 증강 및 연장",2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000650,D000747,상가적인 혈관경련,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000202,D000628,"맥각독성(혈관경련, 말단 및 기타조직 허혈)위험증가",2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000419,D000762,횡문근융해증,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000419,D000769,횡문근융해증을 비롯한 근육질환 등 중증 이상반응,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000019,D000716,간 독성,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000660,D000769,"alprazolam의 혈장농도 증가, 수면 및 진정작용 증강 및 연장",2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000540,혈압상승,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000373,D000719,심실부정맥(Torsade de pointes),2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000202,D000650,"혈압 상승 및 에르고티즘(말초혈관수축 증가, 경련, 사지허혈) 위험 증가",2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000503,D000758,두개내 고혈압,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000255,D000413,"피리독신은 신경독성을 현저하게 감소시켰으나 반응기간에는 역효과, 알트레타민의 치료효과 감소",2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000256,D000719,QT연장 등,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000127,D000758,테트라사이클린 가성뇌종양 보고,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000064,D000758,테트라사이클린 가성뇌종양 보고,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000754,D000758,테트라사이클린 가성뇌종양 보고,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000426,D000719,mizolastine의 혈중농도 상승,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000323,"구역, 구토, 안면홍조, 어지러움, 진전, 산동, 강직, 발한, 고온증, 심장지표의 빠른 변화, 자율신경계의 불안정, 정신상태의 변화",2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000628,D000719,"말초혈관경련, 사지허혈, 감각이상등",2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000022,D000259,심실부정맥(Torsade de pointes) 위험 증가,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000256,D000259,심실부정맥(Torsade de pointes) 위험 증가,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D000513,심실부정맥(Torsade de pointes) 위험 증가,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000452,D000716,혈액학적 독성,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000373,"pimozide의 혈중농도 상승, QT연장",2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000256,QT연장 등,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000256,D000770,병용을 하여도 항균작용이 증가되지 않음,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000256,D000678,병용을 하여도 항균작용이 증가되지 않음,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000256,D000713,병용을 하여도 항균작용이 증가되지 않음,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000517,D000592,triazolam 의 약리학적 효과 및 작용증가,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000113,D000560,혈압강하효과,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000007,D000762,midazolam 의 약리학적 효과 및 작용(수면유도 및 진정작용 등의 중추신경 억제 효과) 증가,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000762,QT 간격 연장 및 심실부정맥(Torsade de pointes) 위험 증가,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000007,D000769,midazolam 의 약리학적 효과 및 작용증가,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000592,D000769,triazolam 의 약리학적 효과 및 작용증가,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000429,심각한 혈압저하 위험 증가,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000256,D000414,심실성빈맥(Torsade de pointes),2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000650,수마트립탄의 혈장농도 증가,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000560,D000781,혈압강하효과,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000516,"세로토닌성 증후군 (고혈압, 고열, 경련, 정신상태 변화등)",2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000027,D000256,"근병증, 횡문근융해의 위험증가",2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000256,D000592,triazolam 의 약리학적 효과 및 작용증가,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000065,D000249,신결석,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000274,D000739,중증의 위장관계 이상반응,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000138,D000274,중증의 위장관계 이상반응,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000274,D000463,중증의 위장관계 이상반응,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000274,D000506,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000071,D000274,중증의 위장관계 이상반응,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000274,D000705,중증의 위장관계 이상반응,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000230,D000274,중증의 위장관계 이상반응,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000274,D000427,중증의 위장관계 이상반응,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000060,D000274,중증의 위장관계 이상반응,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000448,교감신경흥분제의 작용 증강 또는 연장,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000362,QT연장,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000466,QT연장,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000027,D000763,횡문근융해증을 비롯한 근육질환 등 중증 이상반응,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000027,D000626,횡문근융해를 포함한 근육병증 위험 가능,2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D000027,횡문근융해증을 비롯한 근육질환 등 중증 이상반응,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000031,D000298,중증의 위장관계 이상반응,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000298,D000575,중증의 위장관계 이상반응,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000274,D000702,출혈 및 프로트롬빈시간 연장,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000211,D000298,중증의 위장관계 이상반응,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000277,D000650,세로토닌 증후군,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000059,D000650,세로토닌 증후군,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000019,D000503,두개내압 증가,2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000019,D000127,두개내압 증가,2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000019,D000754,두개내압 증가,2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000019,D000064,두개내압 증가,2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D000712,"부정맥, 혈액장애, 발작 등 중대한 이상반응",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D000429,"근독성, 간질, 세로토닌성 증후군(고혈압, 고열, 간대성 근경련, 정신상태 변화 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000248,"세로토닌성 증후군(고혈압, 고열, 간대성 근경련, 정신상태 변화 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000657,"교감신경흥분제의 작용 증강 또는 연장(고혈압, 빈맥 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000657,"교감신경흥분제의 작용 증강 또는 연장(고혈압, 빈맥 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D000202,"맥각독성(말초혈관 경련, 사지와 기타 조직의 허혈, 감각이상 등) 위험 증가",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D000747,"맥각독성(혈관경련, 말단 및 기타조직 허혈)",2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D000419,횡문근융해증을 비롯한 근육질환 등 중증 이상반응,2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D000228,"맥각독성(말초혈관 경련, 사지와 기타 조직의 허혈, 감각이상 등) 위험 증가",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D000213,"QT 연장, 심실성 빈맥, 심실세동 및 torsades de pointes 등 심독성위험 증가",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000027,D000150,횡문근융해증을 비롯한 근육질한 위험성 증가 가능,2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000641,"교감신경흥분제의 작용 증강 또는 연장(고혈압, 빈맥 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000641,"교감신경흥분제의 작용 증강 또는 연장(고혈압, 빈맥 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000476,"고혈압, 저혈압, 발한을 동반한 심각한 중추신경계 이상반응(현기, 진전, 발작 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000476,"고혈압, 저혈압, 발한을 동반한 심각한 중추신경계 이상반응(현기, 진전, 발작 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000443,D000476,혈중농도가 저하되어 보리코나졸의 약물효과 감소,2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000332,D000429,"세로토닌성 증후군(고혈압, 고열, 간대성 근경련, 정신상태 변화 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000277,D000429,"근독성, 간질, 세로토닌성 증후군(고혈압, 고열, 간대성 근경련, 정신상태 변화 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000202,D000558,"맥각독성(말초혈관 경련, 사지와 기타 조직의 허혈, 감각이상 등) 위험 증가",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000202,D000256,"맥각독성(말초혈관 경련, 사지와 기타 조직의 허혈, 감각이상 등) 위험 증가",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000202,D000763,"맥각독성(말초혈관 경련, 사지와 기타 조직의 허혈, 감각이상 등) 위험 증가",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000202,D000762,"맥각독성(말초혈관 경련, 사지와 기타 조직의 허혈, 감각이상 등) 위험 증가",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D000202,"맥각독성(말초혈관 경련, 사지와 기타 조직의 허혈, 감각이상 등) 위험 증가",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000202,D000712,"맥각독성(말초혈관 경련, 사지와 기타 조직의 허혈, 감각이상 등) 위험 증가",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000202,D000443,"맥각독성(말초혈관 경련, 사지와 기타 조직의 허혈, 감각이상 등) 위험 증가",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000171,D000202,"상가적인 혈관수축반응, 현저한 혈압상승",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000501,"근독성, 간질, 세로토닌성 증후군(고혈압, 고열, 간대성 근경련, 정신상태 변화 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000501,"근독성, 간질, 세로토닌성 증후군(고혈압, 고열, 간대성 근경련, 정신상태 변화 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000007,D000558,과도한 진정작용,2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000443,D000558,"현저하게 voriconazole 혈장농도 감소, efavirenz 혈장농도 증가",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000747,D000763,"맥각독성(혈관경련, 말단 및 기타조직 허혈)",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000747,D000762,"맥각독성(혈관경련, 말단 및 기타조직 허혈)",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D000747,"맥각독성(혈관경련, 말단 및 기타조직 허혈)",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000712,D000747,"맥각독성(혈관경련, 말단 및 기타조직 허혈)",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000443,D000747,"맥각독성(혈관경련, 말단 및 기타조직 허혈)",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000516,"세로토닌성 증후군(고혈압, 고열, 간대성 근경련, 정신상태 변화 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000800,"세로토닌성 증후군(고혈압, 고열, 간대성 근경련, 정신상태 변화 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000800,"세로토닌성 증후군(고혈압, 고열, 간대성 근경련, 정신상태 변화 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000187,D000800,"장기화된 저혈압, 졸음, 현기증 및 정신운동능력 감소",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000362,D000429,"근독성, 간질, 세로토닌성 증후군(고혈압, 고열, 간대성 근경련, 정신상태 변화 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000362,"근독성, 간질, 세로토닌성 증후군(고혈압, 고열, 간대성 근경련, 정신상태 변화 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000007,D000763,과도한 진정작용,2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D000763,혈중농도 저하로 항레트로바이러스 약물효과 감소,2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000718,D000761,기능적 신부전에 의해 유산 산성증 촉진,2020-07-10,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000246,D000572,혈관확장작용 증가로 저혈압 효과 상승,2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000228,D000762,"맥각독성(말초혈관 경련, 사지와 기타 조직의 허혈, 감각이상 등) 위험 증가",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D000228,"맥각독성(말초혈관 경련, 사지와 기타 조직의 허혈, 감각이상 등) 위험 증가",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000228,D000712,"맥각독성(말초혈관 경련, 사지와 기타 조직의 허혈, 감각이상 등) 위험 증가",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000228,D000650,"상가적인 혈관수축반응, 현저한 혈압상승",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000171,D000228,"상가적인 혈관수축반응, 현저한 혈압상승",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000229,D000429,고혈압성 위기(현저한 혈압상승),2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000229,고혈압성 위기(현저한 혈압상승),2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000323,D000429,"구역, 구토, 안면홍조, 어지러움, 진전, 산동, 강직, 발한, 고온증, 심장지표의 빠른 변화와 함께 자율신경계의 불안정, 정신상태의 변화",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000466,"근독성, 간질, 세로토닌성 증후군(고혈압, 고열, 간대성 근경련, 정신상태 변화 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000353,D000429,"세로토닌성 증후군(고혈압, 고열, 간대성 근경련, 정신상태 변화 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000700,"아편계 약물의 효과 증강. 혼수, 중증의 호흡 억제",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000336,D000429,"세로토닌성 증후군(고혈압, 고열, 간대성 근경련, 정신상태 변화 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000638,"세로토닌성 증후군(고혈압, 고열, 간대성 근경련, 정신상태 변화 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000246,D000530,혈압강하작용 증강,2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000287,D000650,"상가적인 혈관수축반응, 현저한 혈압상승",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000171,D000287,"상가적인 혈관수축반응, 현저한 혈압상승",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D000314,혈중농도 저하로 항레트로바이러스 약물효과 감소,2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000246,D000498,혈관확장작용 증가로 저혈압 효과 상승,2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000466,"근독성, 간질, 세로토닌성 증후군(고혈압, 고열, 간대성 근경련, 정신상태 변화 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000700,"아편계 약물의 효과 증강. 혼수, 중증의 호흡 억제",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000712,"QT 연장, 심실성 빈맥, 심실세동 및 torsades de pointes 등 심독성위험 증가",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000443,"QT 연장, 심실성 빈맥, 심실세동 및 torsades de pointes 등 심독성위험 증가",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D000443,혈중농도가 저하되어 보리코나졸의 약물효과 감소,2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000638,"세로토닌성 증후군(고혈압, 고열, 간대성 근경련, 정신상태 변화 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000171,D000650,"상가적인 혈관수축반응, 현저한 혈압상승",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000031,D000274,중증의 위장관계 이상반응,2008-01-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000274,D000298,중증의 위장관계 이상반응,2008-01-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000274,D000575,중증의 위장관계 이상반응,2008-01-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000274,D000672,중증의 위장관계 이상반응,2008-01-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000115,D000274,중증의 위장관계 이상반응,2008-01-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000083,D000274,중증의 위장관계 이상반응,2008-01-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000262,D000274,중증의 위장관계 이상반응,2008-01-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000238,D000343,항콜린작용 증가,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000343,D000584,항콜린작용 증가,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000343,D000781,amantadine의 효과 저해,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000144,D000664,anastrozole의 약리작용 감소,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000540,혈압상승,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000560,D000584,혈압강하,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000276,D000560,혈압강하,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000332,QT간격 연장,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000155,D000429,"고혈압, 빈맥 유발",2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000155,D000560,부정맥 또는 심정지 유도,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000155,"고혈압, 빈맥 유발",2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000070,D000560,부정맥 또는 심정지 유도,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000212,D000719,심실성부정맥,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000165,D000718,기능적 신부전에 의해 유산 산성증 촉진,2011-09-29,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000268,D000718,기능적 신부전에 의해 유산 산성증 촉진,2011-09-29,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000560,D000759,부정맥 또는 심정지 유도,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000488,D000758,비타민A 과잉증,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000265,D000769,효소유도로 인한 ketoconazole의 혈중농도 저하,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D000769,효소유도로 인한 ketoconazole의 혈중농도 저하,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000274,D000696,"상가적인 위장관 궤양, 출혈의 위험",2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000274,D000703,"상가적인 위장관 궤양, 출혈의 위험",2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000274,D000766,"상가적인 위장관 궤양, 출혈의 위험",2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000320,D000783,출혈성 궤양대장염과 장괴사,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000120,D000567,warfarin의 항응고효과 감소,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000200,D000429,"경련, 반사항진, 이상고열, 혼수 등",2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000006,D000429,"경련, 반사항진, 이상고열, 혼수 등",2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000773,"세로토닌 작용에 의한 증후군(중추흥분, 설사, 빈맥, 땀, 진전, 혼동, 혼수 등) 야기",2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000196,D000762,nisoldipine의 혈중농도 상승,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000196,D000769,nisoldipine의 혈중농도 상승,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000541,D000755,bromocriptine mesylate 혈중농도 상승,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000261,D000656,항콜린 작용 증가,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000030,D000513,심실성 부정맥(특히 torsades de pointes) 위험 증가,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000514,D000560,부정맥 또는 심정지 유도,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000448,"고혈압, 빈맥 유발",2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000164,D000314,isradipine의 혈장농도 저하,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000197,D000314,nifedipine의 혈장농도 저하,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000196,D000314,nisoldipine의 작용 약화,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000628,심실부정맥(Torsades de pointes 포함)등의 심혈관계 이상반응,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000018,D000139,bupropion의 급성독성 증가,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000242,"고혈압, 저혈압, 발한을 동반한 심각한 중추신경계 이상반응(현기, 진전, 발작등)",2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000200,"경련, 반사항진, 이상고열, 혼수 등",2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000006,D000139,"경련, 반사항진, 이상고열, 혼수 등",2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000650,"동맥 고혈압, 관상동맥 수축",2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000773,"세로토닌 작용에 의한 증후군(중추흥분, 설사, 빈맥, 땀, 진전, 혼동, 혼수 등) 야기",2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000215,D000246,혈압강하작용 증가,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000246,D000787,혈압강하작용 증가,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000159,D000279,고칼륨혈증,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000279,D000731,고칼륨혈증,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000181,D000530,혈압강하작용 증가,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000181,D000215,혈압강하작용 증가,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000181,D000787,혈압강하작용 증가,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000521,D000560,부정맥 또는 심정지 유도,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000541,D000778,bromocryptine의 효과 저해,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000181,D000572,혈압강하작용 증가,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000488,D000503,두개내 고혈압,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000488,D000754,두개내 고혈압,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000064,D000488,두개내 고혈압,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000560,D000753,혈압강하,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000569,D000572,혈압강하작용 증가,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000530,D000569,혈압강하작용 증가,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000215,D000569,혈압강하작용 증가,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000569,D000787,혈압강하작용 증가,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000434,D000530,혈압강하작용 증가,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000215,D000434,혈압강하작용 증가,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000434,D000787,혈압강하작용 증가,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000030,D000259,심실성 부정맥(특히 torsades de pointes),2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000434,D000572,혈압강하작용 증가,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000202,D000745,"혈압상승 및 맥각독성(혈관경련, 말단 및 기타조직 허혈)",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000256,D000419,횡문근융해증/근육병증 및 이에 수반되는 급격한 신기능악화,2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000202,D000373,"맥각독성(혈관경련, 말단 및 기타조직 허혈)",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D000763,"부정맥, 혈액장애, 경련등",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000015,D000690,간독성 및 간효소치 상승,2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000007,D000712,"진정작용의 연장 또는 증가, 호흡저하",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D000259,"부정맥, 혈액장애, 경련등",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000076,D000418,혈당강하 작용 증강,2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000212,D000712,"부정맥, 혈액장애, 경련등",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000142,D000187,"저혈압에 의해 졸음, 현기증 및 정신운동능력 감소",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D000469,아타자나비르의 혈중농도 감소,2023-07-05,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D000719,"QT 연장, 심실성 부정맥",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000202,D000395,사지 및 기타조직의 말초 혈관경련 및 허혈로 나타나는 급성 맥각 중독과 같은 중대한 그리고/또는 생명을 위협하는 반응,2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000202,D000517,"맥각독성(혈관경련, 말단 및 기타조직 허혈)",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000007,D000150,진정작용이나 호흡억제를 증가 또는 연장,2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000082,D000759,"심부정맥, 경우에 따라 심정지",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000137,D000560,부정맥 또는 심정지,2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000181,D000498,혈압강하작용 증강,2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000434,D000498,혈압강하작용 증강,2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000035,D000213,QT 간격 연장,2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000516,QT 간격 연장,2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000800,QT 간격 연장,2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000353,QT 간격 연장,2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000336,QT 간격 연장,2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000141,D000795,"세로토닌 증후군(간대성 근경련, 진전, 편무도병, 조화운동불능, 말더듬증 고열, 정신상태 변화등)",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000141,D000701,"세로토닌 증후군(간대성 근경련, 진전, 편무도병, 조화운동불능, 말더듬증 고열, 정신상태 변화등)？",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000141,D000505,"세로토닌 증후군(간대성 근경련, 진전, 편무도병, 조화운동불능, 말더듬증 고열, 정신상태 변화등)",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000141,D000714,"세로토닌 증후군(간대성 근경련, 진전, 편무도병, 조화운동불능, 말더듬증 고열, 정신상태 변화등)",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000498,D000569,혈압강하작용 증강,2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000128,D000498,혈압강하작용 증강,2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000628,D000747,"맥각독성(혈관경련, 말단 및 기타조직 허혈)",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000128,D000572,혈압강하작용 증강,2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000256,D000747,"맥각독성(혈관경련, 말단 및 기타조직 허혈)",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000373,D000747,"맥각독성(혈관경련, 말단 및 기타조직 허혈)",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000171,D000747,"약리적 상가작용에 의해, 혈압 상승 및 맥각중독(에르고티즘)(말초혈관수축 증가)의 위험성을 증가",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000552,"고열, 경직, 간대성근경련, 정신상태 변화 등",2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000552,"고열, 경직, 간대성근경련, 정신상태 변화 등",2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000277,"고혈압위기, 이상고열증, 근간대경련, 격월성 발작, 정신착란, 혼수 등",2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000505,고혈압위기 유발,2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000505,고혈압위기 유발,2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000792,중추 흥분상태 증가,2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000792,중추 흥분상태 증가,2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000714,혈압상승 위험 유발,2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000714,혈압상승 위험 유발,2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000701,혈압상승 위험,2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000701,혈압상승 위험,2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000795,혈압상승 위험,2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000795,혈압상승 위험,2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000811,혈압변동의 위험,2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000811,혈압변동의 위험,2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000171,D000429,졸미트립탄의 혈중농도 증가,2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000745,D000747,"상가적인 혈관수축반응, 혈압상승",2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000287,D000745,"상가적인 혈관수축반응, 혈압상승",2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000650,D000745,"상가적인 혈관수축반응, 혈압상승",2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000171,D000745,"상가적인 혈관수축반응, 혈압상승",2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000505,D000701,판막심장병 위험,2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000505,D000795,판막심장병 위험,2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000505,D000714,판막심장병 위험,2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000701,D000795,판막심장병 위험,2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000701,D000714,판막심장병 위험,2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000714,D000795,판막심장병 위험,2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000007,D000395,"진정작용의 증가 및 연장, 호흡저하판막심장병 위험",2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000007,D000626,"진정작용의 증가 및 연장, 호흡저하판막심장병 위험",2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D000007,"진정작용의 증가 및 연장, 호흡저하판막심장병 위험",2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000178,D000712,과도한 진정 및 호흡억제,2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000059,D000377,리튬독성증강,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000202,D000626,"맥각독성(혈관경련, 말단 및 기타조직 허혈 등) 위험 증가",2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000202,D000405,"맥각독성(혈관경련, 말단 및 기타조직 허혈 등) 위험 증가",2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000202,D000747,"맥각독성(혈관경련, 말단 및 기타조직 허혈 등) 위험 증가",2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000202,D000742,"맥각독성(혈관경련, 말단 및 기타조직 허혈 등) 위험 증가",2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D000699,아타자나비르의 혈중농도 감소,2023-07-05,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D000153,아타자나비르의 혈중농도 감소,2023-07-05,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D000204,아타자나비르의 혈중농도 감소,2023-07-05,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D000301,아타자나비르의 혈중농도 감소,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D000386,아타자나비르의 혈중농도 감소,2023-07-05,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D000168,아타자나비르의 혈중농도 감,2023-07-05,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D000084,다폭세틴 농도 상승,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000125,D000560,부정맥 또는 심정지,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000185,D000560,부정맥 또는 심정지,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000082,D000137,부정맥 또는 심정지,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000070,D000082,부정맥 또는 심정지,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000082,D000477,부정맥 또는 심정지,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000082,D000125,부정맥 또는 심정지,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000082,D000514,부정맥 또는 심정지,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000082,D000185,부정맥 또는 심정지,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000082,D000521,부정맥 도는 심정지,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000082,D000155,부정맥 또는 심정지,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000084,D000429,"세로토닌성 증후군(고혈압, 고열, 간대성 근경련, 정신상태 변화 등)",2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000084,D000139,"세로토닌성 증후군(고혈압, 고열, 간대성 근경련, 정신상태 변화 등)",2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000084,D000650,"세로토닌성 증후군(고혈압, 고열, 간대성 근경련, 정신상태 변화 등)",2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000246,D000569,동일계열 병용투여 금기,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000246,D000434,동일계열 병용투여 금기,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000128,D000246,동일계열 병용투여 금기,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000181,D000569,동일계열 병용투여 금기,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000128,D000181,동일계열 병용투여 금기,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000128,D000569,동일계열 병용투여 금기,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000128,D000434,동일계열 병용투여 금기,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000181,D000434,동일계열 병용투여 금기,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000434,D000569,동일계열 병용투여 금기,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000029,D000777,혈전형성,2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000590,D000777,혈전형성,2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000520,D000777,혈전형성,2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000324,D000600,저혈당 또는 혼수,2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000604,D000798,신독성 및 청각독성증강,2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000075,D000798,신독성 및 청각독성증강,2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000202,D000322,"맥각독성(혈관경련, 말단 및 기타조직 허혈 등) 위험 증가",2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000322,D000747,"맥각독성(혈관경련, 말단 및 기타조직 허혈 등) 위험 증가",2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000517,D000747,"맥각독성(혈관경련, 말단 및 기타조직 허혈 등) 위험 증가",2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000395,D000747,"맥각독성(혈관경련, 말단 및 기타조직 허혈 등) 위험 증가",2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000405,D000747,"맥각독성(혈관경련, 말단 및 기타조직 허혈 등) 위험 증가",2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000742,D000747,"맥각독성(혈관경련, 말단 및 기타조직 허혈 등) 위험 증가",2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000558,D000747,"맥각독성(혈관경련, 말단 및 기타조직 허혈 등) 위험 증가",2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000338,D000719,심실운동 특히 Torsade de pointes에 대한 위험 증가,2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000158,D000758,두개내 고혈압,2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000127,D000488,두개내 고혈압,2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000019,D000158,두개내 고혈압,2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000020,D000712,신경학적 또는 기타 독성의 빈도 및 강도가 증가,2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000419,D000763,횡문근융해증/근육병증 및 이에 수반되는 급격한 신기능악화,2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000419,D000712,횡문근융해증/근육병증 및 이에 수반되는 급격한 신기능악화,2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D000419,횡문근융해증/근육병증 및 이에 수반되는 급격한 신기능악화,2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000405,D000419,근병증 및 횡문근융해,2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000151,D000581,고칼슘혈증,2011-09-29,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000151,D000175,고칼슘혈증,2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000151,D000188,고칼슘혈증,2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000175,D000581,고칼슘혈증,2011-09-29,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000188,D000581,고칼슘혈증,2011-09-29,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000175,D000188,고칼슘혈증,2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000565,D000731,고칼륨혈증,2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000159,D000565,고칼륨혈증,2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000028,D000281,신장청소율을 감소시켜 양쪽 약물 모두 혈장농도 상승,2011-01-31,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D000161,"골수기능 억제,설사 등 부작용 증강",2011-01-31,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000142,D000696,경련 발생,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000020,D000626,Blonanserin 농도의 증가로 신경학적 또는 기타의 독성 가능성 증가,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000202,D000407,혈압상승 및 맥각독성(말초혈관수축 증가)의 위험성 증가,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000407,D000747,"맥각독성(혈관경련, 말단 및 기타조직 허혈)",2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000626,D000747,"맥각독성(혈관경련, 말단 및 기타조직 허혈)",2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000031,D000716,신세뇨관에서 Methotrexate 배설이 지연되어 Methotrexate의 혈액학적 독성 증가,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000696,D000716,신세뇨관에서 Methotrexate 배설이 지연되어 Methotrexate의 혈액학적 독성 증가,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000672,D000716,신세뇨관에서 Methotrexate 배설이 지연되어 Methotrexate의 혈액학적 독성 증가,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000309,D000716,신세뇨관에서 Methotrexate 배설이 지연되어 Methotrexate의 혈액학적 독성 증가,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000716,D000806,신세뇨관에서 Methotrexate 배설이 지연되어 Methotrexate의 혈액학적 독성 증가,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000030,D000541,길항작용,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000030,D000620,길항작용,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000405,QT 간격 연장,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000045,D000568,131I 섭취율 저하,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000407,D000745,추가적인 관상혈관 경련으로 고혈압 및 관상 동맥 협착의 위험성 증가,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000287,D000407,추가적인 관상혈관 경련으로 고혈압 및 관상 동맥 협착의 위험성 증가,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000248,D000251,리듬장애를 수반한 발작성 고혈압,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000343,QT 간격 연장,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000343,D000719,QT 간격 연장,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000343,QT 간격 연장,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000213,QT 간격 연장,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000719,QT 간격 연장,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000173,D000201,QT 간격 연장,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000173,D000719,QT 간격 연장,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000173,D000213,QT 간격 연장,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D000020,Blonanserin 혈중 약물 농도 증가로 작용 증대,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000434,D000762,Vardenafil의 혈중농도 증가,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000015,D000279,보센탄의 혈중농도 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000091,D000716,메토트렉세이트의 혈액학적 독성 증가,2011-06-08,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000350,D000762,근증/횡문근변성의 위험성이 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000350,D000769,근증/횡문근변성의 위험성이 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000256,D000350,근증/횡문근변성의 위험성이 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000350,D000763,근증/횡문근변성의 위험성이 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000395,D000419,횡문근융해증/근육병증 및 이에 수반되는 급격한 신기능 악화,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000419,D000626,횡문근융해증/근육병증 및 이에 수반되는 급격한 신기능 악화,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D000350,근증/횡문근변성의 위험성이 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000350,D000626,근증/횡문근변성의 위험성이 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D000350,근증/횡문근변성의 위험성이 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000004,D000059,리튬 독성 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000259,Torsade de pointes 위험 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000259,Torsade de pointes 위험 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D000362,Torsade de pointes 위험 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D000466,Torsade de pointes 위험 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D000809,Torsade de pointes 위험 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D000343,Torsade de pointes 위험 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D000319,Torsade de pointes 위험 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000362,Torsade de pointes 위험 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000466,Torsade de pointes 위험 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000809,Torsade de pointes 위험 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000319,Torsade de pointes 위험 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000032,D000718,기능적 신부전에 의해 유산 산성증 촉진,2020-07-10,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D000737,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000737,D000770,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000373,D000737,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000673,D000737,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000395,D000737,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000737,D000763,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000572,D000737,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000737,D000762,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000626,D000737,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000128,D000737,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000530,D000737,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D000737,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000497,D000737,기절의 효과감소,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000498,D000737,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000215,D000737,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000737,D000787,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000405,D000737,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000712,D000737,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000246,D000737,동일계열 병용투여 금기,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000181,D000737,동일계열 병용투여 금기,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000569,D000737,동일계열 병용투여 금기,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000434,D000737,동일계열 병용투여 금기,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000443,D000737,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000128,D000530,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000128,D000215,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000128,D000787,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000246,D000763,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000246,D000626,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000246,D000712,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D000434,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D000434,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000434,D000673,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000395,D000434,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000434,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000434,D000763,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000434,D000626,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D000434,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000434,D000712,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000022,D000434,혈압강하증가,2013-12-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000556,D000733,혈전색전증 위험을 높임,2014-11-04,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000617,D000733,혈전색전증 위험을 높임,2014-11-04,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000694,D000733,혈전색전증 위험을 높임,2014-11-04,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000733,D000789,혈전색전증 위험을 높임,2014-11-04,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000389,D000733,혈전색전증 위험을 높임,2014-11-04,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000121,D000733,혈전색전증 위험을 높임,2014-11-04,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D000695,아타자나비르의 혈중농도 감소,2023-07-05,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D000153,Nelfinavir의 치료효과 감소 및 내성발현 위험 증가,2014-11-04,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000357,D000560,중증의 혈압강하를 일으킬 수 있음,2014-11-04,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D000469,Nelfinavir의 치료효과 감소 및 내성발현 위험 증가,2014-11-04,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000735,D000800,아고멜라틴 혈중농도 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000142,D000735,아고멜라틴 혈중농도 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000334,D000396,다비가트란의 혈중농도가 상승하여 출혈위험 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000396,다비가트란의 혈중농도가 상승하여 출혈위험 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000396,D000762,다비가트란의 혈중농도가 상승하여 출혈위험 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000087,D000535,발프론산의 혈중농도를  감소시켜 간질발작 재발의 위험 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000036,D000476,에트라비린의 혈중농도가 감소하여 치료효과 감소 혹은 내성발현,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000036,D000282,에트라비린의 혈중농도가 감소하여 치료효과 감소 혹은 내성발현,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000036,D000595,에트라비린의 혈중농도가 감소하여 치료효과 감소 혹은 내성발현,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000036,D000314,에트라비린의 혈중농도가 감소하여 치료효과 감소 혹은 내성발현,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000036,D000447,에트라비린의 혈중농도가 감소하여 치료효과 감소 혹은 내성발현,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000123,D000402,메르캅토푸린의 혈중농도 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000250,D000402,아자치오프린의 혈중농도 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000208,D000213,피모짓의 혈중농도 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000472,D000567,와파린작용 증대,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000571,D000762,이바브라딘의 혈중농도 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D000571,이바브라딘의 혈중농도 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000256,D000571,이바브라딘의 혈중농도 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000698,"고혈압위기, 세로토닌증후군 발생 위험 증가",2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000698,"고혈압위기, 세로토닌증후군 발생 위험 증가",2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000242,D000698,"고혈압위기, 세로토닌증후군 발생 위험 증가",2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D000698,"고혈압위기, 세로토닌증후군 발생 위험 증가",2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000158,D000488,두개내 고혈압,2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000225,D000476,릴피비린의 혈중농도가 감소하여 치료효과 감소 혹은 내성발현,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000225,D000263,릴피비린의 혈중농도가 감소하여 치료효과 감소 혹은 내성발현,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000225,D000282,릴피비린의 혈중농도가 감소하여 치료효과 감소 혹은 내성발현,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000225,D000595,릴피비린의 혈중농도가 감소하여 치료효과 감소 혹은 내성발현,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000209,D000225,릴피비린의 혈중농도가 감소하여 치료효과 감소 혹은 내성발현,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000225,D000314,릴피비린의 혈중농도가 감소하여 치료효과 감소 혹은 내성발현,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000225,D000447,릴피비린의 혈중농도가 감소하여 치료효과 감소 혹은 내성발현,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000225,D000469,위장 pH의 증가로 릴피비린의 흡수가 저하되어 릴피비린의 치료효과 감소,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000153,D000225,위장 pH의 증가로 릴피비린의 흡수가 저하되어 릴피비린의 치료효과 감소,2023-07-05,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000225,D000699,위장 pH의 증가로 릴피비린의 흡수가 저하되어 릴피비린의 치료효과 감,2023-07-05,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000225,D000695,위장 pH의 증가로 릴피비린의 흡수가 저하되어 릴피비린의 치료효과 감소,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000225,D000386,위장 pH의 증가로 릴피비린의 흡수가 저하되어 릴피비린의 치료효과 감소,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000225,D000751,위장 pH의 증가로 릴피비린의 흡수가 저하되어 릴피비린의 치료효과 감소,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000204,D000225,위장 pH의 증가로 릴피비린의 흡수가 저하되어 릴피비린의 치료효과 감소,2023-07-05,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000168,D000225,위장 pH의 증가로 릴피비린의 흡수가 저하되어 릴피비린의 치료효과 감소,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000225,D000301,위장 pH의 증가로 릴피비린의 흡수가 저하되어 릴피비린의 치료효과 감소,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D000527,리바록사반의 혈중농도가 상승하여 출혈위험 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000527,D000763,리바록사반의 혈중농도가 상승하여 출혈위험 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000527,D000712,리바록사반의 혈중농도가 상승하여 출혈위험 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000527,D000673,리바록사반의 혈중농도가 상승하여 출혈위험 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000527,D000762,리바록사반의 혈중농도가 상승하여 출혈위험 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000342,D000762,실로도신의 혈중농도 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000342,D000712,실로도신의 혈중농도 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000385,D000712,티카그렐러의 혈중농도 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D000385,티카그렐러의 혈중농도 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000487,D000712,톨밥탄의 혈중농도 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000487,D000763,톨밥탄의 혈중농도 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D000487,톨밥탄의 혈중농도 증가,2015-04-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D000297,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000030,D000297,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000643,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D000297,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성
+강력한 CYP억제제가 돔페리돈의 대사를 감소시켜, 돔페리돈의 영향(이상반응 포함) 증대 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000742,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000328,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000724,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000444,"강력한 CYP억제제가 돔페리돈의 대사를 감소시켜, 돔페리돈의 영향(이상반응 포함) 증대 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000584,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000332,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000395,"강력한 CYP억제제가 돔페리돈의 대사를 감소시켜, 돔페리돈의 영향(이상반응 포함) 증대 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000693,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000319,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000297,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000519,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000078,D000297,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000113,D000297,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000256,D000297,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000763,"강력한 CYP억제제가 돔페리돈의 대사를 감소시켜, 돔페리돈의 영향(이상반응 포함) 증대 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000762,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성
+강력한 CYP억제제가 돔페리돈의 대사를 감소시켜, 돔페리돈의 영향(이상반응 포함) 증대 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000769,"""QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성
+강력한 CYP억제제가 돔페리돈의 대사를 감소시켜, 돔페리돈의 영향(이상반응 포함) 증대 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D000297,"강력한 CYP억제제가 돔페리돈의 대사를 감소시켜, 돔페리돈의 영향(이상반응 포함) 증대 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000470,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000261,D000297,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000513,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000111,D000297,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000297,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000405,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성
+강력한 CYP억제제가 돔페리돈의 대사를 감소시켜, 돔페리돈의 영향(이상반응 포함) 증대 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000102,D000297,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000299,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000422,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000712,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성
+강력한 CYP억제제가 돔페리돈의 대사를 감소시켜, 돔페리돈의 영향(이상반응 포함) 증대 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000022,D000297,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000833,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성
+강력한 CYP억제제가 돔페리돈의 대사를 감소시켜, 돔페리돈의 영향(이상반응 포함) 증대 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000443,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성
+강력한 CYP억제제가 돔페리돈의 대사를 감소시켜, 돔페리돈의 영향(이상반응 포함) 증대 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000842,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000774,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000635,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000638,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000173,D000297,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000615,D000665,"세포내 인산화 방해, 동일한 역전사효소 유전자(M184V) 변이를 통한 바이러스 내성 - 항바이러스 효과 감소",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000564,xylometazoline의 전신작용(고혈압 위험) 증강 또는 연장,2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000564,D000698,xylometazoline의 전신작용(고혈압 위험) 증강 또는 연장,2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000564,xylometazoline의 전신작용(고혈압 위험) 증강 또는 연장,2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000809,"이상고열, 전신경련, 발한, 불온, 혼수등",2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D000823,심실부정맥(Torsade de pointes) 위험 증가,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000563,D000824,"혈압 변동, 빈맥·심실세동등의 부정맥 위험 증가",2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000762,D000823,QT 간격 연장 및 심실부정맥(Torsade de pointes) 위험 증가,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000592,D000825,triazolam 의 약리학적 효과 및 작용(수면유도) 증가,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000417,D000827,금주사제 병용시 피부독성,2009-03-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000159,D000731,고칼륨혈증 위험 증가,2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000159,D000829,고칼륨혈증 위험 증가,2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D000830,"QT 연장, 심실성 빈맥, 심실세동 및 torsades de pointes 등 심독성위험 증가",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000809,"근독성, 간질, 세로토닌성 증후군(고혈압, 고열, 간대성 근경련, 정신상태 변화 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000810,"근독성, 간질, 세로토닌성 증후군(고혈압, 고열, 간대성 근경련, 정신상태 변화 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000810,"근독성, 간질, 세로토닌성 증후군(고혈압, 고열, 간대성 근경련, 정신상태 변화 등)",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000718,D000831,기능적 신부전에 의해 유산 산성증 촉진,2011-09-29,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000718,D000832,기능적 신부전에 의해 유산 산성증 촉진,2011-09-29,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000823,"QT 연장, 심실성 빈맥, 심실세동 및 torsades de pointes 등 심독성위험 증가",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000833,"QT 연장, 심실성 빈맥, 심실세동 및 torsades de pointes 등 심독성위험 증가",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000443,D000823,"QT 연장, 심실성 빈맥, 심실세동 및 torsades de pointes 등 심독성위험 증가",2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000731,D000829,고칼륨혈증 위험 증가,2007-04-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000274,D000834,중증의 위장관계 이상반응,2008-01-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000274,D000836,중증의 위장관계 이상반응,2008-01-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000274,D000837,중증의 위장관계 이상반응,2008-01-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000199,D000830,"1. 아킬레스건 파열 및 손상<특히 노인>
+2. 심혈관계 부작용 증가",2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000560,D000838,부정맥 또는 심정지 유도,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000560,D000841,부정맥 또는 심정지 유도,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000522,D000830,"1. 아킬레스건 파열 및 손상<특히 노인>
+2. 심혈관계 부작용 증가",2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000513,D000839,췌장염 유발,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000406,D000830,"1. 아킬레스건 파열 및 손상<특히 노인>
+2. 심혈관계 부작용 증가",2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D000833,QT 간격 연장으로 심실성 부정맥 위험 증가 가능,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000560,D000840,혈압강하,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000005,D000830,"1. 아킬레스건 파열 및 손상<특히 노인>
+2. 심혈관계 부작용 증가",2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000575,D000829,"질소혈증, 크레아티닌 청소율 저하",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000027,D000833,근병증 및 횡문근융해？,2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D000823,QT간격 연장,2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000712,D000823,"QT간격 연장, 심부정맥",2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000769,D000823,QT간격연장,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000517,D000823,QT간격연장,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000405,D000823,QT간격연장,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000763,D000823,QT간격연장,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000626,D000823,QT간격연장,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000395,D000823,QT간격연장,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000256,D000823,QT간격연장,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000373,D000823,QT간격연장,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000628,D000823,QT간격연장,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000338,D000823,QT간격연장,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000823,D000833,QT간격연장,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000742,D000823,QT간격연장,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000823,D000825,QT간격연장,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000202,D000833,"맥각독성(혈관경련, 말단 및 기타조직 허혈 등) 위험 증가",2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000082,D000838,부정맥 또는 심정지,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000082,D000841,부정맥 또는 심정지,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000343,D000842,QT 간격 연장,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000842,QT 간격 연장,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000173,D000842,QT 간격 연장,2011-05-12,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000350,D000833,근증/횡문근변성의 위험성이 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000419,D000833,횡문근융해증/근육병증 및 이에 수반되는 급격한 신기능 악화,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D000842,Torsade de pointes 위험 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000842,Torsade de pointes 위험 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000249,D000843,신장결석 형성 위험 증가,2011-06-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000747,D000833,"맥각독성(혈관경련, 말단 및 기타조직 허혈 등) 위험 증가",2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000697,D000845,근육수축작용 증가,2008-04-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000846,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000970,"고열, 경직, 간대성근경련, 정신상태 변화 등",2010-05-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000297,D000491,"QTc 연장 효과 증대로 심각한 위험(Torsade de Pointes, 심각한 심실성 부정맥 포함) 가능성",2015-11-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000079,D000324,저혈당 또는 혼수,2010-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000159,D000978,고칼륨혈증 위험 증가,2010-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000274,D000982,중증의 위장관계 이상반응,2008-01-01,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000535,D000757,간질 발작 재발,2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000535,D000779,간질 발작 재발,2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D000444,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000088,D000444,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000202,D000444,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000444,D000747,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000419,D000444,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000444,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000444,D000515,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000444,D000583,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000342,D000444,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000027,D000444,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000444,D000681,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000444,D000592,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000111,D000986,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D000665,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000665,D000695,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000153,D000665,위장 pH의 증가로 릴피비린의 흡수가 저하되어 릴피비린의 치료효과 감소,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000209,D000665,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000168,D000665,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000665,D000699,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000469,D000665,위장 pH의 증가로 릴피비린의 흡수가 저하되어 릴피비린의 치료효과 감소,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000263,D000665,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000386,D000665,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000890,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D000890,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000800,D000890,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D001016,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000698,D001016,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D001016,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000716,D001012,methotrexate ≥ 15mg/주에 한해 금기,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D001011,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D001011,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D001010,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000429,D001010,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D000665,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D000665,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000301,D000665,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000204,D000665,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D000665,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000282,D000665,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000665,D000751,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000444,D001030,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000444,D001031,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000444,D001032,,2016-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000202,D000215,"맥각독성(말초허혈, 감각이상, 구역, 구토) 위험 증가",2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000215,D000747,"맥각독성(말초허혈, 감각이상, 구역, 구토) 위험 증가",2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000215,D001073,혈압강하작용 증가,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000737,D001073,Guanylate cyclase 자극제의 혈압강하작용 증가,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000128,D001073,Guanylate cyclase 자극제의 혈압강하작용 증가,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000246,D001073,Guanylate cyclase 자극제의 혈압강하작용 증가,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000181,D001073,Guanylate cyclase 자극제의 혈압강하작용 증가,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000569,D001073,Guanylate cyclase 자극제의 혈압강하작용 증가,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000434,D001073,Guanylate cyclase 자극제의 혈압강하작용 증가,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000200,D000698,"경련, 반사항진, 이상고열, 혼수 등",2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000155,D000747,혈관수축 및 혈압상승효과를 증가시킴,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000155,D000202,혈관수축 및 혈압상승효과를 증가시킴,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000673,QT연장 및 심실성부정맥 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000395,QT연장 및 심실성부정맥 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000763,QT연장 및 심실성부정맥 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D000213,QT연장 및 심실성부정맥 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D000517,QT연장 및 심실성부정맥 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000027,D000619,근병증의 위험 증가 가능,2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D000654,병용 시 항바이러스 약의 치료효과가 떨어지고 내성 발현 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D000558,병용 시 항바이러스 약의 치료효과가 떨어지고 내성 발현 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001074,병용 시 항바이러스 약의 치료효과가 떨어지고 내성 발현 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D000763,병용 시 항바이러스 약의 치료효과가 떨어지고 내성 발현 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D000447,병용 시 항바이러스 약의 치료효과가 떨어지고 내성 발현 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D000712,병용 시 항바이러스 약의 치료효과가 떨어지고 내성 발현 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D001075,아수나프레비르의 농도 상승으로 인하여 심각하나 간 관련 이상반응의 발생 가능성을 증가시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000444,D001075,아수나프레비르의 농도 상승으로 인하여 심각하나 간 관련 이상반응의 발생 가능성을 증가시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000015,D001075,아수나프레비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001075,아수나프레비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001075,D001076,아수나프레비르의 농도 상승으로 인하여 심각하나 간 관련 이상반응의 발생 가능성을 증가시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000373,D001075,아수나프레비르의 농도 상승으로 인하여 심각하나 간 관련 이상반응의 발생 가능성을 증가시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000673,D001075,아수나프레비르의 농도 상승으로 인하여 심각하나 간 관련 이상반응의 발생 가능성을 증가시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000674,D001075,아수나프레비르의 농도 상승으로 인하여 심각하나 간 관련 이상반응의 발생 가능성을 증가시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001075,D001077,아수나프레비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001075,D001078,아수나프레비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000395,D001075,아수나프레비르의 농도 상승으로 인하여 심각하나 간 관련 이상반응의 발생 가능성을 증가시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000199,D001075,아수나프레비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000818,D001075,아수나프레비르의 농도 상승으로 인하여 심각하나 간 관련 이상반응의 발생 가능성을 증가시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D001075,아수나프레비르의 농도 상승으로 인하여 심각하나 간 관련 이상반응의 발생 가능성을 증가시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000558,D001075,아수나프레비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001075,D001079,아수나프레비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000256,D001075,아수나프레비르의 농도 상승으로 인하여 심각하나 간 관련 이상반응의 발생 가능성을 증가시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000036,D001075,아수나프레비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000212,D001075,아수나프레비르 농도상승으로 인하여 심장 부정맥을 유발할 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000517,D001075,아수나프레비르의 농도 상승으로 인하여 심각하나 간 관련 이상반응의 발생 가능성을 증가시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000209,D001075,아수나프레비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000076,D001075,아수나프레비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000162,D001075,아수나프레비르의 농도 상승으로 인하여 심각하나 간 관련 이상반응의 발생 가능성을 증가시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000763,D001075,아수나프레비르의 농도 상승으로 인하여 심각하나 간 관련 이상반응의 발생 가능성을 증가시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000762,D001075,아수나프레비르의 농도 상승으로 인하여 심각하나 간 관련 이상반응의 발생 가능성을 증가시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000769,D001075,아수나프레비르의 농도 상승으로 인하여 심각하나 간 관련 이상반응의 발생 가능성을 증가시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000626,D001075,아수나프레비르의 농도 상승으로 인하여 심각하나 간 관련 이상반응의 발생 가능성을 증가시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000953,D001075,아수나프레비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000632,D001075,아수나프레비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001075,D001080,아수나프레비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D001075,아수나프레비르의 농도 상승으로 인하여 심각하나 간 관련 이상반응의 발생 가능성을 증가시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001074,D001075,아수나프레비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000608,D001075,아수나프레비르의 농도 상승으로 인하여 심각하나 간 관련 이상반응의 발생 가능성을 증가시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000263,D001075,아수나프레비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000282,D001075,아수나프레비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001075,아수나프레비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000405,D001075,아수나프레비르의 농도 상승으로 인하여 심각하나 간 관련 이상반응의 발생 가능성을 증가시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000103,D001075,아수나프레비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000515,D001075,아수나프레비르 농도상승으로 인하여 심장 부정맥을 유발할 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001075,D001081,아수나프레비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001075,아수나프레비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000712,D001075,아수나프레비르의 농도 상승으로 인하여 심각하나 간 관련 이상반응의 발생 가능성을 증가시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001075,D001082,아수나프레비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001075,아수나프레비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000329,D001075,아수나프레비르의 농도 상승으로 인하여 심각하나 간 관련 이상반응의 발생 가능성을 증가시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000443,D001075,아수나프레비르의 농도 상승으로 인하여 심각하나 간 관련 이상반응의 발생 가능성을 증가시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D001070,중대한 증상성 서맥이 나타날 수 있음. 병용이 필요한 경우 심장 모니터링이  권장됨,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001070,다클라타스비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000199,D001070,다클라타스비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001070,D001079,다클라타스비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000209,D001070,다클라타스비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000953,D001070,다클라타스비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000263,D001070,다클라타스비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000282,D001070,다클라타스비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001070,다클라타스비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000103,D001070,다클라타스비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001070,D001081,다클라타스비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001070,다클라타스비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001070,다클라타스비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D001071,- 중대한 증상성 서맥이 나타날 수 있음. 병용이 필요한 경우 심장 모니터링이 권장됨,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000209,D001071,소포스부비르 혈장 농도를 현저히 떨어트려 소포스부비르의 치료 효과를 감소시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000263,D001071,소포스부비르 혈장 농도를 현저히 떨어트려 소포스부비르의 치료 효과를 감소시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001071,D001081,항바이러스제의 혈중 농도 증가로 부작용 발생위험 증가,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001071,"- Sofosbuvir, Velpatasvir 및/또는 Voxilaprevir의 혈중농도를 감소시켜 치료 효과를 감소시킬 가능성이 있음",2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001071,소포스부비르 혈장 농도를 현저히 떨어트려 소포스부비르의 치료 효과를 감소시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D001072,중대한 증상성 서맥이 나타날 수 있음. 병용이 필요한 경우 심장 모니터링이  권장됨,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001072,레디파스비르 및 소포스부비르 혈장 농도를 현저히 떨어뜨려 이 약의 치료  효과를 감소시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000209,D001072,레디파스비르 및 소포스부비르 혈장 농도를 현저히 떨어뜨려 이 약의 치료  효과를 감소시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000632,D001072,레디파스비르 및 소포스부비르 혈장 농도를 현저히 떨어뜨려 이 약의 치료  효과를 감소시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000263,D001072,레디파스비르 및 소포스부비르 혈장 농도를 현저히 떨어뜨려 이 약의 치료  효과를 감소시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000282,D001072,레디파스비르 및 소포스부비르 혈장 농도를 현저히 떨어뜨려 이 약의 치료  효과를 감소시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001072,레디파스비르 및 소포스부비르 혈장 농도를 현저히 떨어뜨려 이 약의 치료  효과를 감소시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000103,D001072,레디파스비르 및 소포스부비르 혈장 농도를 현저히 떨어뜨려 이 약의 치료  효과를 감소시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001072,D001081,레디파스비르 및 소포스부비르 혈장 농도를 현저히 떨어뜨려 이 약의 치료  효과를 감소시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001072,레디파스비르 및 소포스부비르 혈장 농도를 현저히 떨어뜨려 이 약의 치료  효과를 감소시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000219,D001072,횡문근융해증을 포함한 근육병증 위험 증가 가능,2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001072,레디파스비르 및 소포스부비르 혈장 농도를 현저히 떨어뜨려 이 약의 치료  효과를 감소시킬 수 있음,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000716,D000837,methotrexate ≥ 15mg/주에 한해 금기,2009-12-03,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D000699,치료효과의 손실과 약물내성 나타날 수 있음,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000455,D000619,횡문근융해와 같은 중증의 근육이상 보고,2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000373,D000582,,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000114,D000259,심부정맥 위험 증가 가능,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000114,D000332,심부정맥 위험 증가 가능,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000035,D000114,심부정맥 위험 증가 가능,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000113,D000114,심부정맥 위험 증가 가능,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000114,D000793,심부정맥 위험 증가 가능,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000114,D000467,심부정맥 위험 증가 가능,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000114,D000430,심부정맥 위험 증가 가능,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000114,D000256,심부정맥 위험 증가 가능,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000114,D000513,심부정맥 위험 증가 가능,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000022,D000114,심부정맥 위험 증가 가능,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000114,D000842,심부정맥 위험 증가 가능,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000114,D000635,심부정맥 위험 증가 가능,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000809,D001091,고혈압 초래 가능혈관수축작용으로 혈압상승 가능,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000248,D001091,고혈압 초래 가능혈관수축작용으로 혈압상승 가능,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000810,D001091,고혈압 초래 가능 혈관수축작용으로 혈압상승 가능,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000501,D001091,고혈압 초래 가능 혈관수축작용으로 혈압상승 가능,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000362,D001091,고혈압 초래 가능 혈관수축작용으로 혈압상승 가능,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000466,D001091,고혈압 초래 가능혈관수축작용으로 혈압상승 가능,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000396,D000476,다비가트란의 혈중농도 증가,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D000396,다비가트란의 혈중농도 감소,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000336,D001035,세로토닌 증후군 위험 증가 가능성,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D000386,넬피나비르의 혈장농도가 감소되어 치료효과의 손실과 약물 내성이 나타날 수 있음.,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D000751,넬피나비르의 혈장농도가 감소되어 치료효과의 손실과 약물 내성이 나타날 수 있음.,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000762,D001149,팔보시클립의 혈장 농도 증가,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000405,D001149,팔보시클립의 혈장 농도 증가,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000626,D001149,팔보시클립의 혈장 농도 증가,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000003,D001149,팔보시클립의 혈장 농도 증가,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000712,D001149,팔보시클립의 혈장 농도 증가,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001079,D001149,팔보시클립의 혈장 농도 증가,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001149,팔보시클립의 혈장 농도 증가,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000396,D000769,다비가트란의 혈중농도 증가,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000396,D000447,다비가트란의 혈중농도 증가,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000769,D001149,팔보시클립의 혈장 농도 증가,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000763,D001149,팔보시클립의 혈장 농도 증가,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000277,D001091,고혈압 초래 가능혈관수축작용으로 혈압상승 가능,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001149,팔보시클립의 혈장 농도 증가,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001149,팔보시클립의 혈장 농도 증가,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001149,팔보시클립의 혈장 농도 감소,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000396,D000595,다비가트란의 혈중농도 증가,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000443,D001149,팔보시클립의 혈장 농도 증가,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000373,D001149,팔보시클립의 혈장 농도 증가,2018-11-02,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001171,엘바스비르와 그라조프레비르의 혈장 농도가 유의하게 감소하여 이 약의 바이러스학적 반응 감소 가능,2019-05-22,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000558,D001171,엘바스비르와 그라조프레비르의 혈장 농도가 유의하게 감소하여 이 약의 바이러스학적 반응 감소 가능,2019-05-22,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001171,엘바스비르와 그라조프레비르의 혈장 농도가 유의하게 감소하여 이 약의 바이러스학적 반응 감소 가능,2019-05-22,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001171,엘바스비르와 그라조프레비르의 혈장 농도가 유의하게 감소하여 이 약의 바이러스학적 반응 감소 가능,2019-05-22,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001171,엘바스비르와 그라조프레비르의 혈장 농도가 유의하게 감소하여 이 약의 바이러스학적 반응 감소 가능,2019-05-22,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001171,D001172,그라조프레비르의 혈장 농도가 유의하게 증가하여 ALT 상승 위험 증가 가능,2019-05-22,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000334,D001171,그라조프레비르의 혈장 농도가 유의하게 증가하여 ALT 상승 위험 증가 가능,2019-05-22,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000395,D001171,그라조프레비르의 혈장 농도가 유의하게 증가하여 ALT 상승 위험 증가 가능,2019-05-22,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000626,D001171,그라조프레비르의 혈장 농도가 유의하게 증가하여 ALT 상승 위험 증가 가능,2019-05-22,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000749,D001174,ALT 수치가 정상치 상한 기준보다 20배 이상 높게 나타나는 데 영향이 있음,2019-05-22,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000716,D001176,"엽산 의존 대사 경로에서 구내염, 골수억제 및 신경독성과 같은 독성을 잠재적으로 유발하는 메토트렉세이트의 효과 증가",2019-05-22,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000076,D001177,"다사부비르의 AUC 약 11배, Cmax 약 2배 증가 다사부비르의 혈중농도 증가는 QT 연장을 일으킬 수 있음.",2019-05-22,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000076,D001178,"셀레시팍 노출 약 2배 증가, 셀레시팍 활성대사체 노출 약 11배 증가",2019-05-22,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000018,D000505,판막심장병 위험,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000018,D001063,안전성 및 유효성 미확립,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000018,D000714,폐동맥고혈압 위험 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000018,D000701,판막심장병 위험,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000018,D000795,판막심장병 위험,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000505,D001063,판막심장병 위험,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000714,D001063,폐동맥고혈압 위험 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000701,D001063,판막심장병 위험,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000795,D001063,판막심장병 위험,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000113,D000302,Levodopa의 치료효과 감소,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000113,D000259,QT간격 연장 위험 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000113,D000201,QT간격 연장 위험 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000022,D000113,QT간격 연장 위험 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000113,D000332,QT간격 연장 위험 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000035,D000113,QT간격 연장 위험 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000113,D000742,QT간격 연장 위험 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000113,D000373,QT간격 연장 위험 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000113,D000793,QT간격 연장 위험 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000113,D000430,QT간격 연장 위험 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000113,D000584,QT간격 연장 위험 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000113,D000792,QT간격 연장 위험 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000113,D000256,QT간격 연장 위험 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000113,D000213,QT간격 연장 위험 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000113,D000173,QT간격 연장 위험 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000113,D000513,QT간격 연장 위험 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000113,D000319,QT간격 연장 위험 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000113,D000842,QT간격 연장 위험 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000113,D000635,QT간격 연장 위험 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D000673,Cobicistat 및 Elvitegravir의 혈중농도 감소로 치료효과 소실 및 내성 발현 가능,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000146,D001314,골절 및 사망률 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000762,"Dronedarone의 혈중농도 증가, TdP를 포함하는 중대한 심실성 부정맥 같은 Dronedarone 관련 약물이상반응 발생 위험이 증가. Itraconazole 투여 중 및 종료 후 2주 간 해당 성분 투여 금기",2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000719,D000762,"Mizolastine의 혈중농도 증가, QT 연장 같은 Mizolastine 관련 약물이상반응 발생 위험이 증가. Itraconazole 투여 중 및 종료 후 2주 간 해당 성분 투여 금기",2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000161,D000762,"골수억제, 설사 등 이상반응 증가, Itraconazole 투여 중 및 종료 후 2주 간 해당 성분 투여 금기",2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000404,D000762,"Felodipine의 혈중농도 증가, 저혈압 및 말초부종 같은 약물이상반응 발생 위험이 증가. Itraconazole 투여 중 및 종료 후 2주 간 해당 성분 투여 금기",2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000616,D000762,"Lercanidipine의 혈중농도 증가, 저혈압 및 말초부종 같은 약물이상반응 발생 위험이 증가. Itraconazole 투여 중 및 종료 후 2주 간 해당 성분 투여 금기",2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000084,D000762,"Dapoxetine의 혈중농도 증가, Itraconazole 투여 중 및 종료 후 2주 간 해당 성분 투여 금기",2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000256,D000517,"QT연장, Torsade de pointes 위험성 증가",2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000443,D001081,"Rifabutin의 혈중농도 증가, Voriconazole의 농도 감소",2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000282,D000443,"Phenobarbital의 혈중농도 증가, Voriconazole의 농도 감소",2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000443,D001082,Sirolimus의 농도 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000443,D000447,Voriconazole의 농도 감소,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000405,D000455,"근육병증, 횡문근융해 위험 증가 가능",2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000282,D000673,Cobicistat 및 Elvitegravir의 혈중농도 감소로 치료효과 소실 및 내성 발현 가능,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D000673,Cobicistat 및 Elvitegravir의 혈중농도 감소로 치료효과 소실 및 내성 발현 가능,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000209,D000673,Cobicistat 및 Elvitegravir의 혈중농도 감소로 치료효과 소실 및 내성 발현 가능,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000673,D001081,Cobicistat 및 Elvitegravir의 혈중농도 감소로 치료효과 소실 및 내성 발현 가능,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D000673,Cobicistat 및 Elvitegravir의 혈중농도 감소로 치료효과 소실 및 내성 발현 가능,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D000673,Cobicistat 및 Elvitegravir의 혈중농도 감소로 치료효과 소실 및 내성 발현 가능,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000673,D001030,Alfuzosin 혈중농도 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D000673,Amiodarone 혈중농도 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000020,D000673,Blonanserin 혈중농도 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000202,D000673,"Dihydroergotamine 혈중농도 증가, 말초혈관연축 또는 국소빈혈",2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000228,D000673,"Ergometrine 혈중농도 증가, 말초혈관연축 또는 국소빈혈",2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000673,D000747,"Ergotamine 혈중농도 증가, 말초혈관연축 또는 국소빈혈",2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000419,D000673,근육병증과 같은 이상사례 초래 가능,2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000027,D000673,횡문근융해를 포함한 근육병증 위험 가능,2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000592,D000673,"Triazolam 혈중농도 증가, 진정 또는 호흡 억제의 연장 또는 증가",2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000246,D000673,"Sildenafil 혈중농도 증가, 병용투여 할 경우에는 Sildenafil의 투여용량이 25mg을 초과하지 않도록 하며, 48시간 내 재투여 금지",2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000181,D000673,"Tadalafil 혈중농도 증가, 병용투여 할 경우에는 Tadalafil의 투여용량이 10mg을 초과하지 않도록 하며, 72시간 내 재투여 금지",2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000334,D001075,아수나프레비르에 대한 바이러스 반응의 소실을 유발 가능,2017-11-06,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000027,D000334,"근병증, 횡문근융해 위험성 증가 가능",2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000219,D000334,"근육통, 근육약화, 근염, 때때로 횡문근 변성을 포함한 근육독성 촉진 가능",2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000334,D000419,혈중농도 상승 및 근육병증/횡문근융해증 위험성 증가,2020-07-10,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000334,D000518,신기능 악화를 수반하는 횡문근융해증 발현 가능,2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000718,D001329,기능적 신부전에 의해 유산 산성증 촉진,2020-07-10,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000448,D000698,"고혈압, 빈맥 유발",2020-12-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000316,D000698,"고혈압, 빈맥 유발",2020-12-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000080,D000623,해당 약물 병용 시 gimeracil에 의해 fluoropyrimidine 계열 약물의 대사가 감소하여 항암제의 독성이 증가 gimeracil/oteracil/tegafur 투여 중 및 종료 후 7일 간 해당 성분 투여 금기,2020-12-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000080,D000768,해당 약물 병용 시 gimeracil에 의해 fluoropyrimidine 계열 약물의 대사가 감소하여 항암제의 독성이 증가 gimeracil/oteracil/tegafur 투여 중 및 종료 후 7일 간 해당 성분 투여 금기,2020-12-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000080,D000504,해당 약물 병용 시 gimeracil에 의해 fluoropyrimidine 계열 약물의 대사가 감소하여 항암제의 독성이 증가 gimeracil/oteracil/tegafur 투여 중 및 종료 후 7일 간 해당 성분 투여 금기,2020-12-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000546,D000716,신세뇨관에서 methotrexate 배설이 지연되어 methotrexate의 혈액학적 독성 증가,2020-12-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D001362,Glecaprevir의 혈장 농도가 유의하게 증가하여 ALT 상승 위험 증가 가능,2020-12-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000455,D001362,횡문근융해증을 포함한 근육병증 위험 가능,2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000027,D001362,근병증의 위험 증가 가능,2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001362,Glecaprevir와 Pibrentasvir의 혈장 농도가 유의하게 감소하여 이 약의 바이러스학적 반응 감소 가능,2020-12-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001362,Glecaprevir와 Pibrentasvir의 혈장 농도가 유의하게 감소하여 이 약의 바이러스학적 반응 감소 가능,2020-12-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001362,Glecaprevir와 Pibrentasvir의 혈장 농도가 유의하게 감소하여 이 약의 바이러스학적 반응 감소 가능,2020-12-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001362,Glecaprevir와 Pibrentasvir의 혈장 농도가 유의하게 감소하여 이 약의 바이러스학적 반응 감소 가능,2020-12-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D001364,"QT 연장, 심실성 빈맥, 심실세동 및 torsades de pointes 등 심독성위험 증가",2020-12-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000747,D001364,"맥각독성(혈관경련, 말단 및 기타조직 허혈 등) 위험 증가",2020-12-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000228,D001364,"맥각독성(혈관경련, 말단 및 기타조직 허혈 등) 위험 증가",2020-12-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001365,Netupitant의 혈중농도 감소,2020-12-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D001367,위장 pH의 증가로 atazanavir의 흡수가 저하되어 atazanavir의 치료효과 감소,2020-12-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000225,D001367,위장 pH의 증가로 rilpivirine의 흡수가 저하되어 rilpivirine의 치료효과 감소,2020-12-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000113,D000170,QT간격 연장 위험 증가,2020-12-28,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D000417,"심실성 부정맥, 서맥, 심장 전도장애를 포함한 심장 부정맥 위험성 증가",2021-12-16,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000467,D001558,메플로퀸은 발프로산의 대사를 증가시키며 경련 효과를 가지고 있으므로 병용투여 시 간질성 발작이 일어날 수 있음,2022-06-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001456,D001559,"신장 손상 악화, 저칼슘혈증이 일어날 수 있음",2022-06-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000397,D001560,아연 흡수를 저해하거나 배출을 증가시킴,2022-06-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001261,D001561,출혈 위험 증가,2022-06-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001347,D001561,출혈 위험 증가,2022-06-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000481,D001407,"중등도 이상의 눈부심, 홍채염 등의 안염증이 유발될 우려가 있음",2022-06-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000028,D001419,양쪽 약물 모두 혈장농도 상승 가능,2022-06-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000615,D001419,"라미부딘이 엠트리시타빈의 세포내 인산화를 저해할 수도 있음, 동일한 역전사효소 유전자(M184V) 변이를 통해 바이러스 내성 기전이 일어나므로 병용 시 치료 효과가 제한적일 수 있음",2022-06-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000762,D001562,라놀라진의 혈장 농도 증가,2022-06-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000028,D001563,뉴클레오시드 유사체 단독투여 또는 다른 항레트로바이러스제를 병용투여했을 때 치명적인 사례를 포함한 유산산증과 지방증을 동반한 중증 간비대가 보고됨,2022-06-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D001171,그라조프레비르의 혈장 농도가 유의하게 증가하여 ALT 상승 위험 증가 가능,2019-05-22,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000113,D000781,QT간격 연장 위험 증가,2019-12-17,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000592,D000712,"진정작용의 연장 또는 증가, 호흡 저하",2022-12-15,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000161,D000447,이리노테칸 활성 대사물(SN-38)의 혈중 농도가 저하되어 작용 감소,2022-12-15,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D001035,"고혈압 위기의 위험 증가, 투여중지 후 MAO 억제제인 다른 약물을 투여하기까지 적어도 14일 이상 사이를 두어야 함",2022-12-15,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000306,D000619,"횡문근융해증, 근무력증, 동통 발생 가능",2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000419,D000619,"근육병증, 횡문근융해 위험 증가 가능",2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000518,D000619,"횡문근융해증, 근무력증, 동통 발생 가능",2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000305,D000619,횡문근융해증을 포함한 근육 관련 이상반응 보고,2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000219,D000619,횡문근융해증을 포함한 근육 관련 이상반응 보고,2023-12-20,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000027,D001650,- 횡문근융해증을 포함하는 근육병증의 잠재적인 가능성,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000246,D001723,혈관확장작용 증가로 저혈압 효과 상승,2014-01-09,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000181,D001723,혈압강하작용 증가,2014-01-09,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000569,D001723,혈압강하작용 증가,2014-01-09,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000434,D001723,혈압강하작용 증가,2014-01-09,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000128,D001723,혈압강하작용 증가,2014-01-09,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000737,D001723,혈압강하작용 증가,2014-01-09,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001724,D001725,두 약제는 동일 계열,2023-07-05,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000246,D001722,혈관확장작용 증가로 저혈압 효과 상승,2014-01-09,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000181,D001722,혈압강하작용 증가,2014-01-09,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000569,D001722,혈압강하작용 증가,2014-01-09,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000434,D001722,혈압강하작용 증가,2014-01-09,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000128,D001722,혈압강하작용 증가,2014-01-09,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000737,D001722,혈압강하작용 증가,2014-01-09,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D000751,아타자나비르의 혈중농도 감소,2023-07-05,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000373,D001743,Finerenone 혈중농도의 현저한 증가가 예상됨,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000762,D001743,"Finerenone의 혈중농도 증가, 치료 효과 및 이상반응 연장이 일어날 수 있음. Itraconazole 투여 중 및 종료 후 2주 간 해당 성분 금기.",2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000712,D001743,Finerenone 혈중농도의 현저한 증가가 예상됨.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000673,D001743,Finerenone 혈중농도의 현저한 증가가 예상됨.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000282,D001743,Finerenone 혈중농도의 현저한 감소 및 치료효과 감소가 예상됨.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001743,Finerenone 혈중농도의 현저한 감소 및 치료효과 감소가 예상됨.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001743,Finerenone 혈중농도의 현저한 감소 및 치료효과 감소가 예상됨.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001743,Finerenone 혈중농도의 현저한 감소 및 치료효과 감소가 예상됨.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001743,Finerenone 혈중농도의 현저한 감소 및 치료효과 감소가 예상됨.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001747,Fosnetupitant의 혈중농도가 감소하여 약효가 감소할 수 있음.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001700,Fedratinib의 혈중농도를 감소시킬 수 있음.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001700,Fedratinib의 혈중농도를 감소시킬 수 있음.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001697,Lorlatinib의 혈중농도를 감소시킬 수 있음.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001697,Lorlatinib의 혈중농도를 감소시킬 수 있음.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001697,Lorlatinib의 혈중농도를 감소시킬 수 있음.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001079,D001697,Lorlatinib의 혈중농도를 감소시킬 수 있음.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000953,D001697,Lorlatinib의 혈중농도를 감소시킬 수 있음.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001697,-Lorlatinib의 혈중농도를 감소시킬 수 있음. -총 빌리루빈과 알칼리인산분해효소의 증가 없이 AST와 ALT 의 증가와 연관 있음.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D001697,Pimozide의 혈중농도가 감소될 수 있음.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000334,D001697,Cyclosporine의 혈중농도가 감소될 수 있음.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001082,D001697,Sirolimus의 혈중농도가 감소될 수 있음.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000279,D001697,Tacrolimus의 혈중농도가 감소될 수 있음.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000875,D001697,Alfentanil의 혈중농도가 감소될 수 있음.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000097,D001697,Fentanyl의 혈중농도가 감소될 수 있음.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000282,D001748,Cabotegravir의 혈중농도를 감소시켜 치료 효과를 감소시킬 수 있음.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001748,Cabotegravir의 혈중농도를 감소시켜 치료 효과를 감소시킬 수 있음.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000263,D001748,Cabotegravir의 혈중농도를 감소시켜 치료 효과를 감소시킬 수 있음.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001748,Cabotegravir의 혈중농도를 감소시켜 치료 효과를 감소시킬 수 있음.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001748,Cabotegravir의 혈중농도를 감소시켜 치료 효과를 감소시킬 수 있음.,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000443,D000571,- QTc 연장과 매우 드물게 torsade de pointes 가능,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000443,D000487,- Tolvaptan의 혈장 농도 증가 가능,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000443,D001609,- Venetoclax의 혈장 농도 및 종양용해증후군 위험 증가 가능,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000443,D000712,- Voriconazole의 혈장 농도를 감소시켜 항진균 효과를 상실시킬 수 있음,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000762,D001751,- Apixaban 관련 약물이상반응 발생 위험이 증가함,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000762,D001060,- Edoxaban 관련 약물이상반응 발생 위험이 증가함,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000762,D001580,"- PR, QTc 및/또는 QRS 심전도 간격 연장, 심부정맥 같은 Eliglustat 관련 약물이상반응 발생 위험이 증가함",2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000762,D001609,- 병용 시 이 약의 노출이 증가하여 TLS를 포함한 독성 위험 증가 가능,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000026,D000698,MAO 저해제의 효과를 증가시킬 수 있음,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000026,D000139,MAO 저해제의 효과를 증가시킬 수 있음,2024-06-25,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000334,D001755,면역억제 효과 증가,2024-10-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000279,D001755,면역억제 효과 증가,2024-10-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000334,D001003,면역억제 효과 증가,2024-10-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000279,D001003,면역억제 효과 증가,2024-10-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000250,D001003,면역억제 효과 증가,2024-10-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000302,D000425,레보도파의 효과 감소,2024-10-11,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000246,D001650,"- Sildenafil 관련 이상반응(시각이상, 저혈압, 발기시간 지연 및 실신 포함)의 가능성",2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000747,D001650,- 기타 조직의 혈관 경련 및 허혈을 특징으로 하는 급성 맥각 독성의 잠재적인 가능성(사지 및 중추신경계 포함),2021-12-30,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001650,- 바이러스 반응의 손실 및 내성 발현의 잠재적인 가능성,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001650,- 바이러스 반응의 손실 및 내성 발현의 잠재적인 가능성,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001030,D001650,- 저혈압의 가능성,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001032,D001650,- Tamsulosin의 혈중농도를 증가시킬 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001562,D001650,- 중대한 및/또는 생명을 위협하는 반응의 가능성,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D001650,- 심장부정맥의 가능성,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D001650,- 심장 부정맥의 가능성,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000212,D001650,- 심장 부정맥의 가능성,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000515,D001650,- 심장 부정맥의 가능성,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000582,D001650,- 신장 및/또는 간장애가 있는 환자에서 중대한 및/또는 생명을 위협하는 반응의 가능성,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001650,D001763,- Lurasidone의 혈중농도를 증가시킬 수 있음 - 심장 부정맥과 같은 중대한 및/또는 생명을 위협하는 반응의 가능성,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D001650,- 심장부정맥과 같은 중대한 및/또는 생명을 위협하는 반응의 가능성,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000342,D001650,- 기립성저혈압의 가능성,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000571,D001650,- 서맥 또는 전도장애의 가능성,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000385,D001650,- Ticagrelor의 혈중농도를 증가시킬 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000988,D001650,- Clopidogrel 활성대사체의 농도를 감소시킬 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000015,D001650,"- Bosentan의 혈중농도를 증가시키고, Nirmatrelvir +Ritonavir의 혈중농도를 감소시킬 수 있음",2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000228,D001650,- 사지 및 중추신경계를 포함하는 기타 조직의 혈관경련 및 허혈을 특징으로 하는 급성 맥각독성의 잠재적인 가능성,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000419,D001650,- 횡문근융해증을 포함하는 근육병증의 잠재적인 가능성,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001650,D001743,"- 고칼륨혈증, 저혈압 및 저나트륨혈증을 포함하는 중대한 이상반응의 가능성",2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000181,D001650,- Tadalafil의 혈중농도를 증가시킬 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000592,D001650,- 과도한 진정 및 호흡억제의 가능성,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000487,D001650,"- 탈수, 저혈량증 및 고칼륨혈증의 가능성",2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001650,D001780,- 바이러스 반응의 손실 및 내성 발현의 잠재적인 가능성,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001079,D001650,- 바이러스 반응의 손실 및 내성 발현의 잠재적인 가능성,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001650,- 바이러스 반응의 손실 및 내성 발현의 잠재적인 가능성,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000282,D001650,- 바이러스 반응의 손실 및 내성 발현의 잠재적인 가능성,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001650,- 바이러스 반응의 손실 및 내성 발현의 잠재적인 가능성,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000103,D001650,- 바이러스 반응의 손실 및 내성 발현의 잠재적인 가능성,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000527,D001650,- 출혈 위험의 증가,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000443,D001650,- Voriconazole의 혈중농도를 감소시킬 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001363,D001650,- 증가된 Glecaprevir 농도는 알라닌아미노전달효소(ALT) 상승을 유발할 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000334,D001650,- Cyclosporine의 혈중농도를 증가시킬 수 있음- 중대한 이상반응 초래할 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000279,D001650,- Tacrolimus의 혈중농도를 증가시킬 수 있음 - 중대한 이상반응 초래할 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000461,D001650,- Everolimus의 혈중농도를 증가시킬 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001082,D001650,- Sirolimus의 혈중농도를 증가시킬 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001650,D001781,"- QT 연장, 심계항진, 동성빈맥(sinus tachycardia)을 포함하여 살메테롤과 관련된 심혈관 부작용의 위험을 증가시킬 수 있음",2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000373,D001763,- Lurasidone의 노출을 증가시킬 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000762,D001763,- Lurasidone의 노출을 증가시킬 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000769,D001763,- Lurasidone의 노출을 증가시킬 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000712,D001763,- Lurasidone의 노출을 증가시킬 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000443,D001763,- Lurasidone의 노출을 증가시킬 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001763,- Lurasidone의 노출을 감소시킬 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001763,- Lurasidone의 노출을 감소시킬 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001763,- Lurasidone의 노출을 감소시킬 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001763,- Lurasidone의 노출을 감소시킬 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D001783,- Ozanimod의 노출을 감소시킬 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000769,D001693,- Bosutinib의 혈중농도를 증가시켜 독성위험을 증가시킬 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001693,- Bosutinib의 혈중농도를 감소시켜 유효성을 감소시킬 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001784,- Tucatinib의 혈중농도를 감소시켜 유효성을 감소시킬 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001703,- Zanubrutinib의 혈중농도를 감소시켜 유효성을 감소시킬 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001703,- Zanubrutinib의 혈중농도를 감소시켜 유효성을 감소시킬 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001703,- Zanubrutinib의 혈중농도를 감소시켜 유효성을 감소시킬 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001703,- Zanubrutinib의 혈중농도를 감소시켜 유효성을 감소시킬 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001081,D001748,Cabotegravir 혈중농도 감소로 치료 효과 감소,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000225,D001081,Rilpivirine 혈중농도 감소로 치료효과 감소 혹은 내성발현,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000212,QT 간격을 연장시키고 염전성 심실빈맥 발생 위험을 높일 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000515,QT 간격을 연장시키고 염전성 심실빈맥 발생 위험을 높일 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000022,D000201,QT 간격을 연장시키고 염전성 심실빈맥 발생 위험을 높일 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000334,Dronedarone 노출량 증가,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000373,Dronedarone 노출량 증가,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000712,Dronedarone 노출량 증가,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000443,Dronedarone 노출량 증가,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000769,Dronedarone 노출량 증가,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000256,QT 간격을 연장시키고 염전성 심실빈맥 발생 위험을 높일 수 있음,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000282,Dronedarone 노출량 감소,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000476,Dronedarone 노출량 감소,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000595,Dronedarone 노출량 감소,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000447,Dronedarone 노출량 감소,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000201,D000314,Dronedarone 노출량 감소,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000707,D000769,"- Fluticasone의 혈중농도 증가로 쿠싱증후군 및 부신억제와 같은 전신 코르티코스테로이드 효과 나타날 수 있음 - Salmeterol의 혈중농도 증가로 QT연장, 심계항진 등 심혈관계 이상반응 위험 증가",2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000707,D000762,"- Fluticasone의 혈중농도 증가로 쿠싱증후군 및 부신억제와 같은 전신 코르티코스테로이드 효과 나타날 수 있음 - Salmeterol의 혈중농도 증가로 QT연장, 심계항진 등 심혈관계 이상반응 위험 증가",2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000503,D000820,- 양성 두개내압 상승(가성뇌종양) 보고,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000127,D000820,- 양성 두개내압 상승(가성뇌종양) 보고,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000064,D000820,- 양성 두개내압 상승(가성뇌종양) 보고,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000182,D000820,- 양성 두개내압 상승(가성뇌종양) 보고,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000019,D000820,- 비타민A과다증,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000707,D000712,"- Fluticasone의 혈중농도 증가로 쿠싱증후군 및 부신억제와 같은 전신 코르티코스테로이드 효과 나타날 수 있음 - Salmeterol의 혈중농도 증가로 QT연장, 심계항진 등 심혈관계 이상반응 위험 증가",2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000758,D000820,- 비타민A과다증,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000488,D000820,- 비타민A과다증,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000019,D000182,- 두개내압 상승 위험,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000019,D000758,- 비타민A과다증,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000019,D000488,- 비타민A과다증,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000182,D000758,- 가성뇌종양 보고,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000182,D000488,- 뇌내압 상승 위험,2025-07-14,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001418,- 강력한 CYP3A 유도제와의 병용투여는 Ribociclib의 혈장 노출을 감소시킬 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001418,- 강력한 CYP3A 유도제와의 병용투여는 Ribociclib의 혈장 노출을 감소시킬 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001418,- 강력한 CYP3A 유도제(Rifampicin)와의 병용투여는 건강한 시험대상자에서 Ribociclib의 혈장 노출을 89%까지 감소시킴,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001598,- Ponatinib의 노출 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001598,- Ponatinib의 노출 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001598,- Ponatinib의 노출 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001598,- Ponatinib의 노출 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000700,D000712,- Ritonavir와 병용 시 Pethidine의 독성이 나타날 위험이 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001711,- Ixazomib의 효과 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001711,- Ixazomib의 효과 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001711,- Ixazomib의 효과 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001711,- Ixazomib의 효과 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001594,- Midostaurin과 활성 대사체의 혈중 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001079,D001594,- Midostaurin과 활성 대사체의 혈중 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001594,- Midostaurin과 활성 대사체의 혈중 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001594,- Midostaurin과 활성 대사체의 혈중 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001594,D001812,- Midostaurin과 활성 대사체의 혈중 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001594,- Midostaurin과 활성 대사체의 혈중 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001418,- 강력한 CYP3A 유도제와의 병용투여는 Ribociclib의 혈장 노출을 감소시킬 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D001418,- QT 간격 연장을 유발할 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000022,D001418,- QT 간격 연장을 유발할 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000373,D001418,- QT 간격 연장을 유발할 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000113,D001418,- QT 간격 연장을 유발할 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000430,D001418,- QT 간격 연장을 유발할 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000470,D001418,- QT 간격 연장을 유발할 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000213,D001418,- QT 간격 연장을 유발할 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001419,- Bictegravir의 혈중 농도 감소로 인해 치료 효과 소실 및 내성 발현 야기 가능,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001563,- Doravirine의 혈장 농도가 감소하여 Doravirine의 치료 효과가 줄어들 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000263,D001563,- Doravirine의 혈장 농도가 감소하여 Doravirine의 치료 효과가 줄어들 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000282,D001563,- Doravirine의 혈장 농도가 감소하여 Doravirine의 치료 효과가 줄어들 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001563,- Doravirine의 혈장 농도가 감소하여 Doravirine의 치료 효과가 줄어들 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001079,D001563,- Doravirine의 혈장 농도가 감소하여 Doravirine의 치료 효과가 줄어들 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000953,D001563,- Doravirine의 혈장 농도가 감소하여 Doravirine의 치료 효과가 줄어들 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001563,-Doravirine의 혈장농도가 유의하게 감소하여 약효가 떨어질 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001419,- Bictegravir의 혈중 농도 감소로 인해 치료 효과 소실 및 내성 발현 야기 가능,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001563,- Doravirine의 혈장 농도가 감소하여 Doravirine의 치료 효과가 줄어들 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000263,D001603,- 활성대사체의 과다노출을 유발할 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000229,D001604,- 고혈압 위기,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000516,D001604,- 세로토닌 증후군,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000698,D001604,- 고혈압 위기,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D001604,- 고혈압 위기,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001035,D001604,- 고혈압 위기,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000773,D001604,"- 중추신경계, 호흡기, 심혈관기능에 대해 생명을 위협하는 약물상호작용이 관찰됨- 세로토닌 증후군이 보고됨",2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000700,D001604,- 고혈압 또는 저혈압 위기가 동반되는 중추신경 흥분 또는 억제를 일으킬 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001016,D001604,- 노르에피네프린 수치에 대한 잠재적 부가효과로 인해 심혈관계 부작용이 유발될 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000282,D001562,- Ranolazine의 효과부족이 발생될 것으로 예상됨,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001562,-Ranolazine의 효과부족이 발생될 것으로 예상됨,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001562,-Ranolazine의 효과부족이 발생될 것으로 예상됨,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001562,-Ranolazine의 효과부족이 발생될 것으로 예상됨,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001562,-Ranolazine의 효과부족이 발생될 것으로 예상됨,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000022,D001562,-Ranolazine의 효과부족이 발생될 것으로 예상됨,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000373,D001562,-Ranolazine의 효과부족이 발생될 것으로 예상됨,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000405,D001562,-Ranolazine의 효과부족이 발생될 것으로 예상됨,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000443,D001562,-Ranolazine의 효과부족이 발생될 것으로 예상됨,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000151,D001552,- 고인산혈증 발생 가능,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000581,D001552,- 고인산혈증 발생 가능,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000658,D001552,- 고인산혈증 발생 가능,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001552,D001817,- 고인산혈증 발생 가능,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000282,D001606,- Brigatinib의 혈장 농도를 감소시킬 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001606,- Brigatinib의 혈장 농도를 감소시킬 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001606,- Brigatinib의 혈장 농도를 감소시킬 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001606,- Brigatinib의 혈장 농도를 감소시킬 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001081,D001606,- Brigatinib의 혈장 농도를 감소시킬 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001606,- Brigatinib의 혈장 농도를 감소시킬 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000334,D001606,- Brigatinib에 의해 Cyclosporine의 유효성이 감소될 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001082,D001606,- Brigatinib에 의해 Cyclosporine의 유효성이 감소될 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000279,D001606,- Brigatinib에 의해 Cyclosporine의 유효성이 감소될 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001609,- CYP3A 유도제와의 병용은 Venetoclax의 노출을 감소시켜 결과적으로 효능 부족을 초래할 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001609,- CYP3A 유도제와의 병용은 Venetoclax의 노출을 감소시켜 결과적으로 효능 부족을 초래할 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000632,D001609,- CYP3A 유도제와의 병용은 Venetoclax의 노출을 감소시켜 결과적으로 효능 부족을 초래할 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001609,- CYP3A 유도제와의 병용은 Venetoclax의 노출을 감소시켜 결과적으로 효능 부족을 초래할 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000015,D001609,- CYP3A 유도제와의 병용은 Venetoclax의 노출을 감소시켜 결과적으로 효능 부족을 초래할 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001609,- 강력한 CYP3A 유도제인 Rifampicin과 병용 투여 시 Venetoclax의 Cmax 및 AUC∞는 각각 42% 및 71%까지 감소함,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001080,D001609,- CYP3A 유도제와의 병용은 Venetoclax의 노출을 감소시켜 결과적으로 효능 부족을 초래할 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000036,D001609,- CYP3A 유도제와의 병용은 Venetoclax의 노출을 감소시켜 결과적으로 효능 부족을 초래할 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001451,D001611,- 유효성 및 안전성 미확립- 기회 감염을 포함하여 감염의 위험성을 증가시킬 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000282,D001612,- Isavuconazonium의 혈장농도를 유의미하게 감소시킬 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001612,- Isavuconazonium의 혈장농도를 유의미하게 감소시킬 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001612,- Isavuconazonium의 혈장농도를 유의미하게 감소시킬 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001612,- Isavuconazonium의 혈장농도를 유의미하게 감소시킬 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001081,D001612,- Isavuconazonium의 혈장농도를 유의미하게 감소시킬 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001612,- Isavuconazonium의 혈장농도를 유의미하게 감소시킬 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000712,D001612,"- 고용량의 Ritonavir(>200mg, 1일 2회)와 병용투여 금기",2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D001724,- 모노아민 신경전달 물질의 증가로 인한 세로토닌 증후군 위험 증가,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001073,D001736,- 두 약제는 동일 계열임,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000150,D001648,- 위 내 pH 증가로 인한 Atazanavir의 생체이용률 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000225,D001648,- 위 내 pH 증가로 인한 Atazanavir의 생체이용률 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000373,D001701,- 강력한 CYP3A/P-gp 억제제와의 병용으로 Acalabrutinib의 혈중 농도 증가,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000762,D001701,- 강력한 CYP3A/P-gp 억제제와의 병용으로 Acalabrutinib의 혈중 농도 증가,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000712,D001701,- 강력한 CYP3A/P-gp 억제제와의 병용으로 Acalabrutinib의 혈중 농도 증가,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000405,D001701,- 강력한 CYP3A/P-gp 억제제와의 병용으로 Acalabrutinib의 혈중 농도 증가,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000443,D001701,- 강력한 CYP3A/P-gp 억제제와의 병용으로 Acalabrutinib의 혈중 농도 증가,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001701,-강력한 CYP3A 유도제와의 병용으로 Acalabrutinib의 혈중 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001701,-강력한 CYP3A 유도제와의 병용으로 Acalabrutinib의 혈중 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001701,-강력한 CYP3A 유도제와의 병용으로 Acalabrutinib의 혈중 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001701,-CYP3A 유도제와의 병용으로 Acalabrutinib의 혈중 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000699,D001699,- 위산 억제제와의 병용으로 Neratinib의 혈중 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000329,D001699,- 중등도 CYP3A4/P-gp 억제제와의 병용으로 Neratinib의 혈중 농도 증가,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001699,- 강력한 CYP3A4 유도제와의 병용으로 Neratinib의 혈중 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001818,- Praziquantel의 치료적 유효 혈중농도에 도달하지 못할 수 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000334,D001542,- 신부전 위험 증가,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D000679,- Tamoxifen의 혈장농도를 낮춤,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000749,D001362,- ALT 상승 위험 증가,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000161,D000595,-이리노테칸 활성 대사물(SN-38)의 혈중 농도가 저하되어 작용 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000161,D000476,-이리노테칸 활성 대사물(SN-38)의 혈중 농도가 저하되어 작용 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000161,D000314,-이리노테칸 활성 대사물(SN-38)의 혈중 농도가 저하되어 작용 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000161,D000282,-이리노테칸 활성 대사물(SN-38)의 혈중 농도가 저하되어 작용 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000161,D001780,-이리노테칸 활성 대사물(SN-38)의 혈중 농도가 저하되어 작용 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000745,"- 동맥 고혈압, 관상동맥 수축의 위험이 있음",2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000287,"- 동맥 고혈압, 관상동맥 수축의 위험이 있음",2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000407,"- 동맥 고혈압, 관상동맥 수축의 위험이 있음",2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000139,D000171,"- 동맥 고혈압, 관상동맥 수축의 위험이 있음",2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000506,D000716,-신세뇨관에서 Methotrexate 배설이 지연되어 Methotrexate 혈액학적 독성 증가,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000405,D000527,-Rivaroxaban의 혈중농도가 상승하여 출혈위험 증가,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001819,D001820,"-Digoxin 작용 증강으로 인한 디기탈리스 중독(서맥, 심실성기외수축, 방실블록 등) 위험증가",2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000494,D001820,"-Digoxin 작용 증강으로 인한 디기탈리스 중독(서맥, 심실성기외수축, 방실블록 등) 위험증가",2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D000328,-Bedaquiline의 혈중농도와 치료효과 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000328,D001081,-Bedaquiline의 혈중농도와 치료효과 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001323,-Delamanid의 혈중농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001469,D001560,-아연 흡수를 저해하거나 배출을 증가시킴,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000259,D001821,Amiodarone은 세포내 알파-갈락토시다제 활성을 저해할 가능성 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000075,D001821,겐타마이신은 세포내 알파-갈락토시다제 활성을 저해할 가능성 있음,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001585,-Cabozantinib의 혈장 노출 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000282,D001585,-Cabozantinib의 혈장 노출 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001585,-Cabozantinib의 혈장 노출 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001585,-Cabozantinib의 혈장 노출 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001585,-Cabozantinib의 혈장 노출 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001076,-Ceritinib 혈장 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000055,D001076,- 심장 박동수와 혈압을 정기적으로 모니터링할 것,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001076,D001820,- 심장 박동수와 혈압을 정기적으로 모니터링할 것,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000282,D001076,-Ceritinib의 혈장 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001076,-Ceritinib의 혈장 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001076,D001081,-Ceritinib의 혈장 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001076,-Ceritinib의 혈장 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001076,-Ceritinib의 혈장 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001588,-Entrectinib의 전신 노출 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001589,-Gilteritinib의 혈장 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001589,-Gilteritinib의 혈장 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001589,-Gilteritinib의 혈장 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000476,D001590,-Ibrutinib의 혈중 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000373,D001590,-Ibrutinib의 혈중 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000673,D001590,-Ibrutinib의 혈중 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000762,D001590,-Ibrutinib의 혈중 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000595,D001590,-Ibrutinib의 혈중 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001590,-Ibrutinib의 혈중 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001590,-Ibrutinib의 혈중 농도 감소,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000712,D001590,-Ibrutinib의 혈중 농도 감소 -Ibrutinib의 노출 증가로 종양 용해 증후군의 위험을 포함한 독성 위험성 증가,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000200,D001604,- 정신병 또는 기괴한 행동 등의 유발 보고됨,2025-12-23,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000225,D001824,-위장 pH의 증가로 릴피비린의 흡수가 저하되어 릴피비린의 치료효과 감소,2026-07-21,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001827,"-Capivasertib 농도를 감소시키고, 유효성을 감소시킬 수 있음",2026-07-21,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000073,D001828,-Ganciclovir 활성화에 필요한 UL97을 억제함으로써 Ganciclovir의 항바이러스 효과를 억제시킬 수 있음,2026-07-21,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000131,D001828,-Valganciclovir 활성화에 필요한 UL97을 억제함으로써 Valganciclovir의 항바이러스 효과를 억제시킬 수 있음,2026-07-21,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000314,D001828,-Maribavir의 혈장 농도를 감소시켜 효과 저하를 초래할 수 있음,2026-07-21,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D001081,D001828,-Maribavir의 혈장 농도를 감소시켜 효과 저하를 초래할 수 있음,2026-07-21,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000447,D001828,-Maribavir의 혈장 농도를 감소시켜 효과 저하를 초래할 수 있음,2026-07-21,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000762,D001030,Alfuzosin의 혈중농도 증가로 약물이상반응 발생 위험 증가,2026-07-21,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000712,D001030,Alfuzosin의 혈중농도 증가로 저혈압의 가능성,2026-07-21,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000059,D000731,이뇨제는 Lithium의 신청소율을 감소시켜 Lithium 독성의 위험성 증가,2026-07-21,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000731,D000953,Spironolactone은 Mitotane 혈장농도 저하 가능,2026-07-21,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do
+USJNT_TABOO,D000225,D001410,- 위산분비 억제 작용에 의해 Rilpivirine의 흡수가 낮아지고 혈중 Rilpivirine 농도가 감소될 수 있음,2026-07-21,MFDS-DUR-INGREDIENT,https://www.data.go.kr/data/15056780/openapi.do

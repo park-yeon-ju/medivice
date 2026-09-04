@@ -1,0 +1,570 @@
+<title>메디바이스 ERD 읽는 법</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Sans+KR:wght@400;500&display=swap">
+<style>
+  :root{
+    --ground:#F4F8F7; --surface:#FFFFFF; --surface-2:#EDF3F2;
+    --ink:#16232B; --ink-2:#54666F; --ink-3:#84969C;
+    --line:#DCE4E5; --line-2:#C6D3D3;
+    --blue:#2E86C1; --blue-soft:#E7F1F8;
+    --green:#00996F; --green-soft:#E2F3EE;
+    --orange:#C05621; --orange-soft:#FBEBE0;
+    --purple:#7D3C98; --purple-soft:#F0E7F5;
+    --red:#B4342A; --red-soft:#FAE7E5;
+    --amber:#9C6510; --amber-soft:#FAF0DE;
+    --ok:#1E7A4C; --ok-soft:#E1F1E8;
+    --chip-ink:#FFFFFF;
+    --sans:'IBM Plex Sans KR','Noto Sans KR','Malgun Gothic',sans-serif;
+    --body:'Noto Sans KR','IBM Plex Sans KR','Malgun Gothic',sans-serif;
+    --mono:'IBM Plex Mono','DejaVu Sans Mono','Noto Sans KR',monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ground:#0E181C; --surface:#152229; --surface-2:#1B2B33;
+      --ink:#E9EFEF; --ink-2:#9DACB2; --ink-3:#71838A;
+      --line:#26353C; --line-2:#33454D;
+      --blue:#63B3E8; --blue-soft:#132A3A;
+      --green:#4CC7A4; --green-soft:#0F2F2A;
+      --orange:#E8945F; --orange-soft:#33211A;
+      --purple:#BD8FD6; --purple-soft:#281A31;
+      --red:#E88B82; --red-soft:#331A1A;
+      --amber:#D9A441; --amber-soft:#312614;
+      --ok:#5FC58C; --ok-soft:#13291F;
+      --chip-ink:#0E181C;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0E181C; --surface:#152229; --surface-2:#1B2B33;
+    --ink:#E9EFEF; --ink-2:#9DACB2; --ink-3:#71838A;
+    --line:#26353C; --line-2:#33454D;
+    --blue:#63B3E8; --blue-soft:#132A3A;
+    --green:#4CC7A4; --green-soft:#0F2F2A;
+    --orange:#E8945F; --orange-soft:#33211A;
+    --purple:#BD8FD6; --purple-soft:#281A31;
+    --red:#E88B82; --red-soft:#331A1A;
+    --amber:#D9A441; --amber-soft:#312614;
+    --ok:#5FC58C; --ok-soft:#13291F;
+    --chip-ink:#0E181C;
+  }
+
+  *{box-sizing:border-box}
+  body{background:var(--ground); color:var(--ink); font-family:var(--body);
+       font-size:15.5px; line-height:1.75; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:1160px; margin:0 auto; padding:0 24px 96px;
+        display:grid; grid-template-columns:200px minmax(0,1fr); gap:0 56px; align-items:start}
+
+  /* ── 헤더 ─────────────────────────────────────────── */
+  header{grid-column:1/-1; padding:56px 0 36px; border-bottom:2px solid var(--ink)}
+  .eyebrow{font-family:var(--mono); font-size:11.5px; letter-spacing:.16em; text-transform:uppercase;
+           color:var(--ink-3); margin:0 0 14px}
+  h1{font-family:var(--sans); font-weight:700; font-size:clamp(30px,4.4vw,44px); line-height:1.18;
+     letter-spacing:-.02em; margin:0 0 14px; text-wrap:balance}
+  .lede{font-size:16.5px; color:var(--ink-2); max-width:62ch; margin:0}
+  .facts{display:flex; flex-wrap:wrap; gap:8px; margin-top:22px}
+  .fact{font-family:var(--mono); font-size:11.5px; padding:5px 10px; border:1px solid var(--line-2);
+        border-radius:2px; color:var(--ink-2); background:var(--surface)}
+
+  /* ── 목차 ─────────────────────────────────────────── */
+  nav{position:sticky; top:24px; padding-top:44px; font-size:13px}
+  nav p{font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
+        color:var(--ink-3); margin:0 0 12px}
+  nav ol{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px}
+  nav a{color:var(--ink-2); text-decoration:none; display:block; line-height:1.4;
+        border-left:2px solid var(--line); padding-left:11px}
+  nav a:hover{color:var(--green); border-left-color:var(--green)}
+  nav a:focus-visible{outline:2px solid var(--green); outline-offset:2px}
+
+  main{padding-top:44px; min-width:0}
+  section{padding-bottom:52px}
+  h2{font-family:var(--sans); font-weight:600; font-size:24px; letter-spacing:-.015em;
+     margin:0 0 6px; scroll-margin-top:24px; text-wrap:balance}
+  h2 .num{font-family:var(--mono); font-size:13px; font-weight:600; color:var(--green);
+          margin-right:10px; vertical-align:1px}
+  .sub{color:var(--ink-2); font-size:14.5px; margin:0 0 24px; max-width:66ch}
+  h3{font-family:var(--sans); font-weight:600; font-size:16px; margin:30px 0 10px}
+  p{max-width:68ch}
+  main p{margin:0 0 14px}
+  strong{font-weight:600}
+  code{font-family:var(--mono); font-size:.88em; background:var(--surface-2);
+       padding:1px 5px; border-radius:2px; word-break:break-word}
+
+  /* ── 테이블 칩: ERD 박스 머리와 같은 표기 ─────────── */
+  .t{font-family:var(--mono); font-size:12.5px; font-weight:600; padding:2px 8px; border-radius:3px;
+     color:var(--chip-ink); background:var(--ink-2); white-space:nowrap; display:inline-block; line-height:1.6}
+  .t.a{background:var(--blue)} .t.b{background:var(--green)}
+  .t.nm{background:var(--orange)} .t.code{background:var(--purple)}
+
+  /* ── 파이프라인 ───────────────────────────────────── */
+  .pipe{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:2px;
+        background:var(--line); border:1px solid var(--line); margin:26px 0}
+  .pipe div{background:var(--surface); padding:16px 18px}
+  .pipe b{display:block; font-family:var(--mono); font-size:11px; letter-spacing:.1em;
+          color:var(--ink-3); margin-bottom:7px}
+  .pipe span{font-size:14px; color:var(--ink); font-weight:500}
+  .pipe em{display:block; font-style:normal; font-size:12.5px; color:var(--ink-2); margin-top:5px}
+
+  /* ── 단계 목록 ────────────────────────────────────── */
+  .steps{display:flex; flex-direction:column; gap:1px; background:var(--line);
+         border:1px solid var(--line); margin:24px 0}
+  .step{background:var(--surface); display:grid; grid-template-columns:38px minmax(0,1fr);
+        gap:0 16px; padding:16px 18px}
+  .step .k{font-family:var(--mono); font-size:15px; font-weight:600; color:var(--green)}
+  .step h4{margin:0 0 6px; font-family:var(--sans); font-size:15.5px; font-weight:600}
+  .step p{margin:0; font-size:14px; color:var(--ink-2); max-width:60ch}
+  .step .tables{margin-top:9px; display:flex; flex-wrap:wrap; gap:6px; align-items:center}
+  .arrow{color:var(--ink-3); font-family:var(--mono); font-size:12px}
+
+  /* ── 신호등 ───────────────────────────────────────── */
+  .lights{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:12px; margin:22px 0}
+  .light{border:1px solid var(--line); background:var(--surface); padding:14px 16px; border-top-width:3px}
+  .light.g{border-top-color:var(--ok)} .light.y{border-top-color:var(--amber)} .light.r{border-top-color:var(--red)}
+  .light b{font-family:var(--mono); font-size:13px; display:block; margin-bottom:5px}
+  .light.g b{color:var(--ok)} .light.y b{color:var(--amber)} .light.r b{color:var(--red)}
+  .light span{font-size:13.5px; color:var(--ink-2)}
+
+  /* ── 코드 ─────────────────────────────────────────── */
+  pre{font-family:var(--mono); font-size:12.8px; line-height:1.7; background:var(--surface);
+      border:1px solid var(--line); border-left:3px solid var(--green); padding:15px 17px;
+      overflow-x:auto; margin:16px 0; color:var(--ink)}
+  pre .c{color:var(--ink-3)}
+  pre .kw{color:var(--blue); font-weight:600}
+
+  /* ── 표 ───────────────────────────────────────────── */
+  .tw{overflow-x:auto; margin:20px 0; border:1px solid var(--line)}
+  table{border-collapse:collapse; width:100%; background:var(--surface); font-size:13.5px}
+  th,td{text-align:left; padding:10px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+  th{font-family:var(--mono); font-size:11px; letter-spacing:.09em; text-transform:uppercase;
+     color:var(--ink-3); font-weight:600; background:var(--surface-2); white-space:nowrap}
+  tr:last-child td{border-bottom:0}
+  td code{background:none; padding:0; color:var(--ink)}
+  .num-col{font-variant-numeric:tabular-nums; white-space:nowrap}
+
+  /* ── 강조 블록 ────────────────────────────────────── */
+  .note{background:var(--green-soft); border-left:3px solid var(--green); padding:14px 18px;
+        margin:20px 0; font-size:14px; color:var(--ink)}
+  .note b{color:var(--green)}
+  .warn{background:var(--amber-soft); border-left:3px solid var(--amber); padding:14px 18px;
+        margin:20px 0; font-size:14px}
+  .warn b{color:var(--amber)}
+
+  /* ── Q&A ──────────────────────────────────────────── */
+  .qa{border-top:1px solid var(--line)}
+  .qa details{border-bottom:1px solid var(--line)}
+  .qa summary{cursor:pointer; padding:14px 0; font-family:var(--sans); font-weight:600;
+              font-size:15px; list-style:none; display:flex; gap:12px; align-items:baseline}
+  .qa summary::-webkit-details-marker{display:none}
+  .qa summary::before{content:"Q"; font-family:var(--mono); font-size:12px; color:var(--green); font-weight:600}
+  .qa summary:focus-visible{outline:2px solid var(--green); outline-offset:3px}
+  .qa .ans{padding:0 0 16px 24px; font-size:14px; color:var(--ink-2); max-width:64ch}
+  .qa .ans p{margin:0 0 10px}
+  .qa .ans p:last-child{margin:0}
+
+  footer{grid-column:1/-1; border-top:1px solid var(--line); padding-top:18px; margin-top:8px;
+         font-family:var(--mono); font-size:11.5px; color:var(--ink-3);
+         display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px}
+
+  @media (max-width:900px){
+    .wrap{grid-template-columns:1fr; gap:0}
+    nav{position:static; padding-top:28px; border-bottom:1px solid var(--line); padding-bottom:24px}
+    nav ol{flex-direction:row; flex-wrap:wrap; gap:8px 18px}
+    nav a{border-left:0; padding-left:0; border-bottom:2px solid var(--line); padding-bottom:2px}
+    main{padding-top:32px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+</style>
+
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">메디바이스 · DA 설명 노트</p>
+  <h1>ERD 한 장을 말로 설명하는 법</h1>
+  <p class="lede">표 29개와 선 37개가 왜 그 자리에 있는지, 그리고 “약을 등록하면 왜 색이 바뀌는지”를
+     데이터 흐름 순서대로 따라가는 노트. 발표 전에 이 순서대로 읽으면 그대로 설명이 된다.</p>
+  <div class="facts">
+    <span class="fact">PostgreSQL 16</span>
+    <span class="fact">테이블 29</span>
+    <span class="fact">뷰 10</span>
+    <span class="fact">FK 37</span>
+    <span class="fact">품목 43,019</span>
+    <span class="fact">성분 5,016</span>
+    <span class="fact">병용금기 성분쌍 1,292</span>
+  </div>
+</header>
+
+<nav aria-label="목차">
+  <p>목차</p>
+  <ol>
+    <li><a href="#s1">데이터가 지나는 4칸</a></li>
+    <li><a href="#s2">ERD 기호 4개</a></li>
+    <li><a href="#s3">왜 성분으로 쪼갰나</a></li>
+    <li><a href="#s4">판정 6단계</a></li>
+    <li><a href="#s5">뷰(VIEW)란</a></li>
+    <li><a href="#s6">SQL 5문장</a></li>
+    <li><a href="#s7">sql 파일 9개</a></li>
+    <li><a href="#s8">예상 질문</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- 1 ───────────────────────────────────────────────── -->
+<section id="s1">
+  <h2>데이터가 지나는 4칸</h2>
+  <p class="sub">DB는 “데이터를 담는 곳”이 아니라 <strong>이 파이프라인의 세 번째 칸</strong>이다.
+     앞뒤를 같이 말해야 설명이 끊기지 않는다.</p>
+
+  <div class="pipe">
+    <div><b>1 · 수집</b><span>식약처 공공 API</span><em>JSON 230,809행을 <code>data/raw/</code>에 그대로 저장</em></div>
+    <div><b>2 · 정규화</b><span>파이썬 → CSV</span><em>중복을 접고 표 10개로 분해, 148,664행</em></div>
+    <div><b>3 · 적재</b><span>PostgreSQL</span><em>표 29개에 넣고 FK로 연결 · 여기가 ERD</em></div>
+    <div><b>4 · 판정</b><span>뷰 10개</span><em>SELECT 한 번으로 GREEN/YELLOW/RED</em></div>
+  </div>
+
+  <p>ERD는 3번 칸의 <strong>설계도</strong>다. 그래서 ERD를 설명한다는 건
+     “어떤 표를 만들었는가”가 아니라 <strong>“이 표들이 4번 칸의 판정을 어떻게 가능하게 하는가”</strong>를
+     말하는 것이다. 표 하나하나를 훑으면 청중은 지루해하고, 판정 경로를 따라가면 설계 의도가 드러난다.</p>
+
+  <div class="note">
+    <b>한 문장 요약.</b> 왼쪽은 식약처에서 받아온 <strong>바꾸지 않는 참조 데이터</strong>,
+    오른쪽은 사용자가 만드는 <strong>서비스 데이터</strong>, 그 둘이 만나는 유일한 지점이
+    <span class="t b">ingredients</span>(성분)다.
+  </div>
+</section>
+
+<!-- 2 ───────────────────────────────────────────────── -->
+<section id="s2">
+  <h2>ERD 기호는 결국 4개뿐</h2>
+  <p class="sub">ERD를 처음 보면 선이 많아 보이지만, 실제로 쓰이는 개념은 네 가지다.
+     우리 표로 하나씩 짚으면 외울 것이 없다.</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>기호</th><th>뜻</th><th>우리 DB의 예</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><code>PK</code></td>
+        <td>그 표에서 행 하나를 콕 집는 번호. 중복될 수 없다.</td>
+        <td><span class="t a">products</span> 의 <code>product_id</code> — 품목 43,019개에 붙은 일련번호</td>
+      </tr>
+      <tr>
+        <td><code>FK</code></td>
+        <td>다른 표의 PK를 가리키는 칸. “이 행은 저기 소속”이라는 뜻.</td>
+        <td><span class="t a">products</span>.<code>manufacturer_id</code> →
+            <span class="t a">manufacturers</span> — 제조사 이름을 매번 적지 않는다</td>
+      </tr>
+      <tr>
+        <td><code>1 — N</code></td>
+        <td>부모 하나에 자식 여럿. 화살표는 <strong>자식이 부모를 가리킨다.</strong></td>
+        <td>사용자 1명 → 복용 중인 약 여러 개
+            (<span class="t b">users</span> 1 : N <span class="t b">medications</span>)</td>
+      </tr>
+      <tr>
+        <td><code>N : M</code></td>
+        <td>양쪽 다 여럿. 표 사이에 <strong>교차 테이블</strong>을 하나 끼워 푼다.</td>
+        <td>약 하나에 성분 여럿, 성분 하나가 약 여럿에 →
+            <span class="t nm">product_ingredients</span> 92,355행</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>ERD의 색도 그냥 예쁘라고 칠한 게 아니라 이 네 가지에 대응한다.
+     <span class="t a">파랑</span>은 공공 API에서 받아 읽기만 하는 참조 데이터,
+     <span class="t b">초록</span>은 사용자가 만드는 서비스 데이터,
+     <span class="t nm">주황</span>은 N:M을 푼 교차 테이블,
+     <span class="t code">보라</span>는 반복되는 문자열을 빼낸 코드 테이블이다.
+     발표에서 <strong>“주황 상자가 다대다를 푼 자리, 보라 상자가 중복 문자열을 뺀 자리”</strong>
+     한 줄이면 정규화 설명이 끝난다.</p>
+</section>
+
+<!-- 3 ───────────────────────────────────────────────── -->
+<section id="s3">
+  <h2>왜 굳이 성분 단위로 쪼갰나</h2>
+  <p class="sub">정규화는 “보기 좋으라고”가 아니라 <strong>기능이 성립하려면 어쩔 수 없어서</strong> 했다.
+     이 대비가 발표의 핵심 근거다.</p>
+
+  <p>식약처 병용금기 API는 <strong>품목 조합</strong>으로 내려온다. 같은 금기 규칙 하나가
+     “A약 × B약”, “A약 × B′약”… 조합 수만큼 반복되어 <strong>797,186행</strong>이 된다.
+     이걸 그대로 저장하면 표가 커질 뿐 아니라, 신약이 하나 나올 때마다 행이 또 불어난다.</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>보관 방식</th><th class="num-col">행 수</th><th>새 약이 등록되면</th></tr></thead>
+    <tbody>
+      <tr><td>품목 조합 그대로</td><td class="num-col">797,186</td><td>조합 수만큼 행이 늘어난다</td></tr>
+      <tr><td>성분 쌍으로 접기</td><td class="num-col">1,292</td><td>규칙은 그대로, 약만 성분에 연결하면 끝</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>성분 쌍으로 접으면 규칙은 <strong>1,292개</strong>로 줄고, 새 약은
+     <span class="t nm">product_ingredients</span>에 성분만 연결하면 자동으로 판정 대상이 된다.
+     이것이 <span class="t b">ingredients</span>가 ERD 한가운데에 놓인 이유다 —
+     <strong>모든 조인이 성분을 축으로 지나간다.</strong></p>
+
+  <div class="warn">
+    <b>정직하게 말할 부분.</b> 함량은 92,355행 중 <strong>66,748행(72%)</strong>만 확보했다.
+    나머지는 식약처 원본의 <code>QNT</code> 값 자체가 비었거나 <code>적량</code>·범위처럼
+    숫자가 아니다. <strong>추측해서 채우지 않고 NULL로 두고, 화면에 “함량 미상”을 표시한다.</strong>
+    안전 서비스에서 추정값은 없는 값보다 위험하다.
+  </div>
+</section>
+
+<!-- 4 ───────────────────────────────────────────────── -->
+<section id="s4">
+  <h2>판정 6단계 — “약을 등록하면 왜 색이 바뀌나”</h2>
+  <p class="sub">여기가 발표의 본론이다. 판정경로 ERD를 띄우고 왼쪽에서 오른쪽으로 이 순서대로 읽으면 된다.
+     번호는 실제 실행 순서다.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="k">1</div>
+      <div>
+        <h4>사용자가 약을 등록한다</h4>
+        <p>처방약·영양제·상비약이 모두 한 표에 들어간다. 처방약이라고 판정에서 빼지 않는다.</p>
+        <div class="tables"><span class="t b">medications</span></div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="k">2</div>
+      <div>
+        <h4>약을 성분으로 펼친다</h4>
+        <p>식약처 품목이면 마스터에서, 수기 등록이면 직접 입력분에서 성분을 꺼낸다.
+           복합제 1품목이 성분 N행으로 펼쳐지는 지점 — 1NF를 지킨 덕분에 가능하다.</p>
+        <div class="tables">
+          <span class="t nm">product_ingredients</span><span class="arrow">또는</span>
+          <span class="t nm">medication_ingredients</span>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="k">3</div>
+      <div>
+        <h4>성분을 조인 축으로 모은다</h4>
+        <p>이 사용자가 오늘 먹는 성분 목록과 하루 합산량이 만들어진다.
+           단위가 g·mcg면 여기서 mg로 환산한다. 농도를 모르는 mL는 환산하지 않고 남긴다.</p>
+        <div class="tables"><span class="t b">ingredients</span><span class="arrow">→</span>
+          <code>v_active_ingredients</code></div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="k">4</div>
+      <div>
+        <h4>규칙 4종과 대조한다</h4>
+        <p>상한 초과 · 병용금기 · 단일금기(임부·연령·용량주의) · 효능군 중복을 각각 확인한다.
+           네 가지가 서로 다른 표를 보지만 <strong>전부 성분 축에서 만난다.</strong></p>
+        <div class="tables">
+          <span class="t a">ingredient_daily_limits</span>
+          <span class="t a">dur_pair_rules</span>
+          <span class="t a">dur_single_rules</span>
+          <span class="t nm">ingredient_effect_groups</span>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="k">5</div>
+      <div>
+        <h4>걸린 항목만 근거와 함께 저장한다</h4>
+        <p>어떤 성분이 왜 걸렸는지, 합산량과 임계값이 얼마였는지, 어느 고시가 근거인지
+           (<code>source_ref</code>·<code>rule_version</code>)까지 남긴다. 나중에 “왜 빨간불이냐”에 답할 수 있어야 한다.</p>
+        <div class="tables"><span class="t b">safety_check_items</span></div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="k">6</div>
+      <div>
+        <h4>가장 심한 항목이 최종 색이 된다</h4>
+        <p>항목 중 하나라도 RED면 RED, 아니면 YELLOW, 둘 다 없으면 GREEN.
+           프론트에는 <code>OK / WARN / CRIT</code>로 바꿔 넘긴다.</p>
+        <div class="tables"><span class="t b">safety_checks</span><span class="arrow">→</span>
+          <code>v_medilight</code><span class="arrow">→</span><code>v_medilight_api</code></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lights">
+    <div class="light g"><b>GREEN → OK</b><span>걸린 규칙 없음. 단, “안전”이 아니라 <strong>“확인된 문제 없음”</strong>이다.</span></div>
+    <div class="light y"><b>YELLOW → WARN</b><span>성분·효능군 중복, 또는 상한의 80% 이상.</span></div>
+    <div class="light r"><b>RED → CRIT</b><span>상한 초과 또는 병용금기. 전문가 확인이 필요하다는 신호.</span></div>
+  </div>
+
+  <div class="note">
+    <b>여기서 한 설계 판단.</b> 판정 근거가 아예 없는 성분(영양제 등)을 초록으로 숨기지 않는다.
+    <code>uncovered_count</code>와 <code>amount_missing_count</code>로 따로 세어 화면에 문구로 붙인다.
+    사용자가 <strong>“확인 못 함”을 “이상 없음”으로 읽는 것</strong>이 안전 서비스의 가장 위험한 실패이기 때문이다.
+  </div>
+</section>
+
+<!-- 5 ───────────────────────────────────────────────── -->
+<section id="s5">
+  <h2>뷰(VIEW)는 “이름 붙여 저장해 둔 SELECT”다</h2>
+  <p class="sub">표(TABLE)와 뷰(VIEW)의 차이 한 줄: <strong>표는 데이터를 갖고 있고, 뷰는 갖고 있지 않다.</strong></p>
+
+  <p>뷰는 데이터를 복사해 두는 게 아니라 <strong>질문을 저장</strong>한다.
+     <code>SELECT * FROM v_medilight</code>를 실행하는 순간 저장돼 있던 SELECT문이 그 자리에서 돌아
+     <strong>지금 시점의 표를 읽어</strong> 결과를 만든다. 그래서 약을 하나 추가하면
+     뷰를 고치지 않아도 다음 조회에서 색이 바뀐다.</p>
+
+  <p>우리가 뷰를 쓴 이유는 세 가지다.
+     ① 판정 로직이 <strong>백엔드 코드가 아니라 DB 안</strong>에 있어 프론트·AI가 같은 답을 본다.
+     ② 복잡한 조인을 한 번만 써 두고 이름으로 부른다.
+     ③ 스키마가 실제로 판정을 지탱하는지 <strong>증명</strong>이 된다 — 설계가 말뿐이 아니라는 근거다.</p>
+
+<pre><span class="c">-- 최종 색을 정하는 뷰의 핵심 (sql/03_medilight_views.sql)</span>
+<span class="kw">CREATE OR REPLACE VIEW</span> medivice.v_medilight <span class="kw">AS</span>
+<span class="kw">SELECT</span> u.user_id,
+       <span class="kw">CASE</span> <span class="kw">MAX</span>(<span class="kw">CASE</span> x.level <span class="kw">WHEN</span> 'RED' <span class="kw">THEN</span> 3 <span class="kw">WHEN</span> 'YELLOW' <span class="kw">THEN</span> 2 <span class="kw">END</span>)
+            <span class="kw">WHEN</span> 3 <span class="kw">THEN</span> 'RED' <span class="kw">WHEN</span> 2 <span class="kw">THEN</span> 'YELLOW' <span class="kw">ELSE</span> 'GREEN'
+       <span class="kw">END</span> <span class="kw">AS</span> medilight_level
+  <span class="kw">FROM</span> medivice.users u
+  <span class="kw">LEFT JOIN</span> ( <span class="c">-- 규칙 4종의 결과를 한 줄로 쌓는다</span>
+        <span class="kw">SELECT</span> user_id, level <span class="kw">FROM</span> medivice.v_overdose
+        <span class="kw">UNION ALL SELECT</span> user_id, level <span class="kw">FROM</span> medivice.v_pair_conflict
+        <span class="kw">UNION ALL SELECT</span> user_id, level <span class="kw">FROM</span> medivice.v_effect_dup
+        <span class="kw">UNION ALL SELECT</span> user_id, level <span class="kw">FROM</span> medivice.v_single_conflict
+       ) x <span class="kw">ON</span> x.user_id = u.user_id
+ <span class="kw">GROUP BY</span> u.user_id;</pre>
+
+  <p>읽는 법: <em>“사용자별로(<code>GROUP BY</code>), 규칙 4종에서 나온 판정 중
+     가장 심한 것(<code>MAX</code>)을 최종 색으로 삼는다.”</em> 이 한 문장이 뷰 전체의 뜻이다.</p>
+</section>
+
+<!-- 6 ───────────────────────────────────────────────── -->
+<section id="s6">
+  <h2>SQL은 5문장이면 우리 판정이 읽힌다</h2>
+  <p class="sub">함수를 다 알 필요가 없다. 아래 다섯 개가 우리 뷰의 99%다.</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>문장</th><th>하는 일</th><th>우리 쿼리에서</th></tr></thead>
+    <tbody>
+      <tr><td><code>SELECT … FROM</code></td><td>어느 표에서 어떤 칸을 꺼낼지</td><td>“복용 중인 약을 꺼낸다”</td></tr>
+      <tr><td><code>JOIN … ON</code></td><td>두 표를 <strong>공통 칸으로</strong> 이어 붙인다</td>
+          <td><code>ON pi.product_id = m.product_id</code> — 약과 성분을 잇는 바로 그 선(FK)</td></tr>
+      <tr><td><code>WHERE</code></td><td>행을 걸러낸다</td><td><code>WHERE m.ended_at IS NULL</code> — 아직 복용 중인 것만</td></tr>
+      <tr><td><code>GROUP BY</code></td><td>같은 값끼리 묶는다</td><td>“성분별로 묶어라”</td></tr>
+      <tr><td><code>SUM()</code> · <code>MAX()</code></td><td>묶인 것들을 하나의 숫자로</td>
+          <td><code>SUM(daily_amount)</code> — 하루 합산량. <strong>중복 판정이 여기서 나온다</strong></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p><strong>중요한 연결.</strong> <code>SUM()</code>이 성립하려면 성분이 <strong>행 단위로 펼쳐져</strong> 있어야 한다.
+     복합제 성분이 한 칸에 <code>"아세트아미노펜, 카페인"</code>처럼 묶여 있으면 합계를 낼 수 없다.
+     <strong>“정규화를 왜 했나”의 답이 바로 이것이다 — <code>SUM()</code> 한 줄이 성립하게 하려고.</strong></p>
+
+<pre><span class="c">-- 성분 중복 판정의 뼈대</span>
+<span class="kw">SELECT</span> ingredient_id, <span class="kw">COUNT</span>(*) <span class="kw">AS</span> 겹친제품수, <span class="kw">SUM</span>(daily_amount) <span class="kw">AS</span> 합산량
+  <span class="kw">FROM</span> v_active_ingredients
+ <span class="kw">WHERE</span> user_id = 1
+ <span class="kw">GROUP BY</span> ingredient_id
+<span class="kw">HAVING</span> <span class="kw">COUNT</span>(*) &gt; 1;   <span class="c">-- 두 제품 이상에 같은 성분이면 YELLOW</span></pre>
+</section>
+
+<!-- 7 ───────────────────────────────────────────────── -->
+<section id="s7">
+  <h2>sql 폴더의 파일 9개 — 무엇을, 왜 그 순서로</h2>
+  <p class="sub">“SQL 파일을 실행한다”는 건 <strong>그 안에 적힌 문장을 위에서부터 DB에 보낸다</strong>는 뜻이다.
+     번호는 반드시 지켜야 하는 <strong>의존 순서</strong>다 — 표가 없으면 뷰를 못 만들고, 뷰가 없으면 판정을 못 한다.</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>파일</th><th>하는 일</th><th>왜 이 순서인가</th></tr></thead>
+    <tbody>
+      <tr><td><code>01_schema_ddl</code></td><td>표 29개를 만든다 (<code>CREATE TABLE</code>)</td><td>모든 것의 바닥</td></tr>
+      <tr><td><code>02_seed_code</code></td><td>코드 값(DUR 유형·진료과·증상)과 인덱스</td><td>표가 있어야 값을 넣는다</td></tr>
+      <tr><td><code>03_medilight_views</code></td><td>판정 뷰 10개</td><td>표와 데이터가 있어야 조회가 성립</td></tr>
+      <tr><td><code>04_demo_scenario</code></td><td>실데이터로 RED·YELLOW·안내문구를 실제로 출력</td><td>설계가 작동한다는 증빙</td></tr>
+      <tr><td><code>05_unit_conversion_check</code></td><td>400mg + 0.7g = 1,100mg → RED 검사</td><td>단위 환산이 맞는지</td></tr>
+      <tr><td><code>06_schema_alignment</code></td><td>기존 DB에 부족한 칸만 추가</td><td>데이터를 지우지 않는 이관용</td></tr>
+      <tr><td><code>07_alignment_check</code></td><td>함량 미상 경고·API 상태 매핑 회귀 검사</td><td>고친 뒤에도 여전히 맞는지</td></tr>
+      <tr><td><code>08_widen_name_columns</code></td><td>품목명 칸을 300 → 500자로 확장</td><td>전량 적재 때 391자 품목명이 나와서</td></tr>
+      <tr><td><code>09_fix_single_rule_uniqueness</code></td><td>재적재 시 규칙이 2배로 늘던 문제 수정</td><td>NULL은 서로 같지 않다는 SQL 규칙 때문</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>실행하는 두 가지 방법</h3>
+<pre><span class="c"># psql 이 PATH 에 있을 때</span>
+psql -h localhost -U postgres -d medivice_db -f sql/04_demo_scenario.sql
+
+<span class="c"># psql 없이 파이썬으로 (윈도우에서 PATH 문제를 피하는 쪽)</span>
+python src\setup_db.py --all</pre>
+
+  <div class="note">
+    <b>알아두면 설명이 깔끔해지는 것 — 트랜잭션.</b>
+    <code>05</code>와 <code>07</code>은 <code>BEGIN</code>으로 시작해 <code>ROLLBACK</code>으로 끝난다.
+    가짜 사용자와 가짜 약을 넣어 판정이 제대로 도는지 확인한 다음
+    <strong>전부 없던 일로 되돌린다.</strong> 그래서 검사를 몇 번 돌려도 실제 DB는 더러워지지 않는다.
+    “검사용 데이터는 커밋하지 않는다”는 한 줄로 설명하면 된다.
+  </div>
+</section>
+
+<!-- 8 ───────────────────────────────────────────────── -->
+<section id="s8">
+  <h2>이런 질문이 들어온다</h2>
+  <p class="sub">실제로 나올 법한 것만 골랐다. 답은 한두 문장으로 끊는 게 낫다.</p>
+
+  <div class="qa">
+    <details>
+      <summary>표를 왜 29개나 만들었나요? 하나로 하면 안 되나요?</summary>
+      <div class="ans">
+        <p>한 표에 넣으면 같은 값이 계속 반복되고, 값 하나 바뀔 때 여러 행을 동시에 고쳐야 해서
+           어긋납니다. 더 결정적인 건 <strong>합산이 안 된다</strong>는 점입니다.
+           성분이 한 칸에 묶여 있으면 <code>SUM()</code>을 못 써서 “같은 성분이 겹치는지”를 계산할 수 없습니다.</p>
+      </div>
+    </details>
+    <details>
+      <summary>병용금기 79만 건 중 2만 건만 받았다는 게 표본 아닌가요?</summary>
+      <div class="ans">
+        <p>판정의 기준은 <strong>성분 단위 API(1,836행 전량)</strong>입니다. 79만 건짜리는
+           같은 규칙이 품목 조합만큼 반복된 것이라, 전량을 받아도 규칙은 늘지 않습니다.
+           2만 건은 원본 구조 검증과 제품 예시용으로 전 구간 계통추출한 것이고,
+           앞에서부터 자르면 규칙 7종만 잡히는 편향이 있어 간격을 두고 뽑았습니다.</p>
+      </div>
+    </details>
+    <details>
+      <summary>함량이 28% 비어 있는데 판정이 신뢰할 만한가요?</summary>
+      <div class="ans">
+        <p>비어 있는 건 저희가 못 채운 게 아니라 <strong>식약처 원본의 <code>QNT</code>가
+           비었거나 ‘적량’ 같은 문자열</strong>인 경우입니다. 임의로 숫자를 넣지 않고 NULL로 두었고,
+           그 성분은 합산에서 빼되 화면에 “함량 정보가 없어 합산하지 못했다”고 명시합니다.
+           숨기는 것보다 드러내는 쪽이 안전합니다.</p>
+      </div>
+    </details>
+    <details>
+      <summary>판정 로직을 왜 백엔드가 아니라 DB(뷰)에 넣었나요?</summary>
+      <div class="ans">
+        <p>같은 판정을 프론트·AI 설명·보고서가 각각 다시 구현하면 답이 갈라집니다.
+           뷰 하나를 기준으로 두면 어디서 조회해도 같은 색이 나오고,
+           규칙이 바뀌었을 때 고칠 자리도 한 군데입니다.</p>
+      </div>
+    </details>
+    <details>
+      <summary>ERD의 <code>ingredients</code>가 가운데 있는 이유가 있나요?</summary>
+      <div class="ans">
+        <p>참조 데이터와 서비스 데이터가 만나는 <strong>유일한 접점</strong>이기 때문입니다.
+           약(서비스)도 성분으로 펼쳐지고, 금기 규칙(참조)도 성분에 붙어 있어서
+           모든 판정 조인이 이 표를 지나갑니다. 그림에서 가운데 둔 것도 그 뜻입니다.</p>
+      </div>
+    </details>
+    <details>
+      <summary>처방받은 약인데 경고가 뜨면 의사가 틀렸다는 건가요?</summary>
+      <div class="ans">
+        <p>아닙니다. 경고는 <strong>처방 오류 단정이 아니라 전문가 확인이 필요하다는 신호</strong>입니다.
+           그래서 처방약도 판정에서 제외하지 않고, 안내 문구도 AI가 생성하지 않는
+           고정 템플릿으로 씁니다. 표현이 완화되거나 과장되면 안 되기 때문입니다.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span>메디바이스 DA · 데이터 파이프라인</span>
+  <span>기준일 2026-09-03 · PostgreSQL 16 · 테이블 29 / 뷰 10 / FK 37</span>
+</footer>
+
+</div>
