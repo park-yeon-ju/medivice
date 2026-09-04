@@ -111,8 +111,25 @@ public class MedilightViewRepository {
                   JOIN medivice.medications mb ON mb.medication_id = c.medication_b_id
                   LEFT JOIN medivice.products pa ON pa.product_id = ma.product_id
                   LEFT JOIN medivice.products pb ON pb.product_id = mb.product_id
-                  JOIN medivice.ingredients ia ON ia.ingredient_id = c.ingredient_a_id
-                  JOIN medivice.ingredients ib ON ib.ingredient_id = c.ingredient_b_id
+                  JOIN medivice.ingredients ia ON ia.ingredient_id = CASE
+                       -- v_pair_conflict의 ingredient_a/b는 규칙 저장 순서(작은 ID 우선)라
+                       -- medication_a/b 순서와 다를 수 있다. 화면의 "약 A · 성분 A"가 실제
+                       -- 조합이 되도록 각 복용 항목이 보유한 성분을 기준으로 다시 짝지어 준다.
+                       WHEN EXISTS (
+                           SELECT 1 FROM medivice.v_active_ingredients mia
+                            WHERE mia.medication_id = c.medication_a_id
+                              AND mia.ingredient_id = c.ingredient_a_id
+                       ) THEN c.ingredient_a_id
+                       ELSE c.ingredient_b_id
+                  END
+                  JOIN medivice.ingredients ib ON ib.ingredient_id = CASE
+                       WHEN EXISTS (
+                           SELECT 1 FROM medivice.v_active_ingredients mib
+                            WHERE mib.medication_id = c.medication_b_id
+                              AND mib.ingredient_id = c.ingredient_a_id
+                       ) THEN c.ingredient_a_id
+                       ELSE c.ingredient_b_id
+                  END
                  WHERE c.user_id = :userId
                 """;
         return jdbc.query(sql, new MapSqlParameterSource("userId", userId), (rs, n) -> new PairConflictRow(
