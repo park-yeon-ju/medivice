@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,6 +47,14 @@ public class MedicationController {
     @ResponseStatus(HttpStatus.CREATED)
     public MedicationCreateResponse create(@Valid @RequestBody MedicationCreateRequest request) {
         return medicationService.create(request);
+    }
+
+    @Operation(summary = "복용 항목 수정", description = "기존 복용 항목의 용량, 시점, 성분 목록 등을 수정하고 최신 안전성(medilight) 판정을 재계산하여 반환한다.")
+    @PutMapping("/{id}")
+    public MedicationCreateResponse update(
+            @Parameter(description = "수정할 medication_id") @PathVariable Long id,
+            @Valid @RequestBody MedicationCreateRequest request) {
+        return medicationService.update(id, request);
     }
 
     @Operation(summary = "복용 항목 삭제", description = "소프트 삭제(ended_at 기록)라 과거 증상 기록의 복용 스냅샷은 그대로 남는다. 응답 본문이 없으므로 최신 판정은 GET /api/medilight로 다시 조회해야 한다.")

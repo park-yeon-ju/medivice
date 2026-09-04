@@ -138,6 +138,76 @@ public class MedicationService {
     }
 
     /**
+     * UC14 보완: 복용 항목 수정.
+     * 용량·횟수·성분 목록 등을 변경하고, 의약품 안전성(Medilight)을 즉시 재계산하여 반환한다.
+     */
+    @Transactional
+    public MedicationCreateResponse update(Long medicationId, MedicationCreateRequest request) {
+        Long userId = demoUserResolver.resolveUserId();
+        MedicationHeaderRow existing = medicationRepository.findActiveById(medicationId, userId)
+                .orElseThrow(() -> new NotFoundException("복용 항목을 찾을 수 없습니다: id=" + medicationId));
+
+        boolean isPrescription = "PRESCRIPTION".equals(request.type());
+        String registerReason = null;
+        if (isPrescription) {
+            Integer departmentId = departmentRepository.findIdByName(request.department()).orElse(null);
+            if (existing.prescriptionId() != null) {
+                medicationRepository.updatePrescription(
+                        existing.prescriptionId(), request.hospital(), departmentId, request.reason(), request.duration());
+            } else {
+                Long newPrescriptionId = medicationRepository.insertPrescription(
+                        userId, request.hospital(), departmentId, request.reason(), request.duration());
+                medicationRepository.attachPrescription(medicationId, newPrescriptionId);
+            }
+        } else {
+            registerReason = request.reason();
+        }
+
+        medicationRepository.updateMedication(medicationId, userId, request.name(),
+                request.type(), request.timing(), request.doseUnit(), request.dose(), request.timesPerDay(),
+                registerReason);
+
+        medicationRepository.deleteMedicationIngredients(medicationId);
+        for (MedicationCreateRequest.IngredientInput ingredient : request.ingredients()) {
+            Long ingredientId = ingredientRepository.findOrCreateByName(ingredient.name());
+            medicationRepository.insertMedicationIngredient(medicationId, ingredientId,
+                    ingredient.amount(), ingredient.unit());
+        }
+
+        safetyCheckService.recordCheck(userId, "UPDATE");
+
+        List<IngredientDto> ingredientDtos = request.ingredients().stream()
+                .map(i -> new IngredientDto(i.name(), null, i.amount(), i.unit()))
+                .toList();
+
+        List<String> ingredientNames = request.ingredients().stream()
+                .map(MedicationCreateRequest.IngredientInput::name)
+                .toList();
+        String aiExplanation = generateExplanation(medicationId, request.name(), ingredientNames);
+
+        MedicationDto dto = new MedicationDto(
+                String.valueOf(medicationId),
+                request.type(),
+                request.name(),
+                ingredientDtos,
+                null,
+                request.dose(),
+                request.doseUnit(),
+                request.timesPerDay(),
+                request.timing(),
+                isPrescription ? request.hospital() : null,
+                isPrescription ? request.department() : null,
+                request.reason(),
+                existing.startedAt() != null ? existing.startedAt().toString() : LocalDate.now().toString(),
+                isPrescription ? request.duration() : null,
+                !isPrescription,
+                aiExplanation);
+
+        MedilightDto medilight = medilightService.build(userId);
+        return new MedicationCreateResponse(dto, medilight);
+    }
+
+    /**
      * §29·§31: 등록 직후 "이 약이 뭘 위한 약인지" + "복용 중 흔히 느낄 수 있는 것"을 만들어
      * ai_outputs에 캐시해 둔다. 등록 자체는 이 기능 없이도 되던 핵심 경로라, AI 호출이
      * 실패해도(키 미설정·네트워크 등) 등록 트랜잭션을 굴리지 않는다 — 실패 기록만 남기고
