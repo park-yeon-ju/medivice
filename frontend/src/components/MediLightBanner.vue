@@ -1,3 +1,12 @@
+<!--
+  MediLightBanner.vue
+  메인 화면에서 메디라이트 상태와 가장 중요한 판정 근거를 요약하는 배너.
+
+  병용 충돌이 있으면 단순 성분 합계보다 충돌 건수와 확인 안내를 먼저 보여준다.
+  상태별 배너 구조는 동일하게 유지하고 충돌 약·성분·근거는 상세 화면에서 확인하게 한다.
+
+  관련 UC: UC15, UC16 / 화면: SCR-MAIN-001
+-->
 <script setup>
 import { computed } from 'vue'
 import SignalLamp from './SignalLamp.vue'
@@ -13,7 +22,12 @@ const statusLabel = computed(() => {
   return '초록 · 확인된 문제 없음'
 })
 
+const conflicts = computed(() => props.analysis.conflicts ?? [])
+
 const reason = computed(() => {
+  if (conflicts.value.length) {
+    return `함께 확인해야 할 약 조합이 ${conflicts.value.length}건 있습니다. 아래 약과 성분을 의사·약사에게 보여주고 확인하세요.`
+  }
   const finding = props.analysis.findings?.[0]
   if (!finding) {
     return '현재 적재된 성분·규칙 범위에서 중복 또는 임계값 문제가 발견되지 않았습니다.'
@@ -29,13 +43,21 @@ const reason = computed(() => {
 </script>
 
 <template>
-  <section class="medilight-banner" :class="analysis.status.toLowerCase()" aria-labelledby="medilight-heading">
+  <section
+    class="medilight-banner"
+    :class="analysis.status.toLowerCase()"
+    aria-labelledby="medilight-heading"
+  >
     <SignalLamp :status="analysis.status" large />
     <div class="medilight-copy">
       <b id="medilight-heading">{{ statusLabel }}</b>
       <p>{{ reason }}</p>
     </div>
-    <RouterLink v-if="analysis.findings?.length" class="button ghost compact-button" to="/medilight">
+    <RouterLink
+      v-if="conflicts.length || analysis.findings?.length"
+      class="button ghost compact-button"
+      to="/medilight"
+    >
       {{ actionLabel }}
     </RouterLink>
   </section>

@@ -14,6 +14,7 @@ import { useMediviceStore } from '@/stores/medivice'
 const store = useMediviceStore()
 
 const primaryFinding = computed(() => store.medilight.findings[0])
+const conflicts = computed(() => store.medilight.conflicts ?? [])
 const statusLabel = computed(() => {
   if (store.medilight.status === 'CRIT') return '빨강 · 높은 주의'
   if (store.medilight.status === 'WARN') return '노랑 · 주의'
@@ -36,6 +37,52 @@ onMounted(() => store.loadDashboard())
       </div>
       <!-- 규칙 버전과 적용일은 분석 데이터로 유지하고, 사용자가 판단할 상태 헤더에서는 노출하지 않는다. -->
     </div>
+
+    <section v-if="conflicts.length" class="content-section">
+      <div class="section-title">
+        <div>
+          <span class="section-kicker">CONFLICTS</span>
+          <h2>충돌 약과 성분</h2>
+        </div>
+        <span class="chip crit">{{ conflicts.length }}건 · 높은 주의</span>
+      </div>
+      <article
+        v-for="(conflict, index) in conflicts"
+        :key="`${conflict.type}-${conflict.medicationA}-${conflict.medicationB}-${index}`"
+        class="finding-card"
+        :class="conflict.level.toLowerCase()"
+      >
+        <header>
+          <div>
+            <span class="chip" :class="conflict.level === 'CRIT' ? 'crit' : 'warn'">
+              {{ conflict.type }}
+            </span>
+            <h2>충돌 약과 성분</h2>
+          </div>
+          <b>{{ conflict.level === 'CRIT' ? '빨강 · 높은 주의' : '노랑 · 주의' }}</b>
+        </header>
+        <div class="evidence-list">
+          <div>
+            <span>{{ conflict.medicationA || '등록 약 정보 확인 필요' }}</span>
+            <code>{{ conflict.ingredientA || '성분 정보 확인 필요' }}</code>
+          </div>
+          <div v-if="conflict.medicationB || conflict.ingredientB">
+            <span>{{ conflict.medicationB || '등록 약 정보 확인 필요' }}</span>
+            <code>{{ conflict.ingredientB || '성분 정보 확인 필요' }}</code>
+          </div>
+          <div class="evidence-total">
+            <span>확인 근거</span>
+            <code>{{
+              conflict.detail || '현재 적재된 규칙에서 함께 확인이 필요한 조합입니다.'
+            }}</code>
+          </div>
+        </div>
+        <p class="safety-copy">
+          출처 식약처 DUR · 확인일 {{ store.medilight.checkedAt }} · 복용을 임의로 변경하지 말고
+          의사·약사에게 현재 복용 목록을 보여주세요.
+        </p>
+      </article>
+    </section>
 
     <section
       v-if="primaryFinding"
@@ -94,7 +141,7 @@ onMounted(() => store.loadDashboard())
       </div>
     </section>
 
-    <section v-else class="empty-state compact-empty">
+    <section v-else-if="!conflicts.length" class="empty-state compact-empty">
       <SignalLamp status="OK" large /><b>현재 규칙에서 확인된 문제 없음</b>
       <p>이 결과는 안전을 보장하지 않으며, 현재 적재된 성분·규칙 범위에 한정됩니다.</p>
     </section>
