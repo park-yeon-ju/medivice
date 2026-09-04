@@ -19,7 +19,12 @@ load_dotenv()
 import config  # noqa: E402
 
 SQL_DIR = config.BASE_DIR / "sql"
-STEPS = ["01_schema_ddl.sql", "02_seed_code.sql", "03_medilight_views.sql"]
+STEPS = [
+    "01_schema_ddl.sql",
+    "02_seed_code.sql",
+    "03_medilight_views.sql",
+    "05_backend_extensions.sql",
+]
 
 
 def connect(dbname):

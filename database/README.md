@@ -11,10 +11,11 @@
 ```
 
 > **팀원이라면 여기부터 읽지 마세요.** `docs/팀_공유_가이드.md` 를 먼저 보세요.
-> 수집·정규화는 DA 한 사람만 돌립니다. 신규 DB는 `sql/01~03` 실행 + `load_postgres.py`,
-> 기존 DB는 `sql/06_schema_alignment.sql` → `sql/08_widen_name_columns.sql` →
-> `sql/09_fix_single_rule_uniqueness.sql` 실행 후 `sql/03_medilight_views.sql`을 다시 실행합니다.
-> 인증키도, API 호출도 필요 없습니다.
+> 신규 DB는 스크립트 하나로 자동 설치됩니다:
+> - **macOS / Linux**: `./database/setup_db.sh`
+> - **Windows**: `database\setup_db.bat` (또는 `python src/setup_db.py`)
+>   (`sql/01_schema_ddl.sql` → `02_seed_code.sql` → `03_medilight_views.sql` → `05_backend_extensions.sql` 순차 실행)
+> 수집·정규화는 DA 한 사람만 돌립니다. 인증키도, API 호출도 필요 없습니다.
 
 ## 현재 어디까지 되어 있나
 
