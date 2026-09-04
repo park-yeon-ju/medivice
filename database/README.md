@@ -54,7 +54,7 @@
 ## 1. 환경 준비 (Windows PowerShell 기준)
 
 ```powershell
-cd database
+cd C:\Users\user\DA_데이터파이프라인
 
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1
@@ -66,7 +66,7 @@ pip install -r requirements.txt
 
 ### 인증키를 넣는 곳
 
-**`database/.env`** 파일 딱 하나다. 코드 어디에도 키를 적지 않는다.
+**`DA_데이터파이프라인/.env`** 파일 딱 하나다. 코드 어디에도 키를 적지 않는다.
 
 ```
 DATA_GO_KR_SERVICE_KEY=<발급받은_Decoding_키>

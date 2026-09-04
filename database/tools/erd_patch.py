@@ -97,7 +97,10 @@ def row_markup(x, y_top, idx, name, typ):
 
 # 서비스 ERD는 화면 설명용으로 컬럼을 의도적으로 추렸다. 전체 컬럼을 밀어 넣으면 그림의 목적이 깨지므로
 # 이번 개선에서 새로 생겨 발표 내용의 근거가 되는 컬럼만 채운다.
-STORY_COLS = {"rule_version", "source_ref", "reason_code", "as_needed", "amount_missing_count", "checked_at"}
+STORY_COLS = {
+    "rule_version", "source_ref", "reason_code", "as_needed", "amount_missing_count", "checked_at",
+    "custom_type", "timing", "dose_unit", "duration_note"
+}
 
 
 CONN_RE = re.compile(
