@@ -1,0 +1,2842 @@
+/*
+ * main.css
+ * Medivice 전 화면의 레이아웃·타이포그래피·반응형 동작을 정의하는 공통 스타일.
+ * 기획서의 시각 원칙과 회의에서 정한 가독성 기준을 기존 디자인 토큰으로 일관되게 적용한다.
+ */
+@import './tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  min-height: 100%;
+  background: var(--ground);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  background: var(--ground);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  word-break: keep-all;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+p,
+h1,
+h2,
+h3,
+ul {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  /* 기획서처럼 모든 일반 제목을 딥 그린으로 묶어 본문과의 위계를 분명히 한다. */
+  color: var(--rail-bg);
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid var(--line-2);
+  border-radius: 10px;
+  outline: 0;
+  background: var(--surface);
+  padding: 10px 12px;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  /* 일반 입력 포커스는 기획서의 기본 에메랄드 역할을 사용하고 의료 상태색과 구분한다. */
+  border-color: var(--emerald);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--emerald) 22%, transparent);
+}
+
+input:disabled {
+  color: var(--muted);
+  background: var(--surface-3);
+}
+
+textarea {
+  resize: vertical;
+}
+
+:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--lime) 52%, transparent);
+  outline-offset: 2px;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+.button {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 9px 15px;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.button.primary {
+  /* 진한 초록 배경에는 흰 글자를 사용해 인식 시작을 포함한 주요 동작의 대비를 확보한다. */
+  color: var(--action-ink);
+  background: var(--action);
+  box-shadow: 0 7px 16px color-mix(in srgb, var(--action) 18%, transparent);
+}
+
+.button.primary:hover:not(:disabled) {
+  background: var(--action-hover);
+  box-shadow: 0 9px 20px color-mix(in srgb, var(--action) 24%, transparent);
+}
+
+.button.primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--action) 16%, transparent);
+}
+
+.button.primary:disabled {
+  /* 비활성 상태에서도 문구를 읽을 수 있게 색 조합은 유지하고 깊이감만 제거한다. */
+  box-shadow: none;
+}
+
+.button.secondary {
+  border-color: var(--emerald);
+  color: var(--emerald-2);
+  background: var(--surface);
+}
+
+.button.ghost {
+  border-color: var(--line-2);
+  color: var(--ink-2);
+  background: var(--surface);
+}
+
+.button.text {
+  color: var(--emerald-2);
+  background: transparent;
+}
+
+.button.wide {
+  width: 100%;
+}
+
+.compact-button {
+  min-height: 34px;
+  padding: 7px 11px;
+  font-size: 14.4px;
+}
+
+.eyebrow,
+.section-kicker,
+.reference-date,
+.status-pipeline {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 13.2px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+}
+
+.eyebrow {
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 800;
+}
+
+.section-kicker {
+  color: var(--emerald-2);
+  font-family: var(--sans);
+  font-weight: 800;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 13.2px;
+  font-weight: 750;
+  line-height: 1.45;
+  white-space: nowrap;
+}
+
+.chip.ok {
+  border-color: var(--ok-line);
+  color: var(--ok);
+  background: var(--ok-bg);
+}
+
+.chip.warn {
+  border-color: var(--warn-line);
+  color: var(--warn);
+  background: var(--warn-bg);
+}
+
+.chip.crit {
+  border-color: var(--crit-line);
+  color: var(--crit);
+  background: var(--crit-bg);
+}
+
+.chip.rx {
+  border-color: var(--line-2);
+  color: var(--emerald-2);
+  /* 지병·처방 정보는 상태 판정이 아니므로 부드러운 브랜드 보조 표면을 사용한다. */
+  background: var(--tint);
+}
+
+.chip.neutral {
+  border-color: var(--line);
+  color: var(--muted);
+  background: var(--surface-3);
+}
+
+.chip.ai {
+  color: var(--emerald-2);
+  /* AI 결과는 규칙 기반 상태색과 섞이지 않는 보조 민트 표면으로 분리한다. */
+  background: var(--tint);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+
+.chip.symptom {
+  border-color: var(--line-2);
+  color: var(--emerald-2);
+  /* 증상 기록은 기획서에서 정한 민트 보조 강조 계열로 통일한다. */
+  background: var(--tint);
+}
+
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.brand-mark {
+  display: grid;
+  width: 21px;
+  height: 46px;
+  flex: none;
+  grid-template-rows: repeat(3, 1fr);
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--surface);
+}
+
+.brand-mark i:first-child {
+  /* 로고의 세 구획은 의료 상태등이 아니라 기획서의 브랜드 팔레트를 표현한다. */
+  background: var(--tint);
+}
+
+.brand-mark i:nth-child(2) {
+  background: var(--mint);
+}
+
+.brand-mark i:last-child {
+  background: var(--emerald);
+}
+
+.brand-copy {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-copy b {
+  font-size: 24px;
+  font-weight: 850;
+  letter-spacing: -0.04em;
+}
+
+.brand-copy small {
+  color: var(--muted);
+  font-size: 13.2px;
+}
+
+.brand-lockup.compact {
+  gap: 9px;
+}
+
+.brand-lockup.compact .brand-mark {
+  width: 14px;
+  height: 30px;
+  border: 0;
+}
+
+.brand-lockup.compact .brand-copy b {
+  font-size: 19.2px;
+}
+
+.brand-lockup.image-lockup {
+  width: 100%;
+}
+
+.brand-image {
+  /* 다크 메뉴바의 가로 공간 안에서 제공된 로고 비율과 선명도를 유지한다. */
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.brand-lockup.vertical-image-lockup {
+  width: 100%;
+  justify-content: center;
+}
+
+.vertical-brand-image {
+  /* 세로형 로고가 인증·설문 콘텐츠를 과도하게 밀지 않도록 읽기 좋은 크기로 제한한다. */
+  width: min(230px, 78vw);
+}
+
+.onboarding-header .brand-lockup.image-lockup {
+  /* 특이사항 문진의 진행 문구와 나란히 놓일 수 있도록 가로 로고만 적정 폭으로 제한한다. */
+  width: min(250px, 60vw);
+  flex: none;
+}
+
+.app-shell {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: 168px minmax(0, 1fr);
+  /* 순백색 카드와는 미세하게 구분하면서 화면 대부분은 흰색으로 느껴지는 바탕을 사용한다. */
+  background: color-mix(in srgb, var(--surface) 78%, var(--ground));
+}
+
+.side-rail {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  gap: 28px;
+  padding: 24px 14px 16px;
+  color: var(--rail-ink);
+  background: var(--rail-bg);
+}
+
+.side-rail .brand-copy b {
+  color: var(--rail-ink);
+}
+
+.rail-brand-link {
+  display: block;
+  padding: 0 7px;
+}
+
+.side-rail nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.side-rail nav a {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border-radius: 8px;
+  padding: 9px 10px;
+  color: var(--rail-ink-2);
+  font-size: 15px;
+  font-weight: 700;
+  transition:
+    color 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.side-rail nav a span {
+  /* 어두운 메뉴 배경에서 명칭을 빠르게 읽도록 거의 흰색에 가까운 기존 레일 색을 조합한다. */
+  color: color-mix(in srgb, var(--rail-ink) 92%, var(--rail-ink-2));
+  white-space: nowrap;
+}
+
+.side-rail nav a:hover span,
+.side-rail nav a.active span {
+  /* 상호작용 중인 메뉴명은 순백색으로 올려 현재 위치와 동작 대상을 명확히 구분한다. */
+  color: var(--rail-ink);
+}
+
+.side-rail nav a:hover {
+  color: var(--rail-ink);
+  background: color-mix(in srgb, var(--surface) 8%, transparent);
+}
+
+.side-rail nav a.active {
+  /* 선택 메뉴는 밝은 글자·분리된 배경·민트 표시선을 함께 사용해 색상만으로 구분하지 않는다. */
+  color: var(--rail-ink);
+  background: var(--rail-active);
+  box-shadow: inset 3px 0 0 var(--mint);
+}
+
+.side-rail nav svg {
+  width: 17px;
+  height: 17px;
+  flex: none;
+  fill: currentColor;
+}
+
+.rail-profile {
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+  border: 1px solid color-mix(in srgb, var(--rail-ink) 7%, transparent);
+  border-radius: 10px;
+  padding: 11px;
+  background: color-mix(in srgb, var(--rail-ink) 5%, transparent);
+}
+
+.rail-profile b {
+  color: var(--rail-ink);
+  font-size: 15px;
+}
+
+.rail-profile span,
+.rail-profile small {
+  color: var(--rail-ink-2);
+  font-size: 12.6px;
+}
+
+.app-pane {
+  min-width: 0;
+  /* 인증 화면은 건드리지 않고 스크린샷의 넓은 콘텐츠 바탕만 흰색에 가깝게 밝힌다. */
+  background: color-mix(in srgb, var(--surface) 78%, var(--ground));
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 15;
+  display: flex;
+  min-height: 70px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border-bottom: 1px solid var(--line);
+  padding: 12px clamp(20px, 4vw, 48px);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: blur(14px);
+}
+
+.topbar h1 {
+  /* 로그인 이후 화면 제목만 약 1.25배 키우되 작은 화면에서는 상단 동작을 밀지 않게 제한한다. */
+  font-size: clamp(24px, 2.3vw, 28.5px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.topbar > div:first-child {
+  min-width: 0;
+}
+
+.topbar-actions {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 12px;
+  /* 날짜 정보가 빠진 뒤에도 언어 전환을 화면 우측 끝에 고정한다. */
+  margin-left: auto;
+}
+
+.language-switch {
+  display: inline-flex;
+  overflow: hidden;
+  border: 1px solid var(--line-2);
+  border-radius: 7px;
+  background: var(--surface);
+}
+
+.language-switch button {
+  border: 0;
+  padding: 5px 9px;
+  color: var(--muted);
+  background: transparent;
+  font-family: var(--mono);
+  font-size: 12.6px;
+  font-weight: 700;
+}
+
+.language-switch button.active {
+  color: var(--lime);
+  background: var(--ink);
+}
+
+.language-switch.large button {
+  padding: 8px 14px;
+  font-family: var(--sans);
+  font-size: 14.4px;
+}
+
+.page-canvas {
+  display: flex;
+  width: min(1180px, 100%);
+  flex-direction: column;
+  gap: 22px;
+  margin: 0 auto;
+  padding: clamp(28px, 4vw, 48px);
+}
+
+.hero-row {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) minmax(360px, 0.9fr);
+  align-items: end;
+  gap: 28px;
+  padding: 6px 0 4px;
+}
+
+.hero-row h2,
+.page-intro h2,
+.section-heading h1,
+.status-title h2 {
+  margin-top: 4px;
+  font-size: clamp(21px, 3vw, 30px);
+  font-weight: 850;
+  letter-spacing: -0.045em;
+}
+
+.hero-row > div:first-child > p:last-child,
+.page-intro p:last-child,
+.section-title p,
+.helper-copy {
+  margin-top: 5px;
+  color: var(--muted);
+}
+
+.hero-date {
+  display: block;
+  margin-top: 7px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 17.3px;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+}
+
+.hero-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.action-card {
+  display: grid;
+  min-height: 96px;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr;
+  align-items: center;
+  column-gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease;
+}
+
+.action-card:hover {
+  transform: translateY(-2px);
+  /* 메인 빠른 실행 카드도 주요 동작 버튼과 같은 테두리 색상을 사용해 hover 피드백을 통일한다. */
+  border-color: var(--ok-line);
+}
+
+.action-card > span {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  grid-row: 1;
+  place-items: center;
+  border-radius: 11px;
+  font-size: 26.4px;
+  font-weight: 350;
+}
+
+.action-card.emerald > span,
+.action-card.mint > span {
+  /* 작은 아이콘 영역은 브랜드 민트의 채도를 높여 카드 제목보다 먼저 동작을 찾을 수 있게 한다. */
+  color: var(--ink);
+  background: color-mix(in srgb, var(--mint) 42%, var(--surface));
+}
+
+.action-card:hover > span {
+  /* 카드 hover에서는 같은 색상 계열 안에서만 한 단계 강조해 의료 상태색과 혼동되지 않게 한다. */
+  background: color-mix(in srgb, var(--mint) 56%, var(--surface));
+}
+
+.action-card b {
+  align-self: center;
+  font-size: 16.8px;
+}
+
+.action-card small {
+  align-self: start;
+  color: var(--muted);
+  font-size: 13.2px;
+}
+
+.signal {
+  display: inline-flex;
+  flex: none;
+  gap: 5px;
+  border-radius: 999px;
+  padding: 6px;
+  background: var(--surface-3);
+}
+
+.signal i {
+  display: block;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--line-2);
+}
+
+.signal.large i {
+  width: 18px;
+  height: 18px;
+}
+
+.signal.s-ok i:first-child {
+  background: var(--ok-light);
+  box-shadow:
+    0 0 0 3px var(--ok-bg),
+    0 0 12px color-mix(in srgb, var(--ok-light) 62%, transparent);
+}
+
+.signal.s-warn i:nth-child(2) {
+  background: var(--warn-light);
+  box-shadow:
+    0 0 0 3px var(--warn-bg),
+    0 0 12px color-mix(in srgb, var(--warn-light) 62%, transparent);
+}
+
+.signal.s-crit i:last-child {
+  background: var(--crit-light);
+  box-shadow:
+    0 0 0 3px var(--crit-bg),
+    0 0 12px color-mix(in srgb, var(--crit-light) 62%, transparent);
+}
+
+.medilight-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid;
+  border-radius: 14px;
+  padding: 18px 20px;
+}
+
+.medilight-banner.ok {
+  border-color: var(--ok-line);
+  background: var(--ok-bg);
+}
+
+.medilight-banner.warn {
+  border-color: var(--warn-line);
+  background: var(--warn-bg);
+}
+
+.medilight-banner.crit {
+  border-color: var(--crit-line);
+  background: var(--crit-bg);
+}
+
+.medilight-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.medilight-copy b {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 18px;
+  font-weight: 850;
+}
+
+.medilight-banner.ok .medilight-copy b {
+  color: var(--ok);
+}
+
+.medilight-banner.warn .medilight-copy b {
+  color: var(--warn);
+}
+
+.medilight-banner.crit .medilight-copy b {
+  color: var(--crit);
+}
+
+.medilight-copy p {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.content-section,
+.symptom-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.medilight-overview {
+  /* 바깥 카드 장식을 걷어 내고 제목과 상태 배너가 한 단계씩 읽히도록 정보 위계만 남긴다. */
+  gap: 12px;
+  padding-top: 4px;
+}
+
+.medilight-overview .section-title {
+  align-items: center;
+  border-left: 4px solid var(--lime-hover);
+  padding-left: 13px;
+}
+
+.medilight-overview .section-title h2 {
+  /* 상태 의미가 아니라 섹션 자체의 위계만 높여 기존 신호등·색·라벨 해석을 유지한다. */
+  color: var(--ink);
+  font-size: clamp(24px, 2.5vw, 28px);
+  font-weight: 850;
+  letter-spacing: -0.035em;
+}
+
+.medilight-overview .medilight-banner {
+  min-height: 112px;
+  padding: 22px 24px;
+  box-shadow: var(--shadow);
+}
+
+.medilight-overview .medilight-copy b {
+  font-size: 19.2px;
+}
+
+.medilight-overview .medilight-copy p {
+  font-size: 15.6px;
+}
+
+.section-title {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.section-title h2 {
+  margin-top: 2px;
+  font-size: 21.6px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.section-title > a {
+  color: var(--emerald-2);
+  font-size: 14.4px;
+  font-weight: 750;
+}
+
+.medication-group {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: 0 1px 1px color-mix(in srgb, var(--ink) 5%, transparent);
+}
+
+.medication-group > header {
+  display: flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-bottom: 1px solid var(--line);
+  padding: 10px 15px;
+  background: var(--surface-3);
+}
+
+.medication-group > header > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.medication-group > header > div > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.medication-group > header b {
+  font-size: 15px;
+  font-weight: 750;
+}
+
+.medication-group > header small {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 12.6px;
+}
+
+.group-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--line-2);
+}
+
+.group-dot.emerald {
+  /* 처방약 그룹은 기획서의 기본 에메랄드 역할로 표시한다. */
+  background: var(--emerald);
+}
+
+.group-dot.mint {
+  background: var(--mint);
+}
+
+.medication-row {
+  display: grid;
+  grid-template-columns: 3px minmax(0, 1fr) minmax(240px, auto) auto;
+  align-items: center;
+  gap: 13px;
+  border-bottom: 1px solid var(--line);
+  padding: 14px 15px;
+}
+
+.medication-row:last-child {
+  border-bottom: 0;
+}
+
+.category-stripe {
+  width: 3px;
+  align-self: stretch;
+  flex: none;
+  border-radius: 3px;
+}
+
+.category-stripe.rx {
+  background: var(--emerald);
+}
+
+.category-stripe.supplement {
+  background: var(--mint);
+}
+
+.category-stripe.warn {
+  background: var(--warn);
+}
+
+.medication-main {
+  min-width: 0;
+  flex: 1;
+}
+
+.medication-title,
+.inline-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.medication-title b {
+  font-size: 16.2px;
+  font-weight: 750;
+  letter-spacing: -0.015em;
+}
+
+.medication-main > p {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 13.8px;
+}
+
+.ai-summary {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin-top: 8px;
+  color: var(--ink-2);
+  font-size: 13.8px;
+}
+
+.medication-dose {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: repeat(2, minmax(104px, auto));
+  gap: 14px;
+  font-family: var(--mono);
+  font-size: 12.6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.medication-dose > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.medication-dose b,
+.medication-dose time {
+  color: var(--ink-2);
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+
+.medication-dose > div > span {
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 11.4px;
+  font-weight: 700;
+}
+
+.row-actions {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 4px;
+}
+
+.text-button,
+.icon-button {
+  border: 0;
+  color: var(--muted);
+  background: transparent;
+  font-size: 13.8px;
+  font-weight: 700;
+}
+
+.medication-row .text-button {
+  /* 링크와 실제 버튼의 기본 박스 차이를 없애 두 동작의 높이·기준선·클릭 영역을 맞춘다. */
+  display: inline-flex;
+  width: 48px;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  padding: 6px 9px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.text-button:hover {
+  color: var(--emerald-2);
+}
+
+.expanded .medication-row {
+  padding-block: 17px;
+}
+
+.empty-state,
+.loading-card,
+.error-card {
+  display: flex;
+  min-height: 320px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px dashed var(--line-2);
+  border-radius: 14px;
+  padding: 42px 20px;
+  text-align: center;
+  background: var(--surface);
+}
+
+.empty-state p,
+.error-card span {
+  max-width: 48ch;
+  color: var(--muted);
+}
+
+.empty-state > div {
+  display: flex;
+  gap: 8px;
+}
+
+.empty-illustration {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--emerald-2);
+  background: var(--tint-2);
+  font-size: 33.6px;
+}
+
+.spinner {
+  width: 22px;
+  height: 22px;
+  border: 3px solid var(--line-2);
+  /* 로딩 표시는 경고나 판정이 아닌 보조 진행 상태이므로 민트 강조를 사용한다. */
+  border-top-color: var(--mint);
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+}
+
+.spinner.small {
+  width: 14px;
+  height: 14px;
+  border-width: 2px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.content-card {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.row-intro {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 2px;
+}
+
+.status-page-heading {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+
+.status-title {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 16px;
+}
+
+.status-title > .signal {
+  align-self: center;
+}
+
+.status-title > div {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+}
+
+.status-title > div > span {
+  color: var(--muted);
+  font-size: 13.8px;
+}
+
+.status-title h2 {
+  margin-top: 0;
+  white-space: nowrap;
+}
+
+.finding-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border: 1px solid var(--warn-line);
+  border-radius: 14px;
+  padding: 22px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.finding-card.crit {
+  border-color: var(--crit-line);
+}
+
+.finding-card > header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.finding-card > header > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.finding-card h2 {
+  font-size: 26.4px;
+  font-weight: 850;
+}
+
+.finding-card > header > b {
+  color: var(--warn);
+  font-family: var(--mono);
+  font-size: 16.8px;
+  font-variant-numeric: tabular-nums;
+}
+
+.finding-card.crit > header > b {
+  color: var(--crit);
+}
+
+.formula {
+  border-radius: 9px;
+  padding: 11px 14px;
+  color: var(--rail-ink);
+  background: var(--rail-bg);
+  font-family: var(--mono);
+  font-size: 13.8px;
+  text-align: center;
+}
+
+.evidence-list {
+  border-radius: 10px;
+  padding: 12px 15px;
+  background: var(--surface-3);
+}
+
+.evidence-list > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 6px 0;
+  color: var(--ink-2);
+  font-size: 14.4px;
+}
+
+.evidence-list code {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.evidence-total {
+  border-top: 1px solid var(--line-2);
+  margin-top: 5px;
+  padding-top: 10px !important;
+  font-weight: 800;
+}
+
+.intake-meter {
+  padding: 0 2px;
+}
+
+.meter-track {
+  position: relative;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--surface-3);
+}
+
+.meter-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--warn-light);
+}
+
+.meter-track span.crit {
+  background: var(--crit-light);
+}
+
+.meter-track i {
+  position: absolute;
+  top: -4px;
+  right: 0;
+  width: 2px;
+  height: 16px;
+  background: var(--ink-2);
+  opacity: 0.5;
+}
+
+.intake-meter > div:last-child {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 12.6px;
+}
+
+.ai-box {
+  border: 1px dashed var(--line-2);
+  border-radius: 10px;
+  padding: 15px;
+  background: var(--surface);
+}
+
+.ai-box p {
+  margin: 9px 0;
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.ai-box small {
+  display: block;
+  border-top: 1px solid var(--line);
+  padding-top: 9px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.compact-empty {
+  min-height: 220px;
+}
+
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  margin-top: 16px;
+  border-collapse: collapse;
+  font-size: 14.4px;
+}
+
+.data-table th {
+  border-bottom: 1px solid var(--line);
+  padding: 9px 10px;
+  color: var(--muted);
+  background: var(--surface-3);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.data-table td {
+  border-bottom: 1px solid var(--line);
+  padding: 11px 10px;
+  vertical-align: middle;
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.numeric {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.safety-copy {
+  border-top: 1px dashed var(--line);
+  margin-top: 10px;
+  padding-top: 12px;
+  color: var(--muted);
+  font-size: 13.8px;
+}
+
+.auth-stage,
+.onboarding-stage {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 36px 20px;
+  background:
+    radial-gradient(
+      circle at 16% 8%,
+      color-mix(in srgb, var(--mint) 18%, transparent),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 88% 92%,
+      color-mix(in srgb, var(--emerald) 13%, transparent),
+      transparent 30%
+    ),
+    var(--ground);
+}
+
+.auth-stage:has(.not-found-card) {
+  /* 인증 화면과 같은 구조를 쓰는 404 화면만 예외로 구분해 로그인·회원가입 배경은 그대로 보존한다. */
+  background: color-mix(in srgb, var(--surface) 78%, var(--ground));
+}
+
+.auth-card,
+.onboarding-card {
+  width: min(420px, 100%);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 30px;
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+}
+
+.auth-card.signup {
+  width: min(620px, 100%);
+}
+
+.auth-brand-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth-brand-heading > .brand-lockup {
+  /* 로고 묶음과 화면 제목이 같은 중앙선을 공유하도록 부모에서 정렬한다. */
+  justify-content: center;
+  margin-bottom: 26px;
+}
+
+.auth-heading {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.auth-heading h1,
+.choice-card h1,
+.not-found-card h1 {
+  margin: 5px 0;
+  font-size: 28.8px;
+  font-weight: 850;
+  letter-spacing: -0.04em;
+}
+
+.auth-heading > p:last-child,
+.choice-card .lead-copy,
+.not-found-card > p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 15.6px;
+}
+
+.form-stack,
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-stack {
+  gap: 14px;
+}
+
+.form-field {
+  min-width: 0;
+  gap: 5px;
+}
+
+.form-field > span,
+.form-field legend {
+  color: var(--ink-2);
+  font-size: 14.4px;
+  font-weight: 750;
+}
+
+.form-field > span b,
+.form-field legend b {
+  color: var(--crit);
+}
+
+.form-field > span small,
+.form-field legend small {
+  margin-left: 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.form-field > small {
+  color: var(--muted);
+  font-size: 12.6px;
+}
+
+fieldset.form-field {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.field-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.field-grid.two,
+.selection-grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.field-grid.three,
+.selection-grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.ingredient-grid {
+  grid-template-columns: minmax(0, 1.4fr) minmax(100px, 0.7fr) minmax(90px, 0.5fr);
+}
+
+.field-error {
+  color: var(--crit);
+  font-size: 13.2px;
+}
+
+.privacy-note,
+.info-note,
+.warning-note {
+  /* 일반 안내는 에메랄드·소프트 민트 조합을 쓰고 경고 안내는 아래 전용 토큰으로 덮어쓴다. */
+  border-left: 3px solid var(--emerald);
+  border-radius: 0 8px 8px 0;
+  padding: 11px 13px;
+  color: var(--ink-2);
+  background: var(--tint);
+  font-size: 13.8px;
+}
+
+.info-note,
+.warning-note {
+  display: flex;
+  flex-direction: column;
+}
+
+.warning-note {
+  border-color: var(--warn);
+  background: var(--warn-bg);
+}
+
+.warning-note b {
+  color: var(--warn);
+}
+
+.auth-switch {
+  margin-top: 17px;
+  color: var(--muted);
+  font-size: 13.8px;
+  text-align: center;
+}
+
+.auth-switch a,
+.manual-link {
+  color: var(--emerald-2);
+  font-weight: 750;
+}
+
+.onboarding-stage {
+  align-content: center;
+  gap: 18px;
+  /* 로그인·회원가입의 그라데이션은 유지하고 설문·문진 바탕만 같은 밝은 오프화이트로 맞춘다. */
+  background: color-mix(in srgb, var(--surface) 78%, var(--ground));
+}
+
+.onboarding-header {
+  display: flex;
+  width: min(780px, 100%);
+  align-items: center;
+  justify-content: space-between;
+  /* 로고를 카드와 같은 너비 축에 놓아 문진 흐름의 시선이 자연스럽게 이어지게 한다. */
+  margin-bottom: 0;
+  padding: 0 8px;
+}
+
+.onboarding-header.choice-header {
+  width: min(720px, 100%);
+  justify-content: center;
+}
+
+.onboarding-header > span,
+.progress-label {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 12.6px;
+}
+
+.onboarding-card {
+  width: min(780px, 100%);
+  padding: clamp(30px, 4vw, 42px);
+}
+
+.choice-card {
+  width: min(720px, 100%);
+  text-align: center;
+}
+
+.onboarding-step-copy {
+  margin-top: 7px;
+  color: var(--emerald-2);
+  font-weight: 750;
+}
+
+.onboarding-step-copy + .lead-copy {
+  margin-top: 7px;
+}
+
+.question-icon {
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  color: var(--emerald-2);
+  /* 온보딩의 질문 표시는 상태색이 아닌 브랜드 보조 강조로 표현한다. */
+  background: var(--tint);
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.choice-grid,
+.quick-actions,
+.selection-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.choice-grid {
+  grid-template-columns: 1fr 1fr;
+  margin-top: 24px;
+}
+
+.choice-option,
+.selection-grid button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid var(--line-2);
+  border-radius: 12px;
+  padding: 15px;
+  text-align: left;
+  background: var(--surface);
+}
+
+.choice-option.selected,
+.selection-grid button.selected {
+  /* 일반 선택 상태는 브랜드 에메랄드와 소프트 민트로 통일한다. */
+  border-color: var(--emerald);
+  background: var(--tint);
+  box-shadow: inset 0 0 0 1px var(--emerald);
+}
+
+.report-builder .selection-grid button.selected {
+  /* 보고서 옵션의 선택 상태만 주요 동작 버튼과 같은 완료 색상으로 맞춰 다른 문진 선택에는 영향을 주지 않는다. */
+  border-color: var(--ok-line);
+  color: var(--ok);
+  background: var(--ok-bg);
+  box-shadow: inset 0 0 0 1px var(--ok-line);
+}
+
+.report-builder .selection-grid button.selected span {
+  color: inherit;
+}
+
+.choice-option b,
+.selection-grid button b {
+  font-size: 15.6px;
+}
+
+.choice-option span,
+.selection-grid button span {
+  color: var(--muted);
+  font-size: 13.2px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+}
+
+.onboarding-card > .form-field,
+.onboarding-card > .field-grid,
+.onboarding-card > .optional-block {
+  margin-bottom: 16px;
+}
+
+.check-options,
+.symptom-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.check-options button,
+.symptom-options button {
+  border: 1px solid var(--line-2);
+  border-radius: 8px;
+  padding: 7px 10px;
+  color: var(--ink-2);
+  background: var(--surface);
+  font-size: 13.8px;
+}
+
+.check-options button.selected,
+.symptom-options button.selected {
+  border-color: var(--emerald);
+  color: var(--emerald-2);
+  background: var(--tint);
+  font-weight: 750;
+}
+
+.symptom-options button.selected {
+  /* 선택 전후를 구분하면서 주요 저장 버튼과 같은 완료 색상 체계를 사용하도록 증상 선택 상태만 덮어쓴다. */
+  border-color: var(--ok-line);
+  color: var(--ok);
+  background: var(--ok-bg);
+}
+
+.onboarding-stage > form.onboarding-card .check-options button.selected {
+  /* 온보딩 지병 선택만 같은 색상 체계로 연결하고 마이페이지의 편집 상태에는 영향을 주지 않는다. */
+  border-color: var(--ok-line);
+  color: var(--ok);
+  background: var(--ok-bg);
+}
+
+.condition-direct-field {
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 9px;
+  background: var(--surface-3);
+}
+
+.symptom-options button span {
+  display: none;
+}
+
+.symptom-options button.selected span {
+  display: inline;
+}
+
+.unit-input,
+.input-action {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.unit-input {
+  position: relative;
+}
+
+.unit-input i {
+  position: absolute;
+  right: 12px;
+  color: var(--muted);
+  font-style: normal;
+  font-size: 13.2px;
+}
+
+.optional-block {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+  background: var(--surface-2);
+}
+
+.optional-block > div:first-child {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.optional-block > div:first-child b {
+  font-size: 15px;
+}
+
+.optional-block > div:first-child span {
+  color: var(--muted);
+  font-size: 12.6px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.form-actions.split {
+  justify-content: space-between;
+}
+
+.quick-actions.three {
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 16px;
+}
+
+.quick-actions.two {
+  /* 버튼과 도착 화면 제목이 같은 두 등록 방식만 남겨 빈 열이 생기지 않게 한다. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 16px;
+}
+
+.medication-onboarding .medication-group {
+  max-height: 330px;
+  overflow-y: auto;
+}
+
+.modal-page {
+  display: grid;
+  min-height: calc(100vh - 166px);
+  place-items: center;
+  border-radius: 16px;
+  padding: 28px;
+  /* 사진 등록과 직접 입력도 일반 서비스 화면이므로 같은 밝은 오프화이트 바탕을 사용한다. */
+  background: color-mix(in srgb, var(--surface) 78%, var(--ground));
+}
+
+.dialog-card {
+  width: min(540px, 100%);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+}
+
+.wide-dialog {
+  width: min(680px, 100%);
+}
+
+.dialog-header,
+.dialog-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 18px;
+}
+
+.dialog-header {
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+
+.dialog-header h2 {
+  font-size: 19.2px;
+  font-weight: 800;
+}
+
+.icon-button {
+  font-size: 26.4px;
+}
+
+.dialog-body {
+  display: flex;
+  max-height: calc(100vh - 260px);
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+  padding: 18px;
+}
+
+.dialog-footer {
+  justify-content: flex-end;
+  border-top: 1px solid var(--line);
+  background: var(--surface-2);
+}
+
+.dialog-footer > :first-child {
+  margin-right: auto;
+}
+
+.segmented-select {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.segmented-select button {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line-2);
+  border-radius: 12px;
+  padding: 13px;
+  background: var(--surface);
+}
+
+.segmented-select button.active {
+  /* 공통 분할 선택은 브랜드 기본색을 사용하며 사진 등록의 확정 색상은 하위 규칙에서 유지한다. */
+  border-color: var(--emerald);
+  background: var(--tint);
+  box-shadow: inset 0 0 0 1px var(--emerald);
+}
+
+.segmented-select span {
+  color: var(--muted);
+  font-size: 12.6px;
+}
+
+.modal-page > .dialog-card:not(.wide-dialog) .segmented-select button.active {
+  /* 사진 유형의 선택 상태만 완료 색상으로 표시해 선택 전 항목과의 구분을 유지한다. */
+  border-color: var(--ok-line);
+  color: var(--ok);
+  background: var(--ok-bg);
+  box-shadow: inset 0 0 0 1px var(--ok-line);
+}
+
+.modal-page > .dialog-card:not(.wide-dialog) .segmented-select button.active span {
+  color: inherit;
+}
+
+.modal-page > .dialog-card:not(.wide-dialog) .drop-zone .button.secondary {
+  /* 파일 선택도 같은 등록 흐름의 동작이므로 형태는 유지하고 색상 체계만 통일한다. */
+  border-color: var(--ok-line);
+  color: var(--ok);
+  background: var(--ok-bg);
+}
+
+.modal-page > .dialog-card:not(.wide-dialog) .upload-icon {
+  /* 업로드 화살표도 같은 흐름임을 알 수 있도록 원형 형태는 유지하고 색상만 맞춘다. */
+  color: var(--ok);
+  background: var(--ok-bg);
+}
+
+.modal-page .ocr-medication-card .checkbox-line input[type='checkbox'] {
+  /* 인식 결과의 포함 여부만 등록 동작과 같은 색으로 연결하고 기본 체크박스 형태는 유지한다. */
+  accent-color: var(--ok);
+}
+
+.drop-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border: 2px dashed var(--line-2);
+  border-radius: 12px;
+  padding: 28px 18px;
+  text-align: center;
+  background: var(--surface-2);
+  cursor: pointer;
+}
+
+.drop-zone.populated {
+  /* 파일 선택 완료는 의료 판정이 아니므로 에메랄드·소프트 민트로만 구분한다. */
+  border-color: var(--emerald);
+  background: var(--tint);
+}
+
+.drop-zone.busy {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.drop-zone input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.drop-zone small {
+  color: var(--muted);
+  font-size: 12.6px;
+}
+
+.upload-icon {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--emerald-2);
+  background: var(--tint-2);
+  font-size: 22.8px;
+}
+
+.manual-link {
+  align-self: flex-end;
+  font-size: 13.8px;
+}
+
+.manual-link.disabled {
+  color: var(--muted);
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.button.primary .button-spinner {
+  /* 강조 버튼 위에서도 진행 상태가 보이도록 기존 전경 토큰으로 대비를 만든다. */
+  border-color: color-mix(in srgb, var(--action-ink) 25%, transparent);
+  border-top-color: var(--action-ink);
+}
+
+.ocr-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+.ocr-card > header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  padding: 10px 12px;
+  color: var(--emerald-2);
+  background: var(--tint);
+  font-size: 13.8px;
+}
+
+.ocr-row {
+  display: grid;
+  grid-template-columns: 105px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--line);
+  padding: 9px 12px;
+  font-size: 13.8px;
+}
+
+.ocr-row:last-child {
+  border-bottom: 0;
+}
+
+.ocr-row > span {
+  color: var(--muted);
+  font-weight: 650;
+}
+
+.ocr-row > button {
+  border: 0;
+  border-bottom: 1px dashed var(--line-2);
+  padding: 2px 0;
+  text-align: left;
+  background: transparent;
+  font-weight: 650;
+}
+
+.ocr-row > small {
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-family: var(--mono);
+  font-size: 11.4px;
+}
+
+.ocr-row > small.high {
+  color: var(--ok);
+  background: var(--ok-bg);
+}
+
+.ocr-row > small.low {
+  color: var(--warn);
+  background: var(--warn-bg);
+}
+
+.calculation-preview {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  border-radius: 9px;
+  padding: 12px 14px;
+  background: var(--surface-3);
+  font-size: 13.2px;
+}
+
+.calculation-preview code {
+  color: var(--muted);
+  font-family: var(--mono);
+  text-align: center;
+}
+
+.symptom-layout {
+  display: grid;
+  /* 입력과 스냅샷을 같은 폭으로 읽도록 화면 크기와 관계없이 세로 흐름을 유지한다. */
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 16px;
+}
+
+.symptom-form {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+.snapshot-card {
+  position: static;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 22px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.snapshot-heading {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  font-size: 17.3px;
+  font-weight: 750;
+}
+
+.snapshot-card > p {
+  color: var(--muted);
+  font-size: 15.8px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.snapshot-card ul {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 16.6px;
+}
+
+.snapshot-card li {
+  display: flex;
+  /* 긴 제품명이 두 줄이 되어도 신호점이 첫 줄과 정렬되고 글자가 카드 밖으로 넘치지 않게 한다. */
+  align-items: flex-start;
+  gap: 7px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.snapshot-card .group-dot {
+  margin-top: 0.5em;
+}
+
+.snapshot-card .button {
+  font-size: 17px;
+}
+
+.profile-hero {
+  display: flex;
+  align-items: center;
+  /* 아바타와 사용자 정보가 붙어 보이지 않도록 텍스트 시작점까지의 여백을 넓힌다. */
+  gap: 22px;
+}
+
+.avatar {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  flex: none;
+  place-items: center;
+  margin-inline: 4px;
+  border-radius: 50%;
+  /* 프로필 아바타는 기획서의 기본 에메랄드 역할을 사용해 형광 라임 장식을 줄인다. */
+  color: var(--on-accent);
+  background: var(--emerald);
+  font-size: 24px;
+  font-weight: 850;
+}
+
+.profile-hero > div {
+  min-width: 0;
+  flex: 1;
+}
+
+.profile-hero h2 {
+  font-size: 22.8px;
+  font-weight: 800;
+}
+
+.profile-hero p:not(.eyebrow) {
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 13.8px;
+}
+
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.tile-grid > a {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 11px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px;
+  background: var(--surface);
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease;
+}
+
+.tile-grid > a:hover {
+  transform: translateY(-2px);
+  /* 마이페이지 기능 카드도 공통 동작 색상으로 hover 테두리를 통일한다. */
+  border-color: var(--ok-line);
+}
+
+.tile-icon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  grid-row: 1 / 4;
+  place-items: center;
+  border-radius: 9px;
+  color: var(--emerald-2);
+  background: var(--tint-2);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.tile-grid b {
+  font-size: 16.2px;
+}
+
+.tile-grid p {
+  color: var(--muted);
+  font-size: 13.8px;
+}
+
+.tile-grid small {
+  margin-top: 7px;
+  color: var(--emerald-2);
+  font-size: 12.6px;
+  font-weight: 700;
+}
+
+.language-card,
+.dangerless-card,
+.family-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.language-card p,
+.dangerless-card p,
+.family-card p {
+  color: var(--muted);
+  font-size: 13.8px;
+}
+
+.profile-table {
+  margin-top: 16px;
+}
+
+.profile-row {
+  display: grid;
+  grid-template-columns: 160px minmax(180px, 1fr) minmax(160px, 0.65fr);
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--line);
+  padding: 13px 4px;
+  font-size: 14.4px;
+}
+
+.profile-row:last-child {
+  border-bottom: 0;
+}
+
+.profile-row > span:first-child {
+  color: var(--muted);
+  font-weight: 650;
+}
+
+.profile-row small {
+  color: var(--muted);
+}
+
+.profile-options {
+  margin-top: 18px;
+}
+
+.section-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-edit-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.profile-edit-wide {
+  grid-column: 1 / -1;
+}
+
+.account-fields {
+  margin-top: 18px;
+}
+
+.success-message {
+  border: 1px solid var(--ok-line);
+  border-radius: 8px;
+  margin-top: 14px;
+  padding: 10px 12px;
+  color: var(--ok);
+  background: var(--ok-bg);
+}
+
+.date-filter-card {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(160px, 1fr)) auto;
+  align-items: end;
+  gap: 12px;
+}
+
+.date-filter-card > p {
+  grid-column: 1 / -1;
+}
+
+.date-filter-card input,
+.date-filter-card > .button {
+  min-height: 49px;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: color-mix(in srgb, var(--rail-bg) 62%, transparent);
+}
+
+.confirmation-modal {
+  width: min(420px, 100%);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 26px;
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+}
+
+.confirmation-modal p {
+  margin: 10px 0 20px;
+  color: var(--ink-2);
+}
+
+.muted-row {
+  opacity: 0.68;
+}
+
+.account-card,
+.family-card {
+  margin-bottom: 2px;
+}
+
+.family-card > div:first-child {
+  max-width: 58ch;
+}
+
+.family-card h2 {
+  margin-top: 7px;
+  font-size: 20.4px;
+}
+
+.family-card .input-action {
+  width: min(390px, 100%);
+}
+
+.dangerless-card {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px 18px;
+  background: var(--surface);
+}
+
+.symptom-log {
+  display: grid;
+  grid-template-columns: 70px minmax(0, 1fr) auto;
+  gap: 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  background: var(--surface);
+}
+
+.symptom-log time {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--line);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 12.6px;
+}
+
+.symptom-log time b {
+  color: var(--ink);
+  font-size: 18px;
+}
+
+.symptom-log > div:nth-child(2) p {
+  margin: 7px 0;
+  color: var(--ink-2);
+  font-size: 14.4px;
+}
+
+.symptom-log > div:nth-child(2) small {
+  display: block;
+  border-top: 1px dashed var(--line);
+  padding-top: 7px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.report-builder {
+  width: min(760px, 100%);
+  margin: 0 auto;
+}
+
+.report-options {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.selection-grid {
+  margin-top: 6px;
+}
+
+.include-list {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: var(--surface-2);
+}
+
+.include-list b {
+  font-size: 14.4px;
+}
+
+.include-list ul {
+  display: grid;
+  /* 포함 범위를 빠르게 확인할 수 있도록 세 항목을 항상 한 열로 나열한다. */
+  grid-template-columns: 1fr;
+  gap: 7px 18px;
+  margin-top: 8px;
+  padding: 0;
+  color: var(--ink-2);
+  font-size: 13.8px;
+  list-style: none;
+}
+
+.include-list li::before {
+  margin-right: 7px;
+  /* 포함 항목 체크는 상태 판정이 아닌 기본 브랜드 강조로 표시한다. */
+  color: var(--emerald);
+  content: '✓';
+}
+
+.status-pipeline {
+  text-align: center;
+}
+
+.report-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.report-toolbar > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 13.2px;
+}
+
+.medical-report {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: clamp(20px, 4vw, 36px);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.report-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 22px;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 16px;
+}
+
+.report-header > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.report-header > div:first-child > b {
+  font-size: 25.2px;
+  font-weight: 850;
+  letter-spacing: -0.035em;
+}
+
+.report-header span,
+.report-header > div:last-child > b {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 12.6px;
+}
+
+.report-header > div:last-child {
+  text-align: right;
+}
+
+.report-section {
+  border-bottom: 1px solid var(--line);
+  padding: 20px 0;
+}
+
+.report-section h2 {
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 13.2px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.report-table {
+  min-width: 800px;
+  margin-top: 0;
+}
+
+.report-safety {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--warn-line);
+  border-radius: 12px;
+  padding: 12px;
+  background: var(--warn-bg);
+}
+
+.report-safety > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.report-safety span {
+  color: var(--ink-2);
+  font-size: 13.2px;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-left: 2px solid var(--line);
+  margin-left: 5px;
+  padding-left: 18px;
+}
+
+.timeline-event {
+  position: relative;
+}
+
+.timeline-event::before {
+  position: absolute;
+  top: 6px;
+  left: -23px;
+  width: 8px;
+  height: 8px;
+  border: 2px solid var(--surface);
+  border-radius: 50%;
+  /* 증상 기록 타임라인은 기획서의 민트 보조 강조 역할을 따른다. */
+  background: var(--mint);
+  content: '';
+}
+
+.timeline-event time {
+  display: block;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.timeline-event b {
+  font-size: 14.4px;
+}
+
+.timeline-event p {
+  color: var(--ink-2);
+  font-size: 13.8px;
+}
+
+.report-disclaimer {
+  padding-top: 16px;
+  color: var(--muted);
+  font-size: 12.6px;
+}
+
+.not-found-card {
+  text-align: center;
+}
+
+.not-found-card .button {
+  margin-top: 20px;
+}
+
+@media (max-width: 900px) {
+  .hero-row,
+  .symptom-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .snapshot-card {
+    position: static;
+  }
+
+  .medication-row {
+    grid-template-columns: 3px minmax(0, 1fr) auto;
+  }
+
+  .category-stripe {
+    grid-row: 1 / 3;
+  }
+
+  .medication-dose {
+    grid-column: 2;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .medication-row > .row-actions {
+    grid-column: 3;
+    grid-row: 1 / 3;
+    flex-direction: column;
+  }
+
+  .profile-row {
+    grid-template-columns: 120px 1fr auto;
+  }
+
+  .profile-row small {
+    display: none;
+  }
+
+  .family-card {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 720px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+    padding-bottom: 66px;
+  }
+
+  .side-rail {
+    position: fixed;
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 50;
+    width: 100%;
+    height: 66px;
+    padding: 8px;
+    box-shadow: 0 -8px 30px color-mix(in srgb, var(--rail-bg) 16%, transparent);
+  }
+
+  .rail-brand-link,
+  .rail-profile {
+    display: none;
+  }
+
+  .side-rail nav {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+  }
+
+  .side-rail nav a {
+    flex-direction: column;
+    gap: 2px;
+    padding: 5px 2px;
+    font-size: 11.4px;
+  }
+
+  .side-rail nav a.active {
+    /* 모바일 하단 메뉴에서는 표시선을 위쪽에 두어 현재 페이지를 빠르게 찾게 한다. */
+    box-shadow: inset 0 3px 0 var(--mint);
+  }
+
+  .side-rail nav svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .onboarding-header .brand-lockup.image-lockup {
+    /* 작은 화면에서는 단계 문구의 공간을 남겨 로고와 겹치지 않게 한다. */
+    width: min(190px, 58vw);
+  }
+
+  .topbar {
+    min-height: 60px;
+    padding: 10px 16px;
+  }
+
+  .topbar h1 {
+    font-size: clamp(22px, 6.8vw, 25px);
+  }
+
+  .hero-date {
+    margin-top: 6px;
+    font-size: 16.2px;
+  }
+
+  .reference-date {
+    display: none;
+  }
+
+  .page-canvas {
+    padding: 24px 16px;
+  }
+
+  .hero-actions,
+  .tile-grid,
+  .choice-grid,
+  .quick-actions.two,
+  .quick-actions.three,
+  .profile-edit-grid,
+  .date-filter-card,
+  .field-grid.two,
+  .field-grid.three,
+  .ingredient-grid,
+  .selection-grid.two,
+  .selection-grid.three,
+  .include-list ul {
+    grid-template-columns: 1fr;
+  }
+
+  .medilight-banner,
+  .status-page-heading,
+  .finding-card > header,
+  .language-card,
+  .dangerless-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .medilight-banner .button {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .medilight-overview .medilight-banner {
+    min-height: 0;
+    padding: 18px;
+  }
+
+  .status-title {
+    align-items: flex-start;
+  }
+
+  .status-title > div {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .status-title h2 {
+    white-space: normal;
+  }
+
+  .medication-row {
+    row-gap: 10px;
+  }
+
+  .category-stripe {
+    grid-row: 1 / 3;
+  }
+
+  .medication-dose {
+    align-items: flex-start;
+  }
+
+  .medication-row > .row-actions {
+    gap: 8px;
+  }
+
+  .date-filter-card > .button {
+    width: 100%;
+  }
+
+  .profile-hero,
+  .row-intro,
+  .report-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .profile-hero {
+    gap: 16px;
+  }
+
+  .profile-hero .avatar {
+    margin-inline: 0;
+  }
+
+  .profile-hero > .button {
+    margin-left: 0;
+  }
+
+  .report-header > div:last-child {
+    text-align: left;
+  }
+
+  .profile-row {
+    grid-template-columns: 110px minmax(0, 1fr);
+  }
+
+  .profile-row small {
+    grid-column: 2;
+  }
+
+  .symptom-log {
+    grid-template-columns: 58px minmax(0, 1fr);
+  }
+
+  .symptom-log > .row-actions {
+    grid-column: 2;
+  }
+
+  .dialog-body {
+    max-height: none;
+  }
+
+  .modal-page {
+    min-height: auto;
+    padding: 0;
+    background: transparent;
+  }
+
+  .dialog-card {
+    border-radius: 13px;
+  }
+
+  .ocr-row {
+    grid-template-columns: 88px 1fr;
+  }
+
+  .ocr-row > small {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .calculation-preview {
+    grid-template-columns: 1fr;
+  }
+
+  .calculation-preview code {
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  .side-rail,
+  .topbar,
+  .report-toolbar {
+    display: none !important;
+  }
+
+  .app-shell {
+    display: block;
+  }
+
+  .page-canvas {
+    width: 100%;
+    padding: 0;
+  }
+
+  .medical-report {
+    border: 0;
+    box-shadow: none;
+  }
+}

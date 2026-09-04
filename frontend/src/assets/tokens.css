@@ -1,0 +1,62 @@
+/*
+ * tokens.css
+ * Medivice 기획서의 브랜드 팔레트와 전 화면 공통 디자인 값을 정의한다.
+ * 컴포넌트는 색상값을 직접 쓰지 않고 이 의미 기반 토큰을 통해 일관된 스타일을 공유한다.
+ */
+:root {
+  /* 기획서가 라이트 테마만 정의하므로 실행 환경과 관계없이 동일한 발표 화면을 유지한다. */
+  color-scheme: light;
+
+  /* 넓은 콘텐츠 바탕은 녹색 면적으로 느껴지지 않을 만큼 흰색에 가깝게 둔다. */
+  --ground: #fafdfc;
+  --surface: #ffffff;
+  --surface-2: #fbfcfe;
+  --surface-3: #f7f9fc;
+  --ink: #08302a;
+  --ink-2: #173d37;
+  --muted: #496f68;
+  --line: #d3ebe5;
+  --line-2: #b9ddd4;
+
+  /* 기획서의 민트는 보조 강조, 에메랄드는 기본 동작, 딥 그린은 본문·내비게이션에 사용한다. */
+  --emerald: #00996f;
+  --emerald-2: #08785a;
+  --mint: #17bfae;
+  --lime: #17bfae;
+  --lime-hover: #08785a;
+  /* 밝은 보조 강조 위에는 진한 글자를, 주요 동작 버튼에는 별도의 고대비 조합을 사용한다. */
+  --lime-ink: #111111;
+  --on-accent: #111111;
+  --tint: #dff5ee;
+  --tint-2: #eaf9f5;
+
+  --action: #08785a;
+  --action-hover: #08302a;
+  --action-ink: #ffffff;
+
+  --rail-bg: #08302a;
+  --rail-ink: #ffffff;
+  --rail-ink-2: #e0efeb;
+  --rail-active: #0d5f50;
+
+  /* 의료 상태는 기획서의 세 단계 의미를 그대로 유지하고 장식색과 분리한다. */
+  /* 전체 스타일 변경 전 백업의 선명한 메디라이트 조합을 복원한다. */
+  --ok: #007a3d;
+  --ok-light: #00e676;
+  --ok-bg: #dcffeb;
+  --ok-line: #22d975;
+  --warn: #9a6100;
+  --warn-light: #ffc400;
+  --warn-bg: #fff3bf;
+  --warn-line: #ffbd00;
+  --crit: #c62820;
+  --crit-light: #ff3b30;
+  --crit-bg: #ffe2df;
+  --crit-line: #ff5a50;
+
+  /* 녹색 계열 그림자는 흰 카드가 배경에서 부드럽게 분리되는 정도로만 사용한다. */
+  --shadow: 0 8px 24px rgb(8 48 42 / 7%);
+  --shadow-lg: 0 20px 50px rgb(8 48 42 / 14%);
+  --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  --sans: Pretendard, 'Noto Sans KR', 'Apple SD Gothic Neo', system-ui, -apple-system, sans-serif;
+}
