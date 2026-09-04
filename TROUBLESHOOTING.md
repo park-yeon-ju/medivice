@@ -1,6 +1,6 @@
 # 메디바이스 백엔드 트러블슈팅
 
-- 작성일: 2026-09-03 (최종 갱신: 2026-09-03 — Java 21 업그레이드, OCR 속도 개선, AI 설정 외부화·비동기 전환, 성분 DB 우선 조회·이름 폴백, DB 전체 재적재(43,019개 제품), 복용 항목 AI 설명(효능+부작용) 이후)
+- 작성일: 2026-09-03 (최종 갱신: 2026-09-04 — Java 21 업그레이드, OCR 속도 개선, AI 설정 외부화·비동기 전환, 성분 DB 우선 조회·이름 폴백(3차: 부분 문자열 폴백 포함), DB 전체 재적재(43,019개 제품), 복용 항목 AI 설명(효능+부작용), 등록 입력값 검증, 동명·이형 성분 orphan 중복 정리, OCR 복합제/개별 약 판별 기준 보강, 메디라이트 배지·conflicts 설명 불일치 수정, 판정 범위 밖 성분 안내 구조화, 나이 조건 없는 특정연령대금기 오탐 수정, 병용금기 표에 실제 충돌 성분 노출 이후)
 - 대상: `src/main/java/com/project/medivice/**` (Spring Boot) + 로컬 DB/AI 연동
 - 기록 형식: 문제 → 재현 방법 → 원인 → 해결 → 확인 → 관련 파일
 
@@ -1245,3 +1245,485 @@ POST /api/medications (탐부틴정200밀리그램, 트리메부틴말레산염 
   (`findEfficacyByProductName` → `findProductInfoByProductName`)
 - `src/main/java/com/project/medivice/service/ProductLookupService.java` (`findProductInfo`)
 - §29(이 기능의 원본 구현)
+
+---
+
+## 32. 등록 실패가 raw SQL 에러로 그대로 화면에 노출됨 — `timesPerDay` 검증 누락
+
+### 문제
+
+사용자가 약을 등록하는데 화면에 이런 게 그대로 떴다:
+
+```text
+PreparedStatementCallback; SQL [INSERT INTO medivice.medications (...) VALUES (...) ]:
+ERROR: new row for relation "medications" violates check constraint "chk_med_times"
+세부 정보: Failing row contains (76, 4, null, null, 1.00, 0, 1, ...).
+```
+
+원인도 안 보이고, SQL 원문·컬럼명·값이 그대로 사용자에게 노출됐다.
+
+### 원인
+
+`Failing row`의 값을 `\d medivice.medications` 컬럼 순서에 맞춰보면 `dose_per_intake=1.00` 다음
+`times_per_day=0`이다 — DB 제약 `chk_med_times: CHECK (times_per_day >= 1 AND times_per_day <= 12)`를
+어겼다. 그런데 `MedicationCreateRequest.timesPerDay`는 `@NotNull`만 있고 범위 검증이 없어서, 0 같은
+값이 Bean Validation을 그냥 통과해 DB까지 내려갔다. 게다가 `GlobalExceptionHandler`엔
+`DataIntegrityViolationException` 핸들러가 없어서, DB가 던진 예외가 그대로(스택트레이스·SQL 포함)
+응답 본문에 실렸다 — 정보 노출이자 사용자 입장에서는 "뭔 소리인지 모를" 에러.
+
+### 해결
+
+- `MedicationCreateRequest.timesPerDay`에 `@Min(1) @Max(12)` 추가 — DB의 `chk_med_times`와 정확히
+  같은 범위. 잘못된 값은 이제 DB까지 가지 않고 컨트롤러 경계에서 400으로 막힌다.
+- `GlobalExceptionHandler`에 `DataIntegrityViolationException` 핸들러 추가(방어선) — 앞으로 비슷하게
+  검증이 빠진 필드가 있어도, SQL 원문 대신 "입력값이 올바르지 않습니다" 같은 일반 메시지로 400을
+  주고, 실제 원인(제약조건 이름 등)은 서버 로그에만 남긴다.
+
+### 확인
+
+```text
+POST /api/medications (timesPerDay=0)
+→ 이전: 500 + SQL 원문 그대로 노출
+→ 이후: 400 {"message":"timesPerDay: 1 이상이어야 합니다"}
+```
+
+### 관련 파일
+
+- `src/main/java/com/project/medivice/dto/MedicationCreateRequest.java` (`@Min(1) @Max(12)`)
+- `src/main/java/com/project/medivice/exception/GlobalExceptionHandler.java`
+  (`DataIntegrityViolationException` 핸들러 신규)
+
+---
+
+## 33. §26·§27 매칭이 "접두어"만 봐서, 제조사명이 성분명보다 앞에 오는 실제 제품명을 못 찾음 — 3차 폴백 추가
+
+### 문제
+
+"메토트렉세이트정[2.5mg/1정]"처럼 제품명이 사실상 성분명 그대로인 입력을 `GET
+/api/products/ingredients`에 넣으면 빈 배열이 나왔다. 성분 마스터엔 "메토트렉세이트"(id=5)가
+멀쩡히 있고, DB에도 메토트렉세이트가 든 제품이 21개나 있는데도 못 찾았다.
+
+### 원인
+
+```sql
+SELECT product_id, name_ko FROM medivice.products WHERE name_ko LIKE '%메토트렉세이트%';
+-- 제일메토트렉세이트정1밀리그램(수출용)
+-- 한국유나이티드메토트렉세이트정(수출명:...)
+-- 유한메토트렉세이트정
+-- 메트렉스정(메토트렉세이트)[수출명:DHMTX tablet](수출용)  ← 성분명이 괄호 안에만 있음
+-- ... (21건 전부 이 패턴)
+```
+
+실제 21개 제품 전부 `[제조사명][성분명]정[함량]` 형태로 **제조사명이 성분명보다 앞에** 오거나,
+아예 성분명이 괄호 안 부가 설명으로만 존재한다. 그런데 §26(1차: 전체 이름/괄호 접두어)·§27(2차:
+"정" 앞부분 접두어)은 둘 다 `LIKE '입력값%'` — 제품명이 **입력값으로 시작**해야만 잡히는
+접두어(prefix) 매칭이다. "메토트렉세이트정"으로는 "제일메토트렉세이트정..."을 시작 부분이
+다르므로 못 찾는다 — 접두어 매칭은 원천적으로 "성분명이 문자열 중간에 있는" 실제 제네릭
+제품명 패턴을 커버할 수 없다.
+
+### 해결
+
+1·2차가 둘 다 실패했을 때만 쓰는 3차 폴백을 추가했다: 제품을 특정하려 하지 않고, **입력
+문자열 안에 성분 마스터(5,000여 종)의 이름이 부분 문자열로 들어있는지**만 확인한다
+(`strpos(:productName, name_ko) > 0`). 제조사명이 앞에 오든 뒤에 오든, 괄호 안에 있든 문자열
+어디에 있든 상관없이 잡힌다. 이어서 성분명 뒤에 붙는 함량 표기(`2.5mg`, `2.5밀리그램` 등)를
+정규식으로 뽑아 붙인다 — 못 찾으면 amount/unit은 null로 비운다(§12: 지어내지 않는다).
+
+안전장치(§12·§27과 같은 "모르면 비워라" 원칙) 두 가지:
+- 성분명이 2글자 이하면 다른 단어 안에 우연히 포함될 위험이 커서 `length(name_ko) >= 3`만 본다.
+- "메토트렉세이트"와 "메토트렉세이트나트륨"처럼 한 성분명이 다른 성분명의 부분 문자열인 경우,
+  최장 일치(가장 구체적인 이름)만 채택한다. 그래도 같은 길이의 서로 다른 성분이 여러 개
+  걸리면 모호하므로 포기한다(빈 배열).
+
+OCR 쪽 부수 효과: 3차로 찾은 성분은 함량을 못 구했을 수 있는데(`unit=null`), 기존 `OcrService`의
+행 표시 로직(`i.name() + " " + amount + i.unit()`)이 `unit`이 null이면 문자열에 그대로 "null"이
+찍히는 버그(§ null 표시 버그와 동일 패턴)가 있어 같이 고쳤다 — unit이 없으면 그냥 비운다.
+
+### 확인
+
+```text
+GET /api/products/ingredients?name=메토트렉세이트정[2.5mg/1정]
+→ [{"name":"메토트렉세이트","englishName":"Methotrexate","amount":2.5,"unit":"mg"}]
+
+GET /api/products/ingredients?name=메토트렉세이트정   (함량 없음)
+→ [{"name":"메토트렉세이트","englishName":"Methotrexate","amount":null,"unit":null}]
+```
+
+회귀 확인(1·2차가 여전히 우선 적용되고, 3차가 엉뚱하게 끼어들지 않는지):
+
+```text
+GET /api/products/ingredients?name=벨록스캡정40밀리그램   (1차) → 기존과 동일하게 매칭
+GET /api/products/ingredients?name=가드렛정               (2차) → 기존과 동일하게 매칭
+GET /api/products/ingredients?name=벨록스캡정             (2차 모호 → 포기) → []
+GET /api/products/ingredients?name=타이레놀정500밀리그램   (DB에 없음) → []
+```
+
+참고: 이 확인 과정에서 `name=무코스타서방정`이 (예전엔 §26이 "DB 수집 범위 밖"으로 잘못
+진단했던 것과 달리) §28의 전체 재적재 이후로는 **2차(브랜드명 접두어)만으로 이미 정상
+매칭**되는 것도 다시 확인했다 — 3차와는 무관하게, §28에서 이미 고쳐져 있었다.
+
+### 관련 파일
+
+- `src/main/java/com/project/medivice/repository/IngredientRepository.java`
+  (`resolveIngredientEmbedded`, `findIngredientsByEmbeddedName` 신규, `AMOUNT_PATTERN`)
+- `src/main/java/com/project/medivice/service/ProductLookupService.java`
+  (`findIngredients`에 3차 폴백 연결)
+- `src/main/java/com/project/medivice/service/OcrService.java` (`toDto`의 unit null 처리)
+- `src/main/java/com/project/medivice/controller/ProductController.java` (Swagger 설명·예시 갱신)
+- §26·§27(1·2차 폴백의 원본 설계), §28(DB 전체 재적재로 무코스타 사례가 이미 해결돼 있었음)
+
+---
+
+## 34. 같은 이름의 성분이 두 줄(DUR 마스터 원본 + 사용자 생성 orphan) — 병용금기 판정이 조용히 빠짐
+
+### 문제
+
+이부프로펜·파마브롬 두 성분을 등록했는데, 이후 메토트렉세이트를 등록해도 "메토트렉세이트↔이부프로펜
+병용금기(RED)"가 전혀 표시되지 않았다. 사용자가 "이부프로펜과 파마브롬을 분리해서 저장해야 할 것
+같다"고 직접 원인을 짚었다.
+
+### 원인
+
+두 가지가 겹쳐 있었다.
+
+1. **(진짜 원인 아님, 정상 동작)** 이부프로펜이 든 등록(medication_id=11)은 이미 2026-09-03에
+   `ended_at`이 찍혀 종료된 상태였다 — 지금 활성 등록엔 이부프로펜이 아예 없어서 비교 대상이
+   없었다. 이건 버그가 아니라 "활성 복용 목록끼리만 비교한다"는 설계대로다.
+2. **(진짜 원인)** 조사 중 성분 마스터에 "파마브롬"이 **두 줄** 있는 걸 발견했다:
+
+   ```sql
+   SELECT ingredient_id, name_ko, ingr_code FROM medivice.ingredients WHERE name_ko='파마브롬';
+   --  967 | 파마브롬 | USR-71148EC1-995   ← §28 전체 재적재 이전에 findOrCreateByName이 만든 orphan
+   -- 9741 | 파마브롬 | M082487            ← 재적재로 들어온 진짜 식약처 DUR 마스터 원본
+   ```
+
+   `medication_id=11`은 967(orphan)을 참조하고 있었다. `findIdByName`(`findOrCreateByName`이 쓰는
+   조회)이 `ORDER BY` 없이 `LIMIT 1`만 썼기 때문에, §28로 진짜 DUR 성분(9741)이 들어온 뒤에도
+   어느 쪽이 뽑힐지 보장이 없었고 — 하필 이 케이스는 계속 orphan(967)이 뽑혀 저장돼 있었다.
+   967은 `dur_pair_rules`·`ingredient_effect_groups`·`ingredient_daily_limits` 어디에도 연결이
+   없는 빈 성분이라, 이 성분이 낀 조합은 규칙이 있어도 절대 안 걸린다(이번 사례에서 이부프로펜+
+   파마브롬 자체는 마침 실제로도 DUR 데이터가 없어 결과는 같았지만, 다른 조합이었다면 진짜
+   병용금기를 놓칠 뻔했다).
+
+   전체 스캔해보니 같은 패턴이 **5건**(리보플라빈, 티아민질산염, 클로페라스틴염산염, 아스코르브산,
+   파마브롬) 더 있었다 — 전부 §28 재적재 이전에 만들어진 orphan이 실사용 등록에 남아있던 경우다.
+
+### 해결
+
+- `IngredientRepository.findIdByName`에 `ORDER BY (ingr_code LIKE 'USR-%') ASC, ingredient_id ASC`를
+  추가했다 — 같은 이름이 여러 줄이면 항상 DUR 마스터 원본(ingr_code가 "USR-"로 시작하지 않는 쪽)을
+  먼저 뽑는다. 이제부터 `findOrCreateByName`이 호출될 때 orphan이 아니라 진짜 DUR 연결된 행을
+  일관되게 재사용한다.
+- 기존 데이터 5건(`medication_ingredients.ingredient_id`가 958·959·960·962·967인 행, 총 6개 참조)을
+  트랜잭션으로 실제 DUR 성분 id(7023·7022·8615·7024·9741)로 재연결했다.
+
+### 확인
+
+```text
+POST /api/medications (파마브롬 25mg만 등록, 검증 후 즉시 삭제)
+→ medilight.totals에 "파마브롬" 항목이 dailyTotal=25로 정상 집계됨(재수정 전이었다면 orphan(967)이
+   다시 뽑혔을 자리) — 확인 후 DELETE로 정리(medication_id=86)
+```
+
+```sql
+-- 재연결 후 orphan 쪽 참조가 0인지
+SELECT ingredient_id, count(*) FROM medivice.medication_ingredients
+ WHERE ingredient_id IN (958,959,960,962,967) GROUP BY ingredient_id;
+-- (0 rows)
+```
+
+### 참고 — 조사 중 같이 발견한, 이번 커밋과 무관한 기존 데이터 이슈
+
+- `medication_id=78`("루파핀정[12.8mg/1정]")이 `medication_id=82`("루파핀정 12.8mg/1정", 같은 약의
+  재등록)와 **둘 다 활성 상태**로 남아 있어 "성분 중복" WARN이 뜨고 있다 — 이건 코드 버그가 아니라
+  §32 즈음 테스트하며 79·80·81은 정리했는데 78 하나를 빠뜨린 것으로 보인다. 코드 수정 대상이
+  아니라 사용자 확인 후 정리할 데이터.
+- `medication_id=57·77·79`(이름이 "1"인 등록, 성분명에 "(IBP)"·"(SP)"·"(KP)" 같은 영문 약어가
+  괄호로 붙어 있는 orphan 성분들)는 이전 세션(§32 이전)에서 이미 발견해 사용자에게 삭제 여부를
+  물었고, 사용자가 명시적으로 "그대로 둔다"고 답해 남겨둔 것이다 — 이번에도 손대지 않았다.
+
+### 관련 파일
+
+- `src/main/java/com/project/medivice/repository/IngredientRepository.java` (`findIdByName`)
+- §28(전체 재적재로 진짜 DUR 성분이 이때 처음 들어옴 — orphan은 그 이전 흔적)
+- §33(이 조사의 출발점이 된 §33 검증 도중 사용자가 발견)
+
+---
+
+## 35. OCR이 봉투 안 서로 다른 약 2개를 진짜 복합제 1개로 잘못 합침
+
+### 문제
+
+OCR 확인 화면에 "이부프로펜 200mg · 파마브롬 25mg"이 한 항목(복합제) 안에 성분 2개로 묶여
+"선택한 1건 등록"으로 떴다. 사용자는 실제로는 서로 다른 봉지 2개(단일 성분 약 2개)를 한
+봉투에 담아 찍은 사진이라고 확인해줬다 — AI가 사진을 잘못 판단해 하나로 합친 것이다.
+
+### 원인
+
+이부프로펜 200mg + 파마브롬 25mg 조합 자체는 실제로 시중에 흔한 단일 복합제 캡슐(이지엔6이브·
+탁센이브·프리에나 등 DB에 20개 넘게 등록돼 있음, §34 조사 중 확인)과 정확히 일치하는 조성이다.
+기존 프롬프트(EXT-1)는 "봉지 여러 개 vs 진짜 복합제"를 구분하라고는 했지만, 구분 **기준**을
+주지 않았다 — 그래서 AI가 "이 조합은 시중에 흔한 복합제 조성과 같다"는 걸 판단 근거로 삼아
+사진에 실제로 인쇄된 모양(봉지가 나뉘어 있는지)보다 성분 조합의 "그럴듯함"에 기대어 합쳐버린
+것으로 보인다.
+
+### 해결
+
+프롬프트에 명시적인 판별 기준을 추가했다 — 성분 조합이 흔한 복합제와 닮았다는 이유로 합치지
+말고, **사진에 실제로 인쇄된 모양만** 근거로 삼으라고 못박았다:
+- 하나의 제품명 아래 성분표(여러 줄)로 같이 적혀 있으면 → 복합제(한 항목).
+- 서로 다른 봉지·라벨에 각자 이름·용법이 따로 적혀 있으면 → 별도 약(항목을 나눔), 이때
+  productName도 봉지마다 각각 그대로 쓰고 억지로 하나로 묶지 않는다.
+- 애매하면 note에 불확실성을 적어, 사용자가 확인 화면에서 직접 고칠 수 있게 한다.
+
+주의: 이건 결정론적 코드 버그가 아니라 AI 비전 판단의 실수라서, 프롬프트를 고쳐도 매번 100%
+같은 사진에 같은 결과가 보장되지는 않는다(§ EXT 설계 원칙 — "AI는 주어진 사실만 풀어쓴다"고
+못박아도 사진 해석 자체의 실수까지 완전히 막을 순 없다). 다음에도 비슷한 오판이 남아 있으면
+사용자가 확인 화면에서 "성분 추가"·항목 삭제로 직접 고칠 수 있다(D-4: 확인 전 저장 안 함
+설계 덕분에 이미 가능한 경로).
+
+### 확인
+
+코드 컴파일 확인(`./gradlew compileJava` exit 0)만 했다 — AI 판단 자체는 재현 가능한 단위
+테스트 대상이 아니라서, 사용자가 같은/비슷한 사진으로 다시 업로드해 실제로 2건으로 나뉘는지
+확인 필요.
+
+### 관련 파일
+
+- `src/main/java/com/project/medivice/ai/OpenAiClient.java` (`OCR_PROMPT`)
+- `/Users/seungminchoi/mini project/제출물/AI_프롬프트_문장.md` (제출물 문서도 동일하게 갱신)
+- §34(이 대화의 발단이 된, 같은 이부프로펜+파마브롬 조합 조사)
+
+---
+
+## 36. §35 검증 중 발견 — 성분명에 붙은 "(BP)" 같은 약전 접미사가 orphan을 계속 만듦 + MediLight 배지·설명 문장 불일치
+
+### 문제
+
+두 가지가 겹쳐 나타났다.
+
+1. "이부프로펜(BP)"·"파마브롬(USP)"처럼 영문 약전 접미사가 붙은 이름으로 등록하면, §34에서
+   고친 것과 같은 부류의 orphan 성분이 또 생겼다 — 이번엔 이름 자체가 달라서(§34의 "같은
+   이름 두 줄" 문제가 아니라 "아예 다른 이름") §34의 `ORDER BY` 수정으로는 못 잡는다.
+2. 그 결과를 고치고 나니 메디라이트 배지가 "빨강·높은 주의"(CRIT)로 바뀌었는데, 배지 바로
+   아래 설명 문장은 여전히 "현재 적재된 성분·규칙 범위에서 중복 또는 임계값 문제가 발견되지
+   않았습니다"였다 — 색은 위험하다는데 글은 문제없다고 하는 모순. 상세 화면(`/medilight`)도
+   병용금기 카드가 아예 없어서 왜 CRIT인지 설명하는 곳이 하나도 없었다.
+
+### 원인
+
+1. `findOrCreateByName`이 정확한 이름으로만 찾는다. DUR 마스터에는 "(KP)"처럼 약전 접미사가
+   이름의 정식 일부인 성분이 1,000개 넘게 있지만, "이부프로펜(BP)"·"파마브롬(USP)"는 마스터에
+   그 형태로 존재하지 않는다(마스터엔 접미사 없는 "이부프로펜"만 있음) — 그래서 매번 새 orphan
+   성분을 만들었다.
+2. 프론트 `MediLightBanner.vue`의 `reason`(배지 아래 설명 문장)과 `MedilightView.vue`의 카드
+   섹션이 전부 `analysis.findings`(중복·1일상한 초과 판정)만 보고 `analysis.conflicts`(병용금기·
+   특정연령대금기 등 쌍대조 판정)는 아예 참조하지 않았다. `status`(배지 색)는 서버가 findings·
+   conflicts 중 더 심각한 쪽으로 계산해서 내려주는데, 설명 문장·상세 카드는 conflicts를
+   완전히 빼먹은 것 — 실제로 §34 수정 이후 등록 데이터를 고쳐서 병용금기(conflicts)가 잡히자
+   이 모순이 바로 재현됐다.
+
+### 해결
+
+- `IngredientRepository`에 `findIdByNameOrBareName` 추가 — 정확한 이름으로 먼저 찾고, 실패하면
+  이름 끝의 "(...)" 접미사를 뗀 이름으로 한 번 더 찾는다. `findOrCreateByName`이 이걸 쓰도록
+  변경. 접미사를 뗀 이름도 못 찾으면 원래 이름 그대로 orphan을 만드는 기존 동작은 그대로 —
+  DUR 마스터에 실제로 접미사가 붙은 진짜 성분(1,000여 건)은 1차 정확 매칭에서 이미 걸리므로
+  영향받지 않는다.
+- `MediLightBanner.vue`의 `reason`이 `conflicts[0]`을 `findings[0]`보다 먼저 확인하도록 순서를
+  바꿨다. "자세히 보기" 링크 노출 조건도 `findings.length || conflicts.length`로 넓혔다.
+- `MedilightView.vue`에 병용금기·연령금기 전용 표(CONFLICTS 섹션)를 새로 추가했다 — 기존엔
+  findings 카드 하나만 있어서 conflicts를 볼 방법이 아예 없었다. 빈 상태(초록 배지) 조건도
+  `!conflicts.length`를 같이 확인하도록 고쳤다.
+- `stores/medivice.js`의 `translateVisibleText`가 `conflicts[].type`·`detail`도 번역 대상에
+  포함하도록 추가 — 영어 모드에서 배지는 영어인데 이유 설명(DUR 원문 한글)만 그대로 남는 것을
+  막는다. 성분명·제품명(ingredientA/B, medicationA/B)은 화학명·고유명사라 DeepL로 옮기지 않고
+  원문 그대로 둔다(§ ReportView와 같은 원칙).
+- `demo/front`·`mini project/medivice/front` 두 프론트 복사본 모두 동일하게 수정했다(이 세션
+  내내 지켜온 원칙 — 브라우저가 어느 쪽을 보고 있는지 확실치 않을 때는 둘 다 고친다).
+
+### 확인
+
+```sql
+-- 재연결 전: 이부프로펜(BP)/파마브롬(USP)/"1" orphan을 실제 DUR 성분으로 재연결(직접 등록
+-- 데이터 수정, 코드 검증용)
+```
+
+```text
+GET /api/medilight (수정 후)
+→ status: "CRIT"
+→ conflicts: [{"type":"병용금기","level":"CRIT",
+    "medicationA":"1","medicationB":"메토트렉세이트정 2.5mg/1정","detail":"혈액학적 독성"}]
+```
+
+프론트는 npm install 후 `vite build`로 문법 오류 없음만 확인했다(이 환경엔 브라우저 도구가
+없어 실제 화면 렌더링은 직접 확인 못 함 — 사용자가 새로고침해서 확인 필요).
+
+### 관련 파일
+
+- `src/main/java/com/project/medivice/repository/IngredientRepository.java`
+  (`findIdByNameOrBareName`, `TRAILING_PAREN`)
+- `front/src/components/MediLightBanner.vue`, `front/src/views/MedilightView.vue`,
+  `front/src/stores/medivice.js` (두 프론트 복사본 모두)
+- §34(orphan 성분 문제의 첫 사례), §35(이 조사의 출발점)
+
+---
+
+## 37. "판정 범위 밖 성분" 안내가 성분 7개를 콤마로 이어붙인 문장 하나였음
+
+### 문제
+
+"복용 목록의 성분 중 7개는 안전성 판정에 필요한 공공 데이터가 없어 확인하지 못했습니다:
+레바미피드, 리보플라빈, 아스코르브산, 클로페라스틴염산염, 티아민질산염, 갈근탕엑스(10→1),
+현호색·견우자(5:1) 50% 에탄올 연조엑스(9.5~11.5→1)." — 성분 7개가 콤마로 한 문장에 다 붙어
+있어 어디부터 어디까지가 한 성분명인지 눈으로 나눠 읽어야 했다. 사용자가 "이것도 각 성분을
+나눠서 이해해야지"라고 지적했다 — §36에서 conflicts를 표로 분리한 것과 같은 요청이다.
+
+### 원인
+
+`MedilightService.build()`가 `viewRepository.findNoticeMessage(userId)`로 DB 뷰
+(`v_safety_notice`)가 이미 만들어 둔 문장 하나만 `MedilightDto.noticeMessage`에 담아 내려줬다.
+정작 성분별로 구조화된 데이터(`MedilightViewRepository.findUncoveredIngredients` →
+`v_uncovered_ingredients`)는 이미 존재했지만 `SafetyCheckService`(DB에 판정 결과를 저장할 때)만
+쓰고 있었고, `MedilightDto`에는 노출되지 않았다 — 프론트는 문장 하나만 받아 그대로 보여줄
+수밖에 없었다.
+
+### 해결
+
+- `UncoveredIngredientDto(name, englishName)` 신규.
+- `MedilightDto`에 `uncoveredIngredients` 필드 추가, `MedilightService.build()`가
+  `findUncoveredIngredients(userId)` 결과를 그대로 채워 넣는다 — 기존 `noticeMessage`(문장)는
+  그대로 두고 구조화된 배열을 나란히 추가했다(하위 호환 — 문장에 의존하던 다른 곳이 있어도
+  안 깨짐).
+- `MedilightView.vue`(양쪽 프론트 복사본)의 COVERAGE 섹션이 `uncoveredIngredients`가 있으면
+  §36의 CONFLICTS 표와 같은 모양(성분당 한 행)으로 보여주고, 없을 때(구버전 서버 응답 등)만
+  기존 문장으로 폴백한다.
+
+### 확인
+
+```text
+GET /api/medilight
+→ uncoveredIngredients: [
+    {"name":"레바미피드","englishName":null},
+    {"name":"현호색·견우자(5:1) 50% 에탄올 연조엑스(9.5~11.5→1)","englishName":null}
+  ]
+```
+
+백엔드 `./gradlew compileJava`, 프론트 양쪽 `vite build` 모두 exit 0 확인.
+
+### 관련 파일
+
+- `src/main/java/com/project/medivice/dto/UncoveredIngredientDto.java` (신규)
+- `src/main/java/com/project/medivice/dto/MedilightDto.java` (`uncoveredIngredients` 필드)
+- `src/main/java/com/project/medivice/service/MedilightService.java`
+- `front/src/views/MedilightView.vue`, `front/src/stores/medivice.js` (두 프론트 복사본 모두)
+- §36(같은 요청을 conflicts에 먼저 적용한 것)
+
+---
+
+## 38. 특정연령대금기(AGE_TABOO)가 나이 조건이 없는 규칙에서 모든 사용자에게 걸림
+
+### 문제
+
+52세 사용자에게 "특정연령대금기: 아세트아미노펜 — 소아 및 고령자(노인)는 최소 필요량을 복용..."
+경고가 떴다. 52세는 소아도 아니고(사용자 지적) 통상 "고령자"로 보는 65세 기준에도 못 미친다 —
+그런데도 CRIT로 걸렸다. 사용자가 "특정 연령에 대한 경고 없애"라고 요청했다.
+
+### 원인
+
+`v_single_conflict` 뷰(`DA_데이터파이프라인/sql/03_medilight_views.sql`)의 AGE_TABOO 판정:
+
+```sql
+EXTRACT(YEAR FROM age(u.birth_date))
+    BETWEEN COALESCE(r.condition_min, 0) AND COALESCE(r.condition_max, 200)
+```
+
+`dur_single_rules.condition_min`/`condition_max`(구조화된 나이 범위)가 원본 공공데이터에
+없는 규칙이 많다 — 실제로 세어보니 AGE_TABOO 규칙 126개 중 **111개(88%)**가 두 값 다 NULL이다.
+이 아세트아미노펜 규칙도 그중 하나였다: `prohibit_content`엔 "소아 및 고령자"라는 글자는
+있지만 그걸 숫자 나이 범위로 구조화한 `condition_min`/`condition_max`는 비어 있다.
+`COALESCE(NULL, 0)`~`COALESCE(NULL, 200)` = "0세~200세" — 즉 조건이 없을 때 "전 연령"으로
+해석돼 사실상 모든 사용자에게 무조건 걸렸다. 이건 111개 규칙 전부에 해당하는 광범위한
+문제였다.
+
+### 해결
+
+두 값이 다 NULL이면(구조화된 나이 조건이 아예 없으면) 이 규칙은 판정하지 말고 빠지도록
+조건을 추가했다:
+
+```sql
+OR (t.code = 'AGE_TABOO'
+    AND (r.condition_min IS NOT NULL OR r.condition_max IS NOT NULL)
+    AND EXTRACT(YEAR FROM age(u.birth_date))
+        BETWEEN COALESCE(r.condition_min, 0) AND COALESCE(r.condition_max, 200))
+```
+
+값이 하나라도 있는 15개 규칙(예: "12세 미만 소아 금기")은 그대로 동작한다 — 새 조건이 항상
+참이 되는 경우이므로 동작이 안 바뀐다. 나이 범위를 텍스트에서 추측해 숫자를 지어내는 대신,
+"판정할 근거(구조화된 나이 조건)가 없으면 판정하지 않는다"를 택했다 — §12·이 프로젝트 전체의
+"모르면 지어내지 말고 정직하게 실패하라" 원칙과 같은 결이다. 다만 이건 "그 사용자에게 안전
+하다"는 뜻이 아니라 "이 규칙으로는 확인할 수 없다"는 뜻이라, v_uncovered_ingredients 쪽 보강은
+이번엔 하지 않았다(범위 초과 — 필요하면 후속으로).
+
+라이브 DB 뷰(`CREATE OR REPLACE VIEW`)에 바로 적용했다. 원본 마이그레이션 파일
+(`DA_데이터파이프라인/sql/03_medilight_views.sql`)은 이 프로젝트 git 레포 밖(별도 db 파이프라인
+저장소)에 있어 이 환경에서 직접 수정할 파일을 찾지 못했다 — db 담당자가 같은 패치를 원본
+마이그레이션에도 반영해야 다음에 처음부터 재적재해도 유지된다.
+
+### 확인
+
+```text
+GET /api/medilight (52세 사용자, 수정 전)
+→ status: "CRIT", conflicts: [{"type":"특정연령대금기","ingredientA":"아세트아미노펜",...}]
+
+GET /api/medilight (같은 사용자, 수정 후)
+→ status: "OK", conflicts: []
+```
+
+### 관련 파일
+
+- 라이브 DB 뷰 `medivice.v_single_conflict`(`CREATE OR REPLACE VIEW`로 직접 적용)
+- `DA_데이터파이프라인/sql/03_medilight_views.sql` (원본 마이그레이션 — db 담당자가 반영 필요)
+
+---
+
+## 39. 병용금기 표의 "대상" 칸에 제품명만 뜨고 실제 충돌 성분이 안 보임
+
+### 문제
+
+CONFLICTS 표(§36)의 "대상" 칸이 "메토트렉세이트정[2.5mg/1정] · 1"처럼 제품명(그것도 "1" 같은
+테스트 등록명)만 보여줬다. 사용자가 "여기서 서로 충돌하는 두 물질을 표시해"라고 요청 —
+실제로 병용금기가 걸리는 건 성분(물질)인데 화면엔 그게 안 보였다.
+
+### 원인
+
+DB 뷰 `v_pair_conflict`엔 `ingredient_a_id`/`ingredient_b_id`가 이미 있었는데,
+`MedilightViewRepository.findPairConflicts()`의 SQL이 이 컬럼을 아예 안 가져오고 제품명
+(`medication_a_name`/`medication_b_name`)만 채웠다. `MedilightService.buildConflicts()`도
+`ConflictDto.ingredientA/B`에 항상 `null`을 넣고 있었다 — 프론트(§36)는 애초에
+`ingredientA ?? medicationA` 순서로 성분명을 우선하도록 짜여 있었지만, 백엔드가 성분명 자체를
+준 적이 없어서 항상 제품명으로 폴백했던 것.
+
+### 해결
+
+`findPairConflicts` SQL에 `medivice.ingredients`를 두 번(ia, ib) 조인해 성분명도 같이
+가져오고, `PairConflictRow`·`buildConflicts()`가 `ConflictDto.ingredientA/B`에 실제 성분명을
+채우도록 고쳤다. 제품명(medicationA/B)도 그대로 같이 내려준다 — "어느 등록 항목 때문인지"
+추적용으로는 여전히 유용하고, 프론트는 이미 성분명을 우선 쓰므로 화면만 자연스럽게
+바뀐다(프론트 코드 변경 없음).
+
+### 확인
+
+```text
+POST /api/medications ×2 (이부프로펜 200mg, 메토트렉세이트 2.5mg — 검증용, 즉시 삭제)
+GET /api/medilight
+→ conflicts[0]: {"type":"병용금기","ingredientA":"메토트렉세이트","ingredientB":"이부프로펜",
+    "medicationA":"검증용-이부프로펜","medicationB":"검증용-메토트렉세이트","detail":"혈액학적 독성"}
+```
+
+### 관련 파일
+
+- `src/main/java/com/project/medivice/repository/MedilightViewRepository.java`
+  (`findPairConflicts`, `PairConflictRow`)
+- `src/main/java/com/project/medivice/service/MedilightService.java` (`buildConflicts`)
+- §36(CONFLICTS 표 신설 — 이번에 그 표의 데이터를 완성함)

@@ -28,7 +28,8 @@ public class MedilightViewRepository {
 
     public record PairConflictRow(
             Integer durTypeId, String durTypeName, String level, String prohibitContent,
-            Long medicationAId, String medicationAName, Long medicationBId, String medicationBName) {
+            Long medicationAId, String medicationAName, Long medicationBId, String medicationBName,
+            String ingredientAName, String ingredientBName) {
     }
 
     public record SingleConflictRow(
@@ -92,17 +93,26 @@ public class MedilightViewRepository {
                 rs.getString("level")));
     }
 
+    /**
+     * v_pair_conflict에 ingredient_a_id/ingredient_b_id가 이미 있는데, 예전엔 여기서 안 가져오고
+     * 제품명(medication_a/b)만 채웠다 — 그래서 화면에 "메토트렉세이트정[2.5mg/1정] · 1"처럼
+     * 실제로 충돌하는 두 "물질"이 아니라 제품명(그것도 "1" 같은 테스트 이름)이 보였다. 실제로
+     * 병용금기가 걸리는 대상은 성분이므로, 성분명도 같이 가져온다(§39).
+     */
     public List<PairConflictRow> findPairConflicts(Long userId) {
         String sql = """
                 SELECT c.dur_type_id, t.name_ko AS dur_type_name, c.level, c.prohibit_content,
                        c.medication_a_id, COALESCE(pa.name_ko, ma.custom_name) AS medication_a_name,
-                       c.medication_b_id, COALESCE(pb.name_ko, mb.custom_name) AS medication_b_name
+                       c.medication_b_id, COALESCE(pb.name_ko, mb.custom_name) AS medication_b_name,
+                       ia.name_ko AS ingredient_a_name, ib.name_ko AS ingredient_b_name
                   FROM medivice.v_pair_conflict c
                   JOIN medivice.dur_types t ON t.dur_type_id = c.dur_type_id
                   JOIN medivice.medications ma ON ma.medication_id = c.medication_a_id
                   JOIN medivice.medications mb ON mb.medication_id = c.medication_b_id
                   LEFT JOIN medivice.products pa ON pa.product_id = ma.product_id
                   LEFT JOIN medivice.products pb ON pb.product_id = mb.product_id
+                  JOIN medivice.ingredients ia ON ia.ingredient_id = c.ingredient_a_id
+                  JOIN medivice.ingredients ib ON ib.ingredient_id = c.ingredient_b_id
                  WHERE c.user_id = :userId
                 """;
         return jdbc.query(sql, new MapSqlParameterSource("userId", userId), (rs, n) -> new PairConflictRow(
@@ -113,7 +123,9 @@ public class MedilightViewRepository {
                 rs.getLong("medication_a_id"),
                 rs.getString("medication_a_name"),
                 rs.getLong("medication_b_id"),
-                rs.getString("medication_b_name")));
+                rs.getString("medication_b_name"),
+                rs.getString("ingredient_a_name"),
+                rs.getString("ingredient_b_name")));
     }
 
     public List<SingleConflictRow> findSingleConflicts(Long userId) {

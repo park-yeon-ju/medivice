@@ -11,5 +11,6 @@ public record MedilightDto(
         String ruleVersion,
         String checkedAt,
         int uncoveredCount,
-        String noticeMessage) {
+        String noticeMessage,
+        List<UncoveredIngredientDto> uncoveredIngredients) {
 }

@@ -5,6 +5,7 @@ import com.project.medivice.dto.ConflictDto;
 import com.project.medivice.dto.IngredientAnalysisDto;
 import com.project.medivice.dto.IngredientSourceDto;
 import com.project.medivice.dto.MedilightDto;
+import com.project.medivice.dto.UncoveredIngredientDto;
 import com.project.medivice.repository.MedilightViewRepository;
 import com.project.medivice.repository.MedilightViewRepository.ActiveIngredientRow;
 import com.project.medivice.repository.MedilightViewRepository.EffectDupRow;
@@ -57,9 +58,14 @@ public class MedilightService {
         String checkedAt = viewRepository.findLatestCheckedAt(userId)
                 .map(dt -> dt.toLocalDate().toString())
                 .orElse(LocalDate.now().toString());
+        // §37: noticeMessage는 콤마로 성분명을 이어붙인 한 문장이라, 프론트가 성분별로 나눠
+        // 보여주고 싶어도 문장을 다시 파싱해야 한다 — 같은 데이터를 구조화된 배열로도 내려준다.
+        List<UncoveredIngredientDto> uncoveredIngredients = viewRepository.findUncoveredIngredients(userId).stream()
+                .map(r -> new UncoveredIngredientDto(r.nameKo(), r.nameEn()))
+                .toList();
 
         return new MedilightDto(status, summary, findings, totals, conflicts,
-                properties.ruleVersion(), checkedAt, overall.uncoveredCount(), noticeMessage);
+                properties.ruleVersion(), checkedAt, overall.uncoveredCount(), noticeMessage, uncoveredIngredients);
     }
 
     /** v_active_ingredients(약 단위)를 성분 단위로 묶고, v_overdose로 상태를 매긴다. */
@@ -127,7 +133,11 @@ public class MedilightService {
     private List<ConflictDto> buildConflicts(Long userId) {
         List<ConflictDto> conflicts = new ArrayList<>();
         for (PairConflictRow r : viewRepository.findPairConflicts(userId)) {
-            conflicts.add(new ConflictDto(r.durTypeName(), mapLevel(r.level()), null, null,
+            // §39: "대상" 칸엔 실제로 충돌하는 성분(ingredientA/B)을 우선 보여준다 — 제품명
+            // (medicationA/B)은 "어느 등록 항목 때문인지" 추적용으로 같이 내려주되, 화면은
+            // 성분명을 우선 쓴다(ConflictDto.ingredientA/B가 있으면 그걸 먼저 본다).
+            conflicts.add(new ConflictDto(r.durTypeName(), mapLevel(r.level()),
+                    r.ingredientAName(), r.ingredientBName(),
                     r.medicationAName(), r.medicationBName(), r.prohibitContent()));
         }
         for (SingleConflictRow r : viewRepository.findSingleConflicts(userId)) {

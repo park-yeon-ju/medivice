@@ -1,6 +1,8 @@
 package com.project.medivice.dto;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -21,7 +23,11 @@ public record MedicationCreateRequest(
         @NotEmpty @Valid List<IngredientInput> ingredients,
         @NotNull @Positive BigDecimal dose,
         @NotBlank String doseUnit,
-        @NotNull Integer timesPerDay,
+        // medications.chk_med_times(DB CHECK: 1~12)와 반드시 같은 범위여야 한다 — 여기서
+        // 막지 않으면 이 값이 그대로 DB까지 가서 DataIntegrityViolationException(원인이
+        // 안 보이는 raw SQL 에러)으로 막힌다. "필요 시 복용"은 이 필드가 아니라 별도
+        // 경로(추후 as_needed)로 표현해야 한다 — 0은 유효한 "횟수"가 아니다.
+        @NotNull @Min(1) @Max(12) Integer timesPerDay,
         @NotBlank String reason,
         String hospital,
         String department,

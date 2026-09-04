@@ -195,8 +195,11 @@ public class OcrService {
             rows.add(new OcrRowDto("제품명", r.productName(), r.productNameConfidence()));
         }
         if (!ingredients.isEmpty()) {
+            // 3차(부분 문자열) DB 매칭(§33)은 성분만 확인될 뿐 함량은 못 찾을 수 있다 — unit이
+            // null이면 문자열 결합에서 그대로 "null"이 찍히므로(§ null 표시 버그와 동일 패턴) 이때는
+            // 단위를 아예 비운다.
             String value = ingredients.stream()
-                    .map(i -> i.name() + " " + formatAmount(i.amount()) + i.unit())
+                    .map(i -> i.name() + " " + formatAmount(i.amount()) + (i.unit() != null ? i.unit() : ""))
                     .collect(Collectors.joining(" · "));
             // DB에서 확인된 성분은 식약처 허가 원본이라 신뢰도를 최대로 표시한다.
             Double confidence = ingredientsFromDb ? 1.0 : r.ingredientsConfidence();

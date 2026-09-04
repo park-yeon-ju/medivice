@@ -20,8 +20,22 @@ public class IngredientRepository {
         this.jdbc = jdbc;
     }
 
+    /**
+     * §33 조사 중 발견: 같은 이름의 성분이 두 줄 존재할 수 있다 — 하나는 식약처 DUR 마스터
+     * 원본(ingr_code가 "USR-"로 시작하지 않음), 다른 하나는 §28 전체 재적재 이전에
+     * findOrCreateByName이 "DUR 마스터에 없다"고 오판해 만들어낸 사용자 생성 성분(ingr_code가
+     * "USR-"로 시작, DUR 규칙과 연결 안 됨). ORDER BY 없이 LIMIT 1만 쓰면 둘 중 어느 쪽이 걸릴지
+     * 결정되지 않아, 재적재로 진짜 DUR 성분이 들어온 뒤에도 orphan 쪽이 계속 뽑혀 병용금기·
+     * 효능군중복 판정이 조용히 빠지는 사고(파마브롬 등, §33)로 이어진다. 그래서 DUR 마스터
+     * 원본을 항상 먼저 뽑도록 명시적으로 정렬한다.
+     */
     private Optional<Long> findIdByName(String nameKo) {
-        String sql = "SELECT ingredient_id FROM medivice.ingredients WHERE name_ko = :name LIMIT 1";
+        String sql = """
+                SELECT ingredient_id FROM medivice.ingredients
+                 WHERE name_ko = :name
+                 ORDER BY (ingr_code LIKE 'USR-%') ASC, ingredient_id ASC
+                 LIMIT 1
+                """;
         List<Long> ids = jdbc.query(sql, new MapSqlParameterSource("name", nameKo),
                 (rs, n) -> rs.getLong("ingredient_id"));
         return ids.stream().findFirst();
@@ -119,6 +133,64 @@ public class IngredientRepository {
         return resolveProductIdByCoreName(productName).map(this::ingredientsForProduct).orElse(List.of());
     }
 
+    private record EmbeddedMatch(Long ingredientId, String nameKo, String nameEn) {
+    }
+
+    /**
+     * 3차(최후): 1·2차 모두 실패했을 때만 쓴다. 실제 제품명은 "제일메토트렉세이트정1밀리그램",
+     * "한국유나이티드메토트렉세이트정"처럼 제조사명이 성분명보다 앞에 붙는 경우가 대부분이라,
+     * 접두어 매칭(1·2차)만으로는 "메토트렉세이트정[2.5mg/1정]" 같은 — 제조사명 없이 성분명
+     * 자체가 제품명인 — 입력을 못 찾는다. 대신 성분 마스터(5,000여 종)의 이름이 입력 문자열
+     * 안 어디에든 포함돼 있으면(부분 문자열) 그 성분으로 인정한다 — 제품 하나를 특정하는 게
+     * 아니라 "이 문자열 안에 실존하는 성분명이 들어있는가"만 확인하는 것이라 브랜드명이 앞에
+     * 오든 뒤에 오든 영향받지 않는다.
+     *
+     * 위험 두 가지, 둘 다 "모르면 비워라"(§12·§27)로 방어한다:
+     * - 성분명이 너무 짧으면(2글자 이하) 다른 단어 안에 우연히 들어있을 수 있어 length>=3만 본다.
+     * - "메토트렉세이트"와 "메토트렉세이트나트륨"처럼 한 성분명이 다른 성분명의 부분 문자열인
+     *   경우, 더 구체적인(긴) 이름이 이겨야 한다 — 최장 일치만 남기고, 그래도 길이가 같은
+     *   서로 다른 성분이 여러 개 걸리면 모호하므로 포기한다.
+     */
+    private Optional<EmbeddedMatch> resolveIngredientEmbedded(String productName) {
+        if (productName == null || productName.isBlank()) {
+            return Optional.empty();
+        }
+        String sql = """
+                SELECT ingredient_id, name_ko, name_en FROM medivice.ingredients
+                 WHERE length(name_ko) >= 3 AND strpos(:productName, name_ko) > 0
+                """;
+        List<EmbeddedMatch> matches = jdbc.query(sql, new MapSqlParameterSource("productName", productName),
+                (rs, n) -> new EmbeddedMatch(rs.getLong("ingredient_id"), rs.getString("name_ko"), rs.getString("name_en")));
+        if (matches.isEmpty()) {
+            return Optional.empty();
+        }
+        int maxLen = matches.stream().mapToInt(m -> m.nameKo().length()).max().orElse(0);
+        List<EmbeddedMatch> longest = matches.stream().filter(m -> m.nameKo().length() == maxLen).toList();
+        return longest.size() == 1 ? Optional.of(longest.get(0)) : Optional.empty();
+    }
+
+    /**
+     * 성분명 뒤에 바로 붙는 함량표기(예: "메토트렉세이트정[2.5mg/1정]", "메토트렉세이트정2.5mg")에서
+     * 숫자+단위를 뽑아낸다. 못 찾으면 amount/unit 둘 다 null — 성분 자체는 맞다고 확인됐으니
+     * 값을 지어내는 것보다 함량 없이 보여주는 게 낫다(§12).
+     */
+    private static final java.util.regex.Pattern AMOUNT_PATTERN = java.util.regex.Pattern.compile(
+            "(\\d+(?:\\.\\d+)?)\\s*(mg|mcg|g|ml|IU|밀리그램|마이크로그램)", java.util.regex.Pattern.CASE_INSENSITIVE);
+
+    /** findIngredientsByProductName·findIngredientsByCoreName이 둘 다 실패했을 때만 쓰는 3차 시도. */
+    public List<ProductIngredientRow> findIngredientsByEmbeddedName(String productName) {
+        return resolveIngredientEmbedded(productName).map(match -> {
+            BigDecimal amount = null;
+            String unit = null;
+            java.util.regex.Matcher m = AMOUNT_PATTERN.matcher(productName);
+            if (m.find()) {
+                amount = new BigDecimal(m.group(1));
+                unit = m.group(2).toLowerCase();
+            }
+            return List.of(new ProductIngredientRow(match.nameKo(), match.nameEn(), amount, unit));
+        }).orElse(List.of());
+    }
+
     public record ProductInfoSummary(String efficacy, String sideEffect) {
     }
 
@@ -143,6 +215,30 @@ public class IngredientRepository {
                 .findFirst();
     }
 
+    private static final java.util.regex.Pattern TRAILING_PAREN = java.util.regex.Pattern.compile("^(.+?)\\([^()]*\\)$");
+
+    /**
+     * §35 조사 중 발견: OCR·수기 입력 모두 성분명 뒤에 "(BP)"·"(USP)" 같은 약전 출처 약어를
+     * 그대로 붙여서 들어올 때가 있다(예: "이부프로펜(BP)"). 이 접미사가 붙은 형태 그대로는
+     * DUR 마스터에 없는 경우가 많아 — 매번 새 orphan 성분이 생기고, 원래 있는 "이부프로펜"
+     * (진짜 DUR 성분, 병용금기 판정에 쓰이는 그 행)과 연결이 끊긴다. 단, "(KP)"처럼 약전
+     * 접미사가 진짜 DUR 마스터 이름의 일부인 경우도 1,000건 넘게 있어서 무조건 떼면 안 된다 —
+     * 그래서 "정확한 이름으로 먼저 찾고, 그게 실패했을 때만" 접미사를 뗀 이름으로 한 번 더
+     * 찾는 폴백으로만 쓴다(§26·§27과 같은 완화 폴백 원칙).
+     */
+    private Optional<Long> findIdByNameOrBareName(String nameKo) {
+        Optional<Long> exact = findIdByName(nameKo);
+        if (exact.isPresent()) {
+            return exact;
+        }
+        java.util.regex.Matcher m = TRAILING_PAREN.matcher(nameKo.strip());
+        if (!m.matches()) {
+            return Optional.empty();
+        }
+        String bare = m.group(1).strip();
+        return bare.isBlank() ? Optional.empty() : findIdByName(bare);
+    }
+
     /**
      * 식약처 DUR 마스터에 있는 성분이면 그 id를 재사용하고(그래야 병용금기·중복 판정에 걸린다),
      * 없으면 사용자가 입력한 이름 그대로 새 성분을 만든다. 새로 만든 성분은 어떤 DUR 규칙에도
@@ -150,7 +246,7 @@ public class IngredientRepository {
      * 이것이 침묵하지 않고 정직하게 실패하는 설계다.
      */
     public Long findOrCreateByName(String nameKo) {
-        return findIdByName(nameKo).orElseGet(() -> {
+        return findIdByNameOrBareName(nameKo).orElseGet(() -> {
             String ingrCode = "USR-" + UUID.randomUUID().toString().substring(0, 12).toUpperCase();
             String sql = """
                     INSERT INTO medivice.ingredients (ingr_code, name_ko)
