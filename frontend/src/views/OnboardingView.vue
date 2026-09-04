@@ -109,7 +109,12 @@ function skipAll() {
 <template>
   <main class="onboarding-stage">
     <header class="onboarding-header" :class="{ 'choice-header': step === 'choice' }">
-      <BrandLockup :show-tagline="false" />
+      <!-- 설문 시작은 세로 조합을 유지하고, 입력 단계들은 밝은 배경용 투명 가로 조합으로 통일한다. -->
+      <BrandLockup
+        :show-tagline="false"
+        :vertical-image="step === 'choice'"
+        :light-horizontal-image="step === 'profile' || step === 'medications'"
+      />
       <span v-if="step !== 'choice'">{{ stepLabel }}</span>
     </header>
 

@@ -39,7 +39,8 @@ const activeRoot = computed(() => {
   <div class="app-shell">
     <aside class="side-rail">
       <RouterLink class="rail-brand-link" to="/main" aria-label="Medivice 메인">
-        <BrandLockup compact :show-tagline="false" />
+        <!-- 제공된 가로형 로고는 다크 메뉴바에서만 사용하고 다른 브랜드 화면에는 영향을 주지 않는다. -->
+        <BrandLockup compact :show-tagline="false" image-logo />
       </RouterLink>
       <nav aria-label="주요 메뉴">
         <RouterLink

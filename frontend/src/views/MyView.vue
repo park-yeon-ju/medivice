@@ -499,7 +499,7 @@ function clearDateRange() {
             :disabled="!familyLoginId.trim()"
             @click="sendFamilyInvite"
           >
-            가족 연동 신청
+            연동 신청
           </button>
         </div>
       </section>

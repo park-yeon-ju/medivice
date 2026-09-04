@@ -71,7 +71,8 @@ async function submit() {
   <main class="auth-stage">
     <section class="auth-card" :class="{ signup: isSignup }">
       <div class="auth-brand-heading">
-        <BrandLockup />
+        <!-- 로그인과 회원가입을 같은 세로형 브랜드 조합으로 통일한다. -->
+        <BrandLockup vertical-image />
         <div class="auth-heading">
           <h1>{{ isSignup ? '회원가입' : '다시 만나서 반가워요' }}</h1>
           <p>

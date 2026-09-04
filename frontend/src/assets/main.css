@@ -1,7 +1,7 @@
 /*
  * main.css
  * Medivice 전 화면의 레이아웃·타이포그래피·반응형 동작을 정의하는 공통 스타일.
- * 회의에서 정한 가독성 기준과 기존 디자인 토큰을 모든 화면에 일관되게 적용한다.
+ * 기획서의 시각 원칙과 회의에서 정한 가독성 기준을 기존 디자인 토큰으로 일관되게 적용한다.
  */
 @import './tokens.css';
 
@@ -25,8 +25,8 @@ body {
   color: var(--ink);
   background: var(--ground);
   font-family: var(--sans);
-  font-size: 16.8px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.65;
   word-break: keep-all;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -67,12 +67,19 @@ ul {
   margin: 0;
 }
 
+h1,
+h2,
+h3 {
+  /* 기획서처럼 모든 일반 제목을 딥 그린으로 묶어 본문과의 위계를 분명히 한다. */
+  color: var(--rail-bg);
+}
+
 input,
 select,
 textarea {
   width: 100%;
   border: 1px solid var(--line-2);
-  border-radius: 8px;
+  border-radius: 10px;
   outline: 0;
   background: var(--surface);
   padding: 10px 12px;
@@ -84,8 +91,9 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: var(--lime-hover);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--lime) 22%, transparent);
+  /* 일반 입력 포커스는 기획서의 기본 에메랄드 역할을 사용하고 의료 상태색과 구분한다. */
+  border-color: var(--emerald);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--emerald) 22%, transparent);
 }
 
 input:disabled {
@@ -121,7 +129,8 @@ textarea {
   transition:
     transform 160ms ease,
     background 160ms ease,
-    border-color 160ms ease;
+    border-color 160ms ease,
+    box-shadow 160ms ease;
 }
 
 .button:hover:not(:disabled) {
@@ -129,12 +138,25 @@ textarea {
 }
 
 .button.primary {
-  color: var(--lime-ink);
-  background: var(--lime);
+  /* 진한 초록 배경에는 흰 글자를 사용해 인식 시작을 포함한 주요 동작의 대비를 확보한다. */
+  color: var(--action-ink);
+  background: var(--action);
+  box-shadow: 0 7px 16px color-mix(in srgb, var(--action) 18%, transparent);
 }
 
 .button.primary:hover:not(:disabled) {
-  background: var(--lime-hover);
+  background: var(--action-hover);
+  box-shadow: 0 9px 20px color-mix(in srgb, var(--action) 24%, transparent);
+}
+
+.button.primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--action) 16%, transparent);
+}
+
+.button.primary:disabled {
+  /* 비활성 상태에서도 문구를 읽을 수 있게 색 조합은 유지하고 깊이감만 제거한다. */
+  box-shadow: none;
 }
 
 .button.secondary {
@@ -220,7 +242,8 @@ textarea {
 .chip.rx {
   border-color: var(--line-2);
   color: var(--emerald-2);
-  background: var(--tint-2);
+  /* 지병·처방 정보는 상태 판정이 아니므로 부드러운 브랜드 보조 표면을 사용한다. */
+  background: var(--tint);
 }
 
 .chip.neutral {
@@ -231,7 +254,8 @@ textarea {
 
 .chip.ai {
   color: var(--emerald-2);
-  background: var(--tint-2);
+  /* AI 결과는 규칙 기반 상태색과 섞이지 않는 보조 민트 표면으로 분리한다. */
+  background: var(--tint);
   font-family: var(--mono);
   font-size: 12px;
   letter-spacing: 0.06em;
@@ -240,7 +264,8 @@ textarea {
 .chip.symptom {
   border-color: var(--line-2);
   color: var(--emerald-2);
-  background: var(--tint-2);
+  /* 증상 기록은 기획서에서 정한 민트 보조 강조 계열로 통일한다. */
+  background: var(--tint);
 }
 
 .brand-lockup {
@@ -262,15 +287,16 @@ textarea {
 }
 
 .brand-mark i:first-child {
-  background: var(--ok-light);
+  /* 로고의 세 구획은 의료 상태등이 아니라 기획서의 브랜드 팔레트를 표현한다. */
+  background: var(--tint);
 }
 
 .brand-mark i:nth-child(2) {
-  background: var(--warn-light);
+  background: var(--mint);
 }
 
 .brand-mark i:last-child {
-  background: var(--crit-light);
+  background: var(--emerald);
 }
 
 .brand-copy {
@@ -303,10 +329,40 @@ textarea {
   font-size: 19.2px;
 }
 
+.brand-lockup.image-lockup {
+  width: 100%;
+}
+
+.brand-image {
+  /* 다크 메뉴바의 가로 공간 안에서 제공된 로고 비율과 선명도를 유지한다. */
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.brand-lockup.vertical-image-lockup {
+  width: 100%;
+  justify-content: center;
+}
+
+.vertical-brand-image {
+  /* 세로형 로고가 인증·설문 콘텐츠를 과도하게 밀지 않도록 읽기 좋은 크기로 제한한다. */
+  width: min(230px, 78vw);
+}
+
+.onboarding-header .brand-lockup.image-lockup {
+  /* 특이사항 문진의 진행 문구와 나란히 놓일 수 있도록 가로 로고만 적정 폭으로 제한한다. */
+  width: min(250px, 60vw);
+  flex: none;
+}
+
 .app-shell {
   display: grid;
   min-height: 100vh;
   grid-template-columns: 168px minmax(0, 1fr);
+  /* 순백색 카드와는 미세하게 구분하면서 화면 대부분은 흰색으로 느껴지는 바탕을 사용한다. */
+  background: color-mix(in srgb, var(--surface) 78%, var(--ground));
 }
 
 .side-rail {
@@ -345,18 +401,35 @@ textarea {
   padding: 9px 10px;
   color: var(--rail-ink-2);
   font-size: 15px;
-  font-weight: 650;
+  font-weight: 700;
+  transition:
+    color 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease;
 }
 
 .side-rail nav a span {
-  /* 메뉴명은 짧은 단위로 확정했으므로 데스크톱·모바일 모두 한 줄로 유지한다. */
+  /* 어두운 메뉴 배경에서 명칭을 빠르게 읽도록 거의 흰색에 가까운 기존 레일 색을 조합한다. */
+  color: color-mix(in srgb, var(--rail-ink) 92%, var(--rail-ink-2));
   white-space: nowrap;
 }
 
-.side-rail nav a:hover,
+.side-rail nav a:hover span,
+.side-rail nav a.active span {
+  /* 상호작용 중인 메뉴명은 순백색으로 올려 현재 위치와 동작 대상을 명확히 구분한다. */
+  color: var(--rail-ink);
+}
+
+.side-rail nav a:hover {
+  color: var(--rail-ink);
+  background: color-mix(in srgb, var(--surface) 8%, transparent);
+}
+
 .side-rail nav a.active {
-  color: var(--lime);
+  /* 선택 메뉴는 밝은 글자·분리된 배경·민트 표시선을 함께 사용해 색상만으로 구분하지 않는다. */
+  color: var(--rail-ink);
   background: var(--rail-active);
+  box-shadow: inset 3px 0 0 var(--mint);
 }
 
 .side-rail nav svg {
@@ -389,7 +462,8 @@ textarea {
 
 .app-pane {
   min-width: 0;
-  background: var(--surface-2);
+  /* 인증 화면은 건드리지 않고 스크린샷의 넓은 콘텐츠 바탕만 흰색에 가깝게 밝힌다. */
+  background: color-mix(in srgb, var(--surface) 78%, var(--ground));
 }
 
 .topbar {
@@ -460,11 +534,11 @@ textarea {
 
 .page-canvas {
   display: flex;
-  width: min(1120px, 100%);
+  width: min(1180px, 100%);
   flex-direction: column;
-  gap: 18px;
+  gap: 22px;
   margin: 0 auto;
-  padding: clamp(24px, 4vw, 48px);
+  padding: clamp(28px, 4vw, 48px);
 }
 
 .hero-row {
@@ -518,7 +592,7 @@ textarea {
   align-items: center;
   column-gap: 12px;
   border: 1px solid var(--line);
-  border-radius: 13px;
+  border-radius: 14px;
   padding: 18px;
   background: var(--surface);
   box-shadow: var(--shadow);
@@ -529,7 +603,8 @@ textarea {
 
 .action-card:hover {
   transform: translateY(-2px);
-  border-color: var(--lime-hover);
+  /* 메인 빠른 실행 카드도 주요 동작 버튼과 같은 테두리 색상을 사용해 hover 피드백을 통일한다. */
+  border-color: var(--ok-line);
 }
 
 .action-card > span {
@@ -543,14 +618,16 @@ textarea {
   font-weight: 350;
 }
 
-.action-card.emerald > span {
-  color: var(--lime-ink);
-  background: var(--lime);
+.action-card.emerald > span,
+.action-card.mint > span {
+  /* 작은 아이콘 영역은 브랜드 민트의 채도를 높여 카드 제목보다 먼저 동작을 찾을 수 있게 한다. */
+  color: var(--ink);
+  background: color-mix(in srgb, var(--mint) 42%, var(--surface));
 }
 
-.action-card.mint > span {
-  color: var(--emerald-2);
-  background: var(--tint-2);
+.action-card:hover > span {
+  /* 카드 hover에서는 같은 색상 계열 안에서만 한 단계 강조해 의료 상태색과 혼동되지 않게 한다. */
+  background: color-mix(in srgb, var(--mint) 56%, var(--surface));
 }
 
 .action-card b {
@@ -612,7 +689,7 @@ textarea {
   align-items: center;
   gap: 16px;
   border: 1px solid;
-  border-radius: 13px;
+  border-radius: 14px;
   padding: 18px 20px;
 }
 
@@ -724,7 +801,7 @@ textarea {
 .medication-group {
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 14px;
   background: var(--surface);
   box-shadow: 0 1px 1px color-mix(in srgb, var(--ink) 5%, transparent);
 }
@@ -772,7 +849,8 @@ textarea {
 }
 
 .group-dot.emerald {
-  background: var(--lime-hover);
+  /* 처방약 그룹은 기획서의 기본 에메랄드 역할로 표시한다. */
+  background: var(--emerald);
 }
 
 .group-dot.mint {
@@ -800,7 +878,7 @@ textarea {
 }
 
 .category-stripe.rx {
-  background: var(--lime-hover);
+  background: var(--emerald);
 }
 
 .category-stripe.supplement {
@@ -954,7 +1032,8 @@ textarea {
   width: 22px;
   height: 22px;
   border: 3px solid var(--line-2);
-  border-top-color: var(--lime-hover);
+  /* 로딩 표시는 경고나 판정이 아닌 보조 진행 상태이므로 민트 강조를 사용한다. */
+  border-top-color: var(--mint);
   border-radius: 50%;
   animation: spin 700ms linear infinite;
 }
@@ -973,8 +1052,8 @@ textarea {
 
 .content-card {
   border: 1px solid var(--line);
-  border-radius: 13px;
-  padding: 22px;
+  border-radius: 16px;
+  padding: 24px;
   background: var(--surface);
   box-shadow: var(--shadow);
 }
@@ -1241,11 +1320,16 @@ textarea {
     var(--ground);
 }
 
+.auth-stage:has(.not-found-card) {
+  /* 인증 화면과 같은 구조를 쓰는 404 화면만 예외로 구분해 로그인·회원가입 배경은 그대로 보존한다. */
+  background: color-mix(in srgb, var(--surface) 78%, var(--ground));
+}
+
 .auth-card,
 .onboarding-card {
   width: min(420px, 100%);
   border: 1px solid var(--line);
-  border-radius: 16px;
+  border-radius: 20px;
   padding: 30px;
   background: var(--surface);
   box-shadow: var(--shadow-lg);
@@ -1360,11 +1444,12 @@ fieldset.form-field {
 .privacy-note,
 .info-note,
 .warning-note {
-  border-left: 3px solid var(--lime-hover);
+  /* 일반 안내는 에메랄드·소프트 민트 조합을 쓰고 경고 안내는 아래 전용 토큰으로 덮어쓴다. */
+  border-left: 3px solid var(--emerald);
   border-radius: 0 8px 8px 0;
   padding: 11px 13px;
   color: var(--ink-2);
-  background: var(--tint-2);
+  background: var(--tint);
   font-size: 13.8px;
 }
 
@@ -1399,6 +1484,8 @@ fieldset.form-field {
 .onboarding-stage {
   align-content: center;
   gap: 18px;
+  /* 로그인·회원가입의 그라데이션은 유지하고 설문·문진 바탕만 같은 밝은 오프화이트로 맞춘다. */
+  background: color-mix(in srgb, var(--surface) 78%, var(--ground));
 }
 
 .onboarding-header {
@@ -1451,7 +1538,8 @@ fieldset.form-field {
   margin: 0 auto 16px;
   border-radius: 50%;
   color: var(--emerald-2);
-  background: var(--tint-2);
+  /* 온보딩의 질문 표시는 상태색이 아닌 브랜드 보조 강조로 표현한다. */
+  background: var(--tint);
   font-size: 30px;
   font-weight: 800;
 }
@@ -1474,7 +1562,7 @@ fieldset.form-field {
   flex-direction: column;
   align-items: flex-start;
   border: 1px solid var(--line-2);
-  border-radius: 11px;
+  border-radius: 12px;
   padding: 15px;
   text-align: left;
   background: var(--surface);
@@ -1482,9 +1570,22 @@ fieldset.form-field {
 
 .choice-option.selected,
 .selection-grid button.selected {
-  border-color: var(--lime-hover);
-  background: var(--tint-2);
-  box-shadow: inset 0 0 0 1px var(--lime-hover);
+  /* 일반 선택 상태는 브랜드 에메랄드와 소프트 민트로 통일한다. */
+  border-color: var(--emerald);
+  background: var(--tint);
+  box-shadow: inset 0 0 0 1px var(--emerald);
+}
+
+.report-builder .selection-grid button.selected {
+  /* 보고서 옵션의 선택 상태만 주요 동작 버튼과 같은 완료 색상으로 맞춰 다른 문진 선택에는 영향을 주지 않는다. */
+  border-color: var(--ok-line);
+  color: var(--ok);
+  background: var(--ok-bg);
+  box-shadow: inset 0 0 0 1px var(--ok-line);
+}
+
+.report-builder .selection-grid button.selected span {
+  color: inherit;
 }
 
 .choice-option b,
@@ -1533,10 +1634,24 @@ fieldset.form-field {
 
 .check-options button.selected,
 .symptom-options button.selected {
-  border-color: var(--lime-hover);
+  border-color: var(--emerald);
   color: var(--emerald-2);
-  background: var(--tint-2);
+  background: var(--tint);
   font-weight: 750;
+}
+
+.symptom-options button.selected {
+  /* 선택 전후를 구분하면서 주요 저장 버튼과 같은 완료 색상 체계를 사용하도록 증상 선택 상태만 덮어쓴다. */
+  border-color: var(--ok-line);
+  color: var(--ok);
+  background: var(--ok-bg);
+}
+
+.onboarding-stage > form.onboarding-card .check-options button.selected {
+  /* 온보딩 지병 선택만 같은 색상 체계로 연결하고 마이페이지의 편집 상태에는 영향을 주지 않는다. */
+  border-color: var(--ok-line);
+  color: var(--ok);
+  background: var(--ok-bg);
 }
 
 .condition-direct-field {
@@ -1575,7 +1690,7 @@ fieldset.form-field {
 
 .optional-block {
   border: 1px solid var(--line);
-  border-radius: 11px;
+  border-radius: 14px;
   padding: 14px;
   background: var(--surface-2);
 }
@@ -1628,14 +1743,15 @@ fieldset.form-field {
   place-items: center;
   border-radius: 16px;
   padding: 28px;
-  background: color-mix(in srgb, var(--rail-bg) 42%, transparent);
+  /* 사진 등록과 직접 입력도 일반 서비스 화면이므로 같은 밝은 오프화이트 바탕을 사용한다. */
+  background: color-mix(in srgb, var(--surface) 78%, var(--ground));
 }
 
 .dialog-card {
   width: min(540px, 100%);
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: 15px;
+  border-radius: 16px;
   background: var(--surface);
   box-shadow: var(--shadow-lg);
 }
@@ -1695,20 +1811,51 @@ fieldset.form-field {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--line-2);
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 13px;
   background: var(--surface);
 }
 
 .segmented-select button.active {
-  border-color: var(--lime-hover);
-  background: var(--tint-2);
-  box-shadow: inset 0 0 0 1px var(--lime-hover);
+  /* 공통 분할 선택은 브랜드 기본색을 사용하며 사진 등록의 확정 색상은 하위 규칙에서 유지한다. */
+  border-color: var(--emerald);
+  background: var(--tint);
+  box-shadow: inset 0 0 0 1px var(--emerald);
 }
 
 .segmented-select span {
   color: var(--muted);
   font-size: 12.6px;
+}
+
+.modal-page > .dialog-card:not(.wide-dialog) .segmented-select button.active {
+  /* 사진 유형의 선택 상태만 완료 색상으로 표시해 선택 전 항목과의 구분을 유지한다. */
+  border-color: var(--ok-line);
+  color: var(--ok);
+  background: var(--ok-bg);
+  box-shadow: inset 0 0 0 1px var(--ok-line);
+}
+
+.modal-page > .dialog-card:not(.wide-dialog) .segmented-select button.active span {
+  color: inherit;
+}
+
+.modal-page > .dialog-card:not(.wide-dialog) .drop-zone .button.secondary {
+  /* 파일 선택도 같은 등록 흐름의 동작이므로 형태는 유지하고 색상 체계만 통일한다. */
+  border-color: var(--ok-line);
+  color: var(--ok);
+  background: var(--ok-bg);
+}
+
+.modal-page > .dialog-card:not(.wide-dialog) .upload-icon {
+  /* 업로드 화살표도 같은 흐름임을 알 수 있도록 원형 형태는 유지하고 색상만 맞춘다. */
+  color: var(--ok);
+  background: var(--ok-bg);
+}
+
+.modal-page .ocr-medication-card .checkbox-line input[type='checkbox'] {
+  /* 인식 결과의 포함 여부만 등록 동작과 같은 색으로 연결하고 기본 체크박스 형태는 유지한다. */
+  accent-color: var(--ok);
 }
 
 .drop-zone {
@@ -1725,8 +1872,9 @@ fieldset.form-field {
 }
 
 .drop-zone.populated {
-  border-color: var(--lime-hover);
-  background: var(--tint-2);
+  /* 파일 선택 완료는 의료 판정이 아니므로 에메랄드·소프트 민트로만 구분한다. */
+  border-color: var(--emerald);
+  background: var(--tint);
 }
 
 .drop-zone.busy {
@@ -1771,14 +1919,14 @@ fieldset.form-field {
 
 .button.primary .button-spinner {
   /* 강조 버튼 위에서도 진행 상태가 보이도록 기존 전경 토큰으로 대비를 만든다. */
-  border-color: color-mix(in srgb, var(--lime-ink) 25%, transparent);
-  border-top-color: var(--lime-ink);
+  border-color: color-mix(in srgb, var(--action-ink) 25%, transparent);
+  border-top-color: var(--action-ink);
 }
 
 .ocr-card {
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: 11px;
+  border-radius: 14px;
 }
 
 .ocr-card > header {
@@ -1871,8 +2019,8 @@ fieldset.form-field {
   position: static;
   width: 100%;
   border: 1px solid var(--line);
-  border-radius: 13px;
-  padding: 18px;
+  border-radius: 16px;
+  padding: 22px;
   background: var(--surface);
   box-shadow: var(--shadow);
 }
@@ -1924,7 +2072,8 @@ fieldset.form-field {
 .profile-hero {
   display: flex;
   align-items: center;
-  gap: 16px;
+  /* 아바타와 사용자 정보가 붙어 보이지 않도록 텍스트 시작점까지의 여백을 넓힌다. */
+  gap: 22px;
 }
 
 .avatar {
@@ -1933,9 +2082,11 @@ fieldset.form-field {
   height: 58px;
   flex: none;
   place-items: center;
+  margin-inline: 4px;
   border-radius: 50%;
-  color: var(--lime-ink);
-  background: var(--lime);
+  /* 프로필 아바타는 기획서의 기본 에메랄드 역할을 사용해 형광 라임 장식을 줄인다. */
+  color: var(--on-accent);
+  background: var(--emerald);
   font-size: 24px;
   font-weight: 850;
 }
@@ -1967,7 +2118,7 @@ fieldset.form-field {
   grid-template-columns: auto 1fr;
   column-gap: 11px;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 18px;
   background: var(--surface);
   transition:
@@ -1977,7 +2128,8 @@ fieldset.form-field {
 
 .tile-grid > a:hover {
   transform: translateY(-2px);
-  border-color: var(--lime-hover);
+  /* 마이페이지 기능 카드도 공통 동작 색상으로 hover 테두리를 통일한다. */
+  border-color: var(--ok-line);
 }
 
 .tile-icon {
@@ -2152,7 +2304,7 @@ fieldset.form-field {
 
 .dangerless-card {
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 16px 18px;
   background: var(--surface);
 }
@@ -2162,7 +2314,7 @@ fieldset.form-field {
   grid-template-columns: 70px minmax(0, 1fr) auto;
   gap: 14px;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 16px;
   background: var(--surface);
 }
@@ -2213,7 +2365,7 @@ fieldset.form-field {
 
 .include-list {
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 14px;
   padding: 14px 16px;
   background: var(--surface-2);
 }
@@ -2236,7 +2388,8 @@ fieldset.form-field {
 
 .include-list li::before {
   margin-right: 7px;
-  color: var(--lime-hover);
+  /* 포함 항목 체크는 상태 판정이 아닌 기본 브랜드 강조로 표시한다. */
+  color: var(--emerald);
   content: '✓';
 }
 
@@ -2262,7 +2415,7 @@ fieldset.form-field {
 
 .medical-report {
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 16px;
   padding: clamp(20px, 4vw, 36px);
   background: var(--surface);
   box-shadow: var(--shadow);
@@ -2324,7 +2477,7 @@ fieldset.form-field {
   align-items: center;
   gap: 12px;
   border: 1px solid var(--warn-line);
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 12px;
   background: var(--warn-bg);
 }
@@ -2360,7 +2513,8 @@ fieldset.form-field {
   height: 8px;
   border: 2px solid var(--surface);
   border-radius: 50%;
-  background: var(--lime);
+  /* 증상 기록 타임라인은 기획서의 민트 보조 강조 역할을 따른다. */
+  background: var(--mint);
   content: '';
 }
 
@@ -2475,9 +2629,19 @@ fieldset.form-field {
     font-size: 11.4px;
   }
 
+  .side-rail nav a.active {
+    /* 모바일 하단 메뉴에서는 표시선을 위쪽에 두어 현재 페이지를 빠르게 찾게 한다. */
+    box-shadow: inset 0 3px 0 var(--mint);
+  }
+
   .side-rail nav svg {
     width: 18px;
     height: 18px;
+  }
+
+  .onboarding-header .brand-lockup.image-lockup {
+    /* 작은 화면에서는 단계 문구의 공간을 남겨 로고와 겹치지 않게 한다. */
+    width: min(190px, 58vw);
   }
 
   .topbar {
@@ -2577,8 +2741,16 @@ fieldset.form-field {
     flex-direction: column;
   }
 
+  .profile-hero {
+    gap: 16px;
+  }
+
+  .profile-hero .avatar {
+    margin-inline: 0;
+  }
+
   .profile-hero > .button {
-    margin-left: 74px;
+    margin-left: 0;
   }
 
   .report-header > div:last-child {
