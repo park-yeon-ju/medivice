@@ -84,6 +84,19 @@ export async function createMedication(payload) {
   return { status: 201, data }
 }
 
+/**
+ * UC14 보완 복용 정보 수정.
+ * MedicationCreateRequest 와 동일한 모양의 payload를 PUT /api/medications/:id 로 전송한다.
+ * 백엔드는 수정한 항목과 재계산된 메디라이트({ medication, medilight })를 반환한다.
+ */
+export async function updateMedication(id, payload) {
+  const data = await request(`/api/medications/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(payload),
+  })
+  return { status: 200, data }
+}
+
 /** UC14 삭제. 응답 본문이 없으므로(204) 호출부가 medilight를 별도로 다시 조회해야 한다. */
 export async function deleteMedication(id) {
   await request(`/api/medications/${id}`, { method: 'DELETE' })
@@ -113,8 +126,11 @@ export async function login(payload) {
 }
 
 /**
- * UC8~10(EXT-1) 사진 인식. multipart/form-data라 request()의 JSON 헤더를 재사용할 수 없어
- * 별도로 fetch한다 — Content-Type을 직접 지정하면 브라우저가 boundary를 못 붙여 깨진다.
+ * UC8~10(EXT-1) 사진 인식 (비동기 OCR 계약).
+ * 백엔드는 POST /api/medications/ocr 접수 시 202 Accepted와 함께 jobId를 돌려주고,
+ * 실제 비전 AI 작업은 백그라운드에서 진행된다.
+ * 프론트는 jobId를 받아 GET /api/medications/ocr/:jobId 를 폴링하여
+ * 상태가 COMPLETED가 되면 인식된 약 목록(result)을 화면에 반환한다.
  */
 export async function extractMedicationOcr(file) {
   const loginId = getStoredLoginId()
@@ -149,6 +165,42 @@ export async function extractMedicationOcr(file) {
     throw new Error(message)
   }
 
-  const data = await response.json()
-  return { status: 200, data }
+  const initialData = await response.json()
+
+  // 1. 이미 배열로 결과가 온 경우 (하위 호환성 또는 Mock 모드) 즉시 반환
+  if (Array.isArray(initialData)) {
+    return { status: 200, data: initialData }
+  }
+
+  // 2. 백엔드 비동기 계약: 202 Accepted + OcrJobDto { jobId, status, result, error }
+  const jobId = initialData?.jobId
+  if (!jobId) {
+    // jobId가 없으나 result 필드가 배열인 경우
+    if (Array.isArray(initialData?.result)) {
+      return { status: 200, data: initialData.result }
+    }
+    return { status: 200, data: initialData }
+  }
+
+  // 3. jobId로 백엔드 폴링 (최대 60초 대기, 600ms 간격)
+  const pollIntervalMs = 600
+  const maxTimeoutMs = 60000
+  const startTime = Date.now()
+
+  while (Date.now() - startTime < maxTimeoutMs) {
+    await new Promise((resolve) => setTimeout(resolve, pollIntervalMs))
+
+    const job = await request(`/api/medications/ocr/${jobId}`)
+    if (!job) continue
+
+    if (job.status === 'COMPLETED') {
+      return { status: 200, data: job.result ?? [] }
+    }
+    if (job.status === 'FAILED') {
+      throw new Error(job.error || '이미지 분석에 실패했습니다.')
+    }
+    // PENDING 또는 PROCESSING 상태이면 계속 폴링
+  }
+
+  throw new Error('이미지 인식 시간이 초과되었습니다. 잠시 후 다시 시도해주세요.')
 }
